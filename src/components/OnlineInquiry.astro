@@ -1,0 +1,36 @@
+---
+import ContactForm from './ContactForm.astro';
+import { getEntry } from 'astro:content';
+
+interface Props {
+	contactApiEndpoint?: string;
+}
+
+const { contactApiEndpoint } = Astro.props;
+const onlineInquiry = await getEntry('online-inquiry', 'index');
+const { title, content, buttonText } = onlineInquiry.data;
+---
+
+<section class="py-12 md:py-16 lg:py-20 bg-[var(--color-topbar)]">
+	<div class="container mx-auto px-4">
+		<div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+			<!-- Left Column: Contact Form -->
+			<div>
+				<ContactForm contactApiEndpoint={contactApiEndpoint} />
+			</div>
+
+			<!-- Right Column: Text Content -->
+			<div class="space-y-6">
+				<h2 class="text-3xl md:text-4xl font-bold text-[var(--color-heading)]">
+					{title}
+				</h2>
+				<p class="text-lg text-[var(--color-heading)] opacity-90 leading-relaxed">
+					{content}
+				</p>
+				<a href="#anfrage" class="inline-flex items-center bg-[var(--color-button)] border border-[var(--color-button-border)] hover:opacity-90 text-[var(--color-heading)] font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
+					{buttonText}
+				</a>
+			</div>
+		</div>
+	</div>
+</section>

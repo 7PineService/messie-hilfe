@@ -1,0 +1,126 @@
+---
+// Component for "Unsere Standorte" section
+---
+
+<section class="py-12 md:py-16 lg:py-20 bg-[var(--color-topbar)]">
+	<div class="container mx-auto px-4">
+		<div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+			<!-- Left: Map -->
+			<div>
+				<div class="bg-gray-200 rounded-lg aspect-[4/3] flex items-center justify-center">
+					<svg class="w-32 h-32 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+					</svg>
+				</div>
+			</div>
+
+			<!-- Right: Text and City List -->
+			<div class="space-y-6">
+				<div>
+					<h2 class="text-3xl md:text-4xl font-bold text-[var(--color-heading)] mb-4">
+						Unsere Standorte
+					</h2>
+					<p class="text-lg text-[var(--color-heading)] opacity-90 leading-relaxed">
+						Wir sind bundesweit für Sie da. Unsere Standorte erstrecken sich über ganz Deutschland, sodass wir Ihnen schnell und zuverlässig helfen können.
+					</p>
+				</div>
+
+				<!-- City List -->
+				<div class="grid grid-cols-2 gap-3">
+					<div class="flex items-center space-x-2 text-[var(--color-heading)]">
+						<svg class="w-5 h-5 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Berlin</span>
+					</div>
+					<div class="flex items-center space-x-2 text-[var(--color-heading)]">
+						<svg class="w-5 h-5 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Hamburg</span>
+					</div>
+					<div class="flex items-center space-x-2 text-[var(--color-heading)]">
+						<svg class="w-5 h-5 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>München</span>
+					</div>
+					<div class="flex items-center space-x-2 text-[var(--color-heading)]">
+						<svg class="w-5 h-5 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Köln</span>
+					</div>
+					<div class="flex items-center space-x-2 text-[var(--color-heading)]">
+						<svg class="w-5 h-5 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Frankfurt</span>
+					</div>
+					<div class="flex items-center space-x-2 text-[var(--color-heading)]">
+						<svg class="w-5 h-5 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Stuttgart</span>
+					</div>
+					<div class="flex items-center space-x-2 text-[var(--color-heading)]">
+						<svg class="w-5 h-5 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Düsseldorf</span>
+					</div>
+					<div class="flex items-center space-x-2 text-[var(--color-heading)]">
+						<svg class="w-5 h-5 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Leipzig</span>
+					</div>
+					<div class="flex items-center space-x-2 text-[var(--color-heading)]">
+						<svg class="w-5 h-5 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Dortmund</span>
+					</div>
+					<div class="flex items-center space-x-2 text-[var(--color-heading)]">
+						<svg class="w-5 h-5 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Essen</span>
+					</div>
+					<div class="flex items-center space-x-2 text-[var(--color-heading)]">
+						<svg class="w-5 h-5 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Bremen</span>
+					</div>
+					<div class="flex items-center space-x-2 text-[var(--color-heading)]">
+						<svg class="w-5 h-5 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Dresden</span>
+					</div>
+					<div class="flex items-center space-x-2 text-[var(--color-heading)]">
+						<svg class="w-5 h-5 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Hannover</span>
+					</div>
+					<div class="flex items-center space-x-2 text-[var(--color-heading)]">
+						<svg class="w-5 h-5 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Nürnberg</span>
+					</div>
+				</div>
+
+				<div class="pt-4">
+					<a href="/standorte" class="inline-flex items-center bg-[var(--color-button)] border border-[var(--color-button-border)] hover:opacity-90 text-[var(--color-heading)] font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
+						Alle Standorte
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+

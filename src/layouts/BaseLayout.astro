@@ -1,0 +1,456 @@
+---
+import { getGTMContainerId, shouldExcludeTracking, COOKIEYES_SCRIPT_URL, COOKIEYES_ENABLED } from '../config/tracking';
+import { SITE_URL, SITE_NAME, CONTACT_EMAIL, CONTACT_PHONE, TWITTER_HANDLE } from '../config/site';
+
+interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+	canonicalUrl?: string;
+	noindex?: boolean; // For thank-you pages
+}
+
+const {
+	title,
+	description = 'Diskrete Messie-Hilfe – zuverlässig, bezahlbar, ohne Bewertung. Professionelle Entrümpelung und Unterstützung bei Messie-Wohnungen.',
+	image = '/og-image.jpg',
+	canonicalUrl = SITE_URL,
+	noindex = false
+} = Astro.props;
+
+const siteName = SITE_NAME;
+const twitterHandle = TWITTER_HANDLE;
+const currentPath = Astro.url.pathname;
+const hostname = Astro.url.hostname;
+
+// Check if tracking should be excluded
+const excludeTracking = shouldExcludeTracking(currentPath);
+const gtmId = getGTMContainerId(hostname);
+
+// Generate breadcrumbs based on current path
+const generateBreadcrumbs = () => {
+	const breadcrumbs = [
+		{
+			"@type": "ListItem",
+			"position": 1,
+			"name": "Startseite",
+			"item": canonicalUrl
+		}
+	];
+
+	if (currentPath === '/anfrage/') {
+		breadcrumbs.push({
+			"@type": "ListItem",
+			"position": 2,
+			"name": "Kostenloses Angebot anfordern",
+			"item": `${canonicalUrl}/anfrage/`
+		});
+	} else if (currentPath !== '/') {
+		// For other pages, add them as second breadcrumb
+		const pageName = currentPath.split('/').filter(Boolean).pop() || '';
+		breadcrumbs.push({
+			"@type": "ListItem",
+			"position": 2,
+			"name": title,
+			"item": canonicalUrl
+		});
+	}
+
+	return breadcrumbs;
+};
+
+// Structured Data - Organization
+const organizationSchema = {
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	"name": siteName,
+	"url": canonicalUrl,
+	"logo": `${canonicalUrl}/logo.png`,
+	"description": description,
+	"contactPoint": {
+		"@type": "ContactPoint",
+		"telephone": CONTACT_PHONE,
+		"contactType": "customer service",
+		"email": CONTACT_EMAIL
+	},
+	"sameAs": [
+		`https://twitter.com/${twitterHandle.replace('@', '')}`,
+		`https://facebook.com/${siteName.toLowerCase()}`,
+		`https://linkedin.com/company/${siteName.toLowerCase()}`
+	]
+};
+
+// Structured Data - WebSite
+const websiteSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"name": siteName,
+	"url": canonicalUrl,
+	"potentialAction": {
+		"@type": "SearchAction",
+		"target": {
+			"@type": "EntryPoint",
+			"urlTemplate": `${canonicalUrl}/search?q={search_term_string}`
+		},
+		"query-input": "required name=search_term_string"
+	}
+};
+
+// Structured Data - BreadcrumbList
+const breadcrumbSchema = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": generateBreadcrumbs()
+};
+
+// Structured Data - LocalBusiness
+const localBusinessSchema = {
+	"@context": "https://schema.org",
+	"@type": "LocalBusiness",
+	"name": siteName,
+	"image": `${canonicalUrl}${image}`,
+	"description": description,
+	"url": canonicalUrl,
+	"telephone": CONTACT_PHONE,
+	"email": CONTACT_EMAIL,
+	"address": {
+		"@type": "PostalAddress",
+		"addressCountry": "DE"
+	},
+	"priceRange": "$$",
+	"areaServed": {
+		"@type": "Country",
+		"name": "Germany"
+	}
+};
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="generator" content={Astro.generator}>
+		
+		<!-- CookieYes Consent Tool - FIRST script in head (must load before GTM) -->
+		{!excludeTracking && COOKIEYES_ENABLED && COOKIEYES_SCRIPT_URL && (
+			<>
+				<script id="cookieyes" src={COOKIEYES_SCRIPT_URL} async></script>
+				{import.meta.env.DEV && (
+					<script is:inline>
+						document.getElementById('cookieyes')?.addEventListener('error', function() {
+							console.warn('CookieYes failed to load - check domain registration');
+						});
+					</script>
+				)}
+			</>
+		)}
+		
+		<!-- Primary Meta Tags -->
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		<meta name="keywords" content="Messie-Hilfe, Entrümpelung, Messie-Wohnung, diskrete Hilfe, Wohnungsentrümpelung, Aufräumservice" />
+		<meta name="author" content={siteName} />
+		<meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+		<meta name="language" content="German" />
+		<link rel="canonical" href={canonicalUrl} />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={`${canonicalUrl}${image}`} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:site_name" content={siteName} />
+		<meta property="og:locale" content="de_DE" />
+		
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={canonicalUrl} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={`${canonicalUrl}${image}`} />
+		<meta name="twitter:creator" content={twitterHandle} />
+		<meta name="twitter:site" content={twitterHandle} />
+		
+		<!-- Favicon -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		
+		<!-- Preconnect for Performance - Early DNS resolution and connection -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		
+		<!-- Google Fonts (Non-blocking) - Loaded asynchronously to prevent blocking LCP -->
+		<!-- Reduced weights: 400 (regular), 600 (semibold), 700 (bold) -->
+		<!-- Using media="print" trick to load asynchronously, then switch to "all" -->
+		<link 
+			href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" 
+			rel="stylesheet"
+			media="print"
+			onload="this.media='all'"
+		/>
+		<noscript>
+			<link 
+				href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" 
+				rel="stylesheet"
+			/>
+		</noscript>
+		<!-- Fallback script for browsers that don't support onload on link -->
+		<script is:inline>
+			// Ensure font stylesheet loads even if onload doesn't fire
+			const fontLink = document.querySelector('link[href*="fonts.googleapis.com"]');
+			if (fontLink && fontLink.media === 'print') {
+				setTimeout(() => {
+					fontLink.media = 'all';
+				}, 0);
+			}
+		</script>
+		
+		<!-- Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+		<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+		<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+		<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+		
+		<!-- Google Consent Mode v2 - Must be set before GTM loads -->
+		{!excludeTracking && (
+			<script is:inline>
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('consent', 'default', {
+					'analytics_storage': 'denied',
+					'ad_storage': 'denied',
+					'ad_user_data': 'denied',
+					'ad_personalization': 'denied',
+					'wait_for_update': 500
+				});
+			</script>
+		)}
+		
+		<!-- Google Tag Manager - Only load if not excluded -->
+		{!excludeTracking && (
+			<script is:inline define:vars={{ gtmId }}>
+				(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+				new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+				j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+				'https://www.googletagmanager.com/gtm.js?id='+i+dl;
+				f.parentNode.insertBefore(j,f);
+				})(window,document,'script','dataLayer',gtmId);
+			</script>
+		)}
+		
+		<slot name="head" />
+	</head>
+	<body class="antialiased">
+		<!-- Google Tag Manager (noscript) -->
+		{!excludeTracking && (
+			<noscript>
+				<iframe src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`} height="0" width="0" style="display:none;visibility:hidden"></iframe>
+			</noscript>
+		)}
+		
+		<!-- Event Tracking for Phone and WhatsApp Links - Tracks on successful navigation only -->
+		{!excludeTracking && (
+			<script is:inline define:vars={{ isDev: import.meta.env.DEV }}>
+				// Track phone/WhatsApp links only when navigation actually occurs
+				// Uses visibilitychange/blur events to detect successful navigation
+				(function() {
+					if (!window.dataLayer) {
+						if (isDev) console.warn('[Tracking] dataLayer not available - tracking disabled');
+						return;
+					}
+					
+					// Track which links have already been set up to avoid duplicates
+					const trackedLinks = new WeakSet();
+					
+					function setupPhoneLink(link) {
+						if (trackedLinks.has(link)) return;
+						trackedLinks.add(link);
+						
+						if (isDev) console.log('[Tracking] Setting up phone link:', link.href);
+						
+						link.addEventListener('click', function(e) {
+							if (isDev) console.log('[Tracking] Phone link clicked:', link.href);
+							
+							let eventTracked = false;
+							
+							// Track when page loses visibility (call initiated)
+							const trackCall = function() {
+								if (!eventTracked && (document.hidden || document.visibilityState === 'hidden')) {
+									eventTracked = true;
+									if (isDev) {
+										console.log('[Tracking] ✅ Phone call event fired - page visibility changed');
+										console.log('[Tracking] Event data:', { event: 'contact_call', href: link.href });
+									}
+									window.dataLayer.push({
+										'event': 'contact_call'
+									});
+									cleanup();
+								} else if (isDev && !eventTracked) {
+									console.log('[Tracking] Page visibility changed but still visible - waiting...');
+								}
+							};
+							
+							// Also track on pagehide/blur as fallback (for mobile browsers)
+							const trackCallFallback = function() {
+								if (!eventTracked) {
+									eventTracked = true;
+									if (isDev) {
+										console.log('[Tracking] ✅ Phone call event fired - pagehide/blur fallback');
+										console.log('[Tracking] Event data:', { event: 'contact_call', href: link.href });
+									}
+									window.dataLayer.push({
+										'event': 'contact_call'
+									});
+									cleanup();
+								}
+							};
+							
+							function cleanup() {
+								document.removeEventListener('visibilitychange', trackCall);
+								window.removeEventListener('pagehide', trackCallFallback);
+								window.removeEventListener('blur', trackCallFallback);
+								if (isDev) console.log('[Tracking] Phone call listeners removed');
+							}
+							
+							// Listen for multiple events to catch phone dialer launch
+							document.addEventListener('visibilitychange', trackCall);
+							window.addEventListener('pagehide', trackCallFallback);
+							window.addEventListener('blur', trackCallFallback);
+							
+							// Fallback: track after short delay if phone dialer likely launched
+							// (tel: links immediately launch dialer, so if we're still here after delay, track it)
+							setTimeout(function() {
+								if (!eventTracked) {
+									// If page is still visible but link was clicked, phone dialer likely opened
+									// Track it as successful action (dialer opened = successful click)
+									eventTracked = true;
+									if (isDev) {
+										console.log('[Tracking] ✅ Phone call event fired - dialer launch detected (fallback)');
+										console.log('[Tracking] Event data:', { event: 'contact_call', href: link.href });
+									}
+						window.dataLayer.push({
+							'event': 'contact_call'
+						});
+									cleanup();
+					}
+							}, 300); // Short delay to detect dialer launch
+							
+							// Safety cleanup after 5 seconds
+							setTimeout(function() {
+								if (!eventTracked) {
+									if (isDev) console.log('[Tracking] Phone call listener timeout - removed after 5s (no event fired)');
+								}
+								cleanup();
+							}, 5000);
+						});
+					}
+					
+					function setupWhatsAppLink(link) {
+						if (trackedLinks.has(link)) return;
+						trackedLinks.add(link);
+						
+						if (isDev) console.log('[Tracking] Setting up WhatsApp link:', link.href);
+						
+						link.addEventListener('click', function() {
+							if (isDev) console.log('[Tracking] WhatsApp link clicked:', link.href);
+							
+							// Track when window loses focus (WhatsApp opened)
+							const trackWhatsApp = function() {
+								if (!document.hasFocus()) {
+									if (isDev) {
+										console.log('[Tracking] ✅ WhatsApp event fired - window lost focus');
+										console.log('[Tracking] Event data:', { event: 'contact_whatsapp', href: link.href });
+									}
+						window.dataLayer.push({
+							'event': 'contact_whatsapp'
+						});
+									window.removeEventListener('blur', trackWhatsApp);
+									if (isDev) console.log('[Tracking] WhatsApp listener removed');
+								} else if (isDev) {
+									console.log('[Tracking] Window blur detected but still has focus - waiting...');
+								}
+							};
+							window.addEventListener('blur', trackWhatsApp);
+							
+							// Fallback: remove listener after 5 seconds
+							setTimeout(function() {
+								window.removeEventListener('blur', trackWhatsApp);
+								if (isDev) console.log('[Tracking] WhatsApp listener timeout - removed after 5s');
+							}, 5000);
+						});
+					}
+					
+					function initTracking() {
+						if (isDev) console.log('[Tracking] Initializing event tracking hooks...');
+						
+						// Track phone calls - fires when page visibility changes (user likely initiated call)
+						const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+						if (isDev) console.log(`[Tracking] Found ${phoneLinks.length} phone link(s)`);
+						phoneLinks.forEach(setupPhoneLink);
+						
+						// Track WhatsApp - fires when window loses focus (user navigated to WhatsApp)
+						const whatsappLinks = document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]');
+						if (isDev) console.log(`[Tracking] Found ${whatsappLinks.length} WhatsApp link(s)`);
+						whatsappLinks.forEach(setupWhatsAppLink);
+						
+						if (isDev) console.log('[Tracking] Event tracking hooks initialized successfully');
+					}
+					
+					// Wait for DOM to be ready
+					if (document.readyState === 'loading') {
+						document.addEventListener('DOMContentLoaded', initTracking);
+					} else {
+						// DOM is already ready
+						initTracking();
+					}
+					
+					// Also watch for dynamically added links (for Astro islands/components)
+					const observer = new MutationObserver(function(mutations) {
+						mutations.forEach(function(mutation) {
+							mutation.addedNodes.forEach(function(node) {
+								if (node.nodeType === 1) { // Element node
+									// Check if it's a phone link
+									if (node.tagName === 'A' && node.href && node.href.startsWith('tel:')) {
+										setupPhoneLink(node);
+									}
+									// Check if it's a WhatsApp link
+									if (node.tagName === 'A' && node.href && (node.href.includes('wa.me') || node.href.includes('api.whatsapp.com'))) {
+										setupWhatsAppLink(node);
+									}
+									// Check for links inside the added node
+									const phoneLinks = node.querySelectorAll && node.querySelectorAll('a[href^="tel:"]');
+									if (phoneLinks) phoneLinks.forEach(setupPhoneLink);
+									const whatsappLinks = node.querySelectorAll && node.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]');
+									if (whatsappLinks) whatsappLinks.forEach(setupWhatsAppLink);
+								}
+							});
+						});
+					});
+					
+					// Start observing after DOM is ready
+					function startObserving() {
+						observer.observe(document.body, {
+							childList: true,
+							subtree: true
+						});
+						if (isDev) console.log('[Tracking] MutationObserver started - watching for dynamically added links');
+					}
+					
+					if (document.readyState === 'loading') {
+						document.addEventListener('DOMContentLoaded', startObserving);
+					} else {
+						startObserving();
+					}
+				})();
+			</script>
+		)}
+		
+		<slot />
+	</body>
+</html>
+

@@ -1,16 +1,47 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import OnlineInquiry from '../components/OnlineInquiry.astro';
+import CostResponsibility from '../components/CostResponsibility.astro';
+import Checklist from '../components/Checklist.astro';
+import ServicesCards from '../components/ServicesCards.astro';
+import ServiceDetails from '../components/ServiceDetails.astro';
+import CareSupport from '../components/CareSupport.astro';
+import Locations from '../components/Locations.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import AnonymFormOverlay from '../components/AnonymFormOverlay.astro';
+import FloatingActionIcons from '../components/FloatingActionIcons.astro';
+import { SITE_URL, CONTACT_API_ENDPOINT } from '../config/site';
+import '../styles/global.css';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout 
+	title="Messie-Hilfe – Diskrete Entrümpelung & Aufräumservice"
+	description="Diskrete Messie-Hilfe – zuverlässig, bezahlbar, ohne Bewertung. Professionelle Entrümpelung und Unterstützung bei Messie-Wohnungen. Anonym, diskret, kurzfristig verfügbar."
+	canonicalUrl={SITE_URL}
+>
+	<Header />
+	<main>
+		<Hero contactApiEndpoint={CONTACT_API_ENDPOINT} />
+		<!-- Temporarily hidden sections -->
+		<!-- <HowItWorks /> -->
+		<!-- <OnlineInquiry contactApiEndpoint={CONTACT_API_ENDPOINT} /> -->
+		<!-- <CostResponsibility /> -->
+		<!-- <Checklist /> -->
+		<!-- <ServicesCards /> -->
+		<!-- <ServiceDetails /> -->
+		<!-- <CareSupport /> -->
+		<!-- <Locations /> -->
+		<!-- <FAQ /> -->
+	</main>
+	<Footer />
+	
+	<!-- Anonym Form Overlay (uses inline scripts for client-side interactivity) -->
+	<AnonymFormOverlay contactApiEndpoint={CONTACT_API_ENDPOINT} />
+	
+	<!-- Floating Action Icons -->
+	<FloatingActionIcons />
+</BaseLayout>

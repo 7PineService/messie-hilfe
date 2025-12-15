@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+@theme {
+	/* Brand Colors - Generate utilities: bg-brand-primary, bg-brand-secondary, bg-brand-accent */
+	--color-brand-primary: #FFF8D8;
+	--color-brand-secondary: #FFF2C7;
+	--color-brand-accent: #FFF7E5;
+
+	/* Component Colors - Generate utilities: bg-header-top, bg-header-main, etc. */
+	--color-header-top: #FFF8D8;
+	--color-header-main: #FFF2C7;
+	--color-hero-bg: #FFF7E5;
+	--color-content-bg: #FFF6E9;
+	--color-content-alt: #FFFBF5;
+	--color-nav-breadcrumb: #DFD0D9;
+	--color-footer-main: #463324;
+	--color-footer-legal: #FFF8D8;
+
+	/* Text Colors - Generate utilities: text-primary, text-light */
+	--color-text-primary: #463324;
+	--color-text-light: #FBF1DC;
+
+	/* Surface Color Scale (50-500) - Generate utilities: bg-surface-50, bg-surface-100, etc. */
+	--color-surface-50: #FFFEF9;
+	--color-surface-100: #FFFDF5;
+	--color-surface-200: #FFFBF0;
+	--color-surface-300: #FFF9EB;
+	--color-surface-400: #FFF7E5;
+	--color-surface-500: #FFF2C7;
+
+	/* Legacy Colors (for backward compatibility) */
+	--color-heading: #463324;
+	--color-topbar: #FFF8D8;
+	--color-nav: #FFF2C7;
+	--color-button: #F5D97A;
+	--color-button-border: #E9CA62;
+	--color-input-bg: #EEE7D2;
+	--color-footer-bg: #463324;
+	--color-footer-light: #FFF8D8;
+	--color-bg-light: #FFF7E5;
+	--color-bg-lighter: #FFFBF5;
+	--color-form-bg: #FCF5C3;
+
+	/* Font Family */
+	--font-family-sans: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Performance Optimizations */
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	font-family: var(--font-family-sans);
+	margin: 0;
+	padding: 0;
+	line-height: 1.6;
+	color: var(--color-text-primary);
+	background-color: var(--color-header-top);
+	/* Font loading optimization - prevent layout shift */
+	font-display: swap;
+}
+
+/* Container utility */
+.container {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+	.container {
+		max-width: 640px;
+	}
+}
+
+@media (min-width: 768px) {
+	.container {
+		max-width: 768px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.container {
+		max-width: 1024px;
+	}
+}
+
+@media (min-width: 1280px) {
+	.container {
+		max-width: 1280px;
+	}
+}
+
+/* Remove outlines for all buttons, links, and inputs in all states */
+button,
+a,
+input,
+textarea,
+select {
+	outline: none !important;
+}
+
+button:focus,
+button:focus-visible,
+button:hover,
+button:active,
+a:focus,
+a:focus-visible,
+a:hover,
+a:active,
+input:focus,
+input:focus-visible,
+input:hover,
+input:active,
+textarea:focus,
+textarea:focus-visible,
+textarea:hover,
+textarea:active,
+select:focus,
+select:focus-visible,
+select:hover,
+select:active {
+	outline: none !important;
+	outline-offset: 0 !important;
+	box-shadow: none !important;
+}
+
+/* Smooth transitions and cursor pointer */
+a, button {
+	cursor: pointer;
+	transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Prevent layout shift */
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+/* Loading states */
+.loading {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+/* Overlay optimizations - prevent CLS */
+#anonym-overlay {
+	contain: layout style paint;
+	will-change: opacity;
+}
+
+#anonym-overlay.hidden {
+	display: none !important;
+}
+
+#overlay-content {
+	will-change: transform, opacity;
+	contain: layout style paint;
+}
+
+/* Mobile menu performance optimizations - GPU-accelerated animations */
+#mobile-menu {
+	contain: layout style paint;
+	will-change: transform, opacity;
+	-webkit-overflow-scrolling: touch;
+}
+
+#mobile-menu-backdrop {
+	contain: layout style paint;
+	will-change: opacity;
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+	#mobile-menu,
+	#mobile-menu-backdrop {
+		transition: none !important;
+	}
+	
+	#mobile-menu {
+		transform: none !important;
+	}
+}
+
+/* Floating icons optimizations */
+.fixed {
+	contain: layout style paint;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+	
+	#anonym-overlay,
+	#overlay-content {
+		transition: none !important;
+	}
+}

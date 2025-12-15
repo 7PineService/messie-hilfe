@@ -22,3 +22,18 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Editor/IDE files
+.cursorrules
+
+# Firebase (if using Firebase Functions/Backend)
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Ignore all markdown files except README.md, docs folder, and src/content folder
+*.md
+!README.md
+!docs/**/*.md
+!src/content/**/*.md

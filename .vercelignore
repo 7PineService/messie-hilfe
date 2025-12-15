@@ -1,0 +1,17 @@
+# Vercel ignore file
+# Files and patterns to exclude from Vercel deployments
+# Uses .gitignore-style syntax (same as Git)
+
+# Ignore all markdown files except README.md, docs folder, and src/content folder
+*.md
+!README.md
+!docs/**/*.md
+!src/content/**/*.md
+
+# Note: Vercel automatically ignores:
+# - node_modules/
+# - .git/
+# - .env files
+# - dist/ (build output)
+# No need to add these explicitly
+

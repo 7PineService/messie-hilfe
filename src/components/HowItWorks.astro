@@ -1,0 +1,79 @@
+---
+import { getEntry } from 'astro:content';
+
+const howItWorks = await getEntry('how-it-works', 'index');
+const { title, sections } = howItWorks.data;
+---
+
+<section class="bg-[var(--color-bg-light)]">
+	<!-- First Row: Image Left, Title and Text Right -->
+	<div class="container mx-auto px-4">
+		<div class="py-12 md:py-16 lg:py-20">
+			<div class="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+				<div class="order-2 md:order-1">
+					<div class="bg-gray-200 rounded-lg aspect-[4/3] flex items-center justify-center">
+						<svg class="w-32 h-32 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+						</svg>
+					</div>
+				</div>
+				<div class="order-1 md:order-2 space-y-6">
+					<h2 class="text-3xl md:text-4xl font-bold text-[var(--color-heading)]">
+						{title}
+					</h2>
+					<div class="space-y-4">
+						{sections[0].paragraphs.map((paragraph) => (
+							<p class="text-lg text-[var(--color-heading)] opacity-90 leading-relaxed">
+								{paragraph}
+							</p>
+						))}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Second Row: Text Left, Image Right -->
+	<div class={`py-12 md:py-16 lg:py-20 ${sections[1].background === 'lighter' ? 'bg-[var(--color-bg-lighter)]' : ''}`}>
+		<div class="container mx-auto px-4">
+			<div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+				<div class="space-y-4">
+					{sections[1].paragraphs.map((paragraph) => (
+						<p class="text-lg text-[var(--color-heading)] opacity-90 leading-relaxed">
+							{paragraph}
+						</p>
+					))}
+				</div>
+				<div>
+					<div class="bg-gray-200 rounded-lg aspect-[4/3] flex items-center justify-center">
+						<svg class="w-32 h-32 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+						</svg>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Third Row: Image Left, Text Right -->
+	<div class="container mx-auto px-4">
+		<div class="py-12 md:py-16 lg:py-20">
+			<div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+				<div class="order-2 md:order-1">
+					<div class="bg-gray-200 rounded-lg aspect-[4/3] flex items-center justify-center">
+						<svg class="w-32 h-32 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+						</svg>
+					</div>
+				</div>
+				<div class="order-1 md:order-2 space-y-4">
+					{sections[2].paragraphs.map((paragraph) => (
+						<p class="text-lg text-[var(--color-heading)] opacity-90 leading-relaxed">
+							{paragraph}
+						</p>
+					))}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

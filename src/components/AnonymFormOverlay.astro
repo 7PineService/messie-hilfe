@@ -1,0 +1,217 @@
+---
+// AnonymFormOverlay Component - Lightweight modal overlay for anonym form
+// Uses Astro Island for client-side interactivity
+// Reuses ContactForm component for the form content
+import ContactForm from './ContactForm.astro';
+
+interface Props {
+	contactApiEndpoint?: string;
+}
+
+const { contactApiEndpoint } = Astro.props;
+---
+
+<div id="anonym-overlay" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+	<!-- Backdrop - Warm translucent beige/yellowish tone -->
+	<div 
+		id="overlay-backdrop"
+		class="absolute inset-0 bg-[#F5E6D3]/80 backdrop-blur-sm transition-opacity duration-300"
+		aria-hidden="true"
+	></div>
+	
+	<!-- Modal Content - Warm pastel yellow background, centered card -->
+	<div class="relative z-10 w-full max-w-[460px] max-h-[90vh] overflow-y-auto bg-[#FFF5C7] rounded-[18px] shadow-lg transform transition-all duration-300 scale-95 opacity-0" id="overlay-content">
+		<!-- Header with centered title and close button -->
+		<div class="relative px-6 pt-6 pb-4">
+			<!-- Close Button - Top right -->
+			<button
+				id="overlay-close"
+				class="absolute top-6 right-6 p-1.5 text-[var(--color-heading)] hover:bg-yellow-200/60 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
+				aria-label="Modal schließen"
+			>
+				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+				</svg>
+			</button>
+			
+			<!-- Centered Title -->
+			<h2 id="overlay-title" class="text-2xl font-semibold text-[var(--color-heading)] text-center">Anonym anfragen</h2>
+		</div>
+		
+		<!-- Form Content - Reusing ContactForm component -->
+		<ContactForm 
+			contactApiEndpoint={contactApiEndpoint}
+			formId="overlay-contact-form"
+			fileListId="overlay-file-list"
+			formMessageId="overlay-form-message"
+			privacyCheckboxId="overlay-privacy"
+			nameInputId="overlay-name"
+			contactInputId="overlay-contact"
+			messageInputId="overlay-message"
+			filesInputId="overlay-files"
+			showTitle={false}
+			overlayStyle={true}
+		/>
+	</div>
+</div>
+
+<script is:inline>
+	// Overlay state management - only handles overlay open/close, form logic is in ContactForm
+	const overlay = document.getElementById('anonym-overlay');
+	const overlayContent = document.getElementById('overlay-content');
+	const overlayBackdrop = document.getElementById('overlay-backdrop');
+	const closeButton = document.getElementById('overlay-close');
+	const form = document.getElementById('overlay-contact-form');
+	
+	let previousActiveElement = null;
+
+	// Open overlay function (called from other components)
+	function openAnonymForm() {
+		if (!overlay || !overlayContent) return;
+		
+		// Store the element that triggered the overlay
+		previousActiveElement = document.activeElement;
+		
+		// Ensure initial animation state
+		overlayContent.classList.remove('scale-100', 'opacity-100');
+		overlayContent.classList.add('scale-95', 'opacity-0');
+		
+		// Show overlay
+		overlay.classList.remove('hidden');
+		overlay.classList.add('flex');
+		document.body.style.overflow = 'hidden';
+		
+		// Trigger animation after a frame
+		requestAnimationFrame(() => {
+			requestAnimationFrame(() => {
+				overlayContent.classList.remove('scale-95', 'opacity-0');
+				overlayContent.classList.add('scale-100', 'opacity-100');
+			});
+		});
+		
+		// Focus first input after animation starts
+		setTimeout(() => {
+			const firstInput = form?.querySelector('input, textarea');
+			if (firstInput) firstInput.focus();
+		}, 50);
+	}
+
+	// Close overlay function
+	function closeAnonymForm() {
+		if (!overlay) return;
+		
+		// Hide with animation
+		overlayContent?.classList.remove('scale-100', 'opacity-100');
+		overlayContent?.classList.add('scale-95', 'opacity-0');
+		
+		setTimeout(() => {
+			overlay.classList.add('hidden');
+			overlay.classList.remove('flex');
+			document.body.style.overflow = '';
+			
+			// Reset form
+			if (form) {
+				form.reset();
+				const fileList = document.getElementById('overlay-file-list');
+				const formMessage = document.getElementById('overlay-form-message');
+				if (fileList) fileList.innerHTML = '';
+				if (formMessage) {
+					formMessage.classList.add('hidden');
+					formMessage.textContent = '';
+					formMessage.className = 'hidden mt-4 p-4 rounded-lg';
+				}
+			}
+			
+			// Return focus to trigger element
+			previousActiveElement?.focus();
+			previousActiveElement = null;
+		}, 300);
+	}
+
+	// Close button
+	closeButton?.addEventListener('click', closeAnonymForm);
+
+	// Backdrop click
+	overlayBackdrop?.addEventListener('click', (e) => {
+		if (e.target === overlayBackdrop) {
+			closeAnonymForm();
+		}
+	});
+
+	// ESC key support
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && !overlay?.classList.contains('hidden')) {
+			closeAnonymForm();
+		}
+	});
+
+	// Focus trap (keep focus within modal)
+	form?.addEventListener('keydown', (e) => {
+		if (e.key !== 'Tab') return;
+		
+		const focusableElements = form.querySelectorAll(
+			'input, textarea, button, [href], [tabindex]:not([tabindex="-1"])'
+		);
+		const firstElement = focusableElements[0];
+		const lastElement = focusableElements[focusableElements.length - 1];
+
+		if (e.shiftKey && document.activeElement === firstElement) {
+			e.preventDefault();
+			if (lastElement) lastElement.focus();
+		} else if (!e.shiftKey && document.activeElement === lastElement) {
+			e.preventDefault();
+			if (firstElement) firstElement.focus();
+		}
+	});
+
+	// Listen for successful form submission to close overlay
+	if (form) {
+		form.addEventListener('submit', (e) => {
+			// Check if form submission was successful (ContactForm handles the actual submission)
+			// Close overlay after a delay if submission appears successful
+			const formMessage = document.getElementById('overlay-form-message');
+			if (formMessage) {
+				const observer = new MutationObserver((mutations) => {
+					mutations.forEach((mutation) => {
+						if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+							const isSuccess = formMessage.classList.contains('bg-green-100');
+							if (isSuccess && !formMessage.classList.contains('hidden')) {
+								// Close overlay after success message is shown
+								setTimeout(() => {
+									closeAnonymForm();
+								}, 2000);
+								observer.disconnect();
+							}
+						}
+					});
+				});
+				observer.observe(formMessage, { attributes: true });
+			}
+		});
+	}
+
+	// Expose open function globally
+	if (typeof window !== 'undefined') {
+		window.openAnonymForm = openAnonymForm;
+		window.closeAnonymForm = closeAnonymForm;
+	}
+</script>
+
+<style>
+	/* Ensure overlay doesn't cause CLS */
+	#anonym-overlay {
+		will-change: opacity;
+	}
+	
+	#overlay-content {
+		will-change: transform, opacity;
+	}
+	
+	/* Smooth transitions */
+	@media (prefers-reduced-motion: no-preference) {
+		#overlay-content {
+			transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+		}
+	}
+</style>
+

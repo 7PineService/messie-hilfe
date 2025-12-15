@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_URL } from '../../config/site';
+import '../../styles/global.css';
+---
+
+<BaseLayout 
+	title="Vielen Dank für Ihre Anfrage – Messie-Hilfe"
+	description="Vielen Dank für Ihre Anfrage. Wir erstellen Ihnen schnellstmöglich ein kostenloses, unverbindliches Angebot."
+	canonicalUrl={`${SITE_URL}/danke-anfrage`}
+	noindex={true}
+>
+	<Header />
+	<main class="bg-[var(--color-bg-light)] py-12 md:py-20 min-h-[60vh] flex items-center">
+		<div class="container mx-auto px-4 max-w-3xl">
+			<div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center">
+				<!-- Success Icon -->
+				<div class="mb-6 flex justify-center">
+					<svg class="w-16 h-16 md:w-20 md:h-20 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+					</svg>
+				</div>
+				
+				<!-- Title -->
+				<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-heading)] mb-4">
+					Vielen Dank für Ihre Anfrage!
+				</h1>
+				
+				<!-- Message -->
+				<p class="text-lg md:text-xl text-[var(--color-heading)] opacity-80 mb-8 leading-relaxed">
+					Ihre Anfrage wurde erfolgreich übermittelt. Wir erstellen Ihnen schnellstmöglich ein kostenloses, unverbindliches Angebot und melden uns bei Ihnen.
+				</p>
+				
+				<!-- Additional Info -->
+				<div class="bg-yellow-50 rounded-lg p-6 mb-8 border border-yellow-200">
+					<p class="text-sm md:text-base text-[var(--color-heading)] opacity-70 mb-3">
+						<strong>Was passiert jetzt?</strong>
+					</p>
+					<ul class="text-sm md:text-base text-[var(--color-heading)] opacity-70 text-left space-y-2 max-w-md mx-auto">
+						<li class="flex items-start space-x-2">
+							<svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+							</svg>
+							<span>Wir prüfen Ihre Anfrage</span>
+						</li>
+						<li class="flex items-start space-x-2">
+							<svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+							</svg>
+							<span>Wir erstellen ein individuelles Angebot</span>
+						</li>
+						<li class="flex items-start space-x-2">
+							<svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+							</svg>
+							<span>Wir melden uns schnellstmöglich bei Ihnen</span>
+						</li>
+					</ul>
+				</div>
+				
+				<!-- CTA Button -->
+				<a 
+					href="/" 
+					data-cta="thank-you-home"
+					class="inline-flex items-center space-x-2 bg-[var(--color-button)] border border-[var(--color-button-border)] hover:opacity-90 text-[var(--color-heading)] font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+				>
+					<span>Zurück zur Startseite</span>
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+					</svg>
+				</a>
+			</div>
+		</div>
+	</main>
+	<Footer />
+</BaseLayout>
+

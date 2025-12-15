@@ -1,0 +1,86 @@
+---
+// Component for "Häufig gestellte Fragen und Antworten" section
+---
+
+<section class="py-12 md:py-16 lg:py-20 bg-white">
+	<div class="container mx-auto px-4">
+		<h2 class="text-3xl md:text-4xl font-bold text-[var(--color-heading)] mb-8 md:mb-12 text-center">
+			Häufig gestellte Fragen und Antworten
+		</h2>
+
+		<div class="max-w-3xl mx-auto space-y-4">
+			<!-- FAQ Item 1 -->
+			<div class="border border-gray-200 rounded-lg overflow-hidden">
+				<button 
+					class="w-full px-6 py-4 flex items-center justify-between text-left bg-[var(--color-topbar)] hover:bg-opacity-80 transition-colors"
+					onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')"
+				>
+					<span class="font-semibold text-[var(--color-heading)]">Was ist eine Messie-Wohnung?</span>
+					<svg class="w-6 h-6 text-[var(--color-heading)] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+					</svg>
+				</button>
+				<div class="hidden px-6 py-4 bg-white">
+					<p class="text-[var(--color-heading)] opacity-90 leading-relaxed">
+						Eine Messie-Wohnung ist eine Wohnung, die durch übermäßiges Ansammeln von Gegenständen so stark zugestellt ist, dass sie nicht mehr normal bewohnbar ist. Die Betroffenen haben große Schwierigkeiten, sich von Dingen zu trennen, was zu einer extremen Unordnung führt.
+					</p>
+				</div>
+			</div>
+
+			<!-- FAQ Item 2 -->
+			<div class="border border-gray-200 rounded-lg overflow-hidden">
+				<button 
+					class="w-full px-6 py-4 flex items-center justify-between text-left bg-[var(--color-topbar)] hover:bg-opacity-80 transition-colors"
+					onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')"
+				>
+					<span class="font-semibold text-[var(--color-heading)]">Wie lange dauert eine Entrümpelung?</span>
+					<svg class="w-6 h-6 text-[var(--color-heading)] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+					</svg>
+				</button>
+				<div class="hidden px-6 py-4 bg-white">
+					<p class="text-[var(--color-heading)] opacity-90 leading-relaxed">
+						Die Dauer einer Entrümpelung hängt von der Größe der Wohnung und dem Ausmaß der Unordnung ab. Eine durchschnittliche Entrümpelung kann zwischen einem Tag und mehreren Tagen dauern. Bei der Erstberatung können wir Ihnen eine realistische Zeitschätzung geben.
+					</p>
+				</div>
+			</div>
+
+			<!-- FAQ Item 3 -->
+			<div class="border border-gray-200 rounded-lg overflow-hidden">
+				<button 
+					class="w-full px-6 py-4 flex items-center justify-between text-left bg-[var(--color-topbar)] hover:bg-opacity-80 transition-colors"
+					onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')"
+				>
+					<span class="font-semibold text-[var(--color-heading)]">Was kostet eine Entrümpelung?</span>
+					<svg class="w-6 h-6 text-[var(--color-heading)] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+					</svg>
+				</button>
+				<div class="hidden px-6 py-4 bg-white">
+					<p class="text-[var(--color-heading)] opacity-90 leading-relaxed">
+						Die Kosten für eine Entrümpelung variieren je nach Umfang der Arbeit. Wir erstellen Ihnen nach der Erstberatung ein transparentes und unverbindliches Angebot. Alle Kosten werden im Voraus besprochen, sodass keine Überraschungen auf Sie zukommen.
+					</p>
+				</div>
+			</div>
+
+			<!-- FAQ Item 4 -->
+			<div class="border border-gray-200 rounded-lg overflow-hidden">
+				<button 
+					class="w-full px-6 py-4 flex items-center justify-between text-left bg-[var(--color-topbar)] hover:bg-opacity-80 transition-colors"
+					onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')"
+				>
+					<span class="font-semibold text-[var(--color-heading)]">Wie kann ich einen Termin vereinbaren?</span>
+					<svg class="w-6 h-6 text-[var(--color-heading)] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+					</svg>
+				</button>
+				<div class="hidden px-6 py-4 bg-white">
+					<p class="text-[var(--color-heading)] opacity-90 leading-relaxed">
+						Sie können einen Termin ganz einfach über unser Kontaktformular, per Telefon oder E-Mail vereinbaren. Wir sind flexibel und können kurzfristig Termine anbieten. Die Erstberatung ist kostenlos und unverbindlich.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+

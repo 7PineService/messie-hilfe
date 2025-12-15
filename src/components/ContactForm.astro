@@ -1,0 +1,502 @@
+---
+// Contact Form Component with optional API endpoint integration
+// Set the contactApiEndpoint prop to enable form submission
+// Can be used inline or in overlay modal
+interface Props {
+	contactApiEndpoint?: string;
+	formId?: string; // Optional custom form ID (default: "contact-form")
+	fileListId?: string; // Optional custom file list ID (default: "file-list")
+	formMessageId?: string; // Optional custom message ID (default: "form-message")
+	privacyCheckboxId?: string; // Optional custom privacy checkbox ID (default: "privacy")
+	nameInputId?: string; // Optional custom name input ID (default: "name")
+	contactInputId?: string; // Optional custom contact input ID (default: "contact")
+	messageInputId?: string; // Optional custom message input ID (default: "message")
+	filesInputId?: string; // Optional custom files input ID (default: "files")
+	showTitle?: boolean; // Whether to show the title (default: true)
+	overlayStyle?: boolean; // Use overlay styling (default: false)
+}
+
+const { 
+	contactApiEndpoint,
+	formId = 'contact-form',
+	fileListId = 'file-list',
+	formMessageId = 'form-message',
+	privacyCheckboxId = 'privacy',
+	nameInputId = 'name',
+	contactInputId = 'contact',
+	messageInputId = 'message',
+	filesInputId = 'files',
+	showTitle = true,
+	overlayStyle = false
+} = Astro.props;
+
+// Determine styling based on context
+const containerClass = overlayStyle 
+	? 'px-6 pb-6' 
+	: 'bg-[var(--color-form-bg)] rounded-2xl shadow-xl px-6 py-6';
+const inputBgClass = overlayStyle 
+	? 'bg-[#FFFBF0]' 
+	: 'bg-[var(--color-input-bg)]';
+const borderClass = overlayStyle 
+	? 'border-amber-300/60' 
+	: 'border-amber-200';
+const focusBorderClass = overlayStyle 
+	? 'focus:border-amber-500 focus:outline-none' 
+	: 'focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500';
+const buttonClass = overlayStyle
+	? 'w-full bg-[#463324] hover:bg-[#5a4234] active:bg-[#3d2a1f] text-white font-semibold px-6 py-4 rounded-full shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 group'
+	: 'w-full bg-[var(--color-button)] border border-[var(--color-button-border)] hover:opacity-90 text-[var(--color-heading)] font-semibold px-6 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center space-x-2';
+// File upload uses consistent overlay design for both contexts
+---
+
+<div class={containerClass} id={overlayStyle ? undefined : 'anfrage'}>
+	{showTitle && (
+		<h2 class={`text-2xl ${overlayStyle ? 'font-semibold text-center' : 'md:text-3xl font-bold'} text-[var(--color-heading)] ${overlayStyle ? '' : 'mb-4'}`}>
+			Anonym anfragen
+		</h2>
+	)}
+	
+	<form 
+		id={formId}
+		class="space-y-4"
+		method="POST"
+		action={contactApiEndpoint || '#'}
+	>
+		<!-- Name Field (Optional) -->
+		<div>
+			<input
+				type="text"
+				id={nameInputId}
+				name="name"
+				class={`w-full px-4 py-3 border ${borderClass} rounded-lg ${focusBorderClass} transition-colors ${inputBgClass} text-[var(--color-heading)] placeholder:text-[var(--color-heading)] placeholder:opacity-60`}
+				placeholder="Name (optional)"
+			/>
+		</div>
+
+		<!-- Phone or Email Field -->
+		<div>
+			<input
+				type="text"
+				id={contactInputId}
+				name="contact"
+				required
+				class={`w-full px-4 py-3 border ${borderClass} rounded-lg ${focusBorderClass} transition-colors ${inputBgClass} text-[var(--color-heading)] placeholder:text-[var(--color-heading)] placeholder:opacity-60`}
+				placeholder="Telefon oder E-Mail"
+			/>
+		</div>
+
+		<!-- Message Field -->
+		<div>
+			<textarea
+				id={messageInputId}
+				name="message"
+				rows={overlayStyle ? 5 : 4}
+				required
+				class={`w-full px-4 py-3 border ${borderClass} rounded-lg ${focusBorderClass} transition-colors ${inputBgClass} resize-none text-[var(--color-heading)] placeholder:text-[var(--color-heading)] placeholder:opacity-60`}
+				placeholder="Ihre Nachricht"
+			></textarea>
+		</div>
+
+		<!-- File Upload (Optional) - Square plus button with matching background -->
+		<div>
+			<div class="border-2 border-dashed border-amber-400/50 rounded-lg p-6 hover:border-amber-500/70 transition-colors cursor-pointer bg-[#FFFBF0]">
+				<input
+					type="file"
+					id={filesInputId}
+					name="files"
+					multiple
+					class="hidden"
+					accept="image/*,.pdf"
+				/>
+				<label for={filesInputId} class="cursor-pointer flex items-center gap-3">
+					<!-- Square plus button container with matching form background -->
+					<div class={`w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 ${overlayStyle ? 'bg-[#FFF5C7]' : 'bg-[var(--color-form-bg)]'}`}>
+						<svg class="w-6 h-6 text-[var(--color-heading)] opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+						</svg>
+					</div>
+					<!-- Text content -->
+					<p class="text-sm text-[var(--color-heading)] opacity-80">
+						<span class="font-medium">Drag & Drop Files</span> – Choose Files to Upload
+					</p>
+				</label>
+			</div>
+			<div id={fileListId} class="mt-2 space-y-1"></div>
+		</div>
+
+		<!-- Privacy Checkbox -->
+		<div class="flex items-start gap-2 pt-1">
+			<input
+				type="checkbox"
+				id={privacyCheckboxId}
+				name="privacy"
+				required
+				class="mt-0.5 w-4 h-4 text-[var(--color-heading)] border-amber-300 rounded focus:ring-amber-500 focus:ring-1"
+			/>
+			<label for={privacyCheckboxId} class="text-sm text-[var(--color-heading)] opacity-80 leading-relaxed">
+				Ich habe die Datenschutzerklärung zur Kenntnis genommen
+			</label>
+		</div>
+
+		<!-- Submit Button -->
+		<button
+			type="submit"
+			class={buttonClass}
+		>
+			<span>Anonym anfragen</span>
+			<svg class={`w-5 h-5 ${overlayStyle ? 'group-hover:translate-x-1 transition-transform' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+			</svg>
+		</button>
+
+		<!-- Footer Note (only in overlay style) -->
+		{overlayStyle && (
+			<p class="text-xs text-[var(--color-heading)] opacity-60 text-center pt-2">
+				100 % anonym – keine Weitergabe Ihrer Daten
+			</p>
+		)}
+
+		<!-- Success/Error Messages -->
+		<div id={formMessageId} class="hidden mt-4 p-4 rounded-lg"></div>
+	</form>
+</div>
+
+<script define:vars={{ contactApiEndpoint, formId, fileListId, formMessageId, privacyCheckboxId, filesInputId, overlayStyle, isDev: import.meta.env.DEV }}>
+	const form = document.getElementById(formId);
+	const formMessage = document.getElementById(formMessageId);
+	const fileInput = document.getElementById(filesInputId);
+	const fileList = document.getElementById(fileListId);
+	const privacyCheckbox = document.getElementById(privacyCheckboxId);
+
+	// File upload - simple storage until form submission
+	if (fileInput && fileList) {
+		// Store files with unique IDs - simple Map
+		const fileMap = new Map();
+		let fileIdCounter = 0;
+		
+		// Add file to storage
+		function addFile(file) {
+			const fileId = `file-${fileIdCounter++}`;
+			fileMap.set(fileId, file);
+			renderFileList();
+		}
+		
+		// Remove file from storage
+		function removeFile(fileId) {
+			fileMap.delete(fileId);
+			renderFileList();
+		}
+		
+		// Render the file list
+		function renderFileList() {
+			fileList.innerHTML = '';
+			const bgClass = overlayStyle ? 'bg-[#FFFBF0]' : 'bg-[var(--color-input-bg)]';
+			
+			fileMap.forEach((file, fileId) => {
+				const fileItem = document.createElement('div');
+				fileItem.className = `text-sm text-gray-600 flex items-center justify-between gap-2 p-2 ${bgClass} rounded border border-amber-200`;
+				
+				const fileInfo = document.createElement('div');
+				fileInfo.className = 'flex items-center space-x-2 flex-1 min-w-0';
+				fileInfo.innerHTML = `
+					<svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+					</svg>
+					<span class="truncate">${file.name} (${(file.size / 1024).toFixed(1)} KB)</span>
+				`;
+				
+				const removeBtn = document.createElement('button');
+				removeBtn.type = 'button';
+				removeBtn.className = 'flex-shrink-0 p-1 text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors';
+				removeBtn.setAttribute('aria-label', 'Datei entfernen');
+				removeBtn.innerHTML = `
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				`;
+				removeBtn.addEventListener('click', () => removeFile(fileId));
+				
+				fileItem.appendChild(fileInfo);
+				fileItem.appendChild(removeBtn);
+				fileList.appendChild(fileItem);
+			});
+		}
+		
+		// Handle file selection - add to Map
+		fileInput.addEventListener('change', (e) => {
+			const newFiles = Array.from(e.target.files || []);
+			newFiles.forEach(file => addFile(file));
+			// Clear the input so same file can be selected again if needed
+			fileInput.value = '';
+		});
+		
+		// Expose fileMap for form submission - use unique function name based on filesInputId
+		// This prevents conflicts when multiple ContactForm instances exist on the same page
+		window[`getFileMap_${filesInputId}`] = () => fileMap;
+	}
+
+	// Form submission
+	if (form && contactApiEndpoint) {
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			
+			// Validate privacy checkbox
+			if (privacyCheckbox && !privacyCheckbox.checked) {
+				if (formMessage) {
+					formMessage.className = 'mt-4 p-4 rounded-lg bg-red-100 text-red-800';
+					formMessage.textContent = 'Bitte bestätigen Sie die Datenschutzerklärung.';
+					formMessage.classList.remove('hidden');
+					privacyCheckbox.focus();
+				}
+				return;
+			}
+			
+			const submitButton = form.querySelector('button[type="submit"]');
+			if (!submitButton) return;
+			const originalText = submitButton.innerHTML;
+			submitButton.disabled = true;
+			submitButton.innerHTML = '<span>Wird gesendet...</span>';
+
+			// Collect form data
+			const formData = new FormData(form);
+			const data = {
+				name: formData.get('name') || '',
+				contact: formData.get('contact'),
+				message: formData.get('message'),
+				privacy: formData.get('privacy') === 'on',
+				timestamp: new Date().toISOString(),
+				source: formId.includes('overlay') ? 'overlay-form' : 'landing-page'
+			};
+
+			// Log form submission data (dev mode only)
+			if (isDev) {
+			console.log('=== Form Submission Data ===');
+			console.log('Form ID:', formId);
+			console.log('Form Data:', data);
+			}
+
+			// Handle file uploads from stored Map - use unique function name based on filesInputId
+			const getFileMapFn = window[`getFileMap_${filesInputId}`];
+			const storedFileMap = getFileMapFn ? getFileMapFn() : null;
+			if (storedFileMap && storedFileMap.size > 0) {
+				data.hasFiles = true;
+				data.fileCount = storedFileMap.size;
+				
+				// Log file information (dev mode only)
+				if (isDev) {
+				console.log('Files attached:', storedFileMap.size);
+				storedFileMap.forEach((file, fileId) => {
+					console.log(`  - ${fileId}: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`);
+				});
+				}
+				
+				// Create FormData for file upload
+				const uploadFormData = new FormData();
+				uploadFormData.append('name', data.name);
+				uploadFormData.append('contact', data.contact || '');
+				uploadFormData.append('message', data.message || '');
+				uploadFormData.append('privacy', data.privacy);
+				uploadFormData.append('timestamp', data.timestamp);
+				uploadFormData.append('source', data.source);
+				
+				// Append files from Map
+				storedFileMap.forEach((file) => {
+					uploadFormData.append('files', file);
+				});
+				
+				if (isDev) console.log('Upload FormData created with files');
+
+				try {
+					const response = await fetch(contactApiEndpoint, {
+						method: 'POST',
+						body: uploadFormData
+					});
+
+					if (response.ok) {
+						if (isDev) console.log('Form with files submitted successfully!');
+						const responseData = await response.json().catch(() => null);
+						if (isDev && responseData) {
+							console.log('Server response:', responseData);
+						}
+						
+						// Determine lead type based on form context
+						const isOverlayForm = formId.includes('overlay');
+						const isOfferRequestPage = window.location.pathname === '/anfrage/';
+						const leadType = isOverlayForm ? 'anonymous' : (isOfferRequestPage ? 'offer_request' : 'anonymous');
+						
+						// Track generate_lead event
+						if (window.dataLayer) {
+							window.dataLayer.push({
+								'event': 'generate_lead',
+								'lead_type': leadType
+							});
+						}
+						
+						if (formMessage) {
+							formMessage.className = 'mt-4 p-4 rounded-lg bg-green-100 text-green-800';
+							formMessage.textContent = 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.';
+							formMessage.classList.remove('hidden');
+						}
+						form.reset();
+						if (fileList) fileList.innerHTML = '';
+						// Clear stored files
+						if (storedFileMap) storedFileMap.clear();
+						
+						// Redirect after 2-3 seconds
+						setTimeout(() => {
+							if (isOverlayForm) {
+								window.location.href = '/danke-anonym/';
+							} else if (isOfferRequestPage) {
+								window.location.href = '/danke-anfrage/';
+							} else {
+								// Scroll to message (only if not redirecting)
+								if (formMessage) {
+									formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+								}
+							}
+						}, 2500);
+					} else {
+						const errorText = await response.text().catch(() => 'Unknown error');
+						if (isDev) console.error('Server error:', response.status, errorText);
+						throw new Error('Server error');
+					}
+				} catch (error) {
+					if (isDev) console.error('Form submission error:', error);
+					if (formMessage) {
+						formMessage.className = 'mt-4 p-4 rounded-lg bg-red-100 text-red-800';
+						formMessage.textContent = 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per Telefon.';
+						formMessage.classList.remove('hidden');
+					}
+				} finally {
+					if (submitButton) {
+						submitButton.disabled = false;
+						submitButton.innerHTML = originalText;
+					}
+				}
+			} else {
+				// No files - send JSON as before
+				if (isDev) console.log('No files attached, sending JSON data');
+				try {
+					const response = await fetch(contactApiEndpoint, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(data)
+					});
+
+					if (response.ok) {
+						if (isDev) console.log('Form submitted successfully!');
+						const responseData = await response.json().catch(() => null);
+						if (isDev && responseData) {
+							console.log('Server response:', responseData);
+						}
+						
+						// Determine lead type based on form context
+						const isOverlayForm = formId.includes('overlay');
+						const isOfferRequestPage = window.location.pathname === '/anfrage/';
+						const leadType = isOverlayForm ? 'anonymous' : (isOfferRequestPage ? 'offer_request' : 'anonymous');
+						
+						// Track generate_lead event
+						if (window.dataLayer) {
+							window.dataLayer.push({
+								'event': 'generate_lead',
+								'lead_type': leadType
+							});
+						}
+						
+						if (formMessage) {
+							formMessage.className = 'mt-4 p-4 rounded-lg bg-green-100 text-green-800';
+							formMessage.textContent = 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.';
+							formMessage.classList.remove('hidden');
+						}
+						form.reset();
+						if (fileList) fileList.innerHTML = '';
+						
+						// Redirect after 2-3 seconds
+						setTimeout(() => {
+							if (isOverlayForm) {
+								window.location.href = '/danke-anonym/';
+							} else if (isOfferRequestPage) {
+								window.location.href = '/danke-anfrage/';
+							} else {
+								// Scroll to message (only if not redirecting)
+								if (formMessage) {
+									formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+								}
+							}
+						}, 2500);
+					} else {
+						const errorText = await response.text().catch(() => 'Unknown error');
+						if (isDev) console.error('Server error:', response.status, errorText);
+						throw new Error('Server error');
+					}
+				} catch (error) {
+					if (formMessage) {
+						formMessage.className = 'mt-4 p-4 rounded-lg bg-red-100 text-red-800';
+						formMessage.textContent = 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per Telefon.';
+						formMessage.classList.remove('hidden');
+					}
+				} finally {
+					if (submitButton) {
+						submitButton.disabled = false;
+						submitButton.innerHTML = originalText;
+					}
+				}
+			}
+		});
+	} else if (form) {
+		// Fallback: show success message even without Firebase endpoint
+		form.addEventListener('submit', (e) => {
+			e.preventDefault();
+			
+			// Validate privacy checkbox
+			if (privacyCheckbox && !privacyCheckbox.checked) {
+				if (formMessage) {
+					formMessage.className = 'mt-4 p-4 rounded-lg bg-red-100 text-red-800';
+					formMessage.textContent = 'Bitte bestätigen Sie die Datenschutzerklärung.';
+					formMessage.classList.remove('hidden');
+					privacyCheckbox.focus();
+				}
+				return;
+			}
+			
+			// Collect form data
+			const formData = new FormData(form);
+			const data = {
+				name: formData.get('name') || '',
+				contact: formData.get('contact'),
+				message: formData.get('message'),
+				privacy: formData.get('privacy') === 'on',
+				timestamp: new Date().toISOString(),
+				source: formId.includes('overlay') ? 'overlay-form' : 'landing-page'
+			};
+			
+			// Log form submission data (fallback mode, dev only)
+			if (isDev) {
+			console.log('=== Form Submission Data (Fallback Mode - No Endpoint) ===');
+			console.log('Form ID:', formId);
+			console.log('Form Data:', data);
+			
+			// Handle file uploads from stored Map - use unique function name based on filesInputId
+			const getFileMapFn = window[`getFileMap_${filesInputId}`];
+			const storedFileMap = getFileMapFn ? getFileMapFn() : null;
+			if (storedFileMap && storedFileMap.size > 0) {
+				console.log('Files attached:', storedFileMap.size);
+				storedFileMap.forEach((file, fileId) => {
+					console.log(`  - ${fileId}: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`);
+				});
+				}
+			}
+			
+			if (formMessage) {
+				formMessage.className = 'mt-4 p-4 rounded-lg bg-yellow-100 text-yellow-800';
+				formMessage.textContent = 'Formularfunktion wird konfiguriert. Bitte kontaktieren Sie uns direkt per Telefon oder E-Mail.';
+				formMessage.classList.remove('hidden');
+			}
+			form.reset();
+			if (fileList) fileList.innerHTML = '';
+		});
+	}
+</script>
+

@@ -1,0 +1,123 @@
+---
+import ContactForm from './ContactForm.astro';
+
+interface Props {
+	contactApiEndpoint?: string;
+}
+
+const { contactApiEndpoint } = Astro.props;
+---
+
+<section class="bg-[var(--color-bg-light)] py-12 md:py-16 lg:py-20 min-h-[600px] lg:min-h-[700px] flex items-center">
+	<div class="container mx-auto px-4 w-full">
+		<div class="grid lg:grid-cols-5 gap-8 lg:gap-12 items-start">
+			<!-- Left Column: Content - Takes 3 out of 5 columns (60%) -->
+			<div class="lg:col-span-3 space-y-3 md:space-y-4 lg:space-y-6">
+				<!-- Main Headline - 2 lines only -->
+				<h1 class="text-2xl md:text-3xl lg:text-5xl font-bold text-[var(--color-heading)] leading-tight">
+					Diskrete Messie-Hilfe –<br>
+					zuverlässig, bezahlbar, ohne Bewertung
+				</h1>
+
+				<!-- Description -->
+				<p class="text-base md:text-lg lg:text-xl text-[var(--color-heading)] opacity-80 leading-relaxed max-w-2xl">
+					Eine Messie-Wohnung zu entrümpeln ist emotional und körperlich belastend. Viele Betroffene schämen sich oder wissen nicht, wo sie anfangen sollen. Wir unterstützen Sie diskret, professionell und ohne Bewertung. Unsere Einsätze erfolgen anonym, ohne Logo am Fahrzeug und auf Wunsch kurzfristig.
+				</p>
+
+				<!-- Desktop CTA Button -->
+				<div class="pt-2 hidden lg:block">
+					<a href="/anfrage/" data-cta="hero-offer" class="inline-flex items-center space-x-2 bg-[var(--color-button)] border border-[var(--color-button-border)] hover:opacity-90 text-[var(--color-heading)] font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 text-lg">
+						<span>Kostenloses Angebot anfordern</span>
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+					</a>
+				</div>
+
+				<!-- Mobile CTA Buttons -->
+				<div class="pt-4 lg:hidden flex flex-col gap-3">
+					<!-- Primary CTA: Brown button with play icon -->
+					<button
+						type="button"
+						onclick="if (window.openAnonymForm) window.openAnonymForm()"
+						data-cta="hero-anonym"
+						class="w-full inline-flex items-center justify-center space-x-2 bg-[var(--color-heading)] hover:opacity-90 text-white font-semibold px-6 py-3 md:px-8 md:py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 text-base md:text-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
+					>
+						<span>Anonym anfragen</span>
+						<svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+					</button>
+					
+					<!-- Divider: "oder" -->
+					<div class="text-center text-[var(--color-heading)] opacity-60 font-medium py-1 text-sm md:text-base">oder</div>
+					
+					<!-- Secondary CTA: Outlined button with play icon -->
+					<a href="/anfrage/" data-cta="hero-offer-mobile" class="w-full inline-flex items-center justify-center space-x-2 bg-transparent border-2 border-[var(--color-heading)] hover:bg-[var(--color-heading)] hover:text-white text-[var(--color-heading)] font-semibold px-6 py-3 md:px-8 md:py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 text-base md:text-lg">
+						<span>Kostenloses Angebot anfordern</span>
+						<svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+					</a>
+				</div>
+
+				<!-- Feature List - Four checkmarked items, 2 per line -->
+				<div class="pt-6 lg:pt-0">
+					<div class="grid grid-cols-2 gap-2 md:gap-3">
+						<div class="flex items-center space-x-2 md:space-x-3 text-[var(--color-heading)]">
+							<svg class="w-5 h-5 md:w-6 md:h-6 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+							</svg>
+							<span class="font-medium text-sm md:text-base lg:text-lg">Diskret & Anonym</span>
+						</div>
+						<div class="flex items-center space-x-2 md:space-x-3 text-[var(--color-heading)]">
+							<svg class="w-5 h-5 md:w-6 md:h-6 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+							</svg>
+							<span class="font-medium text-sm md:text-base lg:text-lg">Ohne Bewertung</span>
+						</div>
+						<div class="flex items-center space-x-2 md:space-x-3 text-[var(--color-heading)]">
+							<svg class="w-5 h-5 md:w-6 md:h-6 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+							</svg>
+							<span class="font-medium text-sm md:text-base lg:text-lg">Kurzfristig verfügbar</span>
+						</div>
+						<div class="flex items-center space-x-2 md:space-x-3 text-[var(--color-heading)]">
+							<svg class="w-5 h-5 md:w-6 md:h-6 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+							</svg>
+							<span class="font-medium text-sm md:text-base lg:text-lg">Zuverlässig & bezahlbar</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Trust Indicators -->
+				<div class="flex flex-row gap-3 md:gap-4 pt-4 lg:pt-6">
+					<div class="flex items-center space-x-2 md:space-x-3 bg-yellow-100 px-4 py-3 md:px-6 md:py-4 rounded-lg flex-1">
+						<span class="text-xl md:text-2xl flex-shrink-0">★</span>
+						<div>
+							<div class="text-xl md:text-2xl font-bold text-[var(--color-heading)]">250+</div>
+							<div class="text-xs md:text-sm text-[var(--color-heading)] opacity-70">jährliche Kunden</div>
+						</div>
+					</div>
+					<div class="flex items-center space-x-2 md:space-x-3 bg-yellow-100 px-4 py-3 md:px-6 md:py-4 rounded-lg flex-1">
+						<span class="text-xl md:text-2xl flex-shrink-0">⏳</span>
+						<div>
+							<div class="text-lg md:text-2xl font-bold text-[var(--color-heading)]">Über 20 Jahre</div>
+							<div class="text-xs md:text-sm text-[var(--color-heading)] opacity-70">Erfahrung</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Right Column: Contact Form - Takes 2 out of 5 columns (40%) - Desktop only -->
+			<div class="hidden lg:block lg:col-span-2 lg:sticky lg:top-24">
+				<ContactForm contactApiEndpoint={contactApiEndpoint} />
+			</div>
+		</div>
+	</div>
+</section>
+
