@@ -12,7 +12,7 @@ A high-performance, SEO-optimized landing page built with Astro.js and Tailwind 
 - ✅ **Clean Component Architecture** - Modular, reusable components
 - ✅ **Google Tag Manager** - Fully integrated with environment-based configuration
 - ✅ **Google Consent Mode v2** - CookieYes integration, proper consent flow
-- ✅ **Event Tracking** - Phone/WhatsApp clicks, form submissions (tracks on successful navigation)
+- ✅ **Event Tracking** - GA4 events: conversions (generate_lead), engagement (cta_click, scroll_depth), funnel tracking (funnel_start), contact actions (contact_call, contact_whatsapp)
 - ✅ **Form Integration** - API endpoint support with fallback (configurable via environment variable)
 - ✅ **Thank-You Pages** - Properly configured with noindex meta tags
 
@@ -164,11 +164,18 @@ The form will automatically use this endpoint if provided. If not set, forms wil
 - No direct GA4 scripts in Astro code
 
 **Event Tracking:**
-- Phone clicks → `contact_call` event (tracks on successful call initiation)
-- WhatsApp clicks → `contact_whatsapp` event (tracks on successful window open)
-- Anonymous form submit → `generate_lead` with `lead_type: 'anonymous'`
-- Offer request form → `generate_lead` with `lead_type: 'offer_request'`
-- Events fire only on successful actions, not on button clicks
+- **Conversion Events:**
+  - `/danke-anfrage/` page view → `generate_lead` with `lead_type: 'offer_request'` (Primary conversion)
+  - `/danke-anonym/` page view → `generate_lead` with `lead_type: 'anonymous'` (Secondary conversion)
+  - Phone clicks → `contact_call` event (tracks on successful call initiation)
+  - WhatsApp clicks → `contact_whatsapp` event (tracks on successful window open)
+- **Engagement Events:**
+  - CTA button clicks → `cta_click` with `cta_type: 'primary'` (hero/prominent CTAs)
+  - 75% scroll depth → `scroll_depth` with `percent: 75`
+- **Funnel Tracking:**
+  - `/anfrage/` page view → `funnel_start` with `funnel_type: 'offer_request'`
+  - Anonymous overlay visibility → `funnel_start` with `funnel_type: 'anonymous'`
+- Events fire on page views or successful actions (not on button clicks for conversions)
 - No global click listeners (uses specific element listeners)
 - Dev-mode console logging available for debugging
 
@@ -277,16 +284,32 @@ No additional configuration needed - Vercel auto-detects Astro projects.
 
 ### Event Tracking Implementation
 
+**Conversion Tracking:**
+- `generate_lead` events fire on thank-you page views (not on form submission)
+  - `/danke-anfrage/` → `lead_type: 'offer_request'` (Primary conversion for bidding)
+  - `/danke-anonym/` → `lead_type: 'anonymous'` (Secondary conversion, not for bidding)
+- Form submissions redirect to appropriate thank-you page, where conversion is tracked
+
 **Phone/WhatsApp Tracking:**
 - Uses `visibilitychange` and `blur` events to detect successful navigation
 - Tracks only when action completes (not on click)
 - Automatic cleanup after 5 seconds to prevent memory leaks
 - MutationObserver watches for dynamically added links
 
-**Form Tracking:**
-- Events fire only on successful form submission
-- Lead type automatically determined based on form context
-- Redirects to appropriate thank-you page after submission
+**CTA Click Tracking:**
+- Tracks clicks on elements with `data-cta` attribute
+- Fires `cta_click` with `cta_type: 'primary'` for hero/prominent CTAs
+- Supports dynamically added CTAs via MutationObserver
+
+**Scroll Depth Tracking:**
+- Fires `scroll_depth` with `percent: 75` when user scrolls 75% of page height
+- Uses throttled scroll listener for performance
+- Single-fire event (tracks once per page)
+
+**Funnel Tracking:**
+- `/anfrage/` page view fires `funnel_start` with `funnel_type: 'offer_request'`
+- Anonymous overlay visibility fires `funnel_start` with `funnel_type: 'anonymous'`
+- Used for funnel drop-off analysis (not conversions)
 
 ### SEO Implementation
 
