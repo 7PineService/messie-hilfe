@@ -81,3 +81,24 @@ import '../../styles/global.css';
 	<Footer />
 </BaseLayout>
 
+<!-- Track funnel_start event on page view -->
+<script is:inline define:vars={{ isDev: import.meta.env.DEV }}>
+	(function() {
+		if (typeof window === 'undefined' || !window.dataLayer) {
+			if (isDev) console.warn('[Tracking] dataLayer not available - funnel_start tracking disabled');
+			return;
+		}
+		
+		// Fire funnel_start event with funnel_type: 'offer_request' on page view
+		if (isDev) {
+			console.log('[Tracking] ✅ Firing funnel_start event for offer_request');
+			console.log('[Tracking] Event data:', { event: 'funnel_start', funnel_type: 'offer_request' });
+		}
+		
+		window.dataLayer.push({
+			'event': 'funnel_start',
+			'funnel_type': 'offer_request'
+		});
+	})();
+</script>
+

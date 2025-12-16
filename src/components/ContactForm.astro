@@ -319,19 +319,6 @@ const buttonClass = overlayStyle
 							console.log('Server response:', responseData);
 						}
 						
-						// Determine lead type based on form context
-						const isOverlayForm = formId.includes('overlay');
-						const isOfferRequestPage = window.location.pathname === '/anfrage/';
-						const leadType = isOverlayForm ? 'anonymous' : (isOfferRequestPage ? 'offer_request' : 'anonymous');
-						
-						// Track generate_lead event
-						if (window.dataLayer) {
-							window.dataLayer.push({
-								'event': 'generate_lead',
-								'lead_type': leadType
-							});
-						}
-						
 						if (formMessage) {
 							formMessage.className = 'mt-4 p-4 rounded-lg bg-green-100 text-green-800';
 							formMessage.textContent = 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.';
@@ -390,19 +377,6 @@ const buttonClass = overlayStyle
 						const responseData = await response.json().catch(() => null);
 						if (isDev && responseData) {
 							console.log('Server response:', responseData);
-						}
-						
-						// Determine lead type based on form context
-						const isOverlayForm = formId.includes('overlay');
-						const isOfferRequestPage = window.location.pathname === '/anfrage/';
-						const leadType = isOverlayForm ? 'anonymous' : (isOfferRequestPage ? 'offer_request' : 'anonymous');
-						
-						// Track generate_lead event
-						if (window.dataLayer) {
-							window.dataLayer.push({
-								'event': 'generate_lead',
-								'lead_type': leadType
-							});
 						}
 						
 						if (formMessage) {

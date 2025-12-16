@@ -55,7 +55,7 @@ const { contactApiEndpoint } = Astro.props;
 	</div>
 </div>
 
-<script is:inline>
+<script is:inline define:vars={{ isDev: import.meta.env.DEV }}>
 	// Overlay state management - only handles overlay open/close, form logic is in ContactForm
 	const overlay = document.getElementById('anonym-overlay');
 	const overlayContent = document.getElementById('overlay-content');
@@ -68,6 +68,18 @@ const { contactApiEndpoint } = Astro.props;
 	// Open overlay function (called from other components)
 	function openAnonymForm() {
 		if (!overlay || !overlayContent) return;
+		
+		// Track funnel_start event when overlay becomes visible
+		if (typeof window !== 'undefined' && window.dataLayer) {
+			if (isDev) {
+				console.log('[Tracking] ✅ Firing funnel_start event for anonymous');
+				console.log('[Tracking] Event data:', { event: 'funnel_start', funnel_type: 'anonymous' });
+			}
+			window.dataLayer.push({
+				'event': 'funnel_start',
+				'funnel_type': 'anonymous'
+			});
+		}
 		
 		// Store the element that triggered the overlay
 		previousActiveElement = document.activeElement;

@@ -385,6 +385,69 @@ const localBusinessSchema = {
 						});
 					}
 					
+					function setupCTAClick(ctaElement) {
+						if (!ctaElement || trackedLinks.has(ctaElement)) return;
+						trackedLinks.add(ctaElement);
+						
+						ctaElement.addEventListener('click', function() {
+							if (isDev) {
+								console.log('[Tracking] CTA clicked:', ctaElement.getAttribute('data-cta'));
+								console.log('[Tracking] ✅ Firing cta_click event');
+								console.log('[Tracking] Event data:', { event: 'cta_click', cta_type: 'primary' });
+							}
+							
+							if (window.dataLayer) {
+								window.dataLayer.push({
+									'event': 'cta_click',
+									'cta_type': 'primary'
+								});
+							}
+						});
+					}
+					
+					function initScrollDepthTracking() {
+						let scrollDepthTracked = false;
+						
+						function checkScrollDepth() {
+							if (scrollDepthTracked) return;
+							
+							const windowHeight = window.innerHeight;
+							const documentHeight = document.documentElement.scrollHeight;
+							const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+							const scrollPercent = (scrollTop + windowHeight) / documentHeight * 100;
+							
+							if (scrollPercent >= 75) {
+								scrollDepthTracked = true;
+								if (isDev) {
+									console.log('[Tracking] ✅ Firing scroll_depth event');
+									console.log('[Tracking] Event data:', { event: 'scroll_depth', percent: 75 });
+								}
+								
+								if (window.dataLayer) {
+									window.dataLayer.push({
+										'event': 'scroll_depth',
+										'percent': 75
+									});
+								}
+								
+								// Remove listener after tracking
+								window.removeEventListener('scroll', checkScrollDepth);
+								if (isDev) console.log('[Tracking] Scroll depth listener removed');
+							}
+						}
+						
+						// Throttle scroll events for performance
+						let scrollTimeout;
+						window.addEventListener('scroll', function() {
+							if (scrollTimeout) {
+								window.cancelAnimationFrame(scrollTimeout);
+							}
+							scrollTimeout = window.requestAnimationFrame(checkScrollDepth);
+						}, { passive: true });
+						
+						if (isDev) console.log('[Tracking] Scroll depth tracking initialized');
+					}
+					
 					function initTracking() {
 						if (isDev) console.log('[Tracking] Initializing event tracking hooks...');
 						
@@ -397,6 +460,14 @@ const localBusinessSchema = {
 						const whatsappLinks = document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]');
 						if (isDev) console.log(`[Tracking] Found ${whatsappLinks.length} WhatsApp link(s)`);
 						whatsappLinks.forEach(setupWhatsAppLink);
+						
+						// Track CTA clicks - fires on click of elements with data-cta attribute
+						const ctaElements = document.querySelectorAll('[data-cta]');
+						if (isDev) console.log(`[Tracking] Found ${ctaElements.length} CTA element(s)`);
+						ctaElements.forEach(setupCTAClick);
+						
+						// Initialize scroll depth tracking
+						initScrollDepthTracking();
 						
 						if (isDev) console.log('[Tracking] Event tracking hooks initialized successfully');
 					}
@@ -422,11 +493,17 @@ const localBusinessSchema = {
 									if (node.tagName === 'A' && node.href && (node.href.includes('wa.me') || node.href.includes('api.whatsapp.com'))) {
 										setupWhatsAppLink(node);
 									}
+									// Check if it's a CTA element
+									if (node.hasAttribute && node.hasAttribute('data-cta')) {
+										setupCTAClick(node);
+									}
 									// Check for links inside the added node
 									const phoneLinks = node.querySelectorAll && node.querySelectorAll('a[href^="tel:"]');
 									if (phoneLinks) phoneLinks.forEach(setupPhoneLink);
 									const whatsappLinks = node.querySelectorAll && node.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]');
 									if (whatsappLinks) whatsappLinks.forEach(setupWhatsAppLink);
+									const ctaElements = node.querySelectorAll && node.querySelectorAll('[data-cta]');
+									if (ctaElements) ctaElements.forEach(setupCTAClick);
 								}
 							});
 						});

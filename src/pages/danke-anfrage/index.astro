@@ -77,3 +77,24 @@ import '../../styles/global.css';
 	<Footer />
 </BaseLayout>
 
+<!-- Track generate_lead event on page view -->
+<script is:inline define:vars={{ isDev: import.meta.env.DEV }}>
+	(function() {
+		if (typeof window === 'undefined' || !window.dataLayer) {
+			if (isDev) console.warn('[Tracking] dataLayer not available - generate_lead tracking disabled');
+			return;
+		}
+		
+		// Fire generate_lead event with lead_type: 'offer_request' on page view
+		if (isDev) {
+			console.log('[Tracking] ✅ Firing generate_lead event for offer_request');
+			console.log('[Tracking] Event data:', { event: 'generate_lead', lead_type: 'offer_request' });
+		}
+		
+		window.dataLayer.push({
+			'event': 'generate_lead',
+			'lead_type': 'offer_request'
+		});
+	})();
+</script>
+
