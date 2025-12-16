@@ -1,6 +1,6 @@
 # Messie-Hilfe Landing Page
 
-A high-performance, SEO-optimized landing page built with Astro.js and Tailwind CSS v4.
+A high-performance, SEO-optimized landing page built with Astro.js and Tailwind CSS v4. 
 
 ## 🚀 Features
 
