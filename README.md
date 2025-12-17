@@ -1,14 +1,7 @@
-# messie-hilfe
-Projekt wurde initialisiert. Deployment über Vercel folgt.
-
-#######################################################
-#######################################################
+## LandingpageRequestAPI
 
 
-LandingpageRequestAPI
-
-
-//Staging 
+## Staging 
 curl -X POST https://europe-west3-mrcleanerstaging.cloudfunctions.net/landingpageRequestAPI \
   -H "Content-Type: application/json" \
   -d '{"secret":"QkGgZ120P6j3okWPX3auMCSh"}'
@@ -20,11 +13,7 @@ Production Key will be send on a nother communikation channel
 
 
 
-#######################################################
-#######################################################
-
-
-Structure:
+## Structure:
 
 !!! Please make sure optional is optional and not emty String!
 !!! Everthing signed NOT optional is needed to prevent Error in follow-up functions
@@ -155,11 +144,8 @@ export enum Country {
 }
 ```
 
+## Example Messi:
 
-#######################################################
-#######################################################
-
-Example Messi:
 ```json
 
 
@@ -247,6 +233,3 @@ Example Messi:
 	}// same timestamp, we need the updatedAt for later purpose
 }
 ```
-
-#######################################################
-#######################################################
