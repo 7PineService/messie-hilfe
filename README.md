@@ -9,7 +9,8 @@ curl -X POST https://europe-west3-mrcleanerstaging.cloudfunctions.net/landingpag
 Reminder:
 Please make sure the Secret can not be found in the Body or JS on Web
 Use ENV-Variable to separate staging and production not found on Github/Bitbucket
-Production Key will be send on a nother communikation channel
+
+**Production Key** will be send on another communication channel
 
 
 
