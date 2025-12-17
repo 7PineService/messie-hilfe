@@ -16,8 +16,8 @@ Use ENV-Variable to separate staging and production not found on Github/Bitbucke
 
 ## Structure:
 
-!!! Please make sure optional is optional and not emty String!
-!!! Everthing signed NOT optional is needed to prevent Error in follow-up functions
+!!! Please make sure optional is optional and not empty String!
+!!! Everything signed NOT optional is needed to prevent Error in follow-up functions
 
 ```ts
 export enum FurnitureType {
