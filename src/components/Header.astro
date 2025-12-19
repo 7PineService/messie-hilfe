@@ -23,21 +23,9 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 		<div class="container mx-auto px-4">
 			<div class="flex items-center justify-between h-20">
 				<!-- Logo -->
-				<a href="/" class="flex items-center space-x-3 group" aria-label={`${SITE_NAME} Startseite`}>
-					<div class="w-14 h-14 bg-yellow-400 rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow relative">
-						<!-- House icon with two hands -->
-						<svg class="w-9 h-9 text-[var(--color-heading)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-							<!-- Left hand (cupping from left) -->
-							<path d="M6 14c-1 0-1.5 1-1.5 2s0.5 2 1.5 2" stroke-linecap="round" stroke-linejoin="round"/>
-							<path d="M4 16c0 1 0.5 2 1.5 2s1.5-1 1.5-2" stroke-linecap="round" stroke-linejoin="round"/>
-							<!-- Right hand (cupping from right) -->
-							<path d="M18 14c1 0 1.5 1 1.5 2s-0.5 2-1.5 2" stroke-linecap="round" stroke-linejoin="round"/>
-							<path d="M20 16c0 1-0.5 2-1.5 2s-1.5-1-1.5-2" stroke-linecap="round" stroke-linejoin="round"/>
-							<!-- House -->
-							<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round"/>
-						</svg>
-					</div>
-					<span class="text-2xl font-bold text-[var(--color-heading)]">{SITE_NAME}</span>
+				<a href="/" class="flex items-center space-x-1 group" aria-label={`${SITE_NAME} Startseite`}>
+					<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-20 h-auto w-auto object-contain" />
+					<span class="text-2xl font-bold text-[var(--color-heading)] whitespace-nowrap">{SITE_NAME}</span>
 				</a>
 
 				<!-- Desktop Navigation -->
@@ -65,10 +53,10 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 				<div class="flex items-center space-x-4">
 					<a 
 						href="/anfrage/"
-						class="hidden md:flex items-center space-x-2 bg-[var(--color-button)] border border-[var(--color-button-border)] hover:opacity-90 text-[var(--color-heading)] font-semibold px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+						class="hidden md:flex items-center space-x-2 bg-transparent border-2 border-[var(--color-heading)] hover:bg-[var(--color-heading)] hover:text-white text-[var(--color-heading)] font-semibold px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-500"
 					>
-						<span>Angebot anfordern</span>
-						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<span>Kostenloses Angebot anfordern</span>
+						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 						</svg>
@@ -117,7 +105,7 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 		<!-- Mobile Menu - Sidebar from Right -->
 		<div 
 			id="mobile-menu" 
-			class="lg:hidden fixed inset-y-0 right-0 w-72 bg-white transform translate-x-full opacity-0 transition-all duration-300 ease-out z-50 flex flex-col shadow-2xl"
+			class="lg:hidden fixed inset-y-0 right-0 w-96 bg-white transform translate-x-full opacity-0 transition-all duration-300 ease-out z-50 flex flex-col shadow-2xl"
 			aria-label="Hauptnavigation"
 			aria-hidden="true"
 		>
@@ -125,21 +113,9 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 			<div class="bg-[var(--color-nav)] flex-shrink-0">
 				<div class="flex items-center justify-between h-20 px-6">
 					<!-- Logo - Smaller for sidebar -->
-					<a href="/" class="flex items-center space-x-2 group" aria-label={`${SITE_NAME} Startseite`} onclick="closeMobileMenu()">
-						<div class="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow relative">
-							<!-- House icon with two hands -->
-							<svg class="w-6 h-6 text-[var(--color-heading)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-								<!-- Left hand (cupping from left) -->
-								<path d="M6 14c-1 0-1.5 1-1.5 2s0.5 2 1.5 2" stroke-linecap="round" stroke-linejoin="round"/>
-								<path d="M4 16c0 1 0.5 2 1.5 2s1.5-1 1.5-2" stroke-linecap="round" stroke-linejoin="round"/>
-								<!-- Right hand (cupping from right) -->
-								<path d="M18 14c1 0 1.5 1 1.5 2s-0.5 2-1.5 2" stroke-linecap="round" stroke-linejoin="round"/>
-								<path d="M20 16c0 1-0.5 2-1.5 2s-1.5-1-1.5-2" stroke-linecap="round" stroke-linejoin="round"/>
-								<!-- House -->
-								<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</div>
-						<span class="text-xl font-bold text-[var(--color-heading)]">{SITE_NAME}</span>
+					<a href="/" class="flex items-center space-x-1 group" aria-label={`${SITE_NAME} Startseite`} onclick="closeMobileMenu()">
+						<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-12 h-auto w-auto object-contain" />
+						<span class="text-xl font-bold text-[var(--color-heading)] whitespace-nowrap">{SITE_NAME}</span>
 					</a>
 					
 					<!-- Close Button -->
@@ -232,10 +208,10 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 				
 				<a 
 					href="/anfrage/"
-					class="md:hidden mt-6 px-6 py-4 bg-[var(--color-button)] border border-[var(--color-button-border)] hover:opacity-90 text-[var(--color-heading)] font-semibold rounded-xl text-center transition-all duration-200 shadow-lg hover:shadow-xl touch-manipulation flex items-center justify-center space-x-2"
+					class="md:hidden mt-6 px-6 py-4 bg-transparent border-2 border-[var(--color-heading)] hover:bg-[var(--color-heading)] hover:text-white text-[var(--color-heading)] font-semibold rounded-xl text-center transition-all duration-200 shadow-lg hover:shadow-xl touch-manipulation flex items-center justify-center space-x-2"
 					onclick="closeMobileMenu()"
 				>
-					<span>Angebot anfordern</span>
+					<span>Kostenloses Angebot anfordern</span>
 					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

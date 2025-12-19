@@ -34,18 +34,10 @@ const {
 const containerClass = overlayStyle 
 	? 'px-6 pb-6' 
 	: 'bg-[var(--color-form-bg)] rounded-2xl shadow-xl px-6 py-6';
-const inputBgClass = overlayStyle 
-	? 'bg-[#FFFBF0]' 
-	: 'bg-[var(--color-input-bg)]';
-const borderClass = overlayStyle 
-	? 'border-amber-300/60' 
-	: 'border-amber-200';
-const focusBorderClass = overlayStyle 
-	? 'focus:border-amber-500 focus:outline-none' 
-	: 'focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500';
-const buttonClass = overlayStyle
-	? 'w-full bg-[#463324] hover:bg-[#5a4234] active:bg-[#3d2a1f] text-white font-semibold px-6 py-4 rounded-full shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 group'
-	: 'w-full bg-[var(--color-button)] border border-[var(--color-button-border)] hover:opacity-90 text-[var(--color-heading)] font-semibold px-6 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center space-x-2';
+const inputBgClass = 'bg-[var(--color-input-bg)]';
+const borderClass = 'border-amber-200';
+const focusBorderClass = 'focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500';
+const buttonClass = 'w-full bg-[var(--color-heading)] hover:opacity-90 text-white font-semibold px-6 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center space-x-2';
 // File upload uses consistent overlay design for both contexts
 ---
 
@@ -90,7 +82,7 @@ const buttonClass = overlayStyle
 			<textarea
 				id={messageInputId}
 				name="message"
-				rows={overlayStyle ? 5 : 4}
+				rows={overlayStyle ? 3 : 3}
 				required
 				class={`w-full px-4 py-3 border ${borderClass} rounded-lg ${focusBorderClass} transition-colors ${inputBgClass} resize-none text-[var(--color-heading)] placeholder:text-[var(--color-heading)] placeholder:opacity-60`}
 				placeholder="Ihre Nachricht"
@@ -99,7 +91,7 @@ const buttonClass = overlayStyle
 
 		<!-- File Upload (Optional) - Square plus button with matching background -->
 		<div>
-			<div class="border-2 border-dashed border-amber-400/50 rounded-lg p-6 hover:border-amber-500/70 transition-colors cursor-pointer bg-[#FFFBF0]">
+			<div class="border-2 border-dashed border-amber-400/50 rounded-lg p-4 hover:border-amber-500/70 transition-colors cursor-pointer bg-[#FFFBF0]">
 				<input
 					type="file"
 					id={filesInputId}
@@ -133,7 +125,7 @@ const buttonClass = overlayStyle
 				required
 				class="mt-0.5 w-4 h-4 text-[var(--color-heading)] border-amber-300 rounded focus:ring-amber-500 focus:ring-1"
 			/>
-			<label for={privacyCheckboxId} class="text-sm text-[var(--color-heading)] opacity-80 leading-relaxed">
+			<label for={privacyCheckboxId} class="text-xs text-[var(--color-heading)] opacity-80 leading-normal whitespace-nowrap">
 				Ich habe die Datenschutzerklärung zur Kenntnis genommen
 			</label>
 		</div>
@@ -144,8 +136,9 @@ const buttonClass = overlayStyle
 			class={buttonClass}
 		>
 			<span>Anonym anfragen</span>
-			<svg class={`w-5 h-5 ${overlayStyle ? 'group-hover:translate-x-1 transition-transform' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+			<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 			</svg>
 		</button>
 
