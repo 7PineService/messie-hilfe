@@ -8,7 +8,7 @@ interface Props {
 const { contactApiEndpoint } = Astro.props;
 ---
 
-<section class="bg-[var(--color-bg-light)] pt-6 pb-2 md:pt-7 md:pb-3 lg:pt-6 lg:pb-2 xl:pt-8 xl:pb-4 2xl:pt-10 2xl:pb-6 min-[1920px]:pt-12 min-[1920px]:pb-8 flex items-center">
+<section class="bg-[var(--color-bg-light)] pt-6 pb-2 md:pt-7 md:pb-3 lg:pt-6 lg:pb-2 xl:pt-8 xl:pb-4 2xl:pt-10 2xl:pb-6 min-[1920px]:pt-16 min-[1920px]:pb-10 flex items-center">
 	<div class="container mx-auto px-4 w-full">
 		<div class="grid lg:grid-cols-5 gap-6 md:gap-8 lg:gap-8 xl:gap-10 2xl:gap-12 min-[1920px]:gap-16 items-start">
 			<!-- Left Column: Content - Takes 3 out of 5 columns (60%) -->
@@ -113,7 +113,7 @@ const { contactApiEndpoint } = Astro.props;
 			</div>
 
 			<!-- Right Column: Contact Form - Takes 2 out of 5 columns (40%) - Desktop only -->
-			<div class="hidden lg:block lg:col-span-2 lg:sticky lg:top-20 min-[1920px]:top-28">
+			<div class="hidden lg:block lg:col-span-2 lg:sticky lg:top-20">
 				<ContactForm contactApiEndpoint={contactApiEndpoint} />
 			</div>
 		</div>

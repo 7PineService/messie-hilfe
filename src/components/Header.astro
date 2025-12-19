@@ -6,8 +6,8 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 <header class="sticky top-0 z-50 bg-white shadow-sm transition-shadow duration-300" id="header">
 	<!-- Top Bar -->
 	<div class="bg-[var(--color-topbar)]">
-		<div class="container mx-auto px-4 py-1.5 min-[1920px]:py-2.5">
-			<div class="flex flex-wrap items-center justify-between text-xs min-[1920px]:text-sm">
+		<div class="container mx-auto px-4 py-1.5">
+			<div class="flex flex-wrap items-center justify-between text-xs">
 				<a href={`mailto:${CONTACT_EMAIL}`} class="text-[var(--color-heading)] hover:opacity-80 transition-colors font-medium">
 					{CONTACT_EMAIL}
 				</a>
@@ -21,11 +21,11 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 	<!-- Main Navigation -->
 	<nav class="bg-[var(--color-nav)]" aria-label="Hauptnavigation">
 		<div class="container mx-auto px-4">
-			<div class="flex items-center justify-between h-14 min-[1920px]:h-20">
+			<div class="flex items-center justify-between h-14">
 				<!-- Logo -->
 				<a href="/" class="flex items-center space-x-1 group" aria-label={`${SITE_NAME} Startseite`}>
-					<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-12 min-[1920px]:max-h-16 h-auto w-auto object-contain" />
-					<span class="text-lg min-[1920px]:text-2xl font-bold text-[var(--color-heading)] whitespace-nowrap">{SITE_NAME}</span>
+					<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-12 h-auto w-auto object-contain" />
+					<span class="text-lg font-bold text-[var(--color-heading)] whitespace-nowrap">{SITE_NAME}</span>
 				</a>
 
 				<!-- Desktop Navigation -->
@@ -111,11 +111,11 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 		>
 			<!-- Menu Header with Close Button - Matches Main Header Design -->
 			<div class="bg-[var(--color-nav)] flex-shrink-0">
-				<div class="flex items-center justify-between h-14 min-[1920px]:h-20 px-6">
+				<div class="flex items-center justify-between h-14 px-6">
 					<!-- Logo - Smaller for sidebar -->
 					<a href="/" class="flex items-center space-x-1 group" aria-label={`${SITE_NAME} Startseite`} onclick="closeMobileMenu()">
-						<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-10 min-[1920px]:max-h-14 h-auto w-auto object-contain" />
-						<span class="text-lg min-[1920px]:text-xl font-bold text-[var(--color-heading)] whitespace-nowrap">{SITE_NAME}</span>
+						<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-10 h-auto w-auto object-contain" />
+						<span class="text-lg font-bold text-[var(--color-heading)] whitespace-nowrap">{SITE_NAME}</span>
 					</a>
 					
 					<!-- Close Button -->

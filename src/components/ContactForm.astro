@@ -91,7 +91,7 @@ const buttonClass = 'w-full bg-[var(--color-heading)] hover:opacity-90 text-whit
 
 		<!-- File Upload (Optional) - Square plus button with matching background -->
 		<div>
-			<div class="border-2 border-dashed border-amber-400/50 rounded-lg p-2.5 min-[1920px]:p-3.5 hover:border-amber-500/70 transition-colors cursor-pointer bg-[#FFFBF0]">
+			<div class="border-2 border-dashed border-amber-400/50 rounded-lg p-2.5 hover:border-amber-500/70 transition-colors cursor-pointer bg-[#FFFBF0]">
 				<input
 					type="file"
 					id={filesInputId}
@@ -100,20 +100,20 @@ const buttonClass = 'w-full bg-[var(--color-heading)] hover:opacity-90 text-whit
 					class="hidden"
 					accept="image/*,.pdf"
 				/>
-				<label for={filesInputId} class="cursor-pointer flex items-center gap-2 min-[1920px]:gap-3">
+				<label for={filesInputId} class="cursor-pointer flex items-center gap-2">
 					<!-- Square plus button container with matching form background -->
-					<div class={`w-10 h-10 min-[1920px]:w-12 min-[1920px]:h-12 rounded-lg flex items-center justify-center flex-shrink-0 ${overlayStyle ? 'bg-[#FFF5C7]' : 'bg-[var(--color-form-bg)]'}`}>
-						<svg class="w-4 h-4 min-[1920px]:w-5 min-[1920px]:h-5 text-[var(--color-heading)] opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+					<div class={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${overlayStyle ? 'bg-[#FFF5C7]' : 'bg-[var(--color-form-bg)]'}`}>
+						<svg class="w-4 h-4 text-[var(--color-heading)] opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
 						</svg>
 					</div>
 					<!-- Text content -->
-					<p class="text-xs min-[1920px]:text-sm text-[var(--color-heading)] opacity-80">
+					<p class="text-xs text-[var(--color-heading)] opacity-80">
 						<span class="font-medium">Drag & Drop Files</span> – Choose Files to Upload
 					</p>
 				</label>
 			</div>
-			<div id={fileListId} class="mt-1.5 min-[1920px]:mt-2 space-y-1"></div>
+			<div id={fileListId} class="mt-1.5 space-y-1"></div>
 		</div>
 
 		<!-- Privacy Checkbox -->
