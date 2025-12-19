@@ -8,28 +8,28 @@ interface Props {
 const { contactApiEndpoint } = Astro.props;
 ---
 
-<section class="bg-[var(--color-bg-light)] pt-6 pb-2 md:pt-7 md:pb-3 lg:pt-6 lg:pb-2 xl:pt-8 xl:pb-4 2xl:pt-10 2xl:pb-6 flex items-center">
+<section class="bg-[var(--color-bg-light)] pt-6 pb-2 md:pt-7 md:pb-3 lg:pt-6 lg:pb-2 xl:pt-8 xl:pb-4 2xl:pt-10 2xl:pb-6 min-[1920px]:pt-12 min-[1920px]:pb-8 flex items-center">
 	<div class="container mx-auto px-4 w-full">
-		<div class="grid lg:grid-cols-5 gap-6 md:gap-8 lg:gap-8 xl:gap-10 2xl:gap-12 items-start">
+		<div class="grid lg:grid-cols-5 gap-6 md:gap-8 lg:gap-8 xl:gap-10 2xl:gap-12 min-[1920px]:gap-16 items-start">
 			<!-- Left Column: Content - Takes 3 out of 5 columns (60%) -->
-			<div class="lg:col-span-3 space-y-2 md:space-y-2.5 lg:space-y-2 xl:space-y-3 2xl:space-y-4">
+			<div class="lg:col-span-3 space-y-2 md:space-y-2.5 lg:space-y-2 xl:space-y-3 2xl:space-y-4 min-[1920px]:space-y-5">
 				<!-- Main Headline - 2 lines only -->
-				<h1 class="text-xl md:text-2xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-[var(--color-heading)] leading-tight">
+				<h1 class="text-xl md:text-2xl lg:text-2xl xl:text-3xl 2xl:text-4xl min-[1920px]:text-5xl font-bold text-[var(--color-heading)] leading-tight">
 					Messie-Hilfe & Messie-Wohnung entrümpeln –<br>
 					diskret & anonym
 				</h1>
 
 				<!-- Description -->
-				<div class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl text-[var(--color-heading)] opacity-80 leading-relaxed max-w-2xl space-y-2">
+				<div class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl text-[var(--color-heading)] opacity-80 leading-relaxed max-w-2xl min-[1920px]:max-w-3xl space-y-2 min-[1920px]:space-y-3">
 					<p>Eine <strong>Messie-Wohnung zu entrümpeln</strong> ist für viele Betroffene und Angehörige eine schwere Aufgabe. Oft fehlt der Überblick, wo man anfangen soll – oder die Situation ist emotional zu belastend.</p>
 					<p><strong>Wir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen</strong> – diskret, anonym und mit klaren Abläufen.</p>
 				</div>
 
 				<!-- Desktop CTA Button - Secondary (outline) -->
-				<div class="pt-1 lg:pt-1.5 hidden lg:block">
-					<a href="/anfrage/" data-cta="hero-offer" class="inline-flex items-center space-x-2 bg-transparent border-2 border-[var(--color-heading)] hover:bg-[var(--color-heading)] hover:text-white text-[var(--color-heading)] font-semibold px-5 py-2.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 text-sm">
+				<div class="pt-1 lg:pt-1.5 min-[1920px]:pt-3 hidden lg:block">
+					<a href="/anfrage/" data-cta="hero-offer" class="inline-flex items-center space-x-2 min-[1920px]:space-x-3 bg-transparent border-2 border-[var(--color-heading)] hover:bg-[var(--color-heading)] hover:text-white text-[var(--color-heading)] font-semibold px-5 py-2.5 min-[1920px]:px-7 min-[1920px]:py-3.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 text-sm min-[1920px]:text-base">
 						<span>Kostenloses Angebot anfordern</span>
-						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg class="w-5 h-5 min-[1920px]:w-6 min-[1920px]:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 						</svg>
@@ -66,46 +66,46 @@ const { contactApiEndpoint } = Astro.props;
 				</div>
 
 				<!-- Feature List - Four checkmarked items, 2 per line -->
-				<div class="pt-4 md:pt-5 lg:pt-0">
-					<div class="grid grid-cols-2 gap-2 md:gap-2.5 lg:gap-2.5 xl:gap-3">
-						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 text-[var(--color-heading)]">
-							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<div class="pt-4 md:pt-5 lg:pt-0 min-[1920px]:pt-3">
+					<div class="grid grid-cols-2 gap-2 md:gap-2.5 lg:gap-2.5 xl:gap-3 min-[1920px]:gap-4">
+						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4 text-[var(--color-heading)]">
+							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
 							</svg>
-							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg">Diskret & anonym vor Ort</span>
+							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl">Diskret & anonym vor Ort</span>
 						</div>
-						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 text-[var(--color-heading)]">
-							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4 text-[var(--color-heading)]">
+							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
 							</svg>
-							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg">Kostenlose Vor-Ort-Besichtigung</span>
+							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl">Kostenlose Vor-Ort-Besichtigung</span>
 						</div>
-						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 text-[var(--color-heading)]">
-							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4 text-[var(--color-heading)]">
+							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
 							</svg>
-							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg">Festpreis inkl. aller Kosten</span>
+							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl">Festpreis inkl. aller Kosten</span>
 						</div>
-						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 text-[var(--color-heading)]">
-							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4 text-[var(--color-heading)]">
+							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
 							</svg>
-							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg">Kurzfristig verfügbar</span>
+							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl">Kurzfristig verfügbar</span>
 						</div>
 					</div>
 				</div>
 
 				<!-- Trust Indicators -->
-				<div class="flex flex-row gap-2 md:gap-3 lg:gap-3 xl:gap-4 pt-1 md:pt-1.5 lg:pt-1 xl:pt-2 2xl:pt-2.5">
-					<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 bg-yellow-100 px-3 py-2 md:px-4 md:py-2.5 lg:px-4 lg:py-2.5 xl:px-5 xl:py-3 2xl:px-6 2xl:py-4 rounded-lg flex-1">
-						<span class="text-base md:text-lg lg:text-lg xl:text-xl flex-shrink-0">★</span>
-						<div class="text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg text-[var(--color-heading)] whitespace-nowrap">
+				<div class="flex flex-row gap-2 md:gap-3 lg:gap-3 xl:gap-4 min-[1920px]:gap-5 pt-1 md:pt-1.5 lg:pt-1 xl:pt-2 2xl:pt-2.5 min-[1920px]:pt-4">
+					<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4 bg-yellow-100 px-3 py-2 md:px-4 md:py-2.5 lg:px-4 lg:py-2.5 xl:px-5 xl:py-3 2xl:px-6 2xl:py-4 min-[1920px]:px-8 min-[1920px]:py-5 rounded-lg flex-1">
+						<span class="text-base md:text-lg lg:text-lg xl:text-xl min-[1920px]:text-2xl flex-shrink-0">★</span>
+						<div class="text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl text-[var(--color-heading)] whitespace-nowrap">
 							<span class="font-bold">5.000+</span> <span class="opacity-70">zufriedene Kunden</span>
 						</div>
 					</div>
-					<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 bg-yellow-100 px-3 py-2 md:px-4 md:py-2.5 lg:px-4 lg:py-2.5 xl:px-5 xl:py-3 2xl:px-6 2xl:py-4 rounded-lg flex-1">
-						<span class="text-base md:text-lg lg:text-lg xl:text-xl flex-shrink-0">⏳</span>
-						<div class="text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg text-[var(--color-heading)] whitespace-nowrap">
+					<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4 bg-yellow-100 px-3 py-2 md:px-4 md:py-2.5 lg:px-4 lg:py-2.5 xl:px-5 xl:py-3 2xl:px-6 2xl:py-4 min-[1920px]:px-8 min-[1920px]:py-5 rounded-lg flex-1">
+						<span class="text-base md:text-lg lg:text-lg xl:text-xl min-[1920px]:text-2xl flex-shrink-0">⏳</span>
+						<div class="text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl text-[var(--color-heading)] whitespace-nowrap">
 							<span class="font-bold">20+ Jahre</span> <span class="opacity-70">Erfahrung</span>
 						</div>
 					</div>
@@ -113,7 +113,7 @@ const { contactApiEndpoint } = Astro.props;
 			</div>
 
 			<!-- Right Column: Contact Form - Takes 2 out of 5 columns (40%) - Desktop only -->
-			<div class="hidden lg:block lg:col-span-2 lg:sticky lg:top-20">
+			<div class="hidden lg:block lg:col-span-2 lg:sticky lg:top-20 min-[1920px]:top-28">
 				<ContactForm contactApiEndpoint={contactApiEndpoint} />
 			</div>
 		</div>
