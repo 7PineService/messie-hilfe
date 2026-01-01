@@ -1,146 +1,246 @@
 ---
 import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, CONTACT_WHATSAPP, SITE_NAME } from '../config/site';
-// Footer Component matching the design
+// Footer Component with new 3-section design
 ---
 
 <footer>
-	<!-- Top Section - Light Beige with Breadcrumb -->
-	<div class="bg-[var(--color-footer-light)] py-3">
+	<!-- Upper Footer Section - Gradient background with logo and intro text -->
+	<div class="py-8 md:py-16" style="background: linear-gradient(to bottom, #EFDFD9, #BEA89D);">
 		<div class="container mx-auto px-4">
-			<div class="flex flex-col md:flex-row items-center justify-center md:justify-between gap-3">
-				<nav class="text-sm text-[var(--color-heading)] text-center md:text-left" aria-label="Breadcrumb">
-					<a href="/" class="hover:opacity-80 transition-colors">{SITE_NAME}</a>
-					<span class="mx-2">>></span>
-					<span>Startseite</span>
-				</nav>
+			<div class="max-w-2xl mx-auto text-center space-y-4">
+				<!-- Logo -->
+				<div class="flex items-center justify-center space-x-2">
+					<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="h-16 w-16 object-contain" />
+				</div>
+				<!-- Brand Name -->
+				<h2 class="text-2xl md:text-3xl font-bold">{SITE_NAME}</h2>
+				<!-- Intro Text -->
+				<p class="text-sm md:text-base leading-relaxed opacity-90">
+					Durch qualifiziertes Personal und ein strukturiertes Vorgehen wird Ihre Immobilie diskret, respektvoll und zügig in einen ordentlichen Zustand versetzt.
+				</p>
 			</div>
 		</div>
 	</div>
 
-	<!-- Main Content Section - Dark Brown -->
-	<div class="bg-[var(--color-footer-bg)] text-white py-12 md:py-16">
+	<!-- Main Footer Section - Dark brown background with 3 columns -->
+	<div class="py-8 md:py-16" style="background-color: #463324;">
 		<div class="container mx-auto px-4">
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-				<!-- Column 1: About Us / Description -->
-				<div class="space-y-4 text-center md:text-left">
-					<!-- Logo -->
-					<div class="flex items-center justify-center md:justify-start space-x-1 mb-4">
-						<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-16 w-auto object-contain" />
-						<span class="text-xl font-bold text-white whitespace-nowrap">{SITE_NAME}</span>
-					</div>
-					<p class="text-sm leading-relaxed text-white">
-						Durch qualifiziertes Personal und ein strukturiertes Vorgehen wird Ihre Immobilie diskret, respektvoll und zügig in einen ordentlichen Zustand versetzt.
-					</p>
-				</div>
-
-				<!-- Column 2: Leistungen (Services) -->
-				<div class="text-center md:text-left">
+			<!-- Desktop: 3 Column Grid -->
+			<div class="hidden md:grid md:grid-cols-3 gap-8 lg:gap-12">
+				<!-- Column 1: Leistungen (Services) -->
+				<div>
 					<h3 class="text-white font-semibold text-lg mb-4">Leistungen</h3>
-					<ul class="space-y-3">
+					<ul class="space-y-2.5">
 						<li>
-							<a href="/leistungen/messie-reinigung" class="text-white hover:opacity-80 transition-colors text-sm">
-								Messie-Reinigung
+							<a href="/leistungen/messie-reinigung" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+								<span class="opacity-70">›</span> Messie-Reinigung
 							</a>
 						</li>
 						<li>
-							<a href="/leistungen/entsorgung" class="text-white hover:opacity-80 transition-colors text-sm">
-								Entsorgung
+							<a href="/leistungen/entsorgung" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+								<span class="opacity-70">›</span> Entsorgung
 							</a>
 						</li>
 						<li>
-							<a href="/leistungen/entruempelung" class="text-white hover:opacity-80 transition-colors text-sm">
-								Entrümpelung
+							<a href="/leistungen/entruempelung" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+								<span class="opacity-70">›</span> Entrümpelung
 							</a>
 						</li>
 						<li>
-							<a href="/leistungen/desinfektion" class="text-white hover:opacity-80 transition-colors text-sm">
-								Desinfektion
+							<a href="/leistungen/desinfektion" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+								<span class="opacity-70">›</span> Desinfektion
 							</a>
 						</li>
 						<li>
-							<a href="/leistungen/malerarbeiten" class="text-white hover:opacity-80 transition-colors text-sm">
-								Malerarbeiten
+							<a href="/leistungen/malerarbeiten" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+								<span class="opacity-70">›</span> Malerarbeiten
 							</a>
 						</li>
 						<li>
-							<a href="/leistungen/renovierung" class="text-white hover:opacity-80 transition-colors text-sm">
-								Renovierung
+							<a href="/leistungen/renovierung" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+								<span class="opacity-70">›</span> Renovierung
 							</a>
 						</li>
 					</ul>
 				</div>
 
-				<!-- Column 3: Wichtiges (Important) -->
-				<div class="text-center md:text-left">
+				<!-- Column 2: Wichtiges (Important) -->
+				<div>
 					<h3 class="text-white font-semibold text-lg mb-4">Wichtiges</h3>
-					<ul class="space-y-3">
+					<ul class="space-y-2.5">
 						<li>
-							<a href="/" class="text-white hover:opacity-80 transition-colors text-sm">
-								Startseite
+							<a href="/" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+								<span class="opacity-70">›</span> Startseite
 							</a>
 						</li>
 						<li>
-							<a href="/ueber-uns" class="text-white hover:opacity-80 transition-colors text-sm">
-								Über uns
+							<a href="/ueber-uns" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+								<span class="opacity-70">›</span> Über uns
 							</a>
 						</li>
 						<li>
-							<a href="/kontakt" class="text-white hover:opacity-80 transition-colors text-sm">
-								Kontakt
+							<a href="/kontakt" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+								<span class="opacity-70">›</span> Kontakt
 							</a>
 						</li>
 					</ul>
 				</div>
 
-				<!-- Column 4: Kontakt (Contact) -->
-				<div class="text-center md:text-left">
+				<!-- Column 3: Kontakt (Contact) -->
+				<div>
 					<h3 class="text-white font-semibold text-lg mb-4">Kontakt</h3>
-					<div class="space-y-3">
+					<div class="space-y-2.5">
 						<a href={`mailto:${CONTACT_EMAIL}`} class="block text-white hover:opacity-80 transition-colors text-sm">
 							{CONTACT_EMAIL}
 						</a>
-						<a href={`tel:${CONTACT_PHONE}`} class="block text-white hover:opacity-80 transition-colors text-sm mb-3" data-gtm-event="contact_call">
+						<a href={`tel:${CONTACT_PHONE}`} class="flex items-center gap-2 text-white hover:opacity-80 transition-colors text-sm" data-gtm-event="contact_call">
+							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+							</svg>
 							{CONTACT_PHONE_DISPLAY}
 						</a>
-						<div class="flex justify-center md:justify-start">
-							<a href={`https://wa.me/${CONTACT_WHATSAPP}`} target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-[var(--color-button)] border border-[var(--color-button-border)] rounded-lg flex items-center justify-center shadow-md hover:opacity-90 transition-all duration-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2" aria-label="WhatsApp Nachricht senden" data-gtm-event="contact_whatsapp">
-								<svg class="w-6 h-6 text-[var(--color-heading)]" fill="currentColor" viewBox="0 0 24 24">
-									<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-								</svg>
-							</a>
-						</div>
+						<a href={`https://wa.me/${CONTACT_WHATSAPP}`} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors mt-2" aria-label="WhatsApp Nachricht senden" data-gtm-event="contact_whatsapp">
+							<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Mobile: Accordion Sections -->
+			<div class="md:hidden space-y-3">
+				<!-- Leistungen Accordion -->
+				<div class="border-b border-white/20">
+					<button
+						id="footer-services-toggle"
+						class="w-full flex items-center justify-between py-3 text-white"
+						aria-expanded="false"
+						aria-controls="footer-services-menu"
+					>
+						<span class="font-semibold text-lg">Leistungen</span>
+						<svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+						</svg>
+					</button>
+					<div
+						id="footer-services-menu"
+						class="overflow-hidden transition-all duration-300 ease-in-out"
+						style="max-height: 0;"
+						aria-hidden="true"
+					>
+						<ul class="pb-4 space-y-2.5">
+							<li>
+								<a href="/leistungen/messie-reinigung" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+									<span class="opacity-70">›</span> Messie-Reinigung
+								</a>
+							</li>
+							<li>
+								<a href="/leistungen/entsorgung" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+									<span class="opacity-70">›</span> Entsorgung
+								</a>
+							</li>
+							<li>
+								<a href="/leistungen/entruempelung" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+									<span class="opacity-70">›</span> Entrümpelung
+								</a>
+							</li>
+							<li>
+								<a href="/leistungen/desinfektion" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+									<span class="opacity-70">›</span> Desinfektion
+								</a>
+							</li>
+							<li>
+								<a href="/leistungen/malerarbeiten" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+									<span class="opacity-70">›</span> Malerarbeiten
+								</a>
+							</li>
+							<li>
+								<a href="/leistungen/renovierung" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+									<span class="opacity-70">›</span> Renovierung
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Wichtiges Accordion -->
+				<div class="border-b border-white/20">
+					<button
+						id="footer-important-toggle"
+						class="w-full flex items-center justify-between py-3 text-white"
+						aria-expanded="false"
+						aria-controls="footer-important-menu"
+					>
+						<span class="font-semibold text-lg">Wichtiges</span>
+						<svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+						</svg>
+					</button>
+					<div
+						id="footer-important-menu"
+						class="overflow-hidden transition-all duration-300 ease-in-out"
+						style="max-height: 0;"
+						aria-hidden="true"
+					>
+						<ul class="pb-4 space-y-2.5">
+							<li>
+								<a href="/" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+									<span class="opacity-70">›</span> Startseite
+								</a>
+							</li>
+							<li>
+								<a href="/ueber-uns" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+									<span class="opacity-70">›</span> Über uns
+								</a>
+							</li>
+							<li>
+								<a href="/kontakt" class="text-white hover:opacity-80 transition-colors text-sm flex items-center gap-2">
+									<span class="opacity-70">›</span> Kontakt
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Kontakt Section (Always Visible on Mobile) -->
+				<div class="pt-2">
+					<h3 class="text-white font-semibold text-lg mb-4">Kontakt</h3>
+					<div class="space-y-2.5">
+						<a href={`mailto:${CONTACT_EMAIL}`} class="block text-white hover:opacity-80 transition-colors text-sm">
+							{CONTACT_EMAIL}
+						</a>
+						<a href={`tel:${CONTACT_PHONE}`} class="flex items-center gap-2 text-white hover:opacity-80 transition-colors text-sm" data-gtm-event="contact_call">
+							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+							</svg>
+							{CONTACT_PHONE_DISPLAY}
+						</a>
+						<a href={`https://wa.me/${CONTACT_WHATSAPP}`} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors mt-2" aria-label="WhatsApp Nachricht senden" data-gtm-event="contact_whatsapp">
+							<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+							</svg>
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Bottom Section - Light Beige with Legal Links -->
-	<div class="bg-[var(--color-footer-light)] py-4">
+	<!-- Bottom Footer Section - Light tan background with legal links -->
+	<div class="py-4" style="background-color: #DFCABB;">
 		<div class="container mx-auto px-4">
-			<!-- Mobile: Vertical layout -->
-			<div class="flex flex-wrap items-center justify-center gap-3 md:hidden text-sm text-[var(--color-heading)]">
+			<div class="flex flex-wrap items-center justify-center gap-2 md:gap-3 text-xs md:text-sm">
 				<a href="#" class="hover:opacity-80 transition-colors">Kein Datenhandel</a>
+				<span class="hidden md:inline opacity-50">·</span>
 				<a href="/impressum" class="hover:opacity-80 transition-colors">Impressum</a>
+				<span class="hidden md:inline opacity-50">·</span>
 				<a href="/agb" class="hover:opacity-80 transition-colors">AGB</a>
+				<span class="hidden md:inline opacity-50">·</span>
 				<a href="/datenschutz" class="hover:opacity-80 transition-colors">Datenschutz</a>
+				<span class="hidden md:inline opacity-50">·</span>
 				<a href="/widerruf" class="hover:opacity-80 transition-colors">Widerruf</a>
-				<span class="flex items-center gap-1">
-					Webdesign: ChatGPT 🤍
-				</span>
-			</div>
-			<!-- Desktop: Single row with separators -->
-			<div class="hidden md:flex items-center justify-center gap-4 text-sm text-[var(--color-heading)]">
-				<a href="#" class="hover:opacity-80 transition-colors">Kein Datenhandel</a>
-				<span class="text-[var(--color-heading)] opacity-50">|</span>
-				<a href="/impressum" class="hover:opacity-80 transition-colors">Impressum</a>
-				<span class="text-[var(--color-heading)] opacity-50">|</span>
-				<a href="/agb" class="hover:opacity-80 transition-colors">AGB</a>
-				<span class="text-[var(--color-heading)] opacity-50">|</span>
-				<a href="/datenschutz" class="hover:opacity-80 transition-colors">Datenschutz</a>
-				<span class="text-[var(--color-heading)] opacity-50">|</span>
-				<a href="/widerruf" class="hover:opacity-80 transition-colors">Widerruf</a>
-				<span class="text-[var(--color-heading)] opacity-50">|</span>
+				<span class="hidden md:inline opacity-50">·</span>
 				<span class="flex items-center gap-1">
 					Webdesign: ChatGPT 🤍
 				</span>
@@ -148,6 +248,47 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, CONTACT_WHATSAPP, 
 		</div>
 	</div>
 </footer>
+
+<!-- Mobile Accordion JavaScript -->
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		// Footer accordion functionality
+		const servicesToggle = document.getElementById('footer-services-toggle');
+		const servicesMenu = document.getElementById('footer-services-menu');
+		const importantToggle = document.getElementById('footer-important-toggle');
+		const importantMenu = document.getElementById('footer-important-menu');
+
+		function toggleAccordion(button: HTMLElement | null, menu: HTMLElement | null) {
+			if (!button || !menu) return;
+
+			const isExpanded = button.getAttribute('aria-expanded') === 'true';
+			const chevron = button.querySelector('svg');
+
+			if (isExpanded) {
+				// Collapse
+				button.setAttribute('aria-expanded', 'false');
+				menu.setAttribute('aria-hidden', 'true');
+				menu.style.maxHeight = '0px';
+				chevron?.classList.remove('rotate-90');
+			} else {
+				// Expand
+				button.setAttribute('aria-expanded', 'true');
+				menu.setAttribute('aria-hidden', 'false');
+				menu.style.maxHeight = menu.scrollHeight + 'px';
+				chevron?.classList.add('rotate-90');
+			}
+		}
+
+		servicesToggle?.addEventListener('click', () => {
+			toggleAccordion(servicesToggle, servicesMenu);
+		});
+
+		importantToggle?.addEventListener('click', () => {
+			toggleAccordion(importantToggle, importantMenu);
+		});
+	});
+</script>
+
 
 <!-- Schema.org Structured Data for Footer -->
 <script type="application/ld+json" set:html={JSON.stringify({

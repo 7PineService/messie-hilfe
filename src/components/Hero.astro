@@ -8,114 +8,199 @@ interface Props {
 const { contactApiEndpoint } = Astro.props;
 ---
 
-<section class="bg-[var(--color-bg-light)] pt-6 pb-2 md:pt-7 md:pb-3 lg:pt-6 lg:pb-2 xl:pt-8 xl:pb-4 2xl:pt-10 2xl:pb-6 min-[1920px]:pt-16 min-[1920px]:pb-10 flex items-center">
+<section id="hero-section" class="hero-with-bg flex items-center py-8 md:py-10 lg:py-12">
 	<div class="container mx-auto px-4 w-full">
-		<div class="grid lg:grid-cols-5 gap-6 md:gap-8 lg:gap-8 xl:gap-10 2xl:gap-12 min-[1920px]:gap-16 items-start">
-			<!-- Left Column: Content - Takes 3 out of 5 columns (60%) -->
-			<div class="lg:col-span-3 space-y-2 md:space-y-2.5 lg:space-y-2 xl:space-y-3 2xl:space-y-4 min-[1920px]:space-y-5">
+		<div class="grid lg:grid-cols-8 gap-6 md:gap-8 lg:gap-8 xl:gap-10 2xl:gap-12 min-[1920px]:gap-16 items-start">
+			<!-- Left Column: Content - Takes 4 out of 8 columns (50%) -->
+			<div class="lg:col-span-4 space-y-2 md:space-y-2.5 lg:space-y-2 xl:space-y-3 2xl:space-y-4 min-[1920px]:space-y-5">
 				<!-- Main Headline -->
-				<h1 class="text-xl md:text-2xl lg:text-2xl xl:text-3xl 2xl:text-4xl min-[1920px]:text-5xl font-bold text-[var(--color-heading)] leading-tight">
+				<h1 class="text-2xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight">
 					Messie-Hilfe & Messie-Wohnung entrümpeln – diskret & anonym
 				</h1>
 
 				<!-- Description -->
-				<div class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl text-[var(--color-heading)] opacity-80 leading-relaxed max-w-2xl min-[1920px]:max-w-3xl space-y-2 min-[1920px]:space-y-3">
+				<div class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed max-w-2xl min-[1920px]:max-w-3xl space-y-2 min-[1920px]:space-y-3">
 					<p>Eine <strong>Messie-Wohnung zu entrümpeln</strong> ist für viele Betroffene und Angehörige eine schwere Aufgabe. Oft fehlt der Überblick, wo man anfangen soll – oder die Situation ist emotional zu belastend.</p>
 					<p><strong>Wir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen</strong> – diskret, anonym und mit klaren Abläufen.</p>
 				</div>
 
-				<!-- Desktop CTA Button - Secondary (outline) -->
-				<div class="pt-1 lg:pt-1.5 min-[1920px]:pt-3 hidden lg:block">
-					<a href="/anfrage/" data-cta="hero-offer" class="inline-flex items-center space-x-2 min-[1920px]:space-x-3 bg-transparent border-2 border-[var(--color-heading)] hover:bg-[var(--color-heading)] hover:text-white text-[var(--color-heading)] font-semibold px-5 py-2.5 min-[1920px]:px-7 min-[1920px]:py-3.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 text-sm min-[1920px]:text-base">
-						<span>Kostenloses Angebot anfordern</span>
-						<svg class="w-5 h-5 min-[1920px]:w-6 min-[1920px]:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-						</svg>
-					</a>
-				</div>
-
-				<!-- Mobile CTA Buttons -->
-				<div class="pt-1.5 lg:hidden flex flex-col gap-2">
-					<!-- Primary CTA: Brown button with play icon -->
-					<button
-						type="button"
-						onclick="if (window.openAnonymForm) window.openAnonymForm()"
-						data-cta="hero-anonym"
-						class="w-full inline-flex items-center justify-center space-x-2 bg-[var(--color-heading)] hover:opacity-90 text-white font-semibold px-5 py-2.5 border-2 border-transparent rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
-					>
-						<span>Anonym anfragen</span>
-						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-						</svg>
-					</button>
-					
-					<!-- Divider: "oder" -->
-					<div class="text-center text-[var(--color-heading)] opacity-60 font-medium py-0.5 text-xs">oder</div>
-					
-					<!-- Secondary CTA: Outlined button with play icon -->
-					<a href="/anfrage/" data-cta="hero-offer-mobile" class="w-full inline-flex items-center justify-center space-x-2 bg-transparent border-2 border-[var(--color-heading)] hover:bg-[var(--color-heading)] hover:text-white text-[var(--color-heading)] font-semibold px-5 py-2.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 text-sm">
-						<span>Kostenloses Angebot anfordern</span>
-						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-						</svg>
-					</a>
-				</div>
-
-				<!-- Feature List - Four checkmarked items, 2 per line -->
-				<div class="pt-4 md:pt-5 lg:pt-0 min-[1920px]:pt-3">
-					<div class="grid grid-cols-2 gap-2 md:gap-2.5 lg:gap-2.5 xl:gap-3 min-[1920px]:gap-4">
-						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4 text-[var(--color-heading)]">
-							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+				<!-- Feature List - Vertical list of checkmarked items -->
+				<div class="pt-2 md:pt-2.5 lg:pt-2 xl:pt-3 min-[1920px]:pt-4">
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-1.5 md:gap-2 lg:gap-2 xl:gap-2.5 min-[1920px]:gap-3">
+						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4">
+							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 							</svg>
 							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl">Diskret & anonym vor Ort</span>
 						</div>
-						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4 text-[var(--color-heading)]">
-							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4">
+							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 							</svg>
 							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl">Kostenlose Vor-Ort-Besichtigung</span>
 						</div>
-						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4 text-[var(--color-heading)]">
-							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4">
+							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 							</svg>
 							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl">Festpreis inkl. aller Kosten</span>
 						</div>
-						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4 text-[var(--color-heading)]">
-							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 text-[var(--color-heading)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4">
+							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 							</svg>
 							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl">Kurzfristig verfügbar</span>
 						</div>
 					</div>
 				</div>
 
+				<!-- Desktop CTA Button -->
+				<div class="pt-2 md:pt-2.5 lg:pt-2 xl:pt-3 min-[1920px]:pt-4 hidden lg:block">
+					<a href="/anfrage/" data-cta="hero-offer" class="inline-flex items-center gap-2 text-base border border-cta-border rounded-xl px-4 py-2" style="background-color: #f1ded5;">
+						<span>Kostenloses Angebot anfordern</span>
+						<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none">
+							<circle cx="12" cy="12" r="10" fill="currentColor" />
+							<path d="M10 8l6 4-6 4V8z" fill="white" />
+						</svg>
+					</a>
+				</div>
+
+				<!-- Mobile CTA Buttons -->
+				<div class="pt-1.5 lg:hidden flex flex-col gap-2">
+					<!-- Primary CTA: Bronze button matching desktop style -->
+					<button
+						type="button"
+						onclick="if (window.openAnonymForm) window.openAnonymForm()"
+						data-cta="hero-anonym"
+						class="w-full inline-flex items-center justify-center gap-2 text-sm font-semibold px-4 py-2 border-2 border-transparent rounded-lg transition-all duration-200 text-white hover:opacity-90"
+						style="background-color: #cb9d69;"
+					>
+						<span>Anonym anfragen</span>
+						<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+							<circle cx="12" cy="12" r="10" fill="white" />
+							<path d="M10 8l6 4-6 4V8z" fill="var(--color-primary)" />
+						</svg>
+					</button>
+
+					<!-- Divider: "oder" -->
+					<div class="text-center  opacity-60 font-medium py-0.5 text-xs">oder</div>
+
+					<!-- Secondary CTA: Light beige button matching header style -->
+					<a href="/anfrage/" data-cta="hero-offer-mobile" class="w-full inline-flex items-center justify-center gap-2 text-sm border border-cta-border rounded-xl px-4 py-2" style="background-color: #f1ded5;">
+						<span>Kostenloses Angebot anfordern</span>
+						<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+							<circle cx="12" cy="12" r="10" fill="currentColor" />
+							<path d="M10 8l6 4-6 4V8z" fill="white" />
+						</svg>
+					</a>
+				</div>
+
 				<!-- Trust Indicators -->
-				<div class="flex flex-row gap-2 md:gap-3 lg:gap-3 xl:gap-4 min-[1920px]:gap-5 pt-1 md:pt-1.5 lg:pt-1 xl:pt-2 2xl:pt-2.5 min-[1920px]:pt-4">
-					<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4 bg-yellow-100 px-3 py-2 md:px-4 md:py-2.5 lg:px-4 lg:py-2.5 xl:px-5 xl:py-3 2xl:px-6 2xl:py-4 min-[1920px]:px-8 min-[1920px]:py-5 rounded-lg flex-1">
-						<span class="text-base md:text-lg lg:text-lg xl:text-xl min-[1920px]:text-2xl flex-shrink-0">★</span>
-						<div class="text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl text-[var(--color-heading)] whitespace-nowrap">
-							<strong>5.000+ zufriedene</strong> <span class="opacity-70">Kunden</span>
+				<div class="pt-2 md:pt-2.5 lg:pt-2 xl:pt-3 min-[1920px]:pt-4">
+					<div class="flex items-center justify-between px-3 py-2 md:px-4 md:py-2.5 lg:px-4 lg:py-2.5 xl:px-5 xl:py-3 2xl:px-6 2xl:py-4 min-[1920px]:px-8 min-[1920px]:py-5 rounded-full bg-surface-tertiary">
+						<!-- First Indicator -->
+						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4">
+							<span class="text-base md:text-lg lg:text-lg xl:text-xl min-[1920px]:text-2xl shrink-0" style="color: #bca99f;">★</span>
+							<div class="text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl  whitespace-nowrap">
+								<strong>5.000+ zufriedene</strong> <span class="opacity-70">Kunden</span>
+							</div>
 						</div>
-					</div>
-					<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4 bg-yellow-100 px-3 py-2 md:px-4 md:py-2.5 lg:px-4 lg:py-2.5 xl:px-5 xl:py-3 2xl:px-6 2xl:py-4 min-[1920px]:px-8 min-[1920px]:py-5 rounded-lg flex-1">
-						<span class="text-base md:text-lg lg:text-lg xl:text-xl min-[1920px]:text-2xl flex-shrink-0">⏳</span>
-						<div class="text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl text-[var(--color-heading)] whitespace-nowrap">
-							<span class="font-bold">20+ Jahre</span> <span class="opacity-70">Erfahrung</span>
+
+						<!-- Separator Dot -->
+						<span class="text-primary">•</span>
+
+						<!-- Second Indicator -->
+						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4">
+							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7  shrink-0" viewBox="190 322 400 400">
+								<path d="m 223.45447,322.60119 c -4.86462,0 -8.78192,7.97938 -8.78192,13.02083 0,5.04146 3.9173,9.10118 8.78192,9.10118 l 9.15699,0 c 36.20217,73.56423 77.9319,129.90958 129.9735,164.26739 l 0,24.80469 c -53.27103,26.16892 -101.14053,89.32332 -131.46271,166.6839 -2.6149,0.24393 -3.61483,0.25467 -8.46413,0.25467 -4.79677,0 -8.65812,4.00173 -8.65812,8.97289 0,4.97116 3.86135,12.89445 8.65812,12.89445 l 332.6819,0 c 4.79679,0 8.65998,-7.92328 8.65998,-12.89445 0,-4.97116 -3.86319,-8.97289 -8.65998,-8.97289 l -4.94433,0 C 520.14945,623.13306 473.49407,560.20313 420.42034,533.93314 l 0,-24.98085 C 471.8475,474.74246 513.05887,417.68104 549.02842,344.7232 l 6.18966,0 c 4.86461,0 8.78192,-4.05972 8.78192,-9.10118 0,-5.04145 -3.91731,-13.02083 -8.78192,-13.02083 z m 35.08333,22.12201 265.15184,0 c -35.63774,71.95721 -71.90019,122.17872 -122.58286,155.07429 -1.73881,1.12717 -2.82175,3.3014 -2.81953,5.66407 l 0,32.30124 c 0.002,2.64911 1.36302,5.02739 3.42925,5.9915 50.909,23.7641 93.35503,80.95263 123.23325,156.97955 l -267.64249,0 c 29.91896,-76.09789 72.69506,-133.35562 123.96122,-157.10593 2.07487,-0.96039 3.4409,-3.34561 3.43848,-6.00298 l 0,-32.15189 c -0.002,-2.36122 -1.08845,-4.52989 -2.82876,-5.65066 C 330.86758,466.96384 294.34278,416.73831 258.5378,344.7232 Z" fill="currentColor"/>
+								<path d="m 279.60683,695.79723 222.25688,0 -88.90276,-120.05368 c -13.89096,-15.008 -28.47065,-18.85595 -44.45138,0 z" fill="#bca99f"/>
+								<path d="m 387.26998,486.79611 c 2.45864,2.75356 4.8377,2.3948 7.16471,0 l 56.28005,-52.02338 -119.72481,0 z" fill="#bca99f"/>
+							</svg>
+							<div class="text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl  whitespace-nowrap">
+								<span class="font-bold">20+ Jahre</span> <span class="opacity-70">Erfahrung</span>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<!-- Right Column: Contact Form - Takes 2 out of 5 columns (40%) - Desktop only -->
-			<div class="hidden lg:block lg:col-span-2 lg:sticky lg:top-20">
+			<!-- Right Column: Contact Form - Takes 3 out of 8 columns (~38%) - Desktop only -->
+			<div class="hidden lg:block lg:col-span-3 lg:col-start-6 lg:sticky lg:top-20">
 				<ContactForm contactApiEndpoint={contactApiEndpoint} />
 			</div>
 		</div>
 	</div>
 </section>
 
+<style>
+	/* Hero background with image */
+	.hero-with-bg {
+		background:
+			url('/images/background.webp') right center / cover no-repeat,
+			var(--color-surface-primary);
+		background-position: right center;
+		position: relative;
+	}
+
+	/* Hide background image on mobile for better readability */
+	@media (max-width: 1023px) {
+		.hero-with-bg {
+			background: var(--color-surface-primary);
+		}
+	}
+
+	/* Above-the-fold hero on landscape/desktop screens */
+	@media (min-width: 1024px) and (orientation: landscape) {
+		#hero-section {
+			min-height: calc(100vh - 7rem); /* Approximate header height */
+		}
+	}
+
+	/* On portrait/mobile, use comfortable minimum height instead of forcing 100vh */
+	@media (max-width: 1023px), (orientation: portrait) {
+		#hero-section {
+			min-height: auto; /* Let content determine height naturally */
+		}
+	}
+
+	/* For very short landscape screens (like phones in landscape), relax the constraint */
+	@media (max-height: 600px) and (orientation: landscape) {
+		#hero-section {
+			min-height: auto;
+		}
+	}
+</style>
+
+<script>
+	// Dynamically calculate and set hero height based on actual header height
+	document.addEventListener('DOMContentLoaded', () => {
+		const setHeroHeight = () => {
+			const header = document.getElementById('main-header');
+			const hero = document.getElementById('hero-section');
+
+			if (!header || !hero) return;
+
+			const isLandscape = window.matchMedia('(orientation: landscape)').matches;
+			const isDesktop = window.innerWidth >= 1024;
+			const isTallEnough = window.innerHeight >= 600;
+
+			// Only apply viewport-based height on desktop landscape screens with sufficient height
+			if (isDesktop && isLandscape && isTallEnough) {
+				const headerHeight = header.offsetHeight;
+				hero.style.minHeight = `calc(100vh - ${headerHeight}px)`;
+			} else {
+				// On mobile or portrait, let content determine height
+				hero.style.minHeight = 'auto';
+			}
+		};
+
+		// Set on load
+		setHeroHeight();
+
+		// Recalculate on resize and orientation change
+		window.addEventListener('resize', setHeroHeight);
+		window.addEventListener('orientationchange', () => {
+			setTimeout(setHeroHeight, 100); // Small delay for orientation change
+		});
+	});
+</script>
