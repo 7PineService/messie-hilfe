@@ -1,0 +1,44 @@
+---
+import { SITE_URL } from '../config/site';
+
+interface BreadcrumbItem {
+	name: string;
+	url: string;
+}
+
+interface Props {
+	items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+
+if (items.length <= 1) {
+	return null;
+}
+---
+
+<nav aria-label="Breadcrumb" class="bg-surface-tertiary border-t border-border-primary">
+	<div class="container mx-auto px-4 py-3">
+		<ol class="flex flex-wrap items-center gap-2 text-sm">
+			{items.map((item, index) => (
+				<li class="flex items-center gap-2">
+					{index < items.length - 1 ? (
+						<>
+							<a
+								href={item.url}
+								class="hover:opacity-70 transition-opacity"
+							>
+								{item.name}
+							</a>
+							<svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+							</svg>
+						</>
+					) : (
+						<span class="opacity-70">{item.name}</span>
+					)}
+				</li>
+			))}
+		</ol>
+	</div>
+</nav>

@@ -18,12 +18,13 @@ import { SITE_URL, CONTACT_API_ENDPOINT } from '../config/site';
 import '../styles/global.css';
 ---
 
-<BaseLayout 
+<BaseLayout
 	title="Messie-Hilfe – Messie-Wohnung entrümpeln & reinigen"
 	description="Diskrete Messie-Hilfe ohne Bewertung. Unterstützung bei Messie-Wohnungen, Reinigung & Entrümpelung – anonym & bezahlbar. Jetzt unverbindlich anfragen."
 	canonicalUrl={SITE_URL}
 >
-	<Header />
+	<Header slot="header" />
+
 	<main>
 		<Hero contactApiEndpoint={CONTACT_API_ENDPOINT} />
 		<!-- Temporarily hidden sections -->
@@ -37,11 +38,12 @@ import '../styles/global.css';
 		<!-- <Locations /> -->
 		<!-- <FAQ /> -->
 	</main>
-	<Footer />
-	
+
 	<!-- Anonym Form Overlay (uses inline scripts for client-side interactivity) -->
 	<AnonymFormOverlay contactApiEndpoint={CONTACT_API_ENDPOINT} />
-	
+
 	<!-- Floating Action Icons -->
 	<FloatingActionIcons />
+
+	<Footer slot="footer" />
 </BaseLayout>

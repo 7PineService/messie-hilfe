@@ -29,6 +29,27 @@
 		accent-color: var(--color-primary);
 		cursor: pointer;
 	}
+
+	/* CTA Button styles using theme colors */
+	.cta-primary {
+		background-color: var(--color-cta-primary);
+		transition: background-color 0.2s ease-in-out;
+		cursor: pointer;
+	}
+
+	.cta-primary:hover {
+		background-color: var(--color-cta-primary-hover);
+	}
+
+	.cta-secondary {
+		background-color: var(--color-cta-secondary);
+		transition: background-color 0.2s ease-in-out;
+		cursor: pointer;
+	}
+
+	.cta-secondary:hover {
+		background-color: var(--color-cta-secondary-hover);
+	}
 }
 
 @theme {
@@ -75,11 +96,11 @@
 	   INTERACTIVE COLORS - CTAs & Buttons
 	   ============================================================================ */
 
-	/* Primary CTA - Bronze/tan button */
+	/* Primary CTA - Bronze button (Anonym anfragen - contact form) */
 	--color-cta-primary: #C49F70;
 	--color-cta-primary-hover: #B38F60;
 
-	/* Secondary CTA - Light beige button */
+	/* Secondary CTA - Light beige button (Kostenloses Angebot - header/hero) */
 	--color-cta-secondary: #F4E4D3;
 	--color-cta-secondary-hover: #E9D4C3;
 }
