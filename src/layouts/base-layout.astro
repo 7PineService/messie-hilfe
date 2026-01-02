@@ -4,6 +4,7 @@ import { generateVisualBreadcrumbs } from '@/utils/breadcrumbs';
 import { SITE_URL } from '@/config/site';
 import SEO from '@/components/head/seo.astro';
 import Tracking from '@/components/head/tracking.astro';
+import SpeedInsights from '@/components/head/speed-insights.astro';
 import Breadcrumb from '@/components/layout/breadcrumb.astro';
 import Header from '@/components/layout/header.astro';
 import Footer from '@/components/layout/footer.astro';
@@ -53,6 +54,7 @@ const visualBreadcrumbs = generateVisualBreadcrumbs(currentPath, title);
     />
 
     {!excludeTracking && <Tracking gtmId={gtmId} />}
+    <SpeedInsights />
 
     <slot name="head" />
   </head>

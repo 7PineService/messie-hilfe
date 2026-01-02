@@ -1,0 +1,10 @@
+---
+const isDev = import.meta.env.DEV;
+---
+
+{!isDev && (
+  <script>
+    import { injectSpeedInsights } from '@vercel/speed-insights';
+    injectSpeedInsights();
+  </script>
+)}
