@@ -41,7 +41,7 @@ const visualBreadcrumbs = generateVisualBreadcrumbs(currentPath, title);
 <html lang="de">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="generator" content={Astro.generator}>
 
     <SEO
@@ -59,7 +59,7 @@ const visualBreadcrumbs = generateVisualBreadcrumbs(currentPath, title);
     <slot name="head" />
   </head>
 
-  <body class="antialiased">
+  <body class="antialiased pb-20 lg:pb-0 bg-surface-muted">
     {!excludeTracking && (
       <noscript>
         <iframe
