@@ -1,0 +1,77 @@
+---
+import { getGTMContainerId, shouldExcludeTracking } from '@/config/tracking';
+import { generateVisualBreadcrumbs } from '@/utils/breadcrumbs';
+import { SITE_URL } from '@/config/site';
+import SEO from '@/components/head/seo.astro';
+import Tracking from '@/components/head/tracking.astro';
+import Breadcrumb from '@/components/layout/breadcrumb.astro';
+import Header from '@/components/layout/header.astro';
+import Footer from '@/components/layout/footer.astro';
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  image,
+  canonicalUrl,
+  noindex = false
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const hostname = Astro.url.hostname;
+
+const finalCanonicalUrl = canonicalUrl || `${SITE_URL}${currentPath === '/' ? '' : currentPath}`;
+
+const excludeTracking = shouldExcludeTracking(currentPath);
+const gtmId = getGTMContainerId(hostname);
+
+const visualBreadcrumbs = generateVisualBreadcrumbs(currentPath, title);
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content={Astro.generator}>
+
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      canonicalUrl={finalCanonicalUrl}
+      noindex={noindex}
+      currentPath={currentPath}
+    />
+
+    {!excludeTracking && <Tracking gtmId={gtmId} />}
+
+    <slot name="head" />
+  </head>
+
+  <body class="antialiased">
+    {!excludeTracking && (
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+          height="0"
+          width="0"
+          style="display:none;visibility:hidden"
+        />
+      </noscript>
+    )}
+
+    <Header />
+    <slot />
+    <Breadcrumb items={visualBreadcrumbs} />
+    <Footer />
+  </body>
+</html>

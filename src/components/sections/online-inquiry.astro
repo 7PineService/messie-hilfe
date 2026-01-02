@@ -1,14 +1,9 @@
 ---
-import ContactForm from './ContactForm.astro';
+import ContactForm from '@/components/contact-form.astro';
 import { getEntry } from 'astro:content';
 
-interface Props {
-	contactApiEndpoint?: string;
-}
-
-const { contactApiEndpoint } = Astro.props;
 const onlineInquiry = await getEntry('online-inquiry', 'index');
-const { title, content, buttonText } = onlineInquiry.data;
+const { title, content, buttonText } = onlineInquiry?.data || {};
 ---
 
 <section class="py-12 md:py-16 lg:py-20 bg-[var(--color-topbar)]">
@@ -16,7 +11,7 @@ const { title, content, buttonText } = onlineInquiry.data;
 		<div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
 			<!-- Left Column: Contact Form -->
 			<div>
-				<ContactForm contactApiEndpoint={contactApiEndpoint} />
+				<ContactForm />
 			</div>
 
 			<!-- Right Column: Text Content -->

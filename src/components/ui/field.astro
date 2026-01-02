@@ -1,0 +1,71 @@
+---
+import Input from './input.astro';
+import Textarea from './textarea.astro';
+import { cn } from '@/utils/cn';
+
+interface Props {
+  label: string;
+  name: string;
+  type?: 'text' | 'email' | 'tel' | 'password' | 'number' | 'url' | 'textarea';
+  value?: string | number;
+  placeholder?: string;
+  required?: boolean;
+  disabled?: boolean;
+  error?: string;
+  hint?: string;
+  rows?: number;
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  label,
+  name,
+  type = 'text',
+  value,
+  placeholder,
+  required = false,
+  disabled = false,
+  error,
+  hint,
+  rows,
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const isTextarea = type === 'textarea';
+---
+
+<div class={cn('mb-4', className)}>
+  <label for={name} class="block text-sm font-medium mb-2">
+    {label}
+    {required && <span class="text-red-500">*</span>}
+  </label>
+
+  {isTextarea ? (
+    <Textarea
+      name={name}
+      value={value}
+      placeholder={placeholder}
+      required={required}
+      disabled={disabled}
+      rows={rows}
+      class={error ? 'border-red-500 focus:ring-red-500' : ''}
+      {...rest}
+    />
+  ) : (
+    <Input
+      type={type}
+      name={name}
+      value={value}
+      placeholder={placeholder}
+      required={required}
+      disabled={disabled}
+      class={error ? 'border-red-500 focus:ring-red-500' : ''}
+      {...rest}
+    />
+  )}
+
+  {error && <p class="mt-1 text-sm text-red-600">{error}</p>}
+  {hint && !error && <p class="mt-1 text-sm text-muted">{hint}</p>}
+</div>

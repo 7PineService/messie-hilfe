@@ -1,11 +1,6 @@
 ---
-import ContactForm from './ContactForm.astro';
-
-interface Props {
-	contactApiEndpoint?: string;
-}
-
-const { contactApiEndpoint } = Astro.props;
+import ContactForm from '@/components/contact-form.astro';
+import { Checkmark, Play } from '@/components/icons';
 ---
 
 <section id="hero-section" class="hero-with-bg flex items-center py-8 md:py-10 lg:py-12">
@@ -24,27 +19,19 @@ const { contactApiEndpoint } = Astro.props;
 				<div>
 					<div class="grid grid-cols-2 gap-3 md:gap-4 lg:gap-3.5 xl:gap-4 min-[1920px]:gap-5">
 						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4">
-							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-							</svg>
+							<Checkmark class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0" aria-hidden={true} />
 							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl">Diskret & anonym vor Ort</span>
 						</div>
 						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4">
-							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-							</svg>
+							<Checkmark class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0" aria-hidden={true} />
 							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl">Kostenlose Vor-Ort-Besichtigung</span>
 						</div>
 						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4">
-							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-							</svg>
+							<Checkmark class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0" aria-hidden={true} />
 							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl">Festpreis inkl. aller Kosten</span>
 						</div>
 						<div class="flex items-center space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4">
-							<svg class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-							</svg>
+							<Checkmark class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0" aria-hidden={true} />
 							<span class="font-medium text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl">Kurzfristig verfügbar</span>
 						</div>
 					</div>
@@ -53,10 +40,7 @@ const { contactApiEndpoint } = Astro.props;
 				<div class="pt-1 md:pt-1.5 hidden lg:block">
 					<a href="/anfrage/" data-cta="hero-offer" class="cta-secondary inline-flex items-center gap-2 text-base border border-cta-border rounded-xl px-4 py-2">
 						<span>Kostenloses Angebot anfordern</span>
-						<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none">
-							<circle cx="12" cy="12" r="10" fill="currentColor" />
-							<path d="M10 8l6 4-6 4V8z" fill="white" />
-						</svg>
+						<Play size="lg" aria-hidden={true} />
 					</a>
 				</div>
 
@@ -68,20 +52,14 @@ const { contactApiEndpoint } = Astro.props;
 						class="cta-primary w-full inline-flex items-center justify-center gap-2 text-sm font-semibold px-4 py-2 border-2 border-transparent rounded-lg text-white"
 					>
 						<span>Anonym anfragen</span>
-						<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
-							<circle cx="12" cy="12" r="10" fill="white" />
-							<path d="M10 8l6 4-6 4V8z" fill="var(--color-primary)" />
-						</svg>
+						<Play size="md" variant="inverse" class="text-primary" aria-hidden={true} />
 					</button>
 
 					<div class="text-center  opacity-60 font-medium py-0.5 text-xs">oder</div>
 
 					<a href="/anfrage/" data-cta="hero-offer-mobile" class="cta-secondary w-full inline-flex items-center justify-center gap-2 text-sm border border-cta-border rounded-xl px-4 py-2">
 						<span>Kostenloses Angebot anfordern</span>
-						<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
-							<circle cx="12" cy="12" r="10" fill="currentColor" />
-							<path d="M10 8l6 4-6 4V8z" fill="white" />
-						</svg>
+						<Play size="md" aria-hidden={true} />
 					</a>
 				</div>
 
@@ -111,7 +89,7 @@ const { contactApiEndpoint } = Astro.props;
 			</div>
 
 			<div class="hidden lg:block lg:col-span-3 lg:col-start-6">
-				<ContactForm contactApiEndpoint={contactApiEndpoint} />
+				<ContactForm />
 			</div>
 		</div>
 	</div>

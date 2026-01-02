@@ -1,0 +1,10 @@
+export { default as Hero } from './hero.astro';
+export { default as FAQ } from './faq.astro';
+export { default as HowItWorks } from './how-it-works.astro';
+export { default as Locations } from './locations.astro';
+export { default as ServicesCards } from './services-cards.astro';
+export { default as ServiceDetails } from './service-details.astro';
+export { default as CareSupport } from './care-support.astro';
+export { default as Checklist } from './checklist.astro';
+export { default as CostResponsibility } from './cost-responsibility.astro';
+export { default as OnlineInquiry } from './online-inquiry.astro';

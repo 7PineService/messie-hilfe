@@ -1,0 +1,33 @@
+---
+import { cn } from '@/utils/cn';
+
+interface Props {
+  variant?: 'flat' | 'elevated' | 'outlined';
+  padding?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const {
+  variant = 'flat',
+  padding = 'md',
+  class: className = ''
+} = Astro.props;
+
+const variantClasses = {
+  flat: 'bg-surface-secondary',
+  elevated: 'bg-surface-secondary shadow-xl border border-border-primary',
+  outlined: 'bg-white border-2 border-border-primary'
+};
+
+const paddingClasses = {
+  sm: 'p-4',
+  md: 'p-6',
+  lg: 'p-8'
+};
+
+const baseClasses = 'rounded-2xl';
+---
+
+<div class={cn(baseClasses, variantClasses[variant], paddingClasses[padding], className)}>
+  <slot />
+</div>

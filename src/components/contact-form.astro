@@ -1,23 +1,20 @@
 ---
-// Contact Form Component with optional API endpoint integration
-// Set the contactApiEndpoint prop to enable form submission
-// Can be used inline or in overlay modal
+import { CONTACT_API_ENDPOINT } from '@/config/site';
+
 interface Props {
-	contactApiEndpoint?: string;
-	formId?: string; // Optional custom form ID (default: "contact-form")
-	fileListId?: string; // Optional custom file list ID (default: "file-list")
-	formMessageId?: string; // Optional custom message ID (default: "form-message")
-	privacyCheckboxId?: string; // Optional custom privacy checkbox ID (default: "privacy")
-	nameInputId?: string; // Optional custom name input ID (default: "name")
-	contactInputId?: string; // Optional custom contact input ID (default: "contact")
-	messageInputId?: string; // Optional custom message input ID (default: "message")
-	filesInputId?: string; // Optional custom files input ID (default: "files")
-	showTitle?: boolean; // Whether to show the title (default: true)
-	overlayStyle?: boolean; // Use overlay styling (default: false)
+	formId?: string;
+	fileListId?: string;
+	formMessageId?: string;
+	privacyCheckboxId?: string;
+	nameInputId?: string;
+	contactInputId?: string;
+	messageInputId?: string;
+	filesInputId?: string;
+	showTitle?: boolean;
+	overlayStyle?: boolean;
 }
 
-const { 
-	contactApiEndpoint,
+const {
 	formId = 'contact-form',
 	fileListId = 'file-list',
 	formMessageId = 'form-message',
@@ -29,6 +26,8 @@ const {
 	showTitle = true,
 	overlayStyle = false
 } = Astro.props;
+
+const contactApiEndpoint = CONTACT_API_ENDPOINT;
 
 // Determine styling based on context
 const containerClass = overlayStyle

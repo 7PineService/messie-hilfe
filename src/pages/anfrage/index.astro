@@ -1,18 +1,12 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ContactForm from '../../components/ContactForm.astro';
-import { SITE_URL, CONTACT_API_ENDPOINT } from '../../config/site';
-import '../../styles/global.css';
+import BaseLayout from '@/layouts/base-layout.astro';
+import ContactForm from '@/components/contact-form.astro';
 ---
 
 <BaseLayout
 	title="Kostenloses Angebot anfordern – Messie-Hilfe"
 	description="Fordern Sie jetzt Ihr kostenloses, unverbindliches Angebot für unsere diskrete Messie-Hilfe an. Professionell, zuverlässig und ohne Bewertung."
-	canonicalUrl={`${SITE_URL}/anfrage`}
 >
-	<Header slot="header" />
 
 	<main class="bg-surface-primary py-12 md:py-20">
 		<div class="container mx-auto px-4 max-w-3xl">
@@ -28,7 +22,7 @@ import '../../styles/global.css';
 
 			<!-- Contact Form -->
 			<div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
-				<ContactForm contactApiEndpoint={CONTACT_API_ENDPOINT} />
+				<ContactForm />
 			</div>
 
 			<!-- Additional Information -->
@@ -79,8 +73,6 @@ import '../../styles/global.css';
 			</div>
 		</div>
 	</main>
-
-	<Footer slot="footer" />
 </BaseLayout>
 
 <!-- Track funnel_start event on page view -->

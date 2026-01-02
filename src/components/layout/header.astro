@@ -1,5 +1,6 @@
 ---
-import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '../config/site';
+import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '@/config/site';
+import { Play, Chevron } from '@/components/icons';
 ---
 
 <header id="main-header" class="z-50 relative border-b-[5px] border-border-primary">
@@ -29,7 +30,7 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 					<div class="relative group/dropdown">
 						<a href="/leistungen" class="flex items-center gap-2">
 							Leistungen
-							<span class="inline-block w-0 h-0 border-l-[5px] border-r-[5px] border-t-[9px] border-l-transparent border-r-transparent border-t-current"></span>
+							<Chevron size="xs" aria-hidden={true} />
 						</a>
 						<div class="absolute top-full left-0 pt-2 hidden group-hover/dropdown:block group-focus-within/dropdown:block">
 							<div class="w-56 text-base bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
@@ -47,10 +48,7 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 				<div class="flex items-center gap-4">
 					<a href="/anfrage/" class="cta-secondary hidden md:flex items-center gap-2 text-base border border-cta-border rounded-xl px-4 py-2">
 						<span>Kostenloses Angebot anfordern</span>
-						<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none">
-							<circle cx="12" cy="12" r="10" fill="currentColor" />
-							<path d="M10 8l6 4-6 4V8z" fill="white" />
-						</svg>
+						<Play size="lg" aria-hidden={true} />
 					</a>
 
 					<div class="lg:hidden flex items-center gap-3">
@@ -98,9 +96,7 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 						aria-controls="mobile-services-menu"
 					>
 						<span>Leistungen</span>
-						<svg id="services-chevron" class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-						</svg>
+						<Chevron size="sm" class="transform transition-transform duration-200" aria-hidden={true} />
 					</button>
 					<div id="mobile-services-menu" class="overflow-hidden transition-all duration-300 max-h-0">
 						<div class="bg-gray-50 py-1">
@@ -120,10 +116,7 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 			<div class="px-5 py-6 border-t border-gray-200">
 				<a href="/anfrage/" class="cta-secondary w-full inline-flex items-center justify-center gap-2 text-base font-medium border border-cta-border rounded-xl px-4 py-3">
 					<span>Kostenloses Angebot anfordern</span>
-					<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none">
-						<circle cx="12" cy="12" r="10" fill="currentColor" />
-						<path d="M10 8l6 4-6 4V8z" fill="white" />
-					</svg>
+					<Play size="lg" aria-hidden={true} />
 				</a>
 			</div>
 		</div>
@@ -152,7 +145,6 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 		const menuToggleBtn = document.getElementById('mobile-menu-toggle');
 		const servicesToggle = document.getElementById('services-toggle-btn');
 		const servicesMenu = document.getElementById('mobile-services-menu');
-		const servicesChevron = document.getElementById('services-chevron');
 
 		// Calculate and set header height for mobile menu positioning
 		const updateMenuPosition = () => {
@@ -207,18 +199,19 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 		// Services submenu toggle with animation
 		servicesToggle?.addEventListener('click', () => {
 			const isExpanded = servicesToggle.getAttribute('aria-expanded') === 'true';
+			const chevron = servicesToggle.querySelector('svg');
 
 			if (isExpanded) {
 				// Collapse
 				servicesToggle.setAttribute('aria-expanded', 'false');
 				servicesMenu?.style.setProperty('max-height', '0px');
-				servicesChevron?.classList.remove('rotate-180');
+				chevron?.classList.remove('rotate-180');
 			} else {
 				// Expand
 				servicesToggle.setAttribute('aria-expanded', 'true');
 				const scrollHeight = servicesMenu?.scrollHeight || 0;
 				servicesMenu?.style.setProperty('max-height', `${scrollHeight}px`);
-				servicesChevron?.classList.add('rotate-180');
+				chevron?.classList.add('rotate-180');
 			}
 		});
 	});
