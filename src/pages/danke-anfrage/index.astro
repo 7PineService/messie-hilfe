@@ -6,13 +6,14 @@ import { SITE_URL } from '../../config/site';
 import '../../styles/global.css';
 ---
 
-<BaseLayout 
+<BaseLayout
 	title="Vielen Dank für Ihre Anfrage – Messie-Hilfe"
 	description="Vielen Dank für Ihre Anfrage. Wir erstellen Ihnen schnellstmöglich ein kostenloses, unverbindliches Angebot."
 	canonicalUrl={`${SITE_URL}/danke-anfrage`}
 	noindex={true}
 >
-	<Header />
+	<Header slot="header" />
+
 	<main class="bg-[var(--color-bg-light)] py-12 md:py-20 min-h-[60vh] flex items-center">
 		<div class="container mx-auto px-4 max-w-3xl">
 			<div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center">
@@ -74,7 +75,8 @@ import '../../styles/global.css';
 			</div>
 		</div>
 	</main>
-	<Footer />
+
+	<Footer slot="footer" />
 </BaseLayout>
 
 <!-- Track generate_lead event on page view -->

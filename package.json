@@ -10,8 +10,12 @@
     "validate:env": "node scripts/validate-env.js"
   },
   "dependencies": {
+    "@fontsource/noto-sans": "^5.2.10",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.5",
     "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "terser": "^5.44.1"
   }
 }

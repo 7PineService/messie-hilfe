@@ -1,220 +1,128 @@
 ---
 import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '../config/site';
-// Header Component - Fully responsive with sticky behavior
 ---
 
-<header class="sticky top-0 z-50 bg-white shadow-sm transition-shadow duration-300" id="header">
-	<!-- Top Bar -->
-	<div class="bg-[var(--color-topbar)]">
-		<div class="container mx-auto px-4 py-1.5">
-			<div class="flex flex-wrap items-center justify-between text-xs">
-				<a href={`mailto:${CONTACT_EMAIL}`} class="text-[var(--color-heading)] hover:opacity-80 transition-colors font-medium">
+<header id="main-header" class="z-50 relative border-b-[5px] border-border-primary">
+	<div class="bg-surface-muted">
+		<div class="container mx-auto px-4 py-2.5">
+			<div class="flex flex-wrap items-center justify-between text-sm">
+				<a href={`mailto:${CONTACT_EMAIL}`}>
 					{CONTACT_EMAIL}
 				</a>
-				<a href={`tel:${CONTACT_PHONE}`} class="text-[var(--color-heading)] hover:opacity-80 transition-colors font-medium" data-gtm-event="contact_call">
+				<a href={`tel:${CONTACT_PHONE}`} data-gtm-event="contact_call">
 					{CONTACT_PHONE_DISPLAY}
 				</a>
 			</div>
 		</div>
 	</div>
 
-	<!-- Main Navigation -->
-	<nav class="bg-[var(--color-nav)]" aria-label="Hauptnavigation">
+	<nav class="bg-surface-secondary" aria-label="Hauptnavigation">
 		<div class="container mx-auto px-4">
-			<div class="flex items-center justify-between h-14">
-				<!-- Logo -->
-				<a href="/" class="flex items-center space-x-1 group" aria-label={`${SITE_NAME} Startseite`}>
-					<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-12 h-auto w-auto object-contain" />
-					<span class="text-lg font-bold text-[var(--color-heading)] whitespace-nowrap">{SITE_NAME}</span>
+			<div class="flex items-center justify-between h-18">
+				<a href="/" class="flex items-center gap-2" aria-label={`${SITE_NAME} Startseite`}>
+					<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-14 h-auto w-auto object-contain" />
+					<span class="text-xl font-bold whitespace-nowrap">{SITE_NAME}</span>
 				</a>
 
-				<!-- Desktop Navigation -->
-				<div class="hidden lg:flex items-center space-x-8">
-					<a href="/" class="text-[var(--color-heading)] hover:opacity-80 font-medium transition-colors">Startseite</a>
-					<div class="relative group">
-						<button class="text-[var(--color-heading)] hover:opacity-80 font-medium transition-colors flex items-center" aria-expanded="false" aria-haspopup="true">
+				<div class="hidden lg:flex items-center gap-8 text-base">
+					<a href="/">Startseite</a>
+					<div class="relative group/dropdown">
+						<a href="/leistungen" class="flex items-center gap-2">
 							Leistungen
-							<svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-							</svg>
-						</button>
-						<div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100">
-							<a href="/leistungen/entruempelung" class="block px-4 py-2 text-[var(--color-heading)] hover:bg-yellow-50 hover:opacity-80 transition-colors">Entrümpelung</a>
-							<a href="/leistungen/aufraeumen" class="block px-4 py-2 text-[var(--color-heading)] hover:bg-yellow-50 hover:opacity-80 transition-colors">Aufräumen</a>
-							<a href="/leistungen/entsorgung" class="block px-4 py-2 text-[var(--color-heading)] hover:bg-yellow-50 hover:opacity-80 transition-colors">Entsorgung</a>
+							<span class="inline-block w-0 h-0 border-l-[5px] border-r-[5px] border-t-[9px] border-l-transparent border-r-transparent border-t-current"></span>
+						</a>
+						<div class="absolute top-full left-0 pt-2 hidden group-hover/dropdown:block group-focus-within/dropdown:block">
+							<div class="w-56 text-base bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+								<a href="/leistungen/entruempelung" class="block px-6 py-3 hover:bg-surface-muted">Entrümpelung</a>
+								<a href="/leistungen/aufraeumen" class="block px-6 py-3 hover:bg-surface-muted">Aufräumen</a>
+								<a href="/leistungen/entsorgung" class="block px-6 py-3 hover:bg-surface-muted">Entsorgung</a>
+							</div>
 						</div>
 					</div>
-					<a href="/standorte" class="text-[var(--color-heading)] hover:opacity-80 font-medium transition-colors">Standorte</a>
-					<a href="/ueber-uns" class="text-[var(--color-heading)] hover:opacity-80 font-medium transition-colors">Über uns</a>
-					<a href="/kontakt" class="text-[var(--color-heading)] hover:opacity-80 font-medium transition-colors">Kontakt</a>
+					<a href="/standorte">Standorte</a>
+					<a href="/ueber-uns">Über uns</a>
+					<a href="/kontakt">Kontakt</a>
 				</div>
 
-				<!-- CTA Button & Mobile Menu Toggle -->
-				<div class="flex items-center space-x-4">
-					<a 
-						href="/anfrage/"
-						class="hidden md:flex items-center space-x-2 bg-transparent border-2 border-[var(--color-heading)] hover:bg-[var(--color-heading)] hover:text-white text-[var(--color-heading)] font-semibold px-5 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
-					>
+				<div class="flex items-center gap-4">
+					<a href="/anfrage/" class="cta-secondary hidden md:flex items-center gap-2 text-base border border-cta-border rounded-xl px-4 py-2">
 						<span>Kostenloses Angebot anfordern</span>
-						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+						<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none">
+							<circle cx="12" cy="12" r="10" fill="currentColor" />
+							<path d="M10 8l6 4-6 4V8z" fill="white" />
 						</svg>
 					</a>
-					
-					<!-- Mobile Icons: Document icon and Hamburger menu -->
-					<div class="lg:hidden flex items-center space-x-3">
-						<!-- Document/Page Icon -->
-						<button 
-							type="button"
-							class="p-2 text-gray-700 hover:text-yellow-600 transition-colors touch-manipulation"
-							aria-label="Seite"
-						>
+
+					<div class="lg:hidden flex items-center gap-3">
+						<button type="button" class="p-2" aria-label="Seite">
 							<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
 							</svg>
 						</button>
-						
-						<!-- Hamburger Menu Button -->
-						<button 
-							id="mobile-menu-button"
-							class="p-2.5 text-gray-700 hover:text-yellow-600 transition-colors touch-manipulation"
-							aria-label="Menü öffnen"
+
+						<!-- Animated Hamburger/Close Button -->
+						<button
+							id="mobile-menu-toggle"
+							type="button"
+							class="p-2.5 relative w-10 h-10 flex items-center justify-center"
+							aria-label="Menü"
 							aria-expanded="false"
 							aria-controls="mobile-menu"
 						>
-							<svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-							</svg>
-							<svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-							</svg>
+							<div class="w-6 h-5 relative flex flex-col justify-between">
+								<!-- Top line -->
+								<span class="hamburger-line block h-0.5 w-full bg-current transform transition-all duration-300 ease-in-out origin-center"></span>
+								<!-- Middle line -->
+								<span class="hamburger-line block h-0.5 w-full bg-current transition-all duration-300 ease-in-out"></span>
+								<!-- Bottom line -->
+								<span class="hamburger-line block h-0.5 w-full bg-current transform transition-all duration-300 ease-in-out origin-center"></span>
+							</div>
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<!-- Mobile Menu Backdrop -->
-		<div 
-			id="mobile-menu-backdrop" 
-			class="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm opacity-0 invisible transition-opacity duration-300 ease-out z-40 touch-none"
-			aria-hidden="true"
-		></div>
+		<!-- Mobile Menu Panel (slides from right to left below header) -->
+		<div id="mobile-menu" class="lg:hidden fixed left-0 right-0 w-full bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto" style="top: var(--header-height, 120px); height: calc(100vh - var(--header-height, 120px)); z-index: 30;" aria-label="Hauptnavigation" aria-hidden="true">
+			<!-- Menu Content -->
+			<nav class="py-2">
+				<a href="/" class="block px-6 py-3.5 text-base font-medium hover:bg-gray-50 transition-colors">Startseite</a>
 
-		<!-- Mobile Menu - Sidebar from Right -->
-		<div 
-			id="mobile-menu" 
-			class="lg:hidden fixed inset-y-0 right-0 w-96 bg-white transform translate-x-full opacity-0 transition-all duration-300 ease-out z-50 flex flex-col shadow-2xl"
-			aria-label="Hauptnavigation"
-			aria-hidden="true"
-		>
-			<!-- Menu Header with Close Button - Matches Main Header Design -->
-			<div class="bg-[var(--color-nav)] flex-shrink-0">
-				<div class="flex items-center justify-between h-14 px-6">
-					<!-- Logo - Smaller for sidebar -->
-					<a href="/" class="flex items-center space-x-1 group" aria-label={`${SITE_NAME} Startseite`} onclick="closeMobileMenu()">
-						<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-10 h-auto w-auto object-contain" />
-						<span class="text-lg font-bold text-[var(--color-heading)] whitespace-nowrap">{SITE_NAME}</span>
-					</a>
-					
-					<!-- Close Button -->
-					<button 
-						type="button"
-						onclick="closeMobileMenu()"
-						class="p-2.5 text-gray-700 hover:text-yellow-600 transition-colors touch-manipulation"
-						aria-label="Menü schließen"
-					>
-						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-						</svg>
-					</button>
-				</div>
-			</div>
-
-			<!-- Menu Content - Scrollable -->
-			<div class="flex-1 overflow-y-auto overscroll-contain px-6 py-4 space-y-1">
-				<a 
-					href="/" 
-					class="block px-6 py-4 text-lg text-[var(--color-heading)] hover:bg-yellow-50 hover:text-yellow-600 rounded-xl transition-colors font-medium touch-manipulation"
-					onclick="closeMobileMenu()"
-				>
-					Startseite
-				</a>
-				
-				<div class="px-6 py-4">
-					<button 
-						class="w-full text-left text-lg text-[var(--color-heading)] hover:text-yellow-600 font-medium flex items-center justify-between touch-manipulation" 
-						id="mobile-services-toggle"
+				<!-- Services Dropdown -->
+				<div class="border-y border-gray-100 my-1">
+					<button
+						id="services-toggle-btn"
+						class="w-full px-6 py-3.5 text-base font-medium flex items-center justify-between hover:bg-gray-50 transition-colors"
 						aria-expanded="false"
 						aria-controls="mobile-services-menu"
 					>
 						<span>Leistungen</span>
-						<svg class="w-5 h-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+						<svg id="services-chevron" class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
 						</svg>
 					</button>
-					<div 
-						id="mobile-services-menu" 
-						class="hidden mt-2 pl-4 space-y-1"
-					>
-						<a 
-							href="/leistungen/entruempelung" 
-							class="block px-6 py-3 text-base text-gray-600 hover:bg-yellow-50 hover:text-yellow-600 rounded-xl transition-colors touch-manipulation"
-							onclick="closeMobileMenu()"
-						>
-							Entrümpelung
-						</a>
-						<a 
-							href="/leistungen/aufraeumen" 
-							class="block px-6 py-3 text-base text-gray-600 hover:bg-yellow-50 hover:text-yellow-600 rounded-xl transition-colors touch-manipulation"
-							onclick="closeMobileMenu()"
-						>
-							Aufräumen
-						</a>
-						<a 
-							href="/leistungen/entsorgung" 
-							class="block px-6 py-3 text-base text-gray-600 hover:bg-yellow-50 hover:text-yellow-600 rounded-xl transition-colors touch-manipulation"
-							onclick="closeMobileMenu()"
-						>
-							Entsorgung
-						</a>
+					<div id="mobile-services-menu" class="overflow-hidden transition-all duration-300 max-h-0">
+						<div class="bg-gray-50 py-1">
+							<a href="/leistungen/entruempelung" class="block px-6 py-3 pl-12 text-sm hover:bg-gray-100 transition-colors">Entrümpelung</a>
+							<a href="/leistungen/aufraeumen" class="block px-6 py-3 pl-12 text-sm hover:bg-gray-100 transition-colors">Aufräumen</a>
+							<a href="/leistungen/entsorgung" class="block px-6 py-3 pl-12 text-sm hover:bg-gray-100 transition-colors">Entsorgung</a>
+						</div>
 					</div>
 				</div>
-				
-				<a 
-					href="/standorte" 
-					class="block px-6 py-4 text-lg text-[var(--color-heading)] hover:bg-yellow-50 hover:text-yellow-600 rounded-xl transition-colors font-medium touch-manipulation"
-					onclick="closeMobileMenu()"
-				>
-					Standorte
-				</a>
-				
-				<a 
-					href="/ueber-uns" 
-					class="block px-6 py-4 text-lg text-[var(--color-heading)] hover:bg-yellow-50 hover:text-yellow-600 rounded-xl transition-colors font-medium touch-manipulation"
-					onclick="closeMobileMenu()"
-				>
-					Über uns
-				</a>
-				
-				<a 
-					href="/kontakt" 
-					class="block px-6 py-4 text-lg text-[var(--color-heading)] hover:bg-yellow-50 hover:text-yellow-600 rounded-xl transition-colors font-medium touch-manipulation"
-					onclick="closeMobileMenu()"
-				>
-					Kontakt
-				</a>
-				
-				<a 
-					href="/anfrage/"
-					class="md:hidden mt-6 px-5 py-2.5 bg-transparent border-2 border-[var(--color-heading)] hover:bg-[var(--color-heading)] hover:text-white text-[var(--color-heading)] font-semibold rounded-xl text-center transition-all duration-200 shadow-lg hover:shadow-xl touch-manipulation flex items-center justify-center space-x-2 text-sm"
-					onclick="closeMobileMenu()"
-				>
+
+				<a href="/standorte" class="block px-6 py-3.5 text-base font-medium hover:bg-gray-50 transition-colors">Standorte</a>
+				<a href="/ueber-uns" class="block px-6 py-3.5 text-base font-medium hover:bg-gray-50 transition-colors">Über uns</a>
+				<a href="/kontakt" class="block px-6 py-3.5 text-base font-medium hover:bg-gray-50 transition-colors">Kontakt</a>
+			</nav>
+
+			<!-- CTA Button in Menu -->
+			<div class="px-5 py-6 border-t border-gray-200">
+				<a href="/anfrage/" class="cta-secondary w-full inline-flex items-center justify-center gap-2 text-base font-medium border border-cta-border rounded-xl px-4 py-3">
 					<span>Kostenloses Angebot anfordern</span>
-					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+					<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none">
+						<circle cx="12" cy="12" r="10" fill="currentColor" />
+						<path d="M10 8l6 4-6 4V8z" fill="white" />
 					</svg>
 				</a>
 			</div>
@@ -222,194 +130,96 @@ import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '
 	</nav>
 </header>
 
-<script is:inline>
-	// Performance-optimized mobile menu - minimal JavaScript, CSS-based animations
-	(function() {
-		const mobileMenuButton = document.getElementById('mobile-menu-button');
+<style>
+	/* Hamburger to X animation */
+	#mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
+		transform: translateY(9px) rotate(45deg);
+	}
+
+	#mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
+		opacity: 0;
+	}
+
+	#mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
+		transform: translateY(-9px) rotate(-45deg);
+	}
+</style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const header = document.getElementById('main-header');
 		const mobileMenu = document.getElementById('mobile-menu');
-		const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
-		const menuIcon = document.getElementById('menu-icon');
-		const closeIcon = document.getElementById('close-icon');
-		const mobileServicesToggle = document.getElementById('mobile-services-toggle');
-		const mobileServicesMenu = document.getElementById('mobile-services-menu');
-		const header = document.getElementById('header');
+		const menuToggleBtn = document.getElementById('mobile-menu-toggle');
+		const servicesToggle = document.getElementById('services-toggle-btn');
+		const servicesMenu = document.getElementById('mobile-services-menu');
+		const servicesChevron = document.getElementById('services-chevron');
 
-		// Check for reduced motion preference
-		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-		// Manage tabindex for accessibility - when aria-hidden="true", remove from tab order
-		function setMenuTabindex(isHidden) {
-			if (!mobileMenu) return;
-			
-			// Find all focusable elements in the menu
-			const focusableElements = mobileMenu.querySelectorAll(
-				'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
-			);
-			
-			focusableElements.forEach(element => {
-				if (isHidden) {
-					// When hidden: remove from tab order
-					element.setAttribute('tabindex', '-1');
-				} else {
-					// When visible: restore tab order
-					// Remove tabindex if it was -1, or keep existing tabindex
-					if (element.getAttribute('tabindex') === '-1') {
-						element.removeAttribute('tabindex');
-					}
-				}
-			});
-		}
-
-		// Open mobile menu - uses CSS transforms for GPU acceleration
-		function openMobileMenu() {
-			if (!mobileMenu || !mobileMenuBackdrop || !menuIcon || !closeIcon) return;
-			
-			// Show menu and backdrop with CSS classes (GPU-accelerated transforms)
-			// Slide in from right: remove translate-x-full, add translate-x-0
-			mobileMenu.classList.remove('translate-x-full', 'opacity-0');
-			mobileMenu.classList.add('translate-x-0', 'opacity-100');
-			mobileMenu.setAttribute('aria-hidden', 'false');
-			
-			// Make focusable elements accessible
-			setMenuTabindex(false);
-			
-			mobileMenuBackdrop.classList.remove('opacity-0', 'invisible');
-			mobileMenuBackdrop.classList.add('opacity-100', 'visible');
-			
-			menuIcon.classList.add('hidden');
-			closeIcon.classList.remove('hidden');
-			
-			mobileMenuButton.setAttribute('aria-expanded', 'true');
-			
-			// Prevent body scroll when menu is open
-			document.body.style.overflow = 'hidden';
-		}
-
-		// Close mobile menu - exposed globally for onclick handlers
-		window.closeMobileMenu = function() {
-			if (!mobileMenu || !mobileMenuBackdrop || !menuIcon || !closeIcon) return;
-			
-			// Hide menu and backdrop - slide out to right
-			mobileMenu.classList.remove('translate-x-0', 'opacity-100');
-			mobileMenu.classList.add('translate-x-full', 'opacity-0');
-			mobileMenu.setAttribute('aria-hidden', 'true');
-			
-			// Remove focusable elements from tab order when hidden
-			setMenuTabindex(true);
-			
-			mobileMenuBackdrop.classList.remove('opacity-100', 'visible');
-			mobileMenuBackdrop.classList.add('opacity-0', 'invisible');
-			
-			menuIcon.classList.remove('hidden');
-			closeIcon.classList.add('hidden');
-			
-			mobileMenuButton.setAttribute('aria-expanded', 'false');
-			
-			// Restore body scroll
-			document.body.style.overflow = '';
-			
-			// Close services submenu if open
-			if (mobileServicesMenu && !mobileServicesMenu.classList.contains('hidden')) {
-				mobileServicesMenu.classList.add('hidden');
-				if (mobileServicesToggle) {
-					mobileServicesToggle.setAttribute('aria-expanded', 'false');
-					const svg = mobileServicesToggle.querySelector('svg');
-					if (svg) svg.classList.remove('rotate-180');
-				}
+		// Calculate and set header height for mobile menu positioning
+		const updateMenuPosition = () => {
+			if (header) {
+				const headerHeight = header.offsetHeight;
+				document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
 			}
 		};
 
-		// Initialize mobile menu
-		function initMobileMenu() {
-			if (mobileMenuButton && mobileMenu && mobileMenuBackdrop) {
-				// Toggle menu on button click
-				mobileMenuButton.addEventListener('click', function(e) {
-					e.stopPropagation();
-					const isOpen = mobileMenu.classList.contains('translate-x-0');
-					if (isOpen) {
-						window.closeMobileMenu();
-					} else {
-						openMobileMenu();
-					}
-				});
+		updateMenuPosition();
+		window.addEventListener('resize', updateMenuPosition);
 
-				// Close menu on backdrop click
-				mobileMenuBackdrop.addEventListener('click', window.closeMobileMenu);
+		// Sticky header on scroll
+		const handleScroll = () => {
+			const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-				// Close menu on Escape key
-				document.addEventListener('keydown', function(e) {
-					if (e.key === 'Escape' && !mobileMenu.classList.contains('translate-x-full')) {
-						window.closeMobileMenu();
-					}
-				});
-
-				// Prevent menu clicks from closing menu
-				if (mobileMenu) {
-					mobileMenu.addEventListener('click', function(e) {
-						e.stopPropagation();
-					});
+			if (scrollTop > 0) {
+				if (!header?.classList.contains('sticky')) {
+					header?.classList.add('sticky', 'top-0');
 				}
+			} else {
+				header?.classList.remove('sticky', 'top-0');
 			}
+		};
 
-			// Services submenu toggle
-			if (mobileServicesToggle && mobileServicesMenu) {
-				mobileServicesToggle.addEventListener('click', function(e) {
-					e.stopPropagation();
-					const isExpanded = !mobileServicesMenu.classList.contains('hidden');
-					
-					if (isExpanded) {
-						mobileServicesMenu.classList.add('hidden');
-						mobileServicesToggle.setAttribute('aria-expanded', 'false');
-						const svg = mobileServicesToggle.querySelector('svg');
-						if (svg) svg.classList.remove('rotate-180');
-					} else {
-						mobileServicesMenu.classList.remove('hidden');
-						mobileServicesToggle.setAttribute('aria-expanded', 'true');
-						const svg = mobileServicesToggle.querySelector('svg');
-						if (svg) svg.classList.add('rotate-180');
-					}
-				});
+		window.addEventListener('scroll', handleScroll, { passive: true });
+
+		// Mobile menu toggle with animations
+		const toggleMobileMenu = () => {
+			const isExpanded = menuToggleBtn?.getAttribute('aria-expanded') === 'true';
+
+			if (isExpanded) {
+				// Close menu
+				mobileMenu?.classList.add('translate-x-full');
+				mobileMenu?.setAttribute('aria-hidden', 'true');
+				menuToggleBtn?.setAttribute('aria-expanded', 'false');
+				menuToggleBtn?.setAttribute('aria-label', 'Menü');
+				document.body.style.overflow = '';
+			} else {
+				// Open menu
+				updateMenuPosition(); // Ensure position is correct
+				mobileMenu?.classList.remove('translate-x-full');
+				mobileMenu?.setAttribute('aria-hidden', 'false');
+				menuToggleBtn?.setAttribute('aria-expanded', 'true');
+				menuToggleBtn?.setAttribute('aria-label', 'Menü schließen');
+				document.body.style.overflow = 'hidden';
 			}
-		}
+		};
 
-		// Sticky header shadow on scroll - optimized with requestAnimationFrame
-		function initStickyHeader() {
-			if (!header) return;
-			
-			let ticking = false;
-			function updateShadow() {
-				const currentScroll = window.pageYOffset;
-				if (currentScroll > 10) {
-					header.classList.add('shadow-md');
-				} else {
-					header.classList.remove('shadow-md');
-				}
-				ticking = false;
+		menuToggleBtn?.addEventListener('click', toggleMobileMenu);
+
+		// Services submenu toggle with animation
+		servicesToggle?.addEventListener('click', () => {
+			const isExpanded = servicesToggle.getAttribute('aria-expanded') === 'true';
+
+			if (isExpanded) {
+				// Collapse
+				servicesToggle.setAttribute('aria-expanded', 'false');
+				servicesMenu?.style.setProperty('max-height', '0px');
+				servicesChevron?.classList.remove('rotate-180');
+			} else {
+				// Expand
+				servicesToggle.setAttribute('aria-expanded', 'true');
+				const scrollHeight = servicesMenu?.scrollHeight || 0;
+				servicesMenu?.style.setProperty('max-height', `${scrollHeight}px`);
+				servicesChevron?.classList.add('rotate-180');
 			}
-
-			window.addEventListener('scroll', function() {
-				if (!ticking) {
-					window.requestAnimationFrame(updateShadow);
-					ticking = true;
-				}
-			}, { passive: true });
-		}
-
-		// Defer initialization until after critical rendering
-		if (document.readyState === 'loading') {
-			document.addEventListener('DOMContentLoaded', function() {
-				initMobileMenu();
-				initStickyHeader();
-				// Initialize: menu starts hidden, so set tabindex="-1" on all focusable elements
-				setMenuTabindex(true);
-			});
-		} else {
-			// DOM already loaded
-			initMobileMenu();
-			initStickyHeader();
-			// Initialize: menu starts hidden, so set tabindex="-1" on all focusable elements
-			setMenuTabindex(true);
-		}
-	})();
+		});
+	});
 </script>
-

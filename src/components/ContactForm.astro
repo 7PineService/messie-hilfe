@@ -31,19 +31,19 @@ const {
 } = Astro.props;
 
 // Determine styling based on context
-const containerClass = overlayStyle 
-	? 'px-6 pb-6' 
-	: 'bg-[var(--color-form-bg)] rounded-2xl shadow-xl px-6 py-6';
-const inputBgClass = 'bg-[var(--color-input-bg)]';
-const borderClass = 'border-amber-200';
-const focusBorderClass = 'focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500';
-const buttonClass = 'w-full bg-[var(--color-heading)] hover:opacity-90 text-white font-semibold px-5 py-2.5 border-2 border-transparent rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center space-x-2 text-sm';
+const containerClass = overlayStyle
+	? 'px-4 md:px-6 pb-4 md:pb-6'
+	: 'bg-surface-secondary rounded-2xl shadow-xl px-6 py-6';
+const inputBgClass = 'bg-surface-input';
+const borderClass = 'border-border-primary';
+const focusBorderClass = 'focus:ring-2 focus:ring-border-primary focus:border-border-primary';
+const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 border-2 border-transparent rounded-lg flex items-center justify-center space-x-2 text-base';
 // File upload uses consistent overlay design for both contexts
 ---
 
 <div class={`${containerClass} ${!overlayStyle ? 'text-center' : ''}`} id={overlayStyle ? undefined : 'anfrage'}>
 	{showTitle && (
-		<h2 class={`text-2xl ${overlayStyle ? 'font-semibold' : 'md:text-3xl font-bold'} text-center text-[var(--color-heading)] ${overlayStyle ? '' : 'mb-4'}`}>
+		<h2 class={`text-2xl ${overlayStyle ? 'font-semibold' : 'md:text-3xl font-bold'} text-center ${overlayStyle ? '' : 'mb-4'}`}>
 			Anonym anfragen
 		</h2>
 	)}
@@ -60,7 +60,7 @@ const buttonClass = 'w-full bg-[var(--color-heading)] hover:opacity-90 text-whit
 				type="text"
 				id={nameInputId}
 				name="name"
-				class={`w-full px-3 py-2 min-[1920px]:px-4 min-[1920px]:py-3 text-sm min-[1920px]:text-base border ${borderClass} rounded-lg ${focusBorderClass} transition-colors ${inputBgClass} text-[var(--color-heading)] placeholder:text-[var(--color-heading)] placeholder:opacity-60`}
+				class={`w-full px-3 py-2 min-[1920px]:px-4 min-[1920px]:py-3 text-sm min-[1920px]:text-base border ${borderClass} rounded-lg ${focusBorderClass} transition-colors ${inputBgClass}`}
 				placeholder="Name (optional)"
 			/>
 		</div>
@@ -72,7 +72,7 @@ const buttonClass = 'w-full bg-[var(--color-heading)] hover:opacity-90 text-whit
 				id={contactInputId}
 				name="contact"
 				required
-				class={`w-full px-3 py-2 min-[1920px]:px-4 min-[1920px]:py-3 text-sm min-[1920px]:text-base border ${borderClass} rounded-lg ${focusBorderClass} transition-colors ${inputBgClass} text-[var(--color-heading)] placeholder:text-[var(--color-heading)] placeholder:opacity-60`}
+				class={`w-full px-3 py-2 min-[1920px]:px-4 min-[1920px]:py-3 text-sm min-[1920px]:text-base border ${borderClass} rounded-lg ${focusBorderClass} transition-colors ${inputBgClass}`}
 				placeholder="Telefon oder E-Mail"
 			/>
 		</div>
@@ -82,16 +82,16 @@ const buttonClass = 'w-full bg-[var(--color-heading)] hover:opacity-90 text-whit
 			<textarea
 				id={messageInputId}
 				name="message"
-				rows={overlayStyle ? 2 : 2}
+				rows={overlayStyle ? 3 : 4}
 				required
-				class={`w-full px-3 py-2 min-[1920px]:px-4 min-[1920px]:py-3 text-sm min-[1920px]:text-base border ${borderClass} rounded-lg ${focusBorderClass} transition-colors ${inputBgClass} resize-none text-[var(--color-heading)] placeholder:text-[var(--color-heading)] placeholder:opacity-60`}
+				class={`w-full px-3 py-2 min-[1920px]:px-4 min-[1920px]:py-3 text-sm min-[1920px]:text-base border ${borderClass} rounded-lg ${focusBorderClass} transition-colors ${inputBgClass} resize-none`}
 				placeholder="Ihre Nachricht"
 			></textarea>
 		</div>
 
 		<!-- File Upload (Optional) - Square plus button with matching background -->
 		<div>
-			<div class="border-2 border-dashed border-amber-400/50 rounded-lg p-2.5 hover:border-amber-500/70 transition-colors cursor-pointer bg-[#FFFBF0]">
+			<div class={`border-2 border-dashed ${borderClass} rounded-lg p-2.5 hover:border-border-primary transition-colors cursor-pointer ${inputBgClass}`}>
 				<input
 					type="file"
 					id={filesInputId}
@@ -101,14 +101,14 @@ const buttonClass = 'w-full bg-[var(--color-heading)] hover:opacity-90 text-whit
 					accept="image/*,.pdf"
 				/>
 				<label for={filesInputId} class="cursor-pointer flex items-center gap-2">
-					<!-- Square plus button container with matching form background -->
-					<div class={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${overlayStyle ? 'bg-[#FFF5C7]' : 'bg-[var(--color-form-bg)]'}`}>
-						<svg class="w-4 h-4 text-[var(--color-heading)] opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+					<!-- Square plus button container with new background and border -->
+					<div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border border-dashed" style="background-color: #fbe5ce; border-color: #eacb62;">
+						<svg class="w-4 h-4 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
 						</svg>
 					</div>
 					<!-- Text content -->
-					<p class="text-xs text-[var(--color-heading)] opacity-80">
+					<p class="text-xs opacity-80">
 						<span class="font-medium">Drag & Drop Files</span> – Choose Files to Upload
 					</p>
 				</label>
@@ -123,9 +123,9 @@ const buttonClass = 'w-full bg-[var(--color-heading)] hover:opacity-90 text-whit
 				id={privacyCheckboxId}
 				name="privacy"
 				required
-				class="mt-0.5 w-4 h-4 text-[var(--color-heading)] border-amber-300 rounded focus:ring-amber-500 focus:ring-1"
+				class="mt-0.5 w-4 h-4 border-border-primary rounded focus:ring-border-primary focus:ring-2"
 			/>
-			<label for={privacyCheckboxId} class="text-xs text-[var(--color-heading)] opacity-80 leading-normal whitespace-nowrap">
+			<label for={privacyCheckboxId} class="text-xs opacity-80 leading-normal">
 				Ich habe die Datenschutzerklärung zur Kenntnis genommen
 			</label>
 		</div>
@@ -136,15 +136,15 @@ const buttonClass = 'w-full bg-[var(--color-heading)] hover:opacity-90 text-whit
 			class={buttonClass}
 		>
 			<span>Anonym anfragen</span>
-			<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+			<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none">
+				<circle cx="12" cy="12" r="10" fill="white" />
+				<path d="M10 8l6 4-6 4V8z" fill="var(--color-primary)" />
 			</svg>
 		</button>
 
 		<!-- Footer Note (only in overlay style) -->
 		{overlayStyle && (
-			<p class="text-xs text-[var(--color-heading)] opacity-60 text-center pt-2">
+			<p class="text-xs opacity-60 text-center pt-2">
 				100 % anonym – keine Weitergabe Ihrer Daten
 			</p>
 		)}

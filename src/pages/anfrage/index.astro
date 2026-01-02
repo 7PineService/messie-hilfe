@@ -7,20 +7,21 @@ import { SITE_URL, CONTACT_API_ENDPOINT } from '../../config/site';
 import '../../styles/global.css';
 ---
 
-<BaseLayout 
+<BaseLayout
 	title="Kostenloses Angebot anfordern – Messie-Hilfe"
 	description="Fordern Sie jetzt Ihr kostenloses, unverbindliches Angebot für unsere diskrete Messie-Hilfe an. Professionell, zuverlässig und ohne Bewertung."
 	canonicalUrl={`${SITE_URL}/anfrage`}
 >
-	<Header />
-	<main class="bg-[var(--color-bg-light)] py-12 md:py-20">
+	<Header slot="header" />
+
+	<main class="bg-surface-primary py-12 md:py-20">
 		<div class="container mx-auto px-4 max-w-3xl">
 			<!-- Page Header -->
 			<div class="text-center mb-12">
-				<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-heading)] mb-4">
+				<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
 					Kostenloses Angebot anfordern
 				</h1>
-				<p class="text-lg md:text-xl text-[var(--color-heading)] opacity-80 max-w-2xl mx-auto">
+				<p class="text-lg md:text-xl opacity-80 max-w-2xl mx-auto">
 					Füllen Sie das Formular aus und wir melden uns schnellstmöglich bei Ihnen mit einem unverbindlichen Angebot für unsere diskrete Messie-Hilfe.
 				</p>
 			</div>
@@ -32,45 +33,45 @@ import '../../styles/global.css';
 
 			<!-- Additional Information -->
 			<div class="mt-12 text-center">
-				<div class="bg-yellow-50 rounded-lg p-6 md:p-8 border border-yellow-200">
-					<h2 class="text-xl md:text-2xl font-bold text-[var(--color-heading)] mb-4">
+				<div class="bg-surface-tertiary rounded-lg p-6 md:p-8 border border-border-primary">
+					<h2 class="text-xl md:text-2xl font-bold mb-4">
 						Warum Messie-Hilfe?
 					</h2>
 					<div class="grid md:grid-cols-2 gap-6 text-left">
 						<div class="flex items-start space-x-3">
-							<svg class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg class="w-6 h-6 shrink-0 mt-1" style="color: #bca99f;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
 							</svg>
 							<div>
-								<h3 class="font-semibold text-[var(--color-heading)] mb-1">Diskret & Anonym</h3>
-								<p class="text-[var(--color-heading)] opacity-80 text-sm">Keine Logos am Fahrzeug, diskrete Anfahrt</p>
+								<h3 class="font-semibold mb-1">Diskret & Anonym</h3>
+								<p class="opacity-80 text-sm">Keine Logos am Fahrzeug, diskrete Anfahrt</p>
 							</div>
 						</div>
 						<div class="flex items-start space-x-3">
-							<svg class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg class="w-6 h-6 shrink-0 mt-1" style="color: #bca99f;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
 							</svg>
 							<div>
-								<h3 class="font-semibold text-[var(--color-heading)] mb-1">Ohne Bewertung</h3>
-								<p class="text-[var(--color-heading)] opacity-80 text-sm">Professionelle Unterstützung ohne Urteil</p>
+								<h3 class="font-semibold mb-1">Ohne Bewertung</h3>
+								<p class="opacity-80 text-sm">Professionelle Unterstützung ohne Urteil</p>
 							</div>
 						</div>
 						<div class="flex items-start space-x-3">
-							<svg class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg class="w-6 h-6 shrink-0 mt-1" style="color: #bca99f;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
 							</svg>
 							<div>
-								<h3 class="font-semibold text-[var(--color-heading)] mb-1">Kurzfristig verfügbar</h3>
-								<p class="text-[var(--color-heading)] opacity-80 text-sm">Schnelle Terminvereinbarung möglich</p>
+								<h3 class="font-semibold mb-1">Kurzfristig verfügbar</h3>
+								<p class="opacity-80 text-sm">Schnelle Terminvereinbarung möglich</p>
 							</div>
 						</div>
 						<div class="flex items-start space-x-3">
-							<svg class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg class="w-6 h-6 shrink-0 mt-1" style="color: #bca99f;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
 							</svg>
 							<div>
-								<h3 class="font-semibold text-[var(--color-heading)] mb-1">Über 20 Jahre Erfahrung</h3>
-								<p class="text-[var(--color-heading)] opacity-80 text-sm">Erprobte Methoden und bewährte Abläufe</p>
+								<h3 class="font-semibold mb-1">Über 20 Jahre Erfahrung</h3>
+								<p class="opacity-80 text-sm">Erprobte Methoden und bewährte Abläufe</p>
 							</div>
 						</div>
 					</div>
@@ -78,7 +79,8 @@ import '../../styles/global.css';
 			</div>
 		</div>
 	</main>
-	<Footer />
+
+	<Footer slot="footer" />
 </BaseLayout>
 
 <!-- Track funnel_start event on page view -->

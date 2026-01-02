@@ -19,23 +19,23 @@ const { contactApiEndpoint } = Astro.props;
 		aria-hidden="true"
 	></div>
 	
-	<!-- Modal Content - Warm pastel yellow background, centered card -->
-	<div class="relative z-10 w-full max-w-[560px] max-h-[90vh] overflow-y-auto bg-[#FFF5C7] rounded-[18px] shadow-lg transform transition-all duration-300 scale-95 opacity-0" id="overlay-content">
+	<!-- Modal Content - Warm peachy beige background matching desktop form, centered card -->
+	<div class="relative z-10 w-full max-w-[560px] max-h-[90vh] overflow-y-auto bg-surface-secondary rounded-2xl md:rounded-[18px] shadow-lg transform transition-all duration-300 scale-95 opacity-0" id="overlay-content">
 		<!-- Header with centered title and close button -->
-		<div class="relative px-6 pt-6 pb-4">
+		<div class="relative px-4 md:px-6 pt-4 md:pt-6 pb-3 md:pb-4">
 			<!-- Close Button - Top right -->
 			<button
 				id="overlay-close"
-				class="absolute top-6 right-6 p-1.5 text-[var(--color-heading)] hover:bg-yellow-200/60 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
+				class="absolute top-4 md:top-6 right-4 md:right-6 p-1.5 hover:bg-yellow-200/60 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
 				aria-label="Modal schließen"
 			>
 				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
 				</svg>
 			</button>
-			
+
 			<!-- Centered Title -->
-			<h2 id="overlay-title" class="text-2xl font-semibold text-[var(--color-heading)] text-center">Anonym anfragen</h2>
+			<h2 id="overlay-title" class="text-xl md:text-2xl font-semibold text-center">Anonym anfragen</h2>
 		</div>
 		
 		<!-- Form Content - Reusing ContactForm component -->
@@ -178,7 +178,7 @@ const { contactApiEndpoint } = Astro.props;
 
 	// Listen for successful form submission to close overlay
 	if (form) {
-		form.addEventListener('submit', (e) => {
+		form.addEventListener('submit', () => {
 			// Check if form submission was successful (ContactForm handles the actual submission)
 			// Close overlay after a delay if submission appears successful
 			const formMessage = document.getElementById('overlay-form-message');
