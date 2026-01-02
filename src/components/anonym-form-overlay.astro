@@ -1,14 +1,5 @@
 ---
-// AnonymFormOverlay Component - Lightweight modal overlay for anonym form
-// Uses Astro Island for client-side interactivity
-// Reuses ContactForm component for the form content
-import ContactForm from './ContactForm.astro';
-
-interface Props {
-	contactApiEndpoint?: string;
-}
-
-const { contactApiEndpoint } = Astro.props;
+import ContactForm from './contact-form.astro';
 ---
 
 <div id="anonym-overlay" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
@@ -39,8 +30,7 @@ const { contactApiEndpoint } = Astro.props;
 		</div>
 		
 		<!-- Form Content - Reusing ContactForm component -->
-		<ContactForm 
-			contactApiEndpoint={contactApiEndpoint}
+		<ContactForm
 			formId="overlay-contact-form"
 			fileListId="overlay-file-list"
 			formMessageId="overlay-form-message"

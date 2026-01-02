@@ -1,0 +1,48 @@
+---
+import { cn } from '@/utils/cn';
+
+interface Props {
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  variant?: 'default' | 'inverse';
+  class?: string;
+  'aria-label'?: string;
+  'aria-hidden'?: boolean;
+}
+
+const {
+  size = 'md',
+  variant = 'default',
+  class: className = '',
+  'aria-label': ariaLabel,
+  'aria-hidden': ariaHidden = false
+} = Astro.props;
+
+const sizeClasses = {
+  xs: 'w-4 h-4',
+  sm: 'w-5 h-5',
+  md: 'w-6 h-6',
+  lg: 'w-8 h-8',
+  xl: 'w-10 h-10'
+};
+---
+
+<svg
+  class={cn(sizeClasses[size], className)}
+  viewBox="0 0 24 24"
+  fill="none"
+  aria-label={ariaLabel}
+  aria-hidden={ariaHidden}
+  role={ariaLabel ? 'img' : undefined}
+>
+  {variant === 'inverse' ? (
+    <>
+      <circle cx="12" cy="12" r="10" fill="white" />
+      <path d="M10 8l6 4-6 4V8z" fill="currentColor" />
+    </>
+  ) : (
+    <>
+      <circle cx="12" cy="12" r="10" fill="currentColor" />
+      <path d="M10 8l6 4-6 4V8z" fill="white" />
+    </>
+  )}
+</svg>
