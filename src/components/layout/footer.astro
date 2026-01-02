@@ -257,13 +257,13 @@ import { Phone, WhatsApp, Chevron } from '@/components/icons';
 				button.setAttribute('aria-expanded', 'false');
 				menu.setAttribute('aria-hidden', 'true');
 				menu.style.maxHeight = '0px';
-				chevron?.classList.remove('rotate-90');
+				chevron?.classList.remove('rotate-0');
 			} else {
 				// Expand
 				button.setAttribute('aria-expanded', 'true');
 				menu.setAttribute('aria-hidden', 'false');
 				menu.style.maxHeight = menu.scrollHeight + 'px';
-				chevron?.classList.add('rotate-90');
+				chevron?.classList.add('rotate-0');
 			}
 		}
 
