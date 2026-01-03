@@ -2,12 +2,12 @@
 import { getEntry } from 'astro:content';
 
 const serviceDetails = await getEntry('service-details', 'index');
-const { title, columns } = serviceDetails.data;
+const { title, columns = [] } = serviceDetails?.data || {};
 ---
 
-<section class="py-12 md:py-16 lg:py-20 bg-[var(--color-topbar)]">
+<section class="py-12 md:py-16 lg:py-20 bg-surface-secondary">
 	<div class="container mx-auto px-4">
-		<h2 class="text-3xl md:text-4xl font-bold text-[var(--color-heading)] mb-8 md:mb-12 text-center">
+		<h2 class="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center">
 			{title}
 		</h2>
 
@@ -15,7 +15,7 @@ const { title, columns } = serviceDetails.data;
 			{columns.map((column) => (
 				<div class="space-y-4">
 					{column.paragraphs.map((paragraph) => (
-						<p class="text-lg text-[var(--color-heading)] opacity-90 leading-relaxed">
+						<p class="text-lg opacity-90 leading-relaxed">
 							{paragraph}
 						</p>
 					))}

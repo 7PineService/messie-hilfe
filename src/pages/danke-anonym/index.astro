@@ -8,7 +8,7 @@ import BaseLayout from '@/layouts/base-layout.astro';
 	noindex={true}
 >
 
-	<main class="bg-[var(--color-bg-light)] py-12 md:py-20 min-h-[60vh] flex items-center">
+	<main class="bg-surface-primary py-12 md:py-20 min-h-[60vh] flex items-center">
 		<div class="container mx-auto px-4 max-w-3xl">
 			<div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center">
 				<!-- Success Icon -->
@@ -19,27 +19,27 @@ import BaseLayout from '@/layouts/base-layout.astro';
 				</div>
 				
 				<!-- Title -->
-				<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-heading)] mb-4">
+				<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
 					Vielen Dank!
 				</h1>
 				
 				<!-- Message -->
-				<p class="text-lg md:text-xl text-[var(--color-heading)] opacity-80 mb-8 leading-relaxed">
+				<p class="text-lg md:text-xl opacity-80 mb-8 leading-relaxed">
 					Ihre anonyme Anfrage wurde erfolgreich übermittelt. Wir melden uns schnellstmöglich bei Ihnen.
 				</p>
 				
 				<!-- Additional Info -->
 				<div class="bg-yellow-50 rounded-lg p-6 mb-8 border border-yellow-200">
-					<p class="text-sm md:text-base text-[var(--color-heading)] opacity-70">
+					<p class="text-sm md:text-base opacity-70">
 						<strong>Ihre Daten sind sicher:</strong> Alle Informationen werden vertraulich behandelt und nicht an Dritte weitergegeben.
 					</p>
 				</div>
 				
 				<!-- CTA Button -->
-				<a 
-					href="/" 
+				<a
+					href="/"
 					data-cta="thank-you-home"
-					class="inline-flex items-center space-x-2 bg-[var(--color-button)] border border-[var(--color-button-border)] hover:opacity-90 text-[var(--color-heading)] font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+					class="cta-secondary inline-flex items-center gap-2 text-base border border-cta-border rounded-xl px-8 py-4"
 				>
 					<span>Zurück zur Startseite</span>
 					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
