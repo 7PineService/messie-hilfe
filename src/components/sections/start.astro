@@ -1,0 +1,191 @@
+---
+import { Checkmark } from '@/components/icons'
+---
+
+<section
+  id="start-section"
+  class="start-with-bg flex items-center py-12 md:py-16 lg:py-24"
+>
+  <div class="container mx-auto px-4 w-full pb-8">
+    <div
+      class="title-bg max-w-[90%] lg:max-w-[60%] mx-auto text-center relative z-10"
+    >
+      <h2
+        class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight"
+      >
+        So helfen wir bei Messie-Wohnungen
+      </h2>
+
+      <div
+        class="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed"
+      >
+        <p>
+          Eine Messie-Wohnung ist keine Einzelsituation - wir verstehen die
+          Herausforderungen und helfen Ihnen diskret und respektvoll aus einer
+          Hand: von der Entrümpelung bis zur Reinigung und Wiederherstellung der
+          Wohnung.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-8 items-center mt-16">
+      <div
+        class="section-image relative h-[100%] min-h-[38vh] md:col-span-3 md:col-start-2"
+      >
+      </div>
+
+      <div class="relative md:col-span-4 md:col-start-5 space-y-6">
+        <div
+          class="flex space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4"
+        >
+          <Checkmark
+            class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0"
+            aria-hidden={true}
+          />
+          <span
+            class="font-medium text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl"
+            ><strong>Diskrete Hilfe</strong> ohne <strong>Vorurteile</strong
+            ></span
+          >
+        </div>
+        <div
+          class="flex space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4"
+        >
+          <Checkmark
+            class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0"
+            aria-hidden={true}
+          />
+          <span
+            class="font-medium text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl"
+            ><strong>Entrümpelung & Reinigung</strong> aus einer Hand</span
+          >
+        </div>
+        <div
+          class="flex space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4"
+        >
+          <Checkmark
+            class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0"
+            aria-hidden={true}
+          />
+          <span
+            class="font-medium text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl"
+            ><strong>Fester Ablauf</strong>, transparenter <strong
+              >Festpreis</strong
+            ></span
+          >
+        </div>
+        <div
+          class="flex space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4"
+        >
+          <Checkmark
+            class="w-4 h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 min-[1920px]:w-7 min-[1920px]:h-7 shrink-0"
+            aria-hidden={true}
+          />
+          <span
+            class="font-medium text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl"
+            ><strong>Individuell</strong> - vom Einzelraum bis zur gesamten Wohnung</span
+          >
+        </div>
+        <div
+          class="max-w-[84%] md:max-w-[76%] lg:pt-4 text-xs lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed"
+        >
+          <p class="">
+            Wir arbeiten zuverlässig, diskret und passen den Ablauf individuell
+            an Ihre Situation an - ohne Bewertung und ohne versteckte Kosten.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .start-with-bg {
+    background:
+      url('/images/background.webp') left 80% / cover no-repeat,
+      var(--color-surface-primary);
+    position: relative;
+  }
+
+  .title-bg {
+    filter: drop-shadow(2px 16px 20px #aa470e);
+    /* background-image: radial-gradient(
+      circle,
+      var(--color-surface-muted),
+      var(--color-surface-tertiary),
+      #fbf0ea83,
+      #fbf2ed41,
+      #fcf4f000
+    ); */
+  }
+
+  .section-image::after {
+    content: '';
+    inset: -8rem;
+    bottom: -16%;
+    position: absolute;
+    background: url('/images/section-start.webp') center / contain no-repeat;
+  }
+
+  @media (max-width: 1023px) {
+    .start-with-bg {
+      background:
+        url('/images/background.webp') left 3rem / cover no-repeat,
+        var(--color-surface-primary);
+    }
+  }
+
+  @media (min-width: 1024px) and (orientation: landscape) {
+    #start-section {
+      min-height: calc(100vh - 7rem);
+    }
+  }
+
+  @media (max-width: 1023px), (orientation: portrait) {
+    #start-section {
+      min-height: auto;
+    }
+  }
+
+  @media (max-width: 768px) and (orientation: portrait) {
+    .section-image::after {
+      inset: -3rem;
+      top: -70%;
+    }
+  }
+
+  @media (max-height: 600px) and (orientation: landscape) {
+    #start-section {
+      min-height: auto;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const setStartSectionHeight = () => {
+      const header = document.getElementById('main-header')
+      const startSection = document.getElementById('start-section')
+
+      if (!header || !startSection) return
+
+      const isLandscape = window.matchMedia('(orientation: landscape)').matches
+      const isDesktop = window.innerWidth >= 1024
+      const isTallEnough = window.innerHeight >= 600
+
+      if (isDesktop && isLandscape && isTallEnough) {
+        const headerHeight = header.offsetHeight
+        startSection.style.minHeight = `calc(100vh - ${headerHeight}px)`
+      } else {
+        startSection.style.minHeight = 'auto'
+      }
+    }
+
+    setStartSectionHeight()
+
+    window.addEventListener('resize', setStartSectionHeight)
+    window.addEventListener('orientationchange', () => {
+      setTimeout(setStartSectionHeight, 100)
+    })
+  })
+</script>
