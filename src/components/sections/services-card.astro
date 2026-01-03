@@ -1,0 +1,105 @@
+---
+import { Chevron } from '@/components/icons'
+
+interface Props {
+  title: string
+  description: string
+  imgSrc: string
+  url: string
+}
+const { title, description, url, imgSrc } = Astro.props
+---
+
+<>
+  <!-- service-card -->
+  <div
+    class="service-card hidden md:flex flex-1 flex-col items-center text-center justify-between gap-2 transition rounded-lg px-4 lg:px-8 pb-4"
+  >
+    <div class="h-[50%] w-full">
+      <img src={imgSrc} alt="" />
+    </div>
+    <h4
+      class="text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl min-[1920px]:text-4xl font-semibold leading-tight mb-2 drop-shadow-[2px_16px_20px_#aa470e]"
+    >
+      {title}
+    </h4>
+    <div
+      class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa470e]"
+    >
+      {description}
+    </div>
+    <div class="text-center">
+      <a
+        href={url}
+        data-cta="hero-offer"
+        class="cta-secondary inline-flex gap-2 text-base rounded-lg px-4 py-2"
+      >
+        <span>Mehr erfahren</span>
+        <Chevron class="-rotate-90" size="md" aria-hidden={true} />
+      </a>
+    </div>
+  </div>
+
+  <!-- service-card-mobile -->
+  <div
+    class="service-card-mobile md:hidden grid grid-cols-5 gap-2 transition rounded-lg p-0"
+  >
+    <div class="card-img col-span-2 flex items-center transition rounded-l-lg">
+      <img
+        class="scale-140"
+        src={imgSrc}
+        alt=""
+      />
+    </div>
+    <div class="col-span-3 flex flex-col items-start justify-between gap-2 p-4">
+      <h4
+        class="text-md font-semibold leading-tight mb-2 drop-shadow-[2px_16px_20px_#aa470e]"
+      >
+        {title}
+      </h4>
+      <div
+        class="text-xs opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa470e]"
+      >
+        {description}
+      </div>
+      <div class="text-center">
+        <a
+          href={url}
+          data-cta="hero-offer"
+          class="cta-secondary inline-flex gap-2 text-sm rounded-lg px-4 py-2"
+        >
+          <span>Mehr erfahren</span>
+          <Chevron class="-rotate-90" size="sm" aria-hidden={true} />
+        </a>
+      </div>
+    </div>
+  </div>
+</>
+
+<style>
+  .service-card,
+  .service-card-mobile {
+    background: #fef7f5;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+  .service-card-mobile > .card-img {
+    background: linear-gradient(225deg, #fcecd7, #fceee1);
+  }
+
+  .service-card:hover {
+    background: #fdecc9;
+    box-shadow:
+      #f5dcae 1px 0px 2px 2px,
+      #f5dcae -7px 0px 2px -4px,
+      #f5dcae 1px 2px 2px 2px;
+  }
+  .service-card-mobile:hover {
+    box-shadow:
+      #f5dcaed7 0px 2px 4px 0px,
+      #f5dcae 0px 2px 16px 0px;
+  }
+
+  .service-card-mobile:hover > .card-img {
+    background: linear-gradient(225deg, #fce8ce, #fdecda);
+  }
+</style>

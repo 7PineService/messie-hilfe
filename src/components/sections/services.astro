@@ -1,0 +1,148 @@
+---
+import { ServicesSubCard } from '@/components/sections'
+import { ServicesCard } from '@/components/sections'
+import { Chevron } from '@/components/icons'
+---
+
+<section
+  id="services-section"
+  class="section-bg flex items-center py-12 md:py-16 lg:py-24"
+>
+  <div class="container mx-auto px-4 w-full pb-8">
+    <div
+      class="title-bg max-w-[90%] lg:max-w-[60%] mx-auto text-center relative z-10"
+    >
+      <h2
+        class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight"
+      >
+        Diese Leistungen bieten wir bei Messie-Wohnungen an
+      </h2>
+
+      <div
+        class="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed"
+      >
+        <h3>
+          Von der Entrümpelung über die Reinigung bis zur Wiederherstellung der
+          Wohnung.
+        </h3>
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-between gap-4 lg:gap-6 mt-8 lg-mt-16">
+      <ServicesCard
+        title="Messie-Entrümpelung"
+        description="Komplette Räumung von Messie-Wohnungen - diskret, schnell und mit Festpreis."
+        url="/#services-entrumpelung"
+        imgSrc="/public/images/section-services-1.webp"
+      />
+      <ServicesCard
+        title="Messie-Reinigung"
+        description="Gründliche Reinigung stark verschmutzter Wohnungen."
+        url="/#services-reinigung"
+        imgSrc="/public/images/section-services-2.webp"
+      />
+      <ServicesCard
+        title="Entsorgung & Sperrmüll"
+        description="Abtransport von Hausrat, Sperrmüll, Müll und Sonderabfall."
+        url="/#services-entsorgung"
+        imgSrc="/public/images/section-services-3.webp"
+      />
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-6 mt-4 lg:mt-16">
+      <ServicesSubCard
+        title="Desinfektion"
+        description="Hygienische Desinfektion belasteter Räume."
+        imgSrc="/public/images/section-services-4.png"
+      />
+      <ServicesSubCard
+        title="Geruchsneutralisation"
+        description="Neutralisierung von Gerüchen und unängenehmen Düften."
+        imgSrc="/public/images/section-services-5.png"
+      />
+      <ServicesSubCard
+        title="Renovierung"
+        description="Renovierung und Instandsetzung der Wohnung."
+        imgSrc="/public/images/section-services-6.png"
+      />
+      <ServicesSubCard
+        title="Malerarbeiten"
+        description="Malerarbeiten für einen bewohbaren Zustand"
+        imgSrc="/public/images/section-services-7.png"
+      />
+    </div>
+  </div>
+
+  <style>
+    .section-bg {
+      background:
+        url('/images/background.webp') center / 200% no-repeat,
+        var(--color-surface-primary);
+      position: relative;
+    }
+
+    @media (max-width: 1023px) {
+      .section-bg {
+        background:
+          url('/images/background.webp') left 3rem / cover no-repeat,
+          var(--color-surface-primary);
+      }
+    }
+
+    @media (min-width: 1024px) and (orientation: landscape) {
+      #services-section {
+        min-height: calc(100vh - 7rem);
+      }
+    }
+
+    @media (max-width: 1023px), (orientation: portrait) {
+      #services-section {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 768px) and (orientation: portrait) {
+      .section-image::after {
+        inset: -3rem;
+        top: -70%;
+      }
+    }
+
+    @media (max-height: 600px) and (orientation: landscape) {
+      #services-section {
+        min-height: auto;
+      }
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const setStartSectionHeight = () => {
+        const header = document.getElementById('main-header')
+        const startSection = document.getElementById('services-section')
+
+        if (!header || !startSection) return
+
+        const isLandscape = window.matchMedia(
+          '(orientation: landscape)'
+        ).matches
+        const isDesktop = window.innerWidth >= 1024
+        const isTallEnough = window.innerHeight >= 600
+
+        if (isDesktop && isLandscape && isTallEnough) {
+          const headerHeight = header.offsetHeight
+          startSection.style.minHeight = `calc(100vh - ${headerHeight}px)`
+        } else {
+          startSection.style.minHeight = 'auto'
+        }
+      }
+
+      setStartSectionHeight()
+
+      window.addEventListener('resize', setStartSectionHeight)
+      window.addEventListener('orientationchange', () => {
+        setTimeout(setStartSectionHeight, 100)
+      })
+    })
+  </script>
+</section>

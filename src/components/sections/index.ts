@@ -3,6 +3,8 @@ export { default as FAQ } from './faq.astro';
 export { default as HowItWorks } from './how-it-works.astro';
 export { default as Locations } from './locations.astro';
 export { default as ServicesCards } from './services-cards.astro';
+export { default as ServicesCard } from './services-card.astro';
+export { default as ServicesSubCard } from './services-sub-card.astro';
 export { default as ServiceDetails } from './service-details.astro';
 export { default as CareSupport } from './care-support.astro';
 export { default as Checklist } from './checklist.astro';

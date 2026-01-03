@@ -4,11 +4,11 @@ import { Checkmark } from '@/components/icons'
 
 <section
   id="start-section"
-  class="start-with-bg flex items-center py-12 md:py-16 lg:py-24"
+  class="section-bg flex items-center py-12 md:py-16 lg:py-24"
 >
   <div class="container mx-auto px-4 w-full pb-8">
     <div
-      class="title-bg max-w-[90%] lg:max-w-[60%] mx-auto text-center relative z-10"
+      class="max-w-[90%] lg:max-w-[60%] mx-auto text-center relative z-10 drop-shadow-[2px_16px_20px_#aa470e]"
     >
       <h2
         class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight"
@@ -19,12 +19,12 @@ import { Checkmark } from '@/components/icons'
       <div
         class="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed"
       >
-        <p>
+        <h3>
           Eine Messie-Wohnung ist keine Einzelsituation - wir verstehen die
           Herausforderungen und helfen Ihnen diskret und respektvoll aus einer
           Hand: von der Entrümpelung bis zur Reinigung und Wiederherstellung der
           Wohnung.
-        </p>
+        </h3>
       </div>
     </div>
 
@@ -34,7 +34,7 @@ import { Checkmark } from '@/components/icons'
       >
       </div>
 
-      <div class="relative md:col-span-4 md:col-start-5 space-y-6">
+      <div class="relative md:col-span-4 md:col-start-5 space-y-6 px-8 sm:px-24 md:px-0">
         <div
           class="flex space-x-1.5 md:space-x-2 lg:space-x-2 xl:space-x-3 min-[1920px]:space-x-4"
         >
@@ -100,7 +100,7 @@ import { Checkmark } from '@/components/icons'
 </section>
 
 <style>
-  .start-with-bg {
+  .section-bg {
     background:
       url('/images/background.webp') left 80% / cover no-repeat,
       var(--color-surface-primary);
@@ -128,7 +128,7 @@ import { Checkmark } from '@/components/icons'
   }
 
   @media (max-width: 1023px) {
-    .start-with-bg {
+    .section-bg {
       background:
         url('/images/background.webp') left 3rem / cover no-repeat,
         var(--color-surface-primary);
@@ -150,7 +150,7 @@ import { Checkmark } from '@/components/icons'
   @media (max-width: 768px) and (orientation: portrait) {
     .section-image::after {
       inset: -3rem;
-      top: -70%;
+      top: -50%;
     }
   }
 

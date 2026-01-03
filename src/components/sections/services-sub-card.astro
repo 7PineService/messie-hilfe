@@ -1,0 +1,28 @@
+---
+import { Card } from '@/components/ui'
+
+interface Props {
+  title: string
+  description: string
+  imgSrc: string
+}
+const { title, description, imgSrc } = Astro.props
+---
+
+<Card class="flex p-0 shadow-xl">
+  <div class="min-w-[20%] max-w-[30%]">
+    <img class="w-full translate-y-4 sm:translate-y-0 lg:translate-y-4 lg:scale-120" src={imgSrc} alt="" />
+  </div>
+  <div class="flex-1 gap-4 py-4 pr-4">
+    <div
+      class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl min-[1920px]:text-3xl font-semibold leading-tight tracking-[-1px] sm:tracking-normal mb-2 drop-shadow-[2px_16px_20px_#aa470e]"
+    >
+      {title}
+    </div>
+    <div
+      class="text-xs md:text-sm lg:text-base xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa470e]"
+    >
+      {description}
+    </div>
+  </div>
+</Card>
