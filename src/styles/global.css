@@ -50,6 +50,12 @@
 	.cta-secondary:hover {
 		background-color: var(--color-cta-secondary-hover);
 	}
+
+	.cta-tertiary {
+		background-color: var(--color-cta-tertiary);
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		cursor: pointer;
+	}
 }
 
 @theme {
@@ -103,4 +109,34 @@
 	/* Secondary CTA - Light beige button (Kostenloses Angebot - header/hero) */
 	--color-cta-secondary: #F4E4D3;
 	--color-cta-secondary-hover: #E9D4C3;
+
+	/* Tertiary CTA - Warm peach button (Service cards) */
+	--color-cta-tertiary: #fdecc9;
+
+	/* ============================================================================
+	   ACCENT COLORS
+	   ============================================================================ */
+
+	/* Accent bronze - Darker bronze for icons and accents */
+	--color-accent-bronze: #bb853c;
+
+	/* ============================================================================
+	   ADDITIONAL SURFACE COLORS
+	   ============================================================================ */
+
+	/* Light peach surface - Cards and containers */
+	--color-surface-light-peach: #fef7f5;
+	--color-surface-warm-peach: #fdecc9;
+
+	/* Gradient surfaces - For image containers */
+	--color-surface-gradient-light: linear-gradient(225deg, #fcecd7, #fceee1);
+	--color-surface-gradient-warm: linear-gradient(225deg, #fce8ce, #fdecda);
+
+	/* ============================================================================
+	   SHADOW COLORS
+	   ============================================================================ */
+
+	/* Shadow colors for cards and containers */
+	--color-shadow-subtle: rgba(99, 99, 99, 0.2);
+	--color-shadow-warm: #f5dcae;
 }

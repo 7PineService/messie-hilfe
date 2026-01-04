@@ -1,7 +1,14 @@
 ---
 import { ServicesSubCard } from '@/components/sections'
 import { ServicesCard } from '@/components/sections'
-import { Chevron } from '@/components/icons'
+
+import serviceImg1 from '@/assets/images/section-services-1.webp'
+import serviceImg2 from '@/assets/images/section-services-2.webp'
+import serviceImg3 from '@/assets/images/section-services-3.webp'
+import serviceImg4 from '@/assets/images/section-services-4.png'
+import serviceImg5 from '@/assets/images/section-services-5.png'
+import serviceImg6 from '@/assets/images/section-services-6.png'
+import serviceImg7 from '@/assets/images/section-services-7.png'
 ---
 
 <section
@@ -28,24 +35,24 @@ import { Chevron } from '@/components/icons'
       </div>
     </div>
 
-    <div class="flex flex-col md:flex-row justify-between gap-4 lg:gap-6 mt-8 lg-mt-16">
+    <div class="flex flex-col md:flex-row justify-between gap-4 lg:gap-6 mt-8 lg:mt-16">
       <ServicesCard
         title="Messie-Entrümpelung"
         description="Komplette Räumung von Messie-Wohnungen - diskret, schnell und mit Festpreis."
-        url="/#services-entrumpelung"
-        imgSrc="/public/images/section-services-1.webp"
+        link="/#services-entrumpelung"
+        image={serviceImg1}
       />
       <ServicesCard
         title="Messie-Reinigung"
         description="Gründliche Reinigung stark verschmutzter Wohnungen."
-        url="/#services-reinigung"
-        imgSrc="/public/images/section-services-2.webp"
+        link="/#services-reinigung"
+        image={serviceImg2}
       />
       <ServicesCard
         title="Entsorgung & Sperrmüll"
         description="Abtransport von Hausrat, Sperrmüll, Müll und Sonderabfall."
-        url="/#services-entsorgung"
-        imgSrc="/public/images/section-services-3.webp"
+        link="/#services-entsorgung"
+        image={serviceImg3}
       />
     </div>
 
@@ -53,22 +60,22 @@ import { Chevron } from '@/components/icons'
       <ServicesSubCard
         title="Desinfektion"
         description="Hygienische Desinfektion belasteter Räume."
-        imgSrc="/public/images/section-services-4.png"
+        image={serviceImg4}
       />
       <ServicesSubCard
         title="Geruchsneutralisation"
         description="Neutralisierung von Gerüchen und unängenehmen Düften."
-        imgSrc="/public/images/section-services-5.png"
+        image={serviceImg5}
       />
       <ServicesSubCard
         title="Renovierung"
         description="Renovierung und Instandsetzung der Wohnung."
-        imgSrc="/public/images/section-services-6.png"
+        image={serviceImg6}
       />
       <ServicesSubCard
         title="Malerarbeiten"
         description="Malerarbeiten für einen bewohbaren Zustand"
-        imgSrc="/public/images/section-services-7.png"
+        image={serviceImg7}
       />
     </div>
   </div>
@@ -84,7 +91,7 @@ import { Chevron } from '@/components/icons'
     @media (max-width: 1023px) {
       .section-bg {
         background:
-          url('/images/background.webp') left 3rem / cover no-repeat,
+          url('/images/background.webp') left / cover no-repeat,
           var(--color-surface-primary);
       }
     }
