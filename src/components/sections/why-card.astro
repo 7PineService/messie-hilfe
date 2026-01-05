@@ -21,7 +21,7 @@ const { title, classes, description, image } = Astro.props
       'why-card relative flex flex-col items-center justify-between gap-2 transition rounded-xl shadow-lg'
     )}
   >
-    <div class="w-full">
+    <div class="h-[40%] sm:h-auto w-full">
       <Image
         src={image}
         alt={title}
@@ -69,7 +69,6 @@ const { title, classes, description, image } = Astro.props
       var(--color-shadow-warm) 1px 0px 2px 2px,
       var(--color-shadow-warm) -7px 0px 2px -4px,
       var(--color-shadow-warm) 1px 2px 2px 2px;
-    z-index: 1;
   }
 
   .why-card:hover .cta-tertiary {
