@@ -21,7 +21,7 @@ const { title, classes, description, image } = Astro.props
       'why-card relative flex flex-col items-center justify-between gap-2 transition rounded-xl shadow-lg'
     )}
   >
-    <div class="flex-1 h-[45%] w-full pt-2">
+    <div class="w-full">
       <Image
         src={image}
         alt={title}
@@ -35,14 +35,19 @@ const { title, classes, description, image } = Astro.props
       {title}
     </h4>
     <div
-      class="flex-1 h-[40%] md:inset-shadow-sm md:inset-shadow-orange-100 text-xs sm:text-sm md:text-base xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed md:bg-[#f5dcae24] drop-shadow-[2px_16px_20px_#aa600e] md:drop-shadow-none py-4 px-4 md:px-8 lg:px-4 xl:px-8"
+      class="flex-1 h-[40%] md:inset-shadow-sm md:inset-shadow-orange-100 text-xs sm:text-sm md:text-base xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed md:bg-[#f5dcae24] drop-shadow-[2px_16px_20px_#aa600e] md:drop-shadow-none p-2 sm:p-4 md:px-8 lg:px-4 xl:px-8"
     >
       {
         description.map((d) => (
           <div class="w-fit relative mx-auto inline-flex gap-1">
             <Checkmark
               size="sm"
-              class="shrink-0 text-(--color-accent-bronze) opacity-70 translate-y-1"
+              class="hidden sm:block shrink-0 text-(--color-accent-bronze) opacity-70 translate-y-1"
+              aria-hidden={true}
+            />
+            <Checkmark
+              size="xs"
+              class="sm:hidden shrink-0 text-(--color-accent-bronze) opacity-70"
               aria-hidden={true}
             />
             {d}
