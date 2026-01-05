@@ -60,16 +60,17 @@ import BaseLayout from '@/layouts/base-layout.astro';
 							</div>
 						</div>
 
-						<!-- Variant 4 - Subtle shine / glow -->
+						<!-- Variant 4 - Warm light glow -->
 						<div class="bg-surface-secondary rounded-xl p-8">
-							<p class="text-sm font-semibold mb-4 opacity-70">Variant 4 – Subtle shine / glow</p>
+							<p class="text-sm font-semibold mb-4 opacity-70">Variant 4 – Warm light glow</p>
 							<div class="text-4xl md:text-5xl mb-4">
-								<span class="font-semibold" style="color: #463324;">Messie-</span><span class="font-normal logo-glow" style="color: #F4E4D3;">Hilfe</span>
+								<span class="font-semibold" style="color: #463324;">Messie-</span><span class="font-normal logo-glow-v4" style="color: #ffffff;">Hilfe</span>
 							</div>
 							<div class="text-sm opacity-60 space-y-1">
 								<p>"Messie-" → #463324, semibold</p>
-								<p>"Hilfe" → #F4E4D3, regular + intense glow</p>
-								<p class="text-xs">Bright golden glow effect like a light</p>
+								<p>"Hilfe" → #ffffff, regular + layered glow</p>
+								<p class="text-xs">Inner: Warm yellow glow for visibility</p>
+								<p class="text-xs">Outer: Soft beige (#d4baa5) for harmony</p>
 							</div>
 						</div>
 					</div>
@@ -411,58 +412,13 @@ import BaseLayout from '@/layouts/base-layout.astro';
 </BaseLayout>
 
 <style>
-	/* Maximum intensity glow effect for logo text variant 4 - extremely bright like a powerful light source */
-	.logo-glow {
+	.logo-glow-v4 {
 		text-shadow:
-			0 0 3px rgba(255, 255, 255, 1),
-			0 0 5px rgba(255, 255, 255, 1),
-			0 0 8px rgba(255, 255, 255, 1),
-			0 0 10px rgba(255, 255, 255, 1),
-			0 0 15px rgba(255, 255, 255, 1),
-			0 0 20px rgba(255, 255, 255, 1),
-			0 0 25px rgba(255, 245, 230, 1),
-			0 0 30px rgba(255, 240, 220, 1),
-			0 0 40px rgba(255, 240, 220, 1),
-			0 0 50px rgba(255, 235, 205, 1),
-			0 0 60px rgba(255, 230, 200, 1),
-			0 0 70px rgba(255, 228, 196, 0.95),
-			0 0 80px rgba(255, 220, 190, 0.9),
-			0 0 100px rgba(255, 218, 185, 0.9),
-			0 0 120px rgba(255, 210, 180, 0.85),
-			0 0 140px rgba(250, 220, 190, 0.8),
-			0 0 160px rgba(244, 228, 211, 0.75),
-			0 0 180px rgba(241, 222, 213, 0.7),
-			0 0 200px rgba(241, 222, 213, 0.6);
-	}
-
-	.logo-glow-dark {
-		text-shadow:
-			0 0 3px rgba(255, 255, 255, 1),
-			0 0 5px rgba(255, 255, 255, 1),
-			0 0 8px rgba(255, 255, 255, 1),
-			0 0 10px rgba(255, 255, 255, 1),
-			0 0 15px rgba(255, 255, 255, 1),
-			0 0 20px rgba(255, 255, 255, 1),
-			0 0 25px rgba(255, 245, 230, 1),
-			0 0 30px rgba(255, 240, 220, 1),
-			0 0 40px rgba(255, 240, 220, 1),
-			0 0 50px rgba(255, 235, 205, 1),
-			0 0 60px rgba(255, 230, 200, 1),
-			0 0 70px rgba(255, 228, 196, 1),
-			0 0 80px rgba(255, 220, 190, 0.95),
-			0 0 100px rgba(255, 218, 185, 0.95),
-			0 0 120px rgba(255, 210, 180, 0.9),
-			0 0 140px rgba(250, 220, 190, 0.85),
-			0 0 160px rgba(244, 228, 211, 0.8),
-			0 0 180px rgba(241, 222, 213, 0.75),
-			0 0 200px rgba(241, 222, 213, 0.7);
-	}
-
-	/* Optional: Disable glow on mobile for performance */
-	@media (max-width: 768px) {
-		.logo-glow,
-		.logo-glow-dark {
-			text-shadow: none;
-		}
+			0 0 5px rgba(255, 235, 59, 0.9),
+			0 0 10px rgba(255, 223, 0, 0.8),
+			0 0 15px rgba(255, 215, 0, 0.6),
+			0 0 25px rgba(212, 186, 165, 0.7),
+			0 0 35px rgba(212, 186, 165, 0.5),
+			0 0 45px rgba(212, 186, 165, 0.4);
 	}
 </style>

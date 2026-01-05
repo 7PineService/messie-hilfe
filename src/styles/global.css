@@ -121,6 +121,16 @@
 	--color-accent-bronze: #bb853c;
 
 	/* ============================================================================
+	   LOGO TEXT COLORS - Brand logo styling
+	   ============================================================================ */
+
+	/* Logo "Messie-" part - Dark brown, always semibold */
+	--color-logo-messie: #463324;
+
+	/* Logo "Hilfe" part - Light beige with glow effect, always regular weight */
+	--color-logo-hilfe: #F4E4D3;
+
+	/* ============================================================================
 	   ADDITIONAL SURFACE COLORS
 	   ============================================================================ */
 
