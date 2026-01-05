@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets'
+import { Chevron } from '@/components/icons'
 import type { ImageMetadata } from 'astro'
 import { cn } from '@/utils/cn'
 
@@ -23,7 +24,7 @@ const { key, title, classes, description, subDescription, image } = Astro.props
     )}
   >
     <div
-      class="w-[3.5rem] aspect-square absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-md flex items-center justify-center text-xl md:text-2xl font-semibold bg-(--color-cta-tertiary)"
+      class="w-14 aspect-square absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center text-xl md:text-2xl font-semibold bg-(--color-cta-tertiary)"
     >
       {`0${key + 1}`}
     </div>
@@ -41,7 +42,7 @@ const { key, title, classes, description, subDescription, image } = Astro.props
       <Image src={image} alt={title} loading="eager" class={'mx-auto'} />
     </div>
     <div
-      class="text-sm md:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa600e]"
+      class="text-xs md:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa600e]"
     >
       {subDescription}
     </div>
@@ -102,23 +103,4 @@ const { key, title, classes, description, subDescription, image } = Astro.props
     background: var(--color-surface-gradient-light);
   }
 
-  .steps-card:hover,
-  .steps-card-mobile:hover {
-    background: var(--color-surface-warm-peach);
-    box-shadow:
-      var(--color-shadow-warm) 1px 0px 2px 2px,
-      var(--color-shadow-warm) -7px 0px 2px -4px,
-      var(--color-shadow-warm) 1px 2px 2px 2px;
-    z-index: 1;
-  }
-
-  .steps-card:hover .cta-tertiary,
-  .steps-card-mobile:hover .cta-tertiary {
-    background-color: var(--color-primary);
-    color: white;
-  }
-
-  .steps-card-mobile:hover > .card-img {
-    background: var(--color-surface-gradient-warm);
-  }
 </style>

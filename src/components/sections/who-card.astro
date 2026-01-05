@@ -17,7 +17,7 @@ const { title, classes, description, image } = Astro.props
   <div
     class={cn(
       classes,
-      'who-card relative hidden md:flex flex-col items-center text-center justify-between gap-2 transition px-4 pt-0 pb-16 md:px-8 lg:px-4 xl:px-8  rounded-xl shadow-lg'
+      'who-card relative hidden md:flex flex-col items-center text-center justify-between gap-2 transition px-4 pt-0 pb-16 md:px-8 lg:px-4 rounded-xl shadow-lg'
     )}
   >
     <div class="w-full">
@@ -29,17 +29,13 @@ const { title, classes, description, image } = Astro.props
       {title}
     </h4>
     <div
-      class="text-xs sm:text-sm md:text-base xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa600e]"
+      class="w-full pl-2 md:pl-4 lg:pl-2 xl:pl-4 text-xs sm:text-sm md:text-base xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa600e] text-left"
     >
       {
         description.map((d) => (
-          <div class="who-descriptions w-fit relative mx-auto">{d}</div>
+          <div class="who-descriptions w-fit relative">{d}</div>
         ))
       }
-    </div>
-    <div
-      class="absolute w-full h-10 z-10 bottom-0 left-0 bg-[#f5dcae24] rounded-b-xl"
-    >
     </div>
   </div>
 
@@ -110,7 +106,7 @@ const { title, classes, description, image } = Astro.props
     width: 6px;
     aspect-ratio: 1/1;
     top: 0;
-    left: -0.8rem;
+    left: -1rem;
     transform: translate(0, 160%);
     border-radius: 50%;
     background: var(--color-shadow-warm);

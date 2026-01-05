@@ -1,6 +1,6 @@
 ---
 import { WhoCard } from '@/components/sections'
-import { Play } from '@/components/icons'
+import { Chevron } from '@/components/icons'
 import whoImg1 from '@/assets/images/section-who-1.png'
 import whoImg2 from '@/assets/images/section-who-2.png'
 import whoImg3 from '@/assets/images/section-who-3.png'
@@ -80,16 +80,15 @@ const whoList = [
     </div>
 
     <div
-      class="absolute w-max z-10 md:mx-4 bottom-0 left-1/2 -translate-x-1/2 md:left-0 transform translate-y-1/2 md:translate-x-0 md:p-4 md:bg-[#f5dcae47] rounded-b-xl md:shadow-lg"
+      class="mt-4 text-center md:absolute md:z-10 md:bottom-0 md:left-1/2 md:transform md:-translate-x-1/2 md:translate-y-1/2"
     >
       <a
         href="/anfrage/"
         data-cta="hero-offer-mobile"
-        class="cta-secondary inline-flex items-center justify-center gap-2 text-xs sm:text-base border border-cta-border rounded-lg sm:rounded-xl px-4 py-1 sm:py-2"
+        class="cta-tertiary inline-flex gap-2 items-center text-sm sm:text-base md:text-lg font-semibold rounded-lg px-8 py-2 shadow-sm"
       >
         <span>Kostenloses Angebot anfordern</span>
-        <Play class='hidden md:block' size="lg" aria-hidden={true} />
-        <Play class='md:hidden' size="sm" aria-hidden={true} />
+        <Chevron class="-rotate-90" size="md" aria-hidden={true} />
       </a>
     </div>
   </div>
