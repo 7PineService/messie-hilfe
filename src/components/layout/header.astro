@@ -22,7 +22,9 @@ import { Play, Chevron } from '@/components/icons';
 			<div class="flex items-center justify-between h-18">
 				<a href="/" class="flex items-center gap-2" aria-label={`${SITE_NAME} Startseite`}>
 					<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-14 h-auto w-auto object-contain" />
-					<span class="text-xl font-bold whitespace-nowrap">{SITE_NAME}</span>
+					<span class="text-xl whitespace-nowrap logo-text">
+						<span class="messie">Messie-</span><span class="hilfe">Hilfe</span>
+					</span>
 				</a>
 
 				<div class="hidden lg:flex items-center gap-8 text-base">
@@ -124,7 +126,23 @@ import { Play, Chevron } from '@/components/icons';
 </header>
 
 <style>
-	/* Hamburger to X animation */
+	.messie {
+		font-weight: 600;
+		color: var(--color-logo-messie);
+	}
+
+	.hilfe {
+		font-weight: 400;
+		color: #ffffff;
+		text-shadow:
+			0 0 5px rgba(255, 235, 59, 0.9),
+			0 0 10px rgba(255, 223, 0, 0.8),
+			0 0 15px rgba(255, 215, 0, 0.6),
+			0 0 25px rgba(212, 186, 165, 0.7),
+			0 0 35px rgba(212, 186, 165, 0.5),
+			0 0 45px rgba(212, 186, 165, 0.4);
+	}
+
 	#mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
 		transform: translateY(9px) rotate(45deg);
 	}
