@@ -1,0 +1,235 @@
+---
+import { StepsCard } from '@/components/sections'
+import { Chevron } from '@/components/icons'
+import stepsImg1 from '@/assets/images/section-steps-1.png'
+import stepsImg2 from '@/assets/images/section-steps-2.png'
+import stepsImg3 from '@/assets/images/section-steps-3.png'
+import stepsImg4 from '@/assets/images/section-steps-4.png'
+
+const steps = [
+  {
+    title: 'Anonym und unverbindlich anfragen',
+    description:
+      'Schildern Sie uns Ihr Anliegen per Telefon, E-Mail oder Online-Formular.',
+    subDescription:
+      'Schildern Sie uns Ihr Anliegen per Telefon, E-Mail oder-Online-Formular.',
+    image: stepsImg1,
+  },
+  {
+    title: 'Kostenlose Besichtigung vor Ort',
+    description:
+      'Wir kommen diskret und anonym vorbei, um die Lage zu beurteilen.',
+    subDescription:
+      'Wir kommen diskret und anonym vorbei, um die Lage zu beurteilen.',
+    image: stepsImg2,
+  },
+  {
+    title: 'Transparenter Gesamtpreis',
+    description:
+      'Sie erhalten ein Festpreis-Angebot inklusive Anfahrt, Entsorgung und Reinigung.',
+    subDescription:
+      'Sie erhalten ein Festpreis-Angebot inklusive Anfahrt, Entsorgung und Reinigung.',
+    image: stepsImg3,
+  },
+  {
+    title: 'Diskrete Entrümpelung und Reinigung',
+    description:
+      'Zum Termin erledigen wir alles diskret: Räumen, Entsorgen und Reinigen.',
+    subDescription:
+      'Zum Termin erledigen wir alles diskret: Räumen, Entsorgen und Reinigen.',
+    image: stepsImg4,
+  },
+]
+---
+
+<section
+  id="steps-section"
+  class="section-bg flex items-center py-8 md:py-10 lg:py-12"
+>
+  <div class="container relative mx-auto px-4 w-full">
+    <div class="max-w-[90%] lg:max-w-[60%] mx-auto text-center relative z-10">
+      <h2
+        class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight"
+      >
+        So läuft eine Messie-Hilfe bei uns ab
+      </h2>
+
+      <div
+        class="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed"
+      >
+        <h3>
+          In vier klaren Schritten sorgen wir dafür, dass eine Messie-Wohnung
+          wieder lebenswert wird. Diskret, respektvoll und ohne versteckte
+          Kosten.
+        </h3>
+      </div>
+    </div>
+
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-0 mt-8 lg:mt-16"
+    >
+      {
+        steps.map((step, index) => (
+          <StepsCard
+            key={index}
+            title={step.title}
+            description={step.description}
+            subDescription={step.subDescription}
+            image={step.image}
+          />
+        ))
+      }
+    </div>
+
+    <div
+      class="absolute z-10 bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 py-2 px-8 bg-[#FAD98A] rounded-xl shadow-md text-center font-semibold transition hover:bg-[#fdecc9]"
+    >
+      <a
+        href="#hero-section"
+        data-cta="hero-offer"
+        class="inline-flex gap-2 items-center text-sm sm:text-base md:text-lg"
+      >
+        <span>Kostenfrei anfragen</span>
+        <Chevron class="-rotate-90" size="md" aria-hidden={true} />
+      </a>
+    </div>
+  </div>
+
+  <style>
+    .section-bg {
+      background:
+        url('/images/background.webp') left 80% / cover no-repeat,
+        var(--color-surface-primary);
+      position: relative;
+    }
+
+    .title-bg {
+      filter: drop-shadow(2px 16px 20px #aa600e);
+      /* background-image: radial-gradient(
+      circle,
+      var(--color-surface-muted),
+      var(--color-surface-tertiary),
+      #fbf0ea83,
+      #fbf2ed41,
+      #fcf4f000
+    ); */
+    }
+
+    .check-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background-color: var(--color-surface-warm-peach);
+      color: var(--color-accent-bronze);
+    }
+
+    @media (min-width: 768px) {
+      .check-wrapper {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .check-wrapper {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .check-wrapper {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+
+    @media (min-width: 1920px) {
+      .check-wrapper {
+        width: 1.75rem;
+        height: 1.75rem;
+      }
+    }
+
+    .section-image::after {
+      content: '';
+      inset: -8rem;
+      bottom: -16%;
+      position: absolute;
+      background: url('/images/section-start.webp') center / contain no-repeat;
+    }
+
+    @media (max-width: 1023px) {
+      .section-bg {
+        background:
+          url('/images/background.webp') left / cover no-repeat,
+          var(--color-surface-primary);
+      }
+
+      .section-image::after {
+        inset: -3rem;
+        right: -1rem;
+        top: -50%;
+      }
+    }
+
+    @media (min-width: 1024px) and (orientation: landscape) {
+      #steps-section {
+        min-height: calc(100vh - 7rem);
+      }
+    }
+
+    @media (max-width: 1023px), (orientation: portrait) {
+      #steps-section {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 768px) and (orientation: portrait) {
+      .section-image::after {
+        inset: -3rem;
+        top: -50%;
+      }
+    }
+
+    @media (max-height: 600px) and (orientation: landscape) {
+      #steps-section {
+        min-height: auto;
+      }
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const setStartSectionHeight = () => {
+        const header = document.getElementById('main-header')
+        const startSection = document.getElementById('steps-section')
+
+        if (!header || !startSection) return
+
+        const isLandscape = window.matchMedia(
+          '(orientation: landscape)'
+        ).matches
+        const isDesktop = window.innerWidth >= 1024
+        const isTallEnough = window.innerHeight >= 600
+
+        if (isDesktop && isLandscape && isTallEnough) {
+          const headerHeight = header.offsetHeight
+          startSection.style.minHeight = `calc(100vh - ${headerHeight}px)`
+        } else {
+          startSection.style.minHeight = 'auto'
+        }
+      }
+
+      setStartSectionHeight()
+
+      window.addEventListener('resize', setStartSectionHeight)
+      window.addEventListener('orientationchange', () => {
+        setTimeout(setStartSectionHeight, 100)
+      })
+    })
+  </script>
+</section>

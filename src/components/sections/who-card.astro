@@ -1,0 +1,126 @@
+---
+import { cn } from '@/utils/cn'
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+
+interface Props {
+  title: string
+  classes?: string
+  description: string[]
+  image: ImageMetadata
+}
+const { title, classes, description, image } = Astro.props
+---
+
+<>
+  <!-- who-card -->
+  <div
+    class={cn(
+      classes,
+      'who-card relative hidden md:flex flex-col items-center text-center justify-between gap-2 transition px-4 pt-0 pb-16 md:px-8 lg:px-4 xl:px-8  rounded-xl shadow-lg'
+    )}
+  >
+    <div class="w-full">
+      <Image src={image} alt={title} loading="eager" class={'mx-auto'} />
+    </div>
+    <h4
+      class="md:text-xl lg:text-lg xl:text-xl 2xl:text-2xl min-[1920px]:text-3xl font-semibold leading-tight mb-2"
+    >
+      {title}
+    </h4>
+    <div
+      class="text-xs sm:text-sm md:text-base xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa600e]"
+    >
+      {
+        description.map((d) => (
+          <div class="who-descriptions w-fit relative mx-auto">{d}</div>
+        ))
+      }
+    </div>
+    <div
+      class="absolute w-full h-10 z-10 bottom-0 left-0 bg-[#f5dcae24] rounded-b-xl"
+    >
+    </div>
+  </div>
+
+  <!-- who-card-mobile -->
+  <div
+    class="who-card-mobile md:hidden grid grid-cols-5 transition rounded-lg p-0"
+  >
+    <div
+      class="card-img relative col-span-2 flex justify-center transition rounded-l-lg"
+    >
+      <Image class="object-contain" src={image} alt={title} loading="eager" />
+    </div>
+    <div class="col-span-3 flex flex-col items-start gap-2 p-4 sm:p-4">
+      <h4
+        class="text-sm sm:text-lg md:text-xl font-semibold leading-tight sm:mb-2 drop-shadow-[2px_16px_20px_#aa600e]"
+      >
+        {title}
+      </h4>
+      <div
+        class="text-[10px] sm:text-sm sm:tracking-normal opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa600e]"
+      >
+        {
+          description.map((d) => (
+            <div class="who-descriptions relative mx-auto">{d}</div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</>
+
+<style>
+  .who-card {
+    background: var(--color-surface-light-peach);
+  }
+  .who-card-mobile {
+    background: var(--color-surface-light-peach);
+    box-shadow: var(--color-shadow-subtle) 0px 2px 8px 0px;
+  }
+
+  .who-card-mobile > .card-img {
+    background: var(--color-surface-gradient-light);
+  }
+
+  .who-card:hover,
+  .who-card-mobile:hover {
+    background: var(--color-surface-warm-peach);
+    box-shadow:
+      var(--color-shadow-warm) 1px 0px 2px 2px,
+      var(--color-shadow-warm) -7px 0px 2px -4px,
+      var(--color-shadow-warm) 1px 2px 2px 2px;
+    z-index: 1;
+  }
+
+  .who-card:hover .cta-tertiary,
+  .who-card-mobile:hover .cta-tertiary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .who-card-mobile:hover > .card-img {
+    background: var(--color-surface-gradient-warm);
+  }
+
+  .who-descriptions::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    aspect-ratio: 1/1;
+    top: 0;
+    left: -0.8rem;
+    transform: translate(0, 160%);
+    border-radius: 50%;
+    background: var(--color-shadow-warm);
+  }
+
+  @media (max-width: 640px) {
+    .who-descriptions::after {
+      width: 3px;
+      top: 3px;
+      left: -0.6rem;
+    }
+  }
+</style>
