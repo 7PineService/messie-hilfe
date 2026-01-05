@@ -1,6 +1,5 @@
 ---
-import { WhoCard } from '@/components/sections'
-import { Chevron } from '@/components/icons'
+import { CTABlock, WhoCard } from '@/components/sections'
 import whoImg1 from '@/assets/images/section-who-1.png'
 import whoImg2 from '@/assets/images/section-who-2.png'
 import whoImg3 from '@/assets/images/section-who-3.png'
@@ -10,16 +9,16 @@ const whoList = [
   {
     title: 'Betroffene selbst',
     description: [
-      'Wenn Ihnen die Situation über den Kopf wächst',
-      'Anonyme Hilfe ohne Verurteilung.',
+      'Wenn die Situation über den Kopf wächst',
+      'Anonyme Hilfe ohne Bewertung',
     ],
     image: whoImg1,
   },
   {
     title: 'Angehörige',
     description: [
-      'Wenn Sie sich um einen Angehörigen sorgen.',
-      'Professionelle Unterstützung, diskret & respektvoll.',
+      'Wenn Sie sich um einen Angehörigen sorgen',
+      'Diskrete, professionelle Unterstützung',
     ],
     image: whoImg2,
   },
@@ -27,15 +26,15 @@ const whoList = [
     title: 'Vermieter & Eigentümer',
     description: [
       'Nach Auszug, Kündigung oder Räumung',
-      'Schnelle Hilfe, auch bei extremen Zuständen.',
+      'Schnelle Hilfe auch bei extremen Zuständen',
     ],
     image: whoImg3,
   },
   {
     title: 'Behörden & Betreuer',
     description: [
-      'Bei Fällen betreuter Menschen.',
-      'Verlässliche Zusammenarbeit mit Behörden und Sozialdiensten.',
+      'Bei betreuten oder behördlichen Fällen',
+      'Verlässliche Zusammenarbeit mit Sozialdiensten',
     ],
     image: whoImg4,
   },
@@ -57,11 +56,7 @@ const whoList = [
       <div
         class="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed"
       >
-        <h3>
-          Unsere Messie-Hilfe richtet sich an <strong>alle</strong>, die mit
-          einem stark verschmutzten Haushalt überfordert sind oder Hilfe bei der
-          Räumung und Reinigung benötigen.
-        </h3>
+        <h3>Erkennen Sie sich oder Ihre Situation hier wieder?</h3>
       </div>
     </div>
 
@@ -79,18 +74,7 @@ const whoList = [
       }
     </div>
 
-    <div
-      class="mt-4 text-center md:absolute md:z-10 md:bottom-0 md:left-1/2 md:transform md:-translate-x-1/2 md:translate-y-1/2"
-    >
-      <a
-        href="/anfrage/"
-        data-cta="hero-offer-mobile"
-        class="cta-tertiary inline-flex gap-2 items-center text-sm sm:text-base md:text-lg font-semibold rounded-lg px-8 py-2 shadow-sm"
-      >
-        <span>Kostenloses Angebot anfordern</span>
-        <Chevron class="-rotate-90" size="md" aria-hidden={true} />
-      </a>
-    </div>
+    <CTABlock />
   </div>
 
   <style>

@@ -1,5 +1,5 @@
 ---
-import { WhyCard } from '@/components/sections'
+import { CTABlock, WhyCard } from '@/components/sections'
 import { Play } from '@/components/icons'
 import whyImg1 from '@/assets/images/section-why-1.png'
 import whyImg2 from '@/assets/images/section-why-2.png'
@@ -10,16 +10,16 @@ const reasons = [
   {
     title: '20+ Jahre Erfahrung',
     description: [
-      'Tausende Einsätze, auch in schwierigen Fällen.',
-      'Tause Erhrung',
+      'Tausende Einsätze, auch in schwierigen Fällen',
+      'Langjährige Erfahrung mit sensiblen Situationen',
     ],
     image: whyImg1,
   },
   {
     title: 'Absolute Diskretion',
     description: [
-      'Neutrale Fahrzeuge',
-      'Keine Logos, keine Weitergabe von Daten.',
+      'Neutrale Fahrzeuge ohne Kennzeichnung',
+      'Keine Weitergabe von Daten oder Informationen',
     ],
     image: whyImg2,
   },
@@ -27,13 +27,16 @@ const reasons = [
     title: 'Fair & Transparent',
     description: [
       'Festpreis ohne Nachforderungen',
-      'Schriftilches Angebot im Voraus.',
+      'Schriftliches Angebot im Voraus',
     ],
     image: whyImg3,
   },
   {
     title: 'Respektvoller Umgang',
-    description: ['Keine Bewertung oder Druck', 'Empathie und Verständnis.'],
+    description: [
+      'Keine Bewertung oder Druck',
+      'Empathie, Verständnis und Ruhe',
+    ],
     image: whyImg4,
   },
 ]
@@ -44,7 +47,7 @@ const reasons = [
   class="section-bg flex items-center py-8 md:py-10 lg:py-12"
 >
   <div class="container relative mx-auto px-4 w-full">
-    <div class="max-w-[90%] lg:max-w-[60%] mx-auto text-center relative z-10 drop-shadow-[2px_16px_20px_#aa600e]">
+    <div class="max-w-[84%] md:max-w-[70%] mx-auto text-center relative z-10">
       <h2
         class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight"
       >
@@ -55,16 +58,13 @@ const reasons = [
         class="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed"
       >
         <h3>
-          Diskrete, respektvolle und faire Hilfe bei Messie-Wohnungen. Erfahren,
-          sensibel und verlässlich - das wissen unsere Klienten an uns zu
-          schätzen.
+          Vertrauen entsteht, wenn man respektvoll, transparent und fair
+          behandelt wird.
         </h3>
       </div>
     </div>
 
-    <div
-      class="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 mt-8 lg:mt-12"
-    >
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 mt-8 lg:mt-12">
       {
         reasons.map((w) => (
           <WhyCard
@@ -76,19 +76,7 @@ const reasons = [
       }
     </div>
 
-    <!-- <div
-      class="absolute w-max z-10 md:mx-4 bottom-0 left-1/2 -translate-x-1/2 md:left-0 transform translate-y-1/2 md:translate-x-0 md:p-4 md:bg-[#f5dcae47] rounded-b-xl md:shadow-lg"
-    >
-      <a
-        href="/anfrage/"
-        data-cta="hero-offer-mobile"
-        class="cta-secondary inline-flex items-center justify-center gap-2 text-xs sm:text-base border border-cta-border rounded-lg sm:rounded-xl px-4 py-1 sm:py-2"
-      >
-        <span>Kostenloses Angebot anfordern</span>
-        <Play class="hidden md:block" size="lg" aria-hidden={true} />
-        <Play class="md:hidden" size="sm" aria-hidden={true} />
-      </a>
-    </div> -->
+    <CTABlock />
   </div>
 
   <style>

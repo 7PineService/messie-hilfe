@@ -21,12 +21,12 @@ const { title, classes, description, image } = Astro.props
       'why-card relative flex flex-col items-center justify-between gap-2 transition rounded-xl shadow-lg'
     )}
   >
-    <div class="flex-1 h-[45%] w-full">
+    <div class="flex-1 h-[45%] w-full pt-2">
       <Image
         src={image}
         alt={title}
         loading="eager"
-        class={'h-full w-auto mx-auto'}
+        class={'h-full w-auto mx-auto object-contain'}
       />
     </div>
     <h4

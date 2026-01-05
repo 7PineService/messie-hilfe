@@ -9,6 +9,7 @@ export { default as ServiceDetails } from './service-details.astro';
 export { default as StepsCard } from './steps-card.astro';
 export { default as WhoCard } from './who-card.astro';
 export { default as WhyCard } from './why-card.astro';
+export { default as CTABlock } from './cta-block.astro';
 export { default as CareSupport } from './care-support.astro';
 export { default as Checklist } from './checklist.astro';
 export { default as CostResponsibility } from './cost-responsibility.astro';

@@ -1,6 +1,5 @@
 ---
-import { StepsCard } from '@/components/sections'
-import { Chevron } from '@/components/icons'
+import { StepsCard, CTABlock } from '@/components/sections'
 import stepsImg1 from '@/assets/images/section-steps-1.png'
 import stepsImg2 from '@/assets/images/section-steps-2.png'
 import stepsImg3 from '@/assets/images/section-steps-3.png'
@@ -57,11 +56,7 @@ const steps = [
       <div
         class="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed"
       >
-        <h3>
-          In vier klaren Schritten sorgen wir dafür, dass eine Messie-Wohnung
-          wieder lebenswert wird. Diskret, respektvoll und ohne versteckte
-          Kosten.
-        </h3>
+        <h3>Möchten Sie wissen, wie das in Ihrem Fall ablaufen würde?</h3>
       </div>
     </div>
 
@@ -81,18 +76,7 @@ const steps = [
       }
     </div>
 
-    <div
-      class="mt-4 text-center md:absolute md:z-10 md:bottom-0 md:left-1/2 md:transform md:-translate-x-1/2 md:translate-y-1/2"
-    >
-      <a
-        href="#hero-section"
-        data-cta="hero-offer"
-        class="cta-tertiary inline-flex gap-2 items-center text-sm sm:text-base md:text-lg font-semibold rounded-lg px-8 py-2 shadow-sm"
-      >
-        <span>Kostenfrei anfragen</span>
-        <Chevron class="-rotate-90" size="md" aria-hidden={true} />
-      </a>
-    </div>
+    <CTABlock />
   </div>
 
   <style>

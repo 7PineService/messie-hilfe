@@ -17,7 +17,7 @@ const { title, classes, description, image } = Astro.props
   <div
     class={cn(
       classes,
-      'who-card relative hidden md:flex flex-col items-center text-center justify-between gap-2 transition px-4 pt-0 pb-16 md:px-8 lg:px-4 rounded-xl shadow-lg'
+      'who-card relative hidden md:flex flex-col items-center text-center gap-2 transition px-4 pt-0 pb-16 md:px-8 lg:px-4 rounded-xl shadow-lg'
     )}
   >
     <div class="w-full">
@@ -29,7 +29,7 @@ const { title, classes, description, image } = Astro.props
       {title}
     </h4>
     <div
-      class="w-full pl-2 md:pl-4 lg:pl-2 xl:pl-4 text-xs sm:text-sm md:text-base xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa600e] text-left"
+      class="w-full pl-2 md:pl-4 lg:pl-2 xl:pl-4 text-xs sm:text-sm md:text-base xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa600e] text-left text-justify"
     >
       {
         description.map((d) => (
@@ -55,7 +55,7 @@ const { title, classes, description, image } = Astro.props
         {title}
       </h4>
       <div
-        class="text-[10px] sm:text-sm sm:tracking-normal opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa600e]"
+        class="text-[10px] sm:text-sm sm:tracking-normal opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa600e] text-justify"
       >
         {
           description.map((d) => (
