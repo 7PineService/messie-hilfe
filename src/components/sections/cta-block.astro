@@ -22,14 +22,14 @@ const {
 
 <div class="cta-block mt-8 text-center">
   {topText && (
-    <div class="text-sm sm:text-lg">
+    <div class="text-sm sm:text-lg mb-2">
       {topText}
     </div>
   )}
   <a
     href={buttonHref}
     data-cta={dataGtmEvent}
-    class="cta-secondary inline-flex items-center justify-center gap-2 text-sm sm:text-base border border-cta-border rounded-lg sm:rounded-xl px-5 py-2.5 sm:py-2 my-3"
+    class="cta-secondary w-full lg:w-fit inline-flex items-center justify-center gap-2 text-sm sm:text-base border border-cta-border rounded-lg sm:rounded-xl px-5 py-2.5 sm:py-2"
   >
     <span>{buttonText}</span>
     {showIcon && (
@@ -40,7 +40,7 @@ const {
     )}
   </a>
   {bottomText && (
-    <div class="text-sm sm:text-lg">
+    <div class="text-sm sm:text-lg mt-2">
       {bottomText}
     </div>
   )}
