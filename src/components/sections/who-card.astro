@@ -29,7 +29,7 @@ const { title, classes, description, image } = Astro.props
       {title}
     </h4>
     <div
-      class="w-full pl-2 md:pl-4 lg:pl-2 xl:pl-4 text-xs sm:text-sm md:text-base xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa600e] text-left text-justify"
+      class="w-full pl-2 md:pl-4 lg:pl-2 xl:pl-4 text-xs sm:text-sm md:text-base xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed  text-left text-justify"
     >
       {
         description.map((d) => (
@@ -50,12 +50,12 @@ const { title, classes, description, image } = Astro.props
     </div>
     <div class="col-span-3 flex flex-col items-start gap-2 p-4 sm:p-4">
       <h4
-        class="text-sm sm:text-lg md:text-xl font-semibold leading-tight sm:mb-2 drop-shadow-[2px_16px_20px_#aa600e]"
+        class="text-sm sm:text-lg md:text-xl font-semibold leading-tight sm:mb-2 "
       >
         {title}
       </h4>
       <div
-        class="text-[10px] sm:text-sm sm:tracking-normal opacity-80 leading-relaxed drop-shadow-[2px_16px_20px_#aa600e] text-justify"
+        class="text-[10px] sm:text-sm sm:tracking-normal opacity-80 leading-relaxed  text-justify"
       >
         {
           description.map((d) => (

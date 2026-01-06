@@ -18,24 +18,24 @@ const { title, classes, description, image } = Astro.props
   <div
     class={cn(
       classes,
-      'why-card relative flex flex-col items-center justify-between gap-2 transition rounded-xl shadow-lg'
+      'why-card relative flex flex-col items-center gap-2 transition rounded-xl shadow-lg'
     )}
   >
-    <div class="h-[40%] sm:h-auto w-full">
+    <div class="w-full">
       <Image
         src={image}
         alt={title}
         loading="eager"
-        class={'h-full w-auto mx-auto object-contain'}
+        class={'w-auto mx-auto object-contain'}
       />
     </div>
     <h4
-      class="md:-translate-y-1/2 text-sm sm:text-lg md:text-xl lg:text-lg xl:text-xl 2xl:text-2xl min-[1920px]:text-3xl font-semibold leading-tight text-center px-4 md:px-8 lg:px-4 xl:px-8 drop-shadow-[2px_16px_20px_#aa600e]"
+      class="md:-translate-y-1/2 text-sm sm:text-lg md:text-xl lg:text-lg xl:text-xl 2xl:text-2xl min-[1920px]:text-3xl font-semibold leading-tight text-center px-4 md:px-8 lg:px-4 xl:px-8 "
     >
       {title}
     </h4>
     <div
-      class="flex-1 h-[40%] md:inset-shadow-sm md:inset-shadow-orange-100 text-xs sm:text-sm md:text-base xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed md:bg-[#f5dcae24] drop-shadow-[2px_16px_20px_#aa600e] md:drop-shadow-none p-2 sm:p-4 md:px-8 lg:px-4 xl:px-8"
+      class="md:inset-shadow-sm md:inset-shadow-orange-100 text-xs sm:text-sm md:text-base xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed md:bg-[#f5dcae24]  md:drop-shadow-none p-2 sm:p-4 md:px-8 lg:px-4 xl:px-8 pb-4"
     >
       {
         description.map((d) => (
