@@ -1,21 +1,47 @@
 ---
 import { Play } from '@/components/icons'
+
+interface Props {
+  topText?: string
+  buttonText?: string
+  buttonHref?: string
+  bottomText?: string
+  dataGtmEvent?: string
+  showIcon?: boolean
+}
+
+const {
+  topText = 'Transparente Kosten, klare Abläufe - ohne Überraschungen.',
+  buttonText = 'Kostenloses Angebot anfordern',
+  buttonHref = '/anfrage/',
+  bottomText = 'Wir melden uns diskret bei Ihnen.',
+  dataGtmEvent = 'cta-click',
+  showIcon = true,
+} = Astro.props
 ---
 
 <div class="cta-block mt-8 text-center">
-  <div class="font-semibold text-sm sm:text-lg">
-    Transparente Kosten, klare Abläufe - ohne Überraschungen.
-  </div>
+  {topText && (
+    <div class="text-sm sm:text-lg">
+      {topText}
+    </div>
+  )}
   <a
-    href="/anfrage/"
-    data-cta="hero-offer-mobile"
+    href={buttonHref}
+    data-cta={dataGtmEvent}
     class="cta-secondary inline-flex items-center justify-center gap-2 text-sm sm:text-base border border-cta-border rounded-lg sm:rounded-xl px-5 py-2.5 sm:py-2 my-3"
   >
-    <span>Kostenloses Angebot anfordern</span>
-    <Play class="hidden md:block" size="lg" aria-hidden={true} />
-    <Play class="md:hidden" size="sm" aria-hidden={true} />
+    <span>{buttonText}</span>
+    {showIcon && (
+      <>
+        <Play class="hidden md:block" size="lg" aria-hidden={true} />
+        <Play class="md:hidden" size="sm" aria-hidden={true} />
+      </>
+    )}
   </a>
-  <div class="font-semibold text-sm sm:text-lg">
-    Wir melden uns diskret bei Ihnen.
-  </div>
+  {bottomText && (
+    <div class="text-sm sm:text-lg">
+      {bottomText}
+    </div>
+  )}
 </div>
