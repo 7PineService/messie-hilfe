@@ -7,7 +7,7 @@ import faqImg4 from '@/assets/images/section-faq-4.png'
 import faqImg5 from '@/assets/images/section-faq-5.png'
 import faqImg6 from '@/assets/images/section-faq-6.png'
 
-const reasons = [
+const faqItems = [
   {
     title: 'Bewerten Sie uns?',
     description:
@@ -62,23 +62,23 @@ const reasons = [
       <div
         class="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed"
       >
-        <h3>Ihre Frage ist noch offen?</h3>
+        <h3>Diskret, transparent und ohne Bewertung – hier finden Sie Antworten auf die wichtigsten Fragen.</h3>
       </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 mt-8 lg:mt-12">
       {
-        reasons.map((w) => (
+        faqItems.map((faq) => (
           <FAQCard
-            title={w.title}
-            description={w.description}
-            image={w.image}
+            title={faq.title}
+            description={faq.description}
+            image={faq.image}
           />
         ))
       }
     </div>
 
-    <CTABlock />
+    <CTABlock topText="Ihre Frage ist noch offen?" />
   </div>
 
   <style>
@@ -175,35 +175,4 @@ const reasons = [
       }
     }
   </style>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const setStartSectionHeight = () => {
-        const header = document.getElementById('main-header')
-        const startSection = document.getElementById('faq-section')
-
-        if (!header || !startSection) return
-
-        const isLandscape = window.matchMedia(
-          '(orientation: landscape)'
-        ).matches
-        const isDesktop = window.innerWidth >= 1024
-        const isTallEnough = window.innerHeight >= 600
-
-        if (isDesktop && isLandscape && isTallEnough) {
-          const headerHeight = header.offsetHeight
-          startSection.style.minHeight = `calc(100vh - ${headerHeight}px)`
-        } else {
-          startSection.style.minHeight = 'auto'
-        }
-      }
-
-      setStartSectionHeight()
-
-      window.addEventListener('resize', setStartSectionHeight)
-      window.addEventListener('orientationchange', () => {
-        setTimeout(setStartSectionHeight, 100)
-      })
-    })
-  </script>
 </section>

@@ -6,32 +6,33 @@ import costImg1 from '@/assets/images/section-cost-1.png'
 import costImg2 from '@/assets/images/section-cost-2.png'
 import costImg3 from '@/assets/images/section-cost-3.png'
 
-const costData = [
-  {
-    title: '100 % Festpreis-Garantie',
-    description: [
-      'Keine versteckten Kosten.',
-      'Verbindlicher Festpreis nach Besichtigung.',
-      'Festpreis-Vereinbarung vor Ort - schriftliches Angebot inklusive.',
-    ],
-    image: costImg1,
-    image2: costImg2,
-  },
+const featuredCard = {
+  title: '100 % Festpreis-Garantie',
+  description: [
+    'Keine versteckten Kosten.',
+    'Verbindlicher Festpreis nach Besichtigung.',
+    'Festpreis-Vereinbarung vor Ort - schriftliches Angebot inklusive.',
+  ],
+  leftImage: costImg1,
+  rightImage: costImg2,
+}
+
+const standardCards = [
   {
     title: 'Individueller Festpreis statt Schätzung',
     description: [
-      'Jede Messie-Wohnung ist anders.',
-      'Deshalb erstellen wir erst nach einer kostenlosen Vor-Ort-Besichtigung ein verbindliches Festpreis-Angebot.',
+      'Jede Messie-Wohnung ist anders',
+      'Festpreis erst nach kostenloser Vor-Ort-Besichtigung',
+      'Keine Schätzungen oder Pauschalen'
     ],
     image: costImg3,
   },
   {
     title: 'Wovon hängen die Kosten ab?',
     description: [
-      'Größe & Zustand',
-      'Zugänglichkeit',
-      'Art & Menge des Mülls',
-      'Mögliche Zusatzleistungen (z.B. Desinfektion, Renovierung).',
+      'Größe, Zustand und Zugänglichkeit',
+      'Art und Menge des Mülls',
+      'Mögliche Zusatzleistungen (z. B. Desinfektion, Renovierung)'
     ],
     image: costImg3,
   },
@@ -53,34 +54,32 @@ const costData = [
       <div
         class="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed"
       >
-        <h3>Transparente Kosten, klare Abläufe – ohne Überraschungen.</h3>
+        <h3>Transparent, fair und ohne Überraschungen – wir erklären Ihnen, wie sich die Kosten zusammensetzen.</h3>
       </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 auto-rows-fr gap-2 md:gap-4 mt-8 lg:mt-12">
       <CostCard
-        key={0}
-        title={costData[0].title}
-        description={costData[0].description}
-        image={costData[0].image}
-        image2={costData[0].image2}
+        variant="featured"
+        title={featuredCard.title}
+        description={featuredCard.description}
+        leftImage={featuredCard.leftImage}
+        rightImage={featuredCard.rightImage}
         classes="col-span-1 lg:col-span-2"
       />
       {
-        costData
-          .slice(1)
-          .map((c) => (
-            <CostCard
-              title={c.title}
-              description={c.description}
-              image={c.image}
-              image2={c.image2}
-            />
-          ))
+        standardCards.map((card) => (
+          <CostCard
+            variant="standard"
+            title={card.title}
+            description={card.description}
+            image={card.image}
+          />
+        ))
       }
     </div>
 
-    <CTABlock />
+    <CTABlock topText="Transparente Kosten, klare Abläufe – ohne Überraschungen." />
   </div>
 
   <style>
@@ -177,35 +176,4 @@ const costData = [
       }
     }
   </style>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const setStartSectionHeight = () => {
-        const header = document.getElementById('main-header')
-        const startSection = document.getElementById('cost-section')
-
-        if (!header || !startSection) return
-
-        const isLandscape = window.matchMedia(
-          '(orientation: landscape)'
-        ).matches
-        const isDesktop = window.innerWidth >= 1024
-        const isTallEnough = window.innerHeight >= 600
-
-        if (isDesktop && isLandscape && isTallEnough) {
-          const headerHeight = header.offsetHeight
-          startSection.style.minHeight = `calc(100vh - ${headerHeight}px)`
-        } else {
-          startSection.style.minHeight = 'auto'
-        }
-      }
-
-      setStartSectionHeight()
-
-      window.addEventListener('resize', setStartSectionHeight)
-      window.addEventListener('orientationchange', () => {
-        setTimeout(setStartSectionHeight, 100)
-      })
-    })
-  </script>
 </section>
