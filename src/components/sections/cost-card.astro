@@ -20,7 +20,7 @@ const { key, title, classes, description, image, image2 } = Astro.props
   <div
     class={cn(
       classes,
-      'cost-card relative flex gap-2 transition rounded-xl shadow-lg'
+      'cost-card relative hidden md:flex gap-2 transition rounded-xl shadow-lg'
     )}
   >
     <div
@@ -57,12 +57,7 @@ const { key, title, classes, description, image, image2 } = Astro.props
             <div class="w-fit relative flex gap-1 sm:mb-1 lg:mb-2">
               <Checkmark
                 size="sm"
-                class="hidden sm:block shrink-0 text-(--color-accent-bronze) opacity-70  mr-1"
-                aria-hidden={true}
-              />
-              <Checkmark
-                size="xs"
-                class="sm:hidden shrink-0 text-(--color-accent-bronze) opacity-70"
+                class="shrink-0 text-(--color-accent-bronze) opacity-70  mr-1"
                 aria-hidden={true}
               />
               {d}
@@ -84,6 +79,40 @@ const { key, title, classes, description, image, image2 } = Astro.props
       )
     }
   </div>
+
+  <!-- cost-card-mobile -->
+  <div
+    class="cost-card-mobile md:hidden grid grid-cols-6 transition rounded-lg p-0"
+  >
+    <div
+      class="card-img relative col-span-2 flex justify-center transition rounded-l-lg"
+    >
+      <Image class="object-contain scale-120 min-[426px]:scale-100" src={image} alt={title} loading="eager" />
+    </div>
+    <div class="col-span-4 flex flex-col items-start gap-2 p-2 sm:p-4">
+      <h4
+        class="text-sm sm:text-lg md:text-xl font-semibold leading-tight sm:mb-2"
+      >
+        {title}
+      </h4>
+      <div
+        class="text-[10px] sm:text-sm sm:tracking-normal opacity-80 leading-relaxed"
+      >
+        {
+          description.map((d) => (
+            <div class="w-fit relative flex gap-1 sm:mb-1 lg:mb-2">
+              <Checkmark
+                size="xs"
+                class="shrink-0 text-(--color-accent-bronze) opacity-70"
+                aria-hidden={true}
+              />
+              {d}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
 </>
 
 <style>
@@ -99,8 +128,25 @@ const { key, title, classes, description, image, image2 } = Astro.props
       var(--color-shadow-warm) 1px 2px 2px 2px;
   }
 
-  .cost-card:hover .cta-tertiary {
-    background-color: var(--color-primary);
-    color: white;
+  .cost-card-mobile {
+    background: var(--color-surface-light-peach);
+    box-shadow: var(--color-shadow-subtle) 0px 2px 8px 0px;
+  }
+
+  .cost-card-mobile > .card-img {
+    background: var(--color-surface-gradient-light);
+  }
+
+  .cost-card-mobile:hover {
+    background: var(--color-surface-warm-peach);
+    box-shadow:
+      var(--color-shadow-warm) 1px 0px 2px 2px,
+      var(--color-shadow-warm) -7px 0px 2px -4px,
+      var(--color-shadow-warm) 1px 2px 2px 2px;
+    z-index: 1;
+  }
+
+  .cost-card-mobile:hover > .card-img {
+    background: var(--color-surface-gradient-warm);
   }
 </style>
