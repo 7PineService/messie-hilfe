@@ -1,0 +1,106 @@
+---
+import { cn } from '@/utils/cn'
+import { Image } from 'astro:assets'
+import { Checkmark } from '@/components/icons'
+import type { ImageMetadata } from 'astro'
+
+interface Props {
+  key?: number
+  title: string
+  classes?: string
+  description: string[]
+  image: ImageMetadata
+  image2?: ImageMetadata
+}
+const { key, title, classes, description, image, image2 } = Astro.props
+---
+
+<>
+  <!-- cost-card -->
+  <div
+    class={cn(
+      classes,
+      'cost-card relative flex gap-2 transition rounded-xl shadow-lg'
+    )}
+  >
+    <div
+      class={cn(key === 0 ? 'lg:max-w-[24%] max-w-[30%]' : 'max-w-[24%] pt-4')}
+    >
+      <Image
+        src={image}
+        alt={title}
+        loading="eager"
+        class={'w-auto mx-auto object-contain scale-120 translate-x-2'}
+      />
+    </div>
+    <div class="py-4 lg:py-6">
+      <h4
+        class={cn(
+          key === 0
+            ? 'text-sm min-[426px]:text-base sm:text-xl md:text-2xl lg:text-3lg xl:text-4xl'
+            : 'text-xs min-[426px]:text-sm sm:text-lg md:text-xl lg:text-lg xl:text-xl 2xl:text-2xl min-[1920px]:text-3xl',
+          ' font-semibold leading-tight mb-2 lg:mb-4'
+        )}
+      >
+        {title}
+      </h4>
+      <div
+        class={cn(
+          key === 0
+            ? 'text-[10px] min-[426px]:text-sm sm:text-base md:text-lg 2xl:text-xl min-[1920px]:text-2xl'
+            : 'text-[10px] min-[426px]:text-xs sm:text-sm md:text-base 2xl:text-lg min-[1920px]:text-xl',
+          ' opacity-80 leading-relaxed'
+        )}
+      >
+        {
+          description.map((d) => (
+            <div class="w-fit relative flex gap-1 sm:mb-1 lg:mb-2">
+              <Checkmark
+                size="sm"
+                class="hidden sm:block shrink-0 text-(--color-accent-bronze) opacity-70  mr-1"
+                aria-hidden={true}
+              />
+              <Checkmark
+                size="xs"
+                class="sm:hidden shrink-0 text-(--color-accent-bronze) opacity-70"
+                aria-hidden={true}
+              />
+              {d}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    {
+      image2 && (
+        <div class="">
+          <Image
+            src={image2}
+            alt={title}
+            loading="eager"
+            class={'hidden lg:block w-auto mx-auto object-contain'}
+          />
+        </div>
+      )
+    }
+  </div>
+</>
+
+<style>
+  .cost-card {
+    background: var(--color-surface-light-peach);
+  }
+
+  .cost-card:hover {
+    background: var(--color-surface-warm-peach);
+    box-shadow:
+      var(--color-shadow-warm) 1px 0px 2px 2px,
+      var(--color-shadow-warm) -7px 0px 2px -4px,
+      var(--color-shadow-warm) 1px 2px 2px 2px;
+  }
+
+  .cost-card:hover .cta-tertiary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+</style>

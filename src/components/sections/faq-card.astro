@@ -1,0 +1,102 @@
+---
+import { cn } from '@/utils/cn'
+import { Image } from 'astro:assets'
+import { Chevron } from '@/components/icons'
+import type { ImageMetadata } from 'astro'
+
+interface Props {
+  key?: number
+  title: string
+  classes?: string
+  description: string
+  image: ImageMetadata
+}
+const { key, title, classes, description, image } = Astro.props
+---
+
+<>
+  <!-- faq-card -->
+  <div
+    class={cn(
+      classes,
+      'faq-card hidden md:flex relative gap-2 transition rounded-xl shadow-lg'
+    )}
+  >
+    <div class="w-[30%] shrink-0 pt-4">
+      <Image
+        src={image}
+        alt={title}
+        loading="eager"
+        class={'w-auto mx-auto object-contain scale-120 translate-x-2'}
+      />
+    </div>
+    <div class="py-2 lg:py-4 pr-2">
+      <h4
+        class="md:text-xl lg:text-lg xl:text-xl 2xl:text-2xl min-[1920px]:text-3xl font-semibold leading-tight mb-2"
+      >
+        {title}
+      </h4>
+      <div
+        class="w-fit relative flex gap-1 sm:mb-1 lg:mb-2 md:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed"
+      >
+        {description}
+      </div>
+    </div>
+  </div>
+
+  <!-- faq-card-mobile -->
+  <div
+    class={cn(
+      classes,
+      'faq-card-mobile md:hidden bg-(--color-surface-light-peach) rounded-xl shadow-sm overflow-hidden'
+    )}
+  >
+    <button
+      onclick="const el = this.nextElementSibling;el.classList.toggle('grid-rows-[1fr]');el.classList.toggle('py-3');this.classList.toggle('border-b');this.classList.toggle('border-[#d4baa561]'); this.querySelector('svg').classList.toggle('rotate-0')"
+      class="w-full flex items-center justify-between py-1 pr-1"
+    >
+      <span class="w-[20%] sm:w-[14%] shrink-0"
+        ><Image
+          src={image}
+          alt={title}
+          loading="eager"
+          class={'w-auto mx-auto object-contain scale-110'}
+        /></span
+      >
+      <span
+        class="flex-1 text-start text-xs min-[426px]:text-sm sm:text-base font-semibold leading-tight py-2 pr-2"
+        >{title}</span
+      >
+
+      <span class={``}>
+        <Chevron class="transition-all duration-300 -rotate-90" />
+      </span>
+    </button>
+
+    <div class={`grid transition-all duration-300 ease-in-out grid-rows-[0fr]`}>
+      <div
+        class="overflow-hidden opacity-80 text-xs min-[426px]:text-sm sm:text-base pr-6 pl-[20%] sm:pl-[14%]"
+      >
+        {description}
+      </div>
+    </div>
+  </div>
+</>
+<style>
+  .faq-card {
+    background: var(--color-surface-light-peach);
+  }
+
+  .faq-card:hover {
+    background: var(--color-surface-warm-peach);
+    box-shadow:
+      var(--color-shadow-warm) 1px 0px 2px 2px,
+      var(--color-shadow-warm) -7px 0px 2px -4px,
+      var(--color-shadow-warm) 1px 2px 2px 2px;
+  }
+
+  .faq-card:hover .cta-tertiary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+</style>
