@@ -1,0 +1,118 @@
+---
+import { Checkmark, Play } from '@/components/icons'
+
+interface Props {
+  title?: string
+  subtitle?: string
+  cardTitle?: string
+  buttonText?: string
+  buttonHref?: string
+  bottomText?: string
+  dataGtmEvent?: string
+}
+
+const {
+  title = 'Diskrete Hilfe beginnt mit einem ersten Schritt.',
+  subtitle = 'Kostenlos, anonym und ohne Verpflichtung. Wir melden uns diskret bei Ihnen.',
+  cardTitle = 'Unverbindlich & anonym',
+  buttonText = 'Kostenloses Angebot anfordern',
+  buttonHref = '/anfrage/',
+  bottomText = '100 % vertraulich · Keine Weitergabe Ihrer Daten.',
+  dataGtmEvent = 'hero-cta-click',
+} = Astro.props
+---
+
+<section
+  id="hero-cta-section"
+  class="section-bg flex items-center py-8 md:py-10 lg:py-12"
+>
+  <div class="container relative mx-auto px-4 w-full">
+    <!-- Main Heading -->
+    <div class="max-w-4xl mx-auto text-center relative z-10 mb-8 md:mb-10">
+      <h2
+        class="text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight mb-4 md:mb-6"
+      >
+        {title}
+      </h2>
+
+      <p
+        class="text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl min-[1920px]:text-3xl opacity-80 leading-relaxed"
+      >
+        {subtitle}
+      </p>
+    </div>
+
+    <!-- CTA Card -->
+    <div class="max-w-2xl mx-auto">
+      <div
+        class="cta-card bg-surface-light-peach rounded-xl p-6 sm:p-8 md:p-10 text-center"
+      >
+        <h3
+          class="text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl min-[1920px]:text-3xl font-semibold mb-4 md:mb-6"
+        >
+          {cardTitle}
+        </h3>
+
+        <a
+          href={buttonHref}
+          data-cta={dataGtmEvent}
+          class="cta-secondary w-full lg:w-fit inline-flex items-center justify-center gap-2 text-sm sm:text-base border border-cta-border rounded-lg sm:rounded-xl px-5 py-2.5 sm:py-2"
+        >
+          <span>{buttonText}</span>
+          <Play class="hidden md:block" size="lg" aria-hidden={true} />
+          <Play class="md:hidden" size="sm" aria-hidden={true} />
+        </a>
+
+        {
+          bottomText && (
+            <div class="flex items-center justify-center gap-2 mt-4 md:mt-6 text-xs sm:text-sm md:text-base opacity-70">
+              <Checkmark size="xs" class="shrink-0 text-accent-bronze" aria-hidden={true} />
+              <span>{bottomText}</span>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-bg {
+    background:
+      url('/images/background.webp') center / cover no-repeat,
+      var(--color-surface-primary);
+    position: relative;
+  }
+
+  .cta-card {
+    background: var(--color-surface-light-peach);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(212, 186, 165, 0.3);
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.05),
+      0 4px 16px rgba(0, 0, 0, 0.03),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .cta-card:hover {
+    background: var(--color-surface-warm-peach);
+    border-color: rgba(212, 186, 165, 0.5);
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.08),
+      0 8px 24px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+      var(--color-shadow-warm) 1px 0px 2px 2px,
+      var(--color-shadow-warm) -7px 0px 2px -4px,
+      var(--color-shadow-warm) 1px 2px 2px 2px;
+  }
+
+  @media (max-width: 768px) {
+    .section-bg {
+      background:
+        url('/images/background.webp') left / cover no-repeat,
+        var(--color-surface-primary);
+    }
+  }
+</style>
