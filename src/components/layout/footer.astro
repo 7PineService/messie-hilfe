@@ -241,13 +241,6 @@ import { Phone, WhatsApp, Chevron } from '@/components/icons';
 
 <!-- Mobile Accordion JavaScript -->
 <script>
-	// Extend Window interface for CookieYes
-	declare global {
-		interface Window {
-			cookieyes?: any;
-		}
-	}
-
 	document.addEventListener('DOMContentLoaded', () => {
 		// Footer accordion functionality
 		const servicesToggle = document.getElementById('footer-services-toggle');
@@ -283,9 +276,6 @@ import { Phone, WhatsApp, Chevron } from '@/components/icons';
 		importantToggle?.addEventListener('click', () => {
 			toggleAccordion(importantToggle, importantMenu);
 		});
-
-		console.log('CookieYes instance:', window.cookieyes);
-		console.log('CookieYes methods:', window.cookieyes ? Object.keys(window.cookieyes) : 'not available');
 	});
 </script>
 
