@@ -244,9 +244,7 @@ import { Phone, WhatsApp, Chevron } from '@/components/icons';
 	// Extend Window interface for CookieYes
 	declare global {
 		interface Window {
-			cookieyes?: {
-				show: () => void;
-			};
+			cookieyes?: any;
 		}
 	}
 
@@ -290,6 +288,8 @@ import { Phone, WhatsApp, Chevron } from '@/components/icons';
 		const cookiesBtn = document.getElementById('cookies-settings-btn');
 		cookiesBtn?.addEventListener('click', (e) => {
 			e.preventDefault();
+			console.log('CookieYes instance:', window.cookieyes);
+			console.log('CookieYes methods:', window.cookieyes ? Object.keys(window.cookieyes) : 'not available');
 			if (window.cookieyes?.show) {
 				window.cookieyes.show();
 			}
