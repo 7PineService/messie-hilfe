@@ -229,7 +229,7 @@ import { Phone, WhatsApp, Chevron } from '@/components/icons';
 				<span class="hidden md:inline opacity-50">·</span>
 				<a href="/widerruf/" class="hover:opacity-80 transition-colors">Widerruf</a>
 				<span class="hidden md:inline opacity-50">·</span>
-				<button type="button" id="cookies-settings-btn" class="hover:opacity-80 transition-colors cursor-pointer">Cookies</button>
+				<button type="button" class="cky-banner-element hover:opacity-80 transition-colors cursor-pointer">Cookies</button>
 				<span class="hidden md:inline opacity-50">·</span>
 				<span class="flex items-center gap-1">
 					Webdesign: ChatGPT 🤍
@@ -284,16 +284,8 @@ import { Phone, WhatsApp, Chevron } from '@/components/icons';
 			toggleAccordion(importantToggle, importantMenu);
 		});
 
-		// Cookie settings button
-		const cookiesBtn = document.getElementById('cookies-settings-btn');
-		cookiesBtn?.addEventListener('click', (e) => {
-			e.preventDefault();
-			console.log('CookieYes instance:', window.cookieyes);
-			console.log('CookieYes methods:', window.cookieyes ? Object.keys(window.cookieyes) : 'not available');
-			if (window.cookieyes?.show) {
-				window.cookieyes.show();
-			}
-		});
+		console.log('CookieYes instance:', window.cookieyes);
+		console.log('CookieYes methods:', window.cookieyes ? Object.keys(window.cookieyes) : 'not available');
 	});
 </script>
 
