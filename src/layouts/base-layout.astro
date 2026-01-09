@@ -56,6 +56,10 @@ const visualBreadcrumbs = generateVisualBreadcrumbs(currentPath, title);
     {!excludeTracking && <Tracking gtmId={gtmId} />}
     <SpeedInsights />
 
+    <!-- Start cookieyes banner -->
+    <script is:inline id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/210033cfb1e121b1e704a1033cdc5994/script.js"></script>
+    <!-- End cookieyes banner -->
+
     <slot name="head" />
   </head>
 
