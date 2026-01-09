@@ -1,0 +1,232 @@
+---
+import { Checkmark } from '@/components/icons'
+---
+
+<section
+  id="start-section"
+  class="section-bg flex items-center pt-8 pb-4 md:py-10 lg:py-12"
+>
+  <div class="container mx-auto px-4 w-full">
+    <div
+      class="max-w-[90%] mx-auto text-center relative z-10 "
+    >
+      <h2
+        class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight"
+      >
+        So helfen wir bei Messie-Wohnungen
+      </h2>
+
+      <div
+        class="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed"
+      >
+        <h3>
+          Eine Messie-Wohnung ist keine Einzelsituation - wir verstehen die
+          Herausforderungen und helfen Ihnen diskret und respektvoll aus einer
+          Hand: von der Entrümpelung bis zur Reinigung und Wiederherstellung der
+          Wohnung.
+        </h3>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-8 items-center mt-8 md:mt-16 overflow-hidden">
+      <div
+        class="section-image relative h-full min-h-[38vh] md:col-span-3 md:col-start-2"
+      >
+      </div>
+
+      <div class="relative md:col-span-4 md:col-start-5 space-y-3 md:space-y-6 px-4 md:px-0 mt-6 md:mt-0">
+        <div
+          class="flex space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-4 min-[1920px]:space-x-5"
+        >
+          <span class="check-wrapper shrink-0">
+            <Checkmark
+              class="check-icon"
+              aria-hidden={true}
+            />
+          </span>
+          <span
+            class="font-medium text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl"
+            ><strong>Diskrete Hilfe</strong> ohne <strong>Vorurteile</strong
+            ></span
+          >
+        </div>
+        <div
+          class="flex space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-4 min-[1920px]:space-x-5"
+        >
+          <span class="check-wrapper shrink-0">
+            <Checkmark
+              class="check-icon"
+              aria-hidden={true}
+            />
+          </span>
+          <span
+            class="font-medium text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl"
+            ><strong>Entrümpelung & Reinigung</strong> aus einer Hand</span
+          >
+        </div>
+        <div
+          class="flex space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-4 min-[1920px]:space-x-5"
+        >
+          <span class="check-wrapper shrink-0">
+            <Checkmark
+              class="check-icon"
+              aria-hidden={true}
+            />
+          </span>
+          <span
+            class="font-medium text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl"
+            ><strong>Fester Ablauf</strong>, transparenter <strong
+              >Festpreis</strong
+            ></span
+          >
+        </div>
+        <div
+          class="flex space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-4 min-[1920px]:space-x-5"
+        >
+          <span class="check-wrapper shrink-0">
+            <Checkmark
+              class="check-icon"
+              aria-hidden={true}
+            />
+          </span>
+          <span
+            class="font-medium text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl"
+            ><strong>Individuell</strong> - vom Einzelraum bis zur gesamten Wohnung</span
+          >
+        </div>
+        <div
+          class="md:max-w-[76%] mt-6 md:mt-0 lg:pt-4 text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed"
+        >
+          <p class="">
+            Wir arbeiten zuverlässig, diskret und passen den Ablauf individuell
+            an Ihre Situation an - ohne Bewertung und ohne versteckte Kosten.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-bg {
+    background:
+      url('/images/background.webp') left 80% / cover no-repeat,
+      var(--color-surface-primary);
+    position: relative;
+  }
+
+  .check-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: var(--color-surface-warm-peach);
+    color: var(--color-accent-bronze);
+  }
+
+  @media (min-width: 768px) {
+    .check-wrapper {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .check-wrapper {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .check-wrapper {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .check-wrapper {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+  }
+
+  .section-image::after {
+    content: '';
+    inset: -8rem;
+    bottom: -16%;
+    position: absolute;
+    background: url('/images/section-start.webp') center / contain no-repeat;
+  }
+
+  @media (max-width: 1023px) {
+    .section-bg {
+      background:
+        url('/images/background.webp') left / cover no-repeat,
+        var(--color-surface-primary);
+    }
+
+    .section-image::after {
+      inset: -3rem;
+      right: -1rem;
+      top: -50%;
+    }
+  }
+
+  @media (min-width: 1024px) and (orientation: landscape) {
+    #start-section {
+      min-height: calc(100vh - 7rem);
+    }
+  }
+
+  @media (max-width: 1023px), (orientation: portrait) {
+    #start-section {
+      min-height: auto;
+    }
+  }
+
+  @media (max-width: 768px) and (orientation: portrait) {
+    .section-image::after {
+      inset: -3rem;
+      top: -50%;
+    }
+  }
+
+  @media (max-height: 600px) and (orientation: landscape) {
+    #start-section {
+      min-height: auto;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const setStartSectionHeight = () => {
+      const header = document.getElementById('main-header')
+      const startSection = document.getElementById('start-section')
+
+      if (!header || !startSection) return
+
+      const isLandscape = window.matchMedia('(orientation: landscape)').matches
+      const isDesktop = window.innerWidth >= 1024
+      const isTallEnough = window.innerHeight >= 600
+
+      if (isDesktop && isLandscape && isTallEnough) {
+        const headerHeight = header.offsetHeight
+        startSection.style.minHeight = `calc(100vh - ${headerHeight}px)`
+      } else {
+        startSection.style.minHeight = 'auto'
+      }
+    }
+
+    setStartSectionHeight()
+
+    window.addEventListener('resize', setStartSectionHeight)
+    window.addEventListener('orientationchange', () => {
+      setTimeout(setStartSectionHeight, 100)
+    })
+  })
+</script>

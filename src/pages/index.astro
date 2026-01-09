@@ -1,18 +1,34 @@
 ---
-import BaseLayout from '@/layouts/base-layout.astro';
-import Hero from '@/components/sections/hero.astro';
-import AnonymFormOverlay from '@/components/anonym-form-overlay.astro';
-import FloatingActionIcons from '@/components/floating-action-icons.astro';
+import BaseLayout from '@/layouts/base-layout.astro'
+import Hero from '@/components/sections/hero.astro'
+import Start from '@/components/sections/start.astro';
+import AnonymFormOverlay from '@/components/anonym-form-overlay.astro'
+import FloatingActionIcons from '@/components/floating-action-icons.astro'
+import Services from '@/components/sections/services.astro';
+import Steps from '@/components/sections/steps.astro';
+import Who from '@/components/sections/who.astro';
+import Why from '@/components/sections/why.astro';
+import Cost from '@/components/sections/cost.astro';
+import FAQ from '@/components/sections/faqs.astro';
+import { FinalCTA } from '@/components/sections';
 ---
 
 <BaseLayout
-	title="Messie-Hilfe – Messie-Wohnung entrümpeln & reinigen"
-	description="Diskrete Messie-Hilfe ohne Bewertung. Unterstützung bei Messie-Wohnungen, Reinigung & Entrümpelung – anonym & bezahlbar. Jetzt unverbindlich anfragen."
+  title="Messie-Hilfe – Messie-Wohnung entrümpeln & reinigen"
+  description="Diskrete Messie-Hilfe ohne Bewertung. Unterstützung bei Messie-Wohnungen, Reinigung & Entrümpelung – anonym & bezahlbar. Jetzt unverbindlich anfragen."
 >
-	<main>
-		<Hero />
-	</main>
+  <main>
+    <Hero />
+    <Start />
+    <Services />
+    <Steps />
+    <Who />
+    <Why />
+    <Cost />
+    <FAQ />
+    <FinalCTA />
+  </main>
 
-	<AnonymFormOverlay />
-	<FloatingActionIcons />
+  <AnonymFormOverlay />
+  <FloatingActionIcons />
 </BaseLayout>

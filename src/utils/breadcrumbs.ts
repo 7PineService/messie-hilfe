@@ -14,10 +14,6 @@ export function generateVisualBreadcrumbs(currentPath: string, title: string): B
   ];
 
   if (currentPath === '/') {
-    breadcrumbs.push({
-      name: "Startseite",
-      url: "/"
-    });
     return breadcrumbs;
   }
 

@@ -108,7 +108,7 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 					</div>
 					<!-- Text content -->
 					<p class="text-xs opacity-80">
-						<span class="font-medium">Drag & Drop Files</span> – Choose Files to Upload
+						<span class="font-medium">Dateien hinzufügen (optional)</span>
 					</p>
 				</label>
 			</div>
@@ -141,24 +141,49 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			</svg>
 		</button>
 
-		<!-- Footer Note (only in overlay style) -->
-		{overlayStyle && (
-			<p class="text-xs opacity-60 text-center pt-2">
+		<!-- Footer Notes -->
+		<div class="text-center pt-2 space-y-1">
+			<p class="text-xs opacity-60">
 				100 % anonym – keine Weitergabe Ihrer Daten
 			</p>
-		)}
-
-		<!-- Success/Error Messages -->
-		<div id={formMessageId} class="hidden mt-4 p-4 rounded-lg"></div>
+			<p class="text-xs opacity-40">
+				Kommt es zu keinem Auftrag, löschen wir Ihre Daten spätestens nach 14 Tagen automatisch.
+			</p>
+		</div>
 	</form>
 </div>
 
 <script define:vars={{ contactApiEndpoint, formId, fileListId, formMessageId, privacyCheckboxId, filesInputId, overlayStyle, isDev: import.meta.env.DEV }}>
 	const form = document.getElementById(formId);
-	const formMessage = document.getElementById(formMessageId);
+	let formMessage = null;
 	const fileInput = document.getElementById(filesInputId);
 	const fileList = document.getElementById(fileListId);
 	const privacyCheckbox = document.getElementById(privacyCheckboxId);
+
+	// Helper function to get or create the message element
+	function getMessageElement() {
+		if (!formMessage) {
+			formMessage = document.createElement('div');
+			formMessage.id = formMessageId;
+			form.appendChild(formMessage);
+		}
+		return formMessage;
+	}
+
+	// Helper function to show a message
+	function showMessage(className, text) {
+		const msg = getMessageElement();
+		msg.className = className;
+		msg.textContent = text;
+	}
+
+	// Helper function to clear/hide the message
+	function clearMessage() {
+		if (formMessage && formMessage.parentNode) {
+			formMessage.parentNode.removeChild(formMessage);
+			formMessage = null;
+		}
+	}
 
 	// File upload - simple storage until form submission
 	if (fileInput && fileList) {
@@ -234,12 +259,8 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			
 			// Validate privacy checkbox
 			if (privacyCheckbox && !privacyCheckbox.checked) {
-				if (formMessage) {
-					formMessage.className = 'mt-4 p-4 rounded-lg bg-red-100 text-red-800';
-					formMessage.textContent = 'Bitte bestätigen Sie die Datenschutzerklärung.';
-					formMessage.classList.remove('hidden');
-					privacyCheckbox.focus();
-				}
+				showMessage('mt-4 p-4 rounded-lg bg-red-100 text-red-800', 'Bitte bestätigen Sie die Datenschutzerklärung.');
+				privacyCheckbox.focus();
 				return;
 			}
 			
@@ -310,17 +331,13 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 						if (isDev && responseData) {
 							console.log('Server response:', responseData);
 						}
-						
-						if (formMessage) {
-							formMessage.className = 'mt-4 p-4 rounded-lg bg-green-100 text-green-800';
-							formMessage.textContent = 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.';
-							formMessage.classList.remove('hidden');
-						}
+
+						showMessage('mt-4 p-4 rounded-lg bg-green-100 text-green-800', 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.');
 						form.reset();
 						if (fileList) fileList.innerHTML = '';
 						// Clear stored files
 						if (storedFileMap) storedFileMap.clear();
-						
+
 						// Redirect after 2-3 seconds
 						setTimeout(() => {
 							if (isOverlayForm) {
@@ -341,11 +358,7 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 					}
 				} catch (error) {
 					if (isDev) console.error('Form submission error:', error);
-					if (formMessage) {
-						formMessage.className = 'mt-4 p-4 rounded-lg bg-red-100 text-red-800';
-						formMessage.textContent = 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per Telefon.';
-						formMessage.classList.remove('hidden');
-					}
+					showMessage('mt-4 p-4 rounded-lg bg-red-100 text-red-800', 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per Telefon.');
 				} finally {
 					if (submitButton) {
 						submitButton.disabled = false;
@@ -370,15 +383,11 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 						if (isDev && responseData) {
 							console.log('Server response:', responseData);
 						}
-						
-						if (formMessage) {
-							formMessage.className = 'mt-4 p-4 rounded-lg bg-green-100 text-green-800';
-							formMessage.textContent = 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.';
-							formMessage.classList.remove('hidden');
-						}
+
+						showMessage('mt-4 p-4 rounded-lg bg-green-100 text-green-800', 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.');
 						form.reset();
 						if (fileList) fileList.innerHTML = '';
-						
+
 						// Redirect after 2-3 seconds
 						setTimeout(() => {
 							if (isOverlayForm) {
@@ -398,11 +407,7 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 						throw new Error('Server error');
 					}
 				} catch (error) {
-					if (formMessage) {
-						formMessage.className = 'mt-4 p-4 rounded-lg bg-red-100 text-red-800';
-						formMessage.textContent = 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per Telefon.';
-						formMessage.classList.remove('hidden');
-					}
+					showMessage('mt-4 p-4 rounded-lg bg-red-100 text-red-800', 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per Telefon.');
 				} finally {
 					if (submitButton) {
 						submitButton.disabled = false;
@@ -418,12 +423,8 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			
 			// Validate privacy checkbox
 			if (privacyCheckbox && !privacyCheckbox.checked) {
-				if (formMessage) {
-					formMessage.className = 'mt-4 p-4 rounded-lg bg-red-100 text-red-800';
-					formMessage.textContent = 'Bitte bestätigen Sie die Datenschutzerklärung.';
-					formMessage.classList.remove('hidden');
-					privacyCheckbox.focus();
-				}
+				showMessage('mt-4 p-4 rounded-lg bg-red-100 text-red-800', 'Bitte bestätigen Sie die Datenschutzerklärung.');
+				privacyCheckbox.focus();
 				return;
 			}
 			
@@ -454,12 +455,8 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 				});
 				}
 			}
-			
-			if (formMessage) {
-				formMessage.className = 'mt-4 p-4 rounded-lg bg-yellow-100 text-yellow-800';
-				formMessage.textContent = 'Formularfunktion wird konfiguriert. Bitte kontaktieren Sie uns direkt per Telefon oder E-Mail.';
-				formMessage.classList.remove('hidden');
-			}
+
+			showMessage('mt-4 p-4 rounded-lg bg-yellow-100 text-yellow-800', 'Formularfunktion wird konfiguriert. Bitte kontaktieren Sie uns direkt per Telefon oder E-Mail.');
 			form.reset();
 			if (fileList) fileList.innerHTML = '';
 		});
