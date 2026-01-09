@@ -1,0 +1,106 @@
+---
+import LegalLayout from '@/layouts/legal-layout.astro';
+import { SITE_URL } from '@/config/site';
+
+const title = 'Widerrufsbelehrung | Messie-Hilfe';
+const description = 'Informationen zum Widerrufsrecht bei Verträgen mit der Messie-Hilfe.';
+const canonicalUrl = `${SITE_URL}/widerruf/`;
+---
+
+<LegalLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <h1>Widerrufsbelehrung</h1>
+
+  <section>
+    <h2>Widerrufsrecht</h2>
+    <p>
+      Verbraucher haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen
+      einen mit Messie-Hilfe geschlossenen Vertrag zu widerrufen.
+    </p>
+    <p>
+      Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag des Vertragsschlusses.
+    </p>
+    <p>
+      Um das Widerrufsrecht auszuüben, muss der Kunde die
+      <strong>7Pine Service GmbH</strong>, Aindorferstraße 137, 80689 München,
+      mittels einer eindeutigen Erklärung (z. B. per Post oder E-Mail)
+      über den Entschluss informieren, diesen Vertrag zu widerrufen.
+    </p>
+    <p>
+      Zur Wahrung der Widerrufsfrist reicht es aus, dass die Mitteilung über die
+      Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist abgesendet wird.
+    </p>
+  </section>
+
+  <section>
+    <h2>Widerrufsfolgen</h2>
+    <p>
+      Wenn der Kunde den Vertrag widerruft, hat Messie-Hilfe alle Zahlungen,
+      die aus diesem Vertrag erhalten wurden, unverzüglich und spätestens
+      binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die Mitteilung
+      über den Widerruf eingegangen ist.
+    </p>
+    <p>
+      Für diese Rückzahlung wird dasselbe Zahlungsmittel verwendet, das bei der
+      ursprünglichen Transaktion eingesetzt wurde, es sei denn, es wurde
+      ausdrücklich etwas anderes vereinbart.
+    </p>
+  </section>
+
+  <section>
+    <h2>Besonderer Hinweis zum Erlöschen des Widerrufsrechts</h2>
+    <p>
+      Das Widerrufsrecht erlischt bei einem Vertrag über die Erbringung von
+      Dienstleistungen auch dann, wenn Messie-Hilfe die Dienstleistung vollständig
+      erbracht hat und mit der Ausführung der Dienstleistung erst begonnen hat,
+      nachdem der Verbraucher ausdrücklich zugestimmt hat und gleichzeitig
+      bestätigt hat, dass er sein Widerrufsrecht bei vollständiger Vertragserfüllung verliert.
+    </p>
+  </section>
+
+  <section>
+    <h2>Muster-Widerrufsformular</h2>
+    <p>
+      (Wenn Sie den Vertrag widerrufen möchten, füllen Sie bitte dieses Formular aus
+      und senden Sie es zurück.)
+    </p>
+
+    <p>
+      An:<br>
+      <strong>7Pine Service GmbH</strong><br>
+      Aindorferstraße 137<br>
+      80689 München<br>
+      Deutschland<br>
+      Telefon: +49 89 548 77 642<br>
+      E-Mail: kontakt@messie-hilfe.de
+    </p>
+
+    <p>
+      Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen Vertrag
+      über die Erbringung der folgenden Dienstleistung (*):
+    </p>
+
+    <p>
+      Bestellt am (*) / erhalten am (*)
+    </p>
+
+    <p>
+      Name des/der Verbraucher(s)
+    </p>
+
+    <p>
+      Anschrift des/der Verbraucher(s)
+    </p>
+
+    <p>
+      Unterschrift des/der Verbraucher(s) (nur bei Mitteilung auf Papier)
+    </p>
+
+    <p>
+      Datum
+    </p>
+
+    <p>
+      (*) Unzutreffendes streichen
+    </p>
+  </section>
+</LegalLayout>

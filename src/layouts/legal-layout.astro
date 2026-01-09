@@ -1,0 +1,100 @@
+---
+import BaseLayout from '@/layouts/base-layout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+}
+
+const { title, description, canonicalUrl } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <main class="min-h-screen py-8 md:py-10 lg:py-12">
+    <article class="container mx-auto px-4">
+      <div class="legal-content">
+        <slot />
+      </div>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .legal-content :global(h1) {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .legal-content :global(h1) {
+      font-size: 2.25rem;
+    }
+  }
+
+  .legal-content :global(h2) {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .legal-content :global(h2) {
+      font-size: 1.875rem;
+    }
+  }
+
+  .legal-content :global(h3) {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .legal-content :global(h3) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .legal-content :global(p) {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+  }
+
+  .legal-content :global(strong) {
+    font-weight: 600;
+  }
+
+  .legal-content :global(section) {
+    margin-bottom: 2rem;
+  }
+
+  .legal-content :global(ul) {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .legal-content :global(ul li) {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .legal-content :global(a) {
+    color: var(--color-accent-bronze);
+    text-decoration: underline;
+    transition: color 0.2s;
+  }
+
+  .legal-content :global(a:hover) {
+    color: var(--color-cta-primary);
+  }
+
+  .legal-content :global(address) {
+    font-style: normal;
+    margin-bottom: 1rem;
+  }
+</style>
