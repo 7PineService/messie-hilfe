@@ -1,0 +1,55 @@
+---
+import PhoneIcon from '@/components/icons/phone.astro';
+import EmailIcon from '@/components/icons/email.astro';
+---
+
+<div>
+  <!-- Heading -->
+  <h2 class="text-lg md:text-xl lg:text-2xl font-bold text-primary mb-6">
+    Kontaktinformationen
+  </h2>
+
+  <!-- Contact Details -->
+  <div class="space-y-6">
+    <!-- Phone -->
+    <div class="flex items-start gap-3">
+      <div class="shrink-0 mt-0.5">
+        <PhoneIcon size="md" class="text-primary" aria-hidden={true} />
+      </div>
+      <div>
+        <div class="font-semibold text-primary mb-1">Telefon</div>
+        <a href="tel:0800123456789" class="text-primary hover:text-cta-primary transition-colors">
+          0800-1234-5678-90
+        </a>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="flex items-start gap-3">
+      <div class="shrink-0 mt-0.5">
+        <EmailIcon size="md" class="text-primary" aria-hidden={true} />
+      </div>
+      <div>
+        <div class="font-semibold text-primary mb-1">E-Mail</div>
+        <a href="mailto:kontakt@messie-hilfe.de" class="text-primary hover:text-cta-primary transition-colors break-all">
+          kontakt@messie-hilfe.de
+        </a>
+      </div>
+    </div>
+
+    <!-- Opening Hours -->
+    <div class="pt-4 border-t border-border-primary">
+      <div class="font-semibold text-primary mb-2">Öffnungszeiten</div>
+      <p class="text-primary opacity-80">
+        Montag bis Freitag, 8:00 – 18:00 Uhr
+      </p>
+    </div>
+
+    <!-- Note -->
+    <div class="bg-surface-warm-peach bg-opacity-30 rounded-lg px-4 py-3 mt-6">
+      <p class="text-sm text-primary opacity-80 leading-relaxed">
+        Sie erreichen uns werktags – bei dringenden Fällen auch kurzfristig.
+      </p>
+    </div>
+  </div>
+</div>

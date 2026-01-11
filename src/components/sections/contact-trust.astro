@@ -1,0 +1,28 @@
+---
+import CheckmarkIcon from '@/components/icons/checkmark.astro';
+
+const trustPoints = [
+  '100 % vertraulich',
+  'Keine Weitergabe Ihrer Daten',
+  'Keine Verpflichtung'
+];
+---
+
+<!-- Trust Points - Vertical on mobile, horizontal row on desktop -->
+<div class="flex flex-col md:flex-row md:items-center md:justify-center gap-6 md:gap-8 lg:gap-12">
+  {trustPoints.map((point) => (
+    <div class="flex items-center gap-3">
+      <div class="shrink-0">
+        <CheckmarkIcon
+          size="md"
+          class="text-cta-primary"
+          aria-hidden={true}
+          strokeWidth={3}
+        />
+      </div>
+      <p class="text-base md:text-lg text-primary font-medium">
+        {point}
+      </p>
+    </div>
+  ))}
+</div>

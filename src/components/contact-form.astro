@@ -12,6 +12,8 @@ interface Props {
 	filesInputId?: string;
 	showTitle?: boolean;
 	overlayStyle?: boolean;
+	formTitle?: string;
+	submitButtonText?: string;
 }
 
 const {
@@ -24,7 +26,9 @@ const {
 	messageInputId = 'message',
 	filesInputId = 'files',
 	showTitle = true,
-	overlayStyle = false
+	overlayStyle = false,
+	formTitle = 'Anonym anfragen',
+	submitButtonText = 'Anonym anfragen'
 } = Astro.props;
 
 const contactApiEndpoint = CONTACT_API_ENDPOINT;
@@ -43,7 +47,7 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 <div class={`${containerClass} ${!overlayStyle ? 'text-center' : ''}`} id={overlayStyle ? undefined : 'anfrage'}>
 	{showTitle && (
 		<h2 class={`text-2xl ${overlayStyle ? 'font-semibold' : 'md:text-3xl font-bold'} text-center ${overlayStyle ? '' : 'mb-4'}`}>
-			Anonym anfragen
+			{formTitle}
 		</h2>
 	)}
 	
@@ -134,7 +138,7 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			type="submit"
 			class={buttonClass}
 		>
-			<span>Anonym anfragen</span>
+			<span>{submitButtonText}</span>
 			<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none">
 				<circle cx="12" cy="12" r="10" fill="white" />
 				<path d="M10 8l6 4-6 4V8z" fill="var(--color-primary)" />
