@@ -1,0 +1,68 @@
+---
+import BaseLayout from '@/layouts/base-layout.astro';
+import { FinalCTA, Why, Steps } from '@/components/sections';
+import TextImageHero from '@/components/sections/text-image-hero.astro';
+import Experience from '@/components/sections/experience.astro';
+import { SITE_URL } from '@/config/site';
+import whyImage1 from '@/assets/images/section-why-1.png';
+import whyImage2 from '@/assets/images/section-why-2.png';
+import whyImage3 from '@/assets/images/section-why-3.png';
+import whyImage4 from '@/assets/images/section-why-4.png';
+
+const title = 'Über uns | Messie-Hilfe';
+const description = 'Diskret, respektvoll und strukturiert – erfahren Sie mehr über unsere Werte, unsere Arbeitsweise und unsere Erfahrung in der Messie-Hilfe.';
+const canonicalUrl = `${SITE_URL}/ueber-uns/`;
+
+const haltungItems = [
+  {
+    title: '20+ Jahre Erfahrung',
+    description: [
+      'Tausende Einsätze, auch in schwierigen Fällen',
+      'Langjährige Erfahrung mit sensiblen Situationen',
+    ],
+    image: whyImage1
+  },
+  {
+    title: 'Absolute Diskretion',
+    description: [
+      'Neutrale Fahrzeuge ohne Kennzeichnung',
+      'Keine Weitergabe von Daten oder Informationen',
+    ],
+    image: whyImage2
+  },
+  {
+    title: 'Fair & Transparent',
+    description: [
+      'Festpreis ohne Nachforderungen',
+      'Schriftliches Angebot im Voraus',
+    ],
+    image: whyImage3
+  },
+  {
+    title: 'Respektvoller Umgang',
+    description: [
+      'Keine Bewertung oder Druck',
+      'Empathie, Verständnis und Ruhe',
+    ],
+    image: whyImage4
+  }
+];
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <main>
+    <TextImageHero />
+    <Why
+      heading="Unsere Haltung"
+      subtitle="Vertrauen ist das Fundament unserer Arbeit. Das spiegeln wir durch unsere Werte, sondern vor allem durch unsere Art zu arbeiten."
+      showCTA={false}
+      items={haltungItems}
+    />
+    <Steps
+      heading="So arbeiten wir bei Messie-Hilfe"
+      showCTA={false}
+    />
+    <Experience />
+    <FinalCTA />
+  </main>
+</BaseLayout>

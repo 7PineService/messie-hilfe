@@ -1,0 +1,94 @@
+---
+import { Checkmark } from '@/components/icons';
+---
+
+<section id="erfahrung-section" class="section-bg flex items-center py-8 md:py-10 lg:py-12">
+	<div class="container mx-auto px-4 w-full">
+		<div class="max-w-3xl mx-auto text-center space-y-6 md:space-y-8">
+			<!-- Heading -->
+			<h2 class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight">
+				Erfahrung, die Sicherheit gibt
+			</h2>
+
+			<!-- Intro Text -->
+			<p class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed">
+				Seit vielen Jahren begleiten wir Menschen in herausfordernden Wohnsituationen.
+			</p>
+
+			<!-- Sub-heading -->
+			<p class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed font-medium">
+				Unsere Erfahrung hilft uns, ruhig zu bleiben, auch wenn Situationen komplex oder emotional belastet sind.
+			</p>
+
+			<!-- Checkmark List -->
+			<div class="max-w-xl mx-auto space-y-3 md:space-y-4 pt-4">
+				<div class="flex items-start gap-3 md:gap-4">
+					<div class="check-wrapper shrink-0">
+						<Checkmark size="sm" aria-hidden={true} />
+					</div>
+					<span class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl opacity-80 text-left leading-relaxed">
+						Viele erfolgreich begleitete Einsätze
+					</span>
+				</div>
+
+				<div class="flex items-start gap-3 md:gap-4">
+					<div class="check-wrapper shrink-0">
+						<Checkmark size="sm" aria-hidden={true} />
+					</div>
+					<span class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl opacity-80 text-left leading-relaxed">
+						Erfahrene, geschulte Teams
+					</span>
+				</div>
+
+				<div class="flex items-start gap-3 md:gap-4">
+					<div class="check-wrapper shrink-0">
+						<Checkmark size="sm" aria-hidden={true} />
+					</div>
+					<span class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl opacity-80 text-left leading-relaxed">
+						Bestätigt Umgang mit komplexen Situationen
+					</span>
+				</div>
+			</div>
+
+			<!-- Closing Paragraph -->
+			<p class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed pt-4">
+				Was zählt, ist nicht die Zeit der Einsätze – sondern wie wir damit umgehen.
+			</p>
+		</div>
+	</div>
+</section>
+
+<style>
+	.section-bg {
+		background:
+			url('/images/background.webp') center / cover no-repeat,
+			var(--color-surface-primary);
+		position: relative;
+	}
+
+	.check-wrapper {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.5rem;
+		height: 1.5rem;
+		border-radius: 50%;
+		background-color: var(--color-surface-warm-peach);
+		color: var(--color-accent-bronze);
+		margin-top: 0.125rem;
+	}
+
+	@media (min-width: 768px) {
+		.check-wrapper {
+			width: 1.75rem;
+			height: 1.75rem;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.check-wrapper {
+			width: 2rem;
+			height: 2rem;
+		}
+	}
+</style>

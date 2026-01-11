@@ -1,0 +1,15 @@
+---
+import BaseLayout from '@/layouts/base-layout.astro';
+import { FinalCTA } from '@/components/sections';
+import { SITE_URL } from '@/config/site';
+
+const title = 'Kontakt | Messie-Hilfe';
+const description = 'Nehmen Sie Kontakt mit uns auf. Wir helfen Ihnen gerne weiter.';
+const canonicalUrl = `${SITE_URL}/kontakt/`;
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <main>
+    <FinalCTA />
+  </main>
+</BaseLayout>

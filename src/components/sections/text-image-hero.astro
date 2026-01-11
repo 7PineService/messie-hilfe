@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import heroImage from '@/assets/images/hero-ueber-uns.png';
+---
+
+<section id="ueber-uns-hero" class="hero-section flex items-center py-8 md:py-10 lg:py-12">
+	<div class="container mx-auto px-4 w-full">
+		<div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+			<!-- Left Column: Text Content -->
+			<div class="space-y-5 md:space-y-6 lg:space-y-6 xl:space-y-7 2xl:space-y-8 min-[1920px]:space-y-10">
+				<h1 class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight">
+					Diskret. Respektvoll. Strukturiert.
+				</h1>
+
+				<div class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed space-y-3 md:space-y-4 min-[1920px]:space-y-5">
+					<p>Wir unterstützen Menschen in sensiblen Lebenssituationen – ruhig, respektvoll und ohne Vorurteile.</p>
+					<p>Eine Messie-Wohnung ist kein Makel, sondern oft das Ergebnis von Überforderung, Krankheit oder schwierigen Lebensumständen.</p>
+					<p>Unsere Aufgabe ist es nicht zu bewerten, sondern zu helfen – diskret und mit klaren Abläufen.</p>
+				</div>
+			</div>
+
+			<!-- Right Column: Illustration -->
+			<div class="hidden lg:flex items-center justify-center">
+				<Image
+					src={heroImage}
+					alt="Zwei Personen beim Organisieren und Sortieren von Kisten"
+					class="w-full hero-image"
+					loading="eager"
+				/>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero-section {
+		background:
+			url('/images/background.webp') center / cover no-repeat,
+			var(--color-surface-primary);
+		position: relative;
+	}
+
+	.hero-image {
+		transform: scale(1.25);
+		transform-origin: center;
+	}
+
+	@media (max-width: 1023px) {
+		.hero-section {
+			background: var(--color-surface-primary);
+		}
+	}
+</style>

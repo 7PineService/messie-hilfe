@@ -1,11 +1,25 @@
 ---
 import { StepsCard, SectionCTA } from '@/components/common'
+import type { ImageMetadata } from 'astro'
 import stepsImg1 from '@/assets/images/section-steps-1.png'
 import stepsImg2 from '@/assets/images/section-steps-2.png'
 import stepsImg3 from '@/assets/images/section-steps-3.png'
 import stepsImg4 from '@/assets/images/section-steps-4.png'
 
-const steps = [
+interface Props {
+  heading?: string;
+  subtitle?: string;
+  showCTA?: boolean;
+  ctaText?: string;
+  steps?: Array<{
+    title: string;
+    description: string;
+    subDescription: string;
+    image: ImageMetadata;
+  }>;
+}
+
+const defaultSteps = [
   {
     title: 'Anonym und unverbindlich anfragen',
     description:
@@ -39,6 +53,14 @@ const steps = [
     image: stepsImg4,
   },
 ]
+
+const {
+  heading = "So läuft eine Messie-Hilfe bei uns ab",
+  subtitle = "In vier klaren Schritten sorgen wir dafür, dass eine Messie-Wohnung wieder lebenswert wird. Diskret, respektvoll und ohne versteckte Kosten.",
+  showCTA = true,
+  ctaText = "Möchten Sie wissen, wie das in Ihrem Fall ablaufen würde?",
+  steps = defaultSteps
+} = Astro.props;
 ---
 
 <section
@@ -50,16 +72,14 @@ const steps = [
       <h2
         class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight"
       >
-        So läuft eine Messie-Hilfe bei uns ab
+        {heading}
       </h2>
 
       <div
         class="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed"
       >
         <h3>
-          In vier klaren Schritten sorgen wir dafür, dass eine Messie-Wohnung
-          wieder lebenswert wird. Diskret, respektvoll und ohne versteckte
-          Kosten.
+          {subtitle}
         </h3>
       </div>
     </div>
@@ -80,9 +100,7 @@ const steps = [
       }
     </div>
 
-    <SectionCTA
-      topText="Möchten Sie wissen, wie das in Ihrem Fall ablaufen würde?"
-    />
+    {showCTA && <SectionCTA topText={ctaText} />}
   </div>
 
   <style>

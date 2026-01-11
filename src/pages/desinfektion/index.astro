@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@/layouts/base-layout.astro';
+import Hero from '@/components/sections/hero.astro';
+import { FinalCTA } from '@/components/sections';
+import AnonymFormOverlay from '@/components/anonym-form-overlay.astro';
+import FloatingActionIcons from '@/components/floating-action-icons.astro';
+import { SITE_URL } from '@/config/site';
+
+const title = 'Desinfektion | Messie-Hilfe';
+const description = 'Professionelle Desinfektion – gründlich, sicher und zuverlässig.';
+const canonicalUrl = `${SITE_URL}/desinfektion/`;
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <main>
+    <Hero />
+    <FinalCTA />
+  </main>
+
+  <AnonymFormOverlay />
+  <FloatingActionIcons />
+</BaseLayout>
