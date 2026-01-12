@@ -29,6 +29,9 @@ const {
 const currentPath = Astro.url.pathname;
 const hostname = Astro.url.hostname;
 
+const isHomepage = currentPath === '/';
+const fullTitle = isHomepage ? title : `${title} | Messie-Hilfe`;
+
 const finalCanonicalUrl = canonicalUrl || `${SITE_URL}${currentPath === '/' ? '' : currentPath}`;
 
 const excludeTracking = shouldExcludeTracking(currentPath);
@@ -45,7 +48,7 @@ const visualBreadcrumbs = generateVisualBreadcrumbs(currentPath, title);
     <meta name="generator" content={Astro.generator}>
 
     <SEO
-      title={title}
+      title={fullTitle}
       description={description}
       image={image}
       canonicalUrl={finalCanonicalUrl}

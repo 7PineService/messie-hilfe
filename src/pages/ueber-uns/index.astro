@@ -8,43 +8,73 @@ import whyImage1 from '@/assets/images/section-why-1.png';
 import whyImage2 from '@/assets/images/section-why-2.png';
 import whyImage3 from '@/assets/images/section-why-3.png';
 import whyImage4 from '@/assets/images/section-why-4.png';
+import stepsImage1 from '@/assets/images/section-steps-1.png';
+import stepsImage2 from '@/assets/images/section-steps-2.png';
+import stepsImage3 from '@/assets/images/section-steps-3.png';
+import stepsImage4 from '@/assets/images/section-steps-4.png';
 
-const title = 'Über uns | Messie-Hilfe';
+const title = 'Über uns';
 const description = 'Diskret, respektvoll und strukturiert – erfahren Sie mehr über unsere Werte, unsere Arbeitsweise und unsere Erfahrung in der Messie-Hilfe.';
 const canonicalUrl = `${SITE_URL}/ueber-uns/`;
 
 const haltungItems = [
   {
-    title: '20+ Jahre Erfahrung',
+    title: 'Keine Bewertung',
     description: [
-      'Tausende Einsätze, auch in schwierigen Fällen',
-      'Langjährige Erfahrung mit sensiblen Situationen',
+      'Wir begegnen jeder Situation ohne Vorurteile.',
+      'Was Sie erlebt haben, bleibt Ihre Geschichte - wir kümmern uns um den nächsten Schritt.',
     ],
     image: whyImage1
   },
   {
     title: 'Absolute Diskretion',
     description: [
-      'Neutrale Fahrzeuge ohne Kennzeichnung',
-      'Keine Weitergabe von Daten oder Informationen',
+      'Keine Fotos ohne Zustimmung.',
+      'Keine Weitergabe von Informationen.',
+      'Ihr Anliegen bleibt vertraulich.',
     ],
     image: whyImage2
   },
   {
-    title: 'Fair & Transparent',
+    title: 'Klare Struktur',
     description: [
-      'Festpreis ohne Nachforderungen',
-      'Schriftliches Angebot im Voraus',
+      'Feste Schritte, klare Absprachen und transparente Abläufe - damit Sie jederzeit wissen, was passiert.',
     ],
     image: whyImage3
   },
   {
-    title: 'Respektvoller Umgang',
+    title: 'Respektvoll & ruhig',
     description: [
-      'Keine Bewertung oder Druck',
-      'Empathie, Verständnis und Ruhe',
+      'Unsere Teams arbeiten ruhig, professionell und mit dem nötigen Feingefühl - auch in schwierigen Situationen.',
     ],
     image: whyImage4
+  }
+];
+
+const stepsItems = [
+  {
+    title: 'Erstkontakt',
+    description: 'Sie entscheiden, wie anonym Sie bleiben möchten.',
+    subDescription: '',
+    image: stepsImage1
+  },
+  {
+    title: 'Besichtigung & Einschätzung',
+    description: 'Kostenlos, unverbindlich und diskret.',
+    subDescription: '',
+    image: stepsImage2
+  },
+  {
+    title: 'Festpreis Angebot',
+    description: 'Ein klar kalkuliertes Festpreis-Angebot - transparent und ohne Überraschungen.',
+    subDescription: '',
+    image: stepsImage3
+  },
+  {
+    title: 'Durchführung',
+    description: 'Ruhig, respektvoll und strukturiert - mit festen Ansprechpartnern.',
+    subDescription: '',
+    image: stepsImage4
   }
 ];
 ---
@@ -61,6 +91,7 @@ const haltungItems = [
     <Steps
       heading="So arbeiten wir bei Messie-Hilfe"
       showCTA={false}
+      steps={stepsItems}
     />
     <Experience />
     <FinalCTA />
