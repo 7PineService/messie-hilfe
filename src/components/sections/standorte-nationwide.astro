@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import heroStandorte from '@/assets/images/hero-standorte.png';
+---
+
+<section class="section-bg py-8 md:py-10 lg:py-12">
+  <div class="container mx-auto px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <!-- Map illustration (reused from hero) -->
+      <div class="flex justify-center mb-4 md:mb-5 lg:mb-6">
+        <Image
+          src={heroStandorte}
+          alt="Deutschlandweite Abdeckung"
+          class="w-32 h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 opacity-80"
+        />
+      </div>
+
+      <!-- Section heading -->
+      <h2 class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold text-primary leading-tight mb-4 md:mb-6">
+        Auch außerhalb dieser Städte für Sie da
+      </h2>
+
+      <!-- Main text -->
+      <p class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl text-primary opacity-80 leading-relaxed mb-6 md:mb-8">
+        Wir unterstützen Menschen in ganz Deutschland.<br />
+        Auch wenn Ihr Wohnort hier nicht aufgeführt ist, prüfen wir Ihr Anliegen individuell und helfen Ihnen nach Möglichkeit weiter.
+      </p>
+
+      <!-- USPs inline -->
+      <div class="text-sm md:text-base lg:text-lg xl:text-xl text-primary font-medium">
+        Diskret • individuell • unverbindlich
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-bg {
+    background:
+      url('/images/background.webp') center / cover no-repeat,
+      var(--color-surface-primary);
+  }
+</style>

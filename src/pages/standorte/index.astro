@@ -1,15 +1,32 @@
 ---
 import BaseLayout from '@/layouts/base-layout.astro';
-import { FinalCTA } from '@/components/sections';
+import StandorteHero from '@/components/sections/standorte-hero.astro';
+import StandorteIntro from '@/components/sections/standorte-intro.astro';
+import StandorteFocus from '@/components/sections/standorte-focus.astro';
+import StandorteNationwide from '@/components/sections/standorte-nationwide.astro';
+import FinalCta from '@/components/sections/final-cta.astro';
 import { SITE_URL } from '@/config/site';
 
-const title = 'Standorte';
-const description = 'Unsere Standorte in Ihrer Nähe. Wir sind deutschlandweit für Sie da.';
+const title = 'Unsere Einsatzgebiete – bundesweit für Sie da';
+const description = 'Wir sind bundesweit tätig. In ausgewählten Städten regelmäßig im Einsatz – in anderen Regionen nach individueller Anfrage.';
 const canonicalUrl = `${SITE_URL}/standorte/`;
 ---
 
 <BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
   <main>
-    <FinalCTA />
+    <!-- Hero Section -->
+    <StandorteHero />
+
+    <!-- Intro Text Section -->
+    <StandorteIntro />
+
+    <!-- Focus Locations Section -->
+    <StandorteFocus />
+
+    <!-- Nationwide Coverage Section -->
+    <StandorteNationwide />
+
+    <!-- Final CTA Section -->
+    <FinalCta />
   </main>
 </BaseLayout>

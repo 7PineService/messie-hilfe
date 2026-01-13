@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets';
+import berlinImg from '@/assets/images/section-standorte-berlin.png';
+import muenchenImg from '@/assets/images/section-standorte-muenchen.png';
+import hamburgImg from '@/assets/images/section-standorte-hamburg.png';
+import koelnImg from '@/assets/images/section-standorte-koeln.png';
+import frankfurtImg from '@/assets/images/section-standorte-frankfurt.png';
+import duesseldorfImg from '@/assets/images/section-standorte-duesseldorf.png';
+import essenImg from '@/assets/images/section-standorte-essen.png';
+
+const cities = [
+  { name: 'Berlin', image: berlinImg },
+  { name: 'München', image: muenchenImg },
+  { name: 'Hamburg', image: hamburgImg },
+  { name: 'Köln', image: koelnImg },
+  { name: 'Frankfurt', image: frankfurtImg },
+  { name: 'Düsseldorf', image: duesseldorfImg },
+  { name: 'Essen', image: essenImg },
+];
+---
+
+<section class="section-bg py-8 md:py-10 lg:py-12">
+  <div class="container mx-auto px-4">
+    <!-- Section heading -->
+    <div class="max-w-3xl mx-auto text-center mb-8 md:mb-10 lg:mb-12">
+      <h2 class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold text-primary leading-tight mb-4">
+        Unsere Schwerpunkte
+      </h2>
+      <p class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl text-primary opacity-80 leading-relaxed">
+        An den folgenden Standorten sind wir regelmäßig im Einsatz.
+      </p>
+    </div>
+
+    <!-- 3-column grid -->
+    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-5xl mx-auto">
+      {cities.map((city) => (
+        <div class="city-card rounded-xl p-6 text-center transition-all duration-300">
+          <div class="flex justify-center mb-4">
+            <Image
+              src={city.image}
+              alt={city.name}
+              class="w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32"
+            />
+          </div>
+          <h3 class="text-base md:text-lg lg:text-xl xl:text-2xl font-semibold text-primary">
+            {city.name}
+          </h3>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-bg {
+    background:
+      url('/images/background.webp') center / cover no-repeat,
+      var(--color-surface-primary);
+  }
+
+  .city-card {
+    border: 1px solid rgba(212, 186, 165, 0.3);
+  }
+
+  .city-card:hover {
+    background: var(--color-surface-warm-peach);
+    border-color: rgba(212, 186, 165, 0.5);
+    transform: translateY(-2px);
+  }
+</style>
