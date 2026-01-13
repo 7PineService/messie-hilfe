@@ -30,10 +30,10 @@ import { Play, Chevron } from '@/components/icons';
 				<div class="hidden lg:flex items-center gap-8 text-base">
 					<a href="/">Startseite</a>
 					<div class="relative group/dropdown">
-						<a href="/leistungen/" class="flex items-center gap-2">
+						<button type="button" class="flex items-center gap-2 cursor-pointer bg-transparent border-none text-current">
 							Leistungen
 							<Chevron size="xs" aria-hidden={true} />
-						</a>
+						</button>
 						<div class="absolute top-full left-0 pt-2 hidden group-hover/dropdown:block group-focus-within/dropdown:block">
 							<div class="w-56 text-base bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
 								<a href="/messie-reinigung/" class="block px-6 py-3 hover:bg-surface-muted">Messie-Reinigung</a>
