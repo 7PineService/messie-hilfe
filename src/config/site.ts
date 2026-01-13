@@ -29,10 +29,10 @@ if (envValidation.warnings.length > 0 && import.meta.env.DEV) {
 export const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://messie-hilfe.de';
 
 // Contact Information
-export const CONTACT_PHONE = import.meta.env.PUBLIC_CONTACT_PHONE || '+498001234567890';
-export const CONTACT_PHONE_DISPLAY = import.meta.env.PUBLIC_CONTACT_PHONE_DISPLAY || '0800-1234-5678-90';
-export const CONTACT_EMAIL = import.meta.env.PUBLIC_CONTACT_EMAIL || 'info@messie-hilfe.de';
-export const CONTACT_WHATSAPP = import.meta.env.PUBLIC_CONTACT_WHATSAPP || '498001234567890';
+export const CONTACT_PHONE = import.meta.env.PUBLIC_CONTACT_PHONE || '+4989120891335';
+export const CONTACT_PHONE_DISPLAY = import.meta.env.PUBLIC_CONTACT_PHONE_DISPLAY || '089 120 891 335';
+export const CONTACT_EMAIL = import.meta.env.PUBLIC_CONTACT_EMAIL || 'kontakt@messie-hilfe.de';
+export const CONTACT_WHATSAPP = import.meta.env.PUBLIC_CONTACT_WHATSAPP || '4989120891335';
 
 // Social Media
 export const TWITTER_HANDLE = import.meta.env.PUBLIC_TWITTER_HANDLE || '@messiehilfe';

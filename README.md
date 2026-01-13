@@ -79,10 +79,10 @@ PUBLIC_SITE_URL=https://messie-hilfe.de
 PUBLIC_SITE_NAME=Messie-Hilfe
 
 # Contact Information
-PUBLIC_CONTACT_PHONE=+498001234567890
-PUBLIC_CONTACT_PHONE_DISPLAY=0800-1234-5678-90
-PUBLIC_CONTACT_EMAIL=info@messie-hilfe.de
-PUBLIC_CONTACT_WHATSAPP=498001234567890
+PUBLIC_CONTACT_PHONE=+4989120891335
+PUBLIC_CONTACT_PHONE_DISPLAY=089 120 891 335
+PUBLIC_CONTACT_EMAIL=kontakt@messie-hilfe.de
+PUBLIC_CONTACT_WHATSAPP=4989120891335
 
 # Form Submission Endpoint (optional - leave empty if not using backend API)
 PUBLIC_CONTACT_API_ENDPOINT=
@@ -339,4 +339,4 @@ All rights reserved.
 
 ## 👤 Support
 
-For questions or issues, contact: info@messie-hilfe.de
+For questions or issues, contact: kontakt@messie-hilfe.de
