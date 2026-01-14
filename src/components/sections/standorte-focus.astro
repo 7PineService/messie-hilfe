@@ -32,19 +32,21 @@ const cities = [
     </div>
 
     <!-- 3-column grid -->
-    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-5xl mx-auto">
+    <div class="cities-grid">
       {cities.map((city) => (
-        <div class="city-card rounded-xl p-6 text-center transition-all duration-300">
-          <div class="flex justify-center mb-4">
-            <Image
-              src={city.image}
-              alt={city.name}
-              class="w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32"
-            />
+        <div class="city-card">
+          <div class="city-card-inner">
+            <div class="flex justify-center mb-3">
+              <Image
+                src={city.image}
+                alt={city.name}
+                class="city-icon"
+              />
+            </div>
+            <h3 class="city-name">
+              {city.name}
+            </h3>
           </div>
-          <h3 class="text-base md:text-lg lg:text-xl xl:text-2xl font-semibold text-primary">
-            {city.name}
-          </h3>
         </div>
       ))}
     </div>
@@ -58,13 +60,103 @@ const cities = [
       var(--color-surface-primary);
   }
 
-  .city-card {
-    border: 1px solid rgba(212, 186, 165, 0.3);
+  .cities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 56rem;
+    margin: 0 auto;
+    justify-items: center;
   }
 
-  .city-card:hover {
+  @media (min-width: 768px) {
+    .cities-grid {
+      gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cities-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    /* Center the last item (7th) when it's alone in the row */
+    .city-card:nth-child(7) {
+      grid-column: 2 / 3;
+    }
+  }
+
+  .city-card {
+    width: 100%;
+    max-width: 18.75rem;
+  }
+
+  .city-card-inner {
+    background: transparent;
+    border: 1px solid rgba(212, 186, 165, 0.2);
+    border-radius: 0.75rem;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+    min-height: 13rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .city-card-inner {
+      min-height: 14rem;
+      max-height: 14rem;
+      padding: 1.5rem 1.25rem;
+    }
+  }
+
+  .city-card-inner:hover {
     background: var(--color-surface-warm-peach);
-    border-color: rgba(212, 186, 165, 0.5);
+    border-color: rgba(212, 186, 165, 0.4);
     transform: translateY(-2px);
+  }
+
+  .city-icon {
+    width: 5rem;
+    height: 5rem;
+    object-fit: contain;
+  }
+
+  @media (min-width: 768px) {
+    .city-icon {
+      width: 5.5rem;
+      height: 5.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .city-icon {
+      width: 6rem;
+      height: 6rem;
+    }
+  }
+
+  .city-name {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+  }
+
+  @media (min-width: 768px) {
+    .city-name {
+      font-size: 1rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .city-name {
+      font-size: 1.0625rem;
+    }
   }
 </style>
