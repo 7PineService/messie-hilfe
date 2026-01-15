@@ -39,25 +39,6 @@ export function validateEnvVariables(isProduction: boolean = false): ValidationR
 			}
 		},
 		{
-			name: 'PUBLIC_CONTACT_EMAIL',
-			value: import.meta.env.PUBLIC_CONTACT_EMAIL,
-			validate: (val: string | undefined) => {
-				if (!val) return 'PUBLIC_CONTACT_EMAIL is required';
-				if (!val.includes('@')) {
-					return 'PUBLIC_CONTACT_EMAIL must be a valid email address';
-				}
-				return null;
-			}
-		},
-		{
-			name: 'PUBLIC_CONTACT_PHONE',
-			value: import.meta.env.PUBLIC_CONTACT_PHONE,
-			validate: (val: string | undefined) => {
-				if (!val) return 'PUBLIC_CONTACT_PHONE is required';
-				return null;
-			}
-		},
-		{
 			name: 'PUBLIC_GTM_CONTAINER_ID',
 			value: import.meta.env.PUBLIC_GTM_CONTAINER_ID,
 			validate: (val: string | undefined) => {
