@@ -5,6 +5,21 @@ interface BreadcrumbItem {
   url: string;
 }
 
+const breadcrumbLabels: Record<string, string> = {
+  '/agb/': 'AGB',
+  '/impressum/': 'Impressum',
+  '/standorte/': 'Standorte',
+  '/ueber-uns/': 'Über uns',
+  '/kontakt/': 'Kontakt',
+  '/datenschutz/': 'Datenschutz',
+  '/entruempelung/': 'Entrümpelung',
+  '/messie-reinigung/': 'Messie-Reinigung',
+  '/entsorgung/': 'Entsorgung',
+  '/desinfektion/': 'Desinfektion',
+  '/renovierung/': 'Renovierung',
+  '/malerarbeiten/': 'Malerarbeiten',
+};
+
 export function generateVisualBreadcrumbs(currentPath: string, title: string): BreadcrumbItem[] {
   const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -20,19 +35,22 @@ export function generateVisualBreadcrumbs(currentPath: string, title: string): B
   const pathSegments = currentPath.split('/').filter(Boolean);
 
   if (pathSegments.length === 1) {
+    const normalizedPath = currentPath.endsWith('/') ? currentPath : currentPath + '/';
     breadcrumbs.push({
-      name: title,
+      name: breadcrumbLabels[normalizedPath] || title,
       url: currentPath
     });
   } else if (pathSegments.length > 1) {
     let accumulatedPath = '';
     pathSegments.forEach((segment, index) => {
       accumulatedPath += `/${segment}`;
+      const pathWithSlash = accumulatedPath + '/';
       const isLast = index === pathSegments.length - 1;
+      const label = breadcrumbLabels[pathWithSlash] || (isLast ? title : segment.charAt(0).toUpperCase() + segment.slice(1));
 
       breadcrumbs.push({
-        name: isLast ? title : segment.charAt(0).toUpperCase() + segment.slice(1),
-        url: accumulatedPath + '/'
+        name: label,
+        url: pathWithSlash
       });
     });
   }
