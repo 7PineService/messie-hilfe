@@ -1,5 +1,29 @@
 ---
 import { Checkmark } from '@/components/icons'
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import defaultImage from '@/assets/images/section-start.webp'
+
+interface Props {
+  heading?: string;
+  subtitle?: string;
+  bulletPoints?: string[];
+  closingText?: string;
+  image?: ImageMetadata;
+}
+
+const {
+  heading = 'So helfen wir bei Messie-Wohnungen',
+  subtitle = 'Eine Messie-Wohnung ist keine Einzelsituation - wir verstehen die Herausforderungen und helfen Ihnen diskret und respektvoll aus einer Hand: von der Entrümpelung bis zur Reinigung und Wiederherstellung der Wohnung.',
+  bulletPoints = [
+    '<strong>Diskrete Hilfe</strong> ohne <strong>Vorurteile</strong>',
+    '<strong>Entrümpelung & Reinigung</strong> aus einer Hand',
+    '<strong>Fester Ablauf</strong>, transparenter <strong>Festpreis</strong>',
+    '<strong>Individuell</strong> - vom Einzelraum bis zur gesamten Wohnung'
+  ],
+  closingText = 'Wir arbeiten zuverlässig, diskret und passen den Ablauf individuell an Ihre Situation an - ohne Bewertung und ohne versteckte Kosten.',
+  image = defaultImage
+} = Astro.props;
 ---
 
 <section
@@ -13,93 +37,51 @@ import { Checkmark } from '@/components/icons'
       <h2
         class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight"
       >
-        So helfen wir bei Messie-Wohnungen
+        {heading}
       </h2>
 
       <div
         class="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed"
       >
         <h3>
-          Eine Messie-Wohnung ist keine Einzelsituation - wir verstehen die
-          Herausforderungen und helfen Ihnen diskret und respektvoll aus einer
-          Hand: von der Entrümpelung bis zur Reinigung und Wiederherstellung der
-          Wohnung.
+          {subtitle}
         </h3>
       </div>
     </div>
 
-    <div class="grid md:grid-cols-8 items-center mt-8 md:mt-16 overflow-hidden">
-      <div
-        class="section-image relative h-full min-h-[38vh] md:col-span-3 md:col-start-2"
-      >
+    <div class="grid md:grid-cols-2 items-center gap-8 mt-4 md:mt-8">
+      <div class="flex items-center justify-center">
+        <Image
+          src={image}
+          alt={heading}
+          class="w-full h-auto max-w-md md:max-w-none object-contain"
+          widths={[400, 600, 800]}
+          sizes="(max-width: 768px) 400px, 50vw"
+        />
       </div>
 
-      <div class="relative md:col-span-4 md:col-start-5 space-y-3 md:space-y-6 px-4 md:px-0 mt-6 md:mt-0">
-        <div
-          class="flex space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-4 min-[1920px]:space-x-5"
-        >
-          <span class="check-wrapper shrink-0">
-            <Checkmark
-              class="check-icon"
-              aria-hidden={true}
-            />
-          </span>
-          <span
-            class="font-medium text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl"
-            ><strong>Diskrete Hilfe</strong> ohne <strong>Vorurteile</strong
-            ></span
+      <div class="space-y-3 md:space-y-6 px-4 md:px-0 mt-6 md:mt-0">
+        {bulletPoints.map((point) => (
+          <div
+            class="flex space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-4 min-[1920px]:space-x-5"
           >
-        </div>
-        <div
-          class="flex space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-4 min-[1920px]:space-x-5"
-        >
-          <span class="check-wrapper shrink-0">
-            <Checkmark
-              class="check-icon"
-              aria-hidden={true}
+            <span class="check-wrapper shrink-0">
+              <Checkmark
+                class="check-icon"
+                aria-hidden={true}
+              />
+            </span>
+            <span
+              class="font-medium text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl"
+              set:html={point}
             />
-          </span>
-          <span
-            class="font-medium text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl"
-            ><strong>Entrümpelung & Reinigung</strong> aus einer Hand</span
-          >
-        </div>
-        <div
-          class="flex space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-4 min-[1920px]:space-x-5"
-        >
-          <span class="check-wrapper shrink-0">
-            <Checkmark
-              class="check-icon"
-              aria-hidden={true}
-            />
-          </span>
-          <span
-            class="font-medium text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl"
-            ><strong>Fester Ablauf</strong>, transparenter <strong
-              >Festpreis</strong
-            ></span
-          >
-        </div>
-        <div
-          class="flex space-x-2 md:space-x-3 lg:space-x-3 xl:space-x-4 min-[1920px]:space-x-5"
-        >
-          <span class="check-wrapper shrink-0">
-            <Checkmark
-              class="check-icon"
-              aria-hidden={true}
-            />
-          </span>
-          <span
-            class="font-medium text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl"
-            ><strong>Individuell</strong> - vom Einzelraum bis zur gesamten Wohnung</span
-          >
-        </div>
+          </div>
+        ))}
         <div
           class="md:max-w-[76%] mt-6 md:mt-0 lg:pt-4 text-sm lg:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed"
         >
           <p class="">
-            Wir arbeiten zuverlässig, diskret und passen den Ablauf individuell
-            an Ihre Situation an - ohne Bewertung und ohne versteckte Kosten.
+            {closingText}
           </p>
         </div>
       </div>
@@ -154,25 +136,11 @@ import { Checkmark } from '@/components/icons'
     }
   }
 
-  .section-image::after {
-    content: '';
-    inset: -8rem;
-    bottom: -16%;
-    position: absolute;
-    background: url('/images/section-start.webp') center / contain no-repeat;
-  }
-
   @media (max-width: 1023px) {
     .section-bg {
       background:
         url('/images/background.webp') left / cover no-repeat,
         var(--color-surface-primary);
-    }
-
-    .section-image::after {
-      inset: -3rem;
-      right: -1rem;
-      top: -50%;
     }
   }
 
@@ -185,13 +153,6 @@ import { Checkmark } from '@/components/icons'
   @media (max-width: 1023px), (orientation: portrait) {
     #start-section {
       min-height: auto;
-    }
-  }
-
-  @media (max-width: 768px) and (orientation: portrait) {
-    .section-image::after {
-      inset: -3rem;
-      top: -50%;
     }
   }
 

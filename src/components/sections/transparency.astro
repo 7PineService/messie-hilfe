@@ -1,0 +1,106 @@
+---
+import { Checkmark } from '@/components/icons'
+import { SectionCTA } from '@/components/common'
+
+interface Props {
+  heading?: string;
+  subtitle?: string;
+  bulletPoints?: string[];
+  rightText?: string;
+  ctaText?: string;
+  showCTA?: boolean;
+}
+
+const {
+  heading = 'Kosten & Transparenz – fair, nachvollziehbar und ohne Überraschungen',
+  subtitle = 'Die Kosten einer Messie-Reinigung lassen sich nicht pauschal festlegen. Jede Situation ist unterschiedlich – und genau das berücksichtigen wir. Deshalb setzen wir auf eine ehrliche Einschätzung und transparente Angebote.',
+  bulletPoints = [
+    'Der Preis richtet sich nach dem tatsächlichen Aufwand',
+    'Besichtigung / Einschätzung für realistisches Angebot notwendig',
+    'Klares Festpreis-Angebot vor Beginn der Arbeiten',
+    'Angebot unverbindlich – Sie entscheiden in Ruhe'
+  ],
+  rightText = 'Uns ist wichtig, dass Sie von Anfang an wissen, womit Sie rechnen können. Transparenz, Fairness und klare Absprachen stehen bei uns an erster Stelle – ohne versteckte Kosten oder nachträgliche Überraschungen.',
+  ctaText = 'Kosten realistisch einschätzen lassen',
+  showCTA = true
+} = Astro.props;
+---
+
+<section
+  id="transparency-section"
+  class="section-bg flex items-center py-8 md:py-10 lg:py-12"
+>
+  <div class="container relative mx-auto px-4 w-full">
+    <div class="max-w-[90%] mx-auto text-center relative z-10">
+      <h2
+        class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight"
+      >
+        {heading}
+      </h2>
+
+      <div
+        class="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed"
+      >
+        <h3>{subtitle}</h3>
+      </div>
+    </div>
+
+    <div class="bg-surface-light-peach rounded-2xl p-6 md:p-8 mt-8 lg:mt-12 shadow-sm">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0 items-center">
+        <!-- Left Column - Bullets -->
+        <div class="lg:pr-8 lg:border-r lg:border-black/5 space-y-4 md:space-y-5">
+          {bulletPoints.map((point) => (
+            <div class="flex space-x-3 md:space-x-4">
+              <span class="check-wrapper shrink-0">
+                <Checkmark class="check-icon" aria-hidden={true} />
+              </span>
+              <span class="text-sm md:text-base lg:text-lg font-medium">{point}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Right Column - Text -->
+        <div class="lg:pl-8 text-sm md:text-base lg:text-lg opacity-80 leading-relaxed">
+          <p>{rightText}</p>
+        </div>
+      </div>
+    </div>
+
+    {showCTA && <SectionCTA topText={ctaText} />}
+  </div>
+
+  <style>
+    .section-bg {
+      background:
+        url('/images/background.webp') left 80% / cover no-repeat,
+        var(--color-surface-primary);
+      position: relative;
+    }
+
+    .check-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 50%;
+      background-color: var(--color-surface-warm-peach);
+      color: var(--color-accent-bronze);
+    }
+
+    @media (min-width: 768px) {
+      .check-wrapper {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      .section-bg {
+        background:
+          url('/images/background.webp') left / cover no-repeat,
+          var(--color-surface-primary);
+      }
+    }
+  </style>
+</section>

@@ -1,0 +1,199 @@
+---
+import { Checkmark, Close } from '@/components/icons'
+import { SectionCTA } from '@/components/common'
+
+interface Props {
+  heading?: string;
+  subtitle?: string;
+  includedTitle?: string;
+  includedItems?: string[];
+  includedFooter?: string;
+  notIncludedTitle?: string;
+  notIncludedTitleSuffix?: string;
+  notIncludedItems?: string[];
+  notIncludedFooter?: string;
+  ctaText?: string;
+  showCTA?: boolean;
+}
+
+const {
+  heading = 'Was ist bei einer Messie-Reinigung enthalten – und was nicht',
+  subtitle = 'Transparenz von Anfang an – damit es später keine <strong>Missverständnisse</strong> gibt.',
+  includedTitle = 'In der Messie-Reinigung enthalten',
+  includedItems = [
+    '<strong>Fachgerechte Reinigung</strong> stark verschmutzter Räume',
+    '<strong>Entfernung</strong> von Schmutz, Rückständen und Gerüchen',
+    'Einsatz geeigneter <strong>Reinigungsmittel</strong> & Geräte',
+    '<strong>Diskrete</strong> Durchführung durch geschulte Teams',
+    '<strong>Fester</strong> Ablauf & transparenter Festpreis',
+    '<strong>Individuelle</strong> Anpassung an die jeweilige Situation'
+  ],
+  includedFooter = 'Gern klären wir vorab, welche Leistungen für Ihre Situation sinnvoll und notwendig sind.',
+  notIncludedTitle = 'Nicht enthalten',
+  notIncludedTitleSuffix = 'bzw. separat buchbar',
+  notIncludedItems = [
+    '<strong>Entrümpelung großer Mengen</strong> (separater Leistungsbereich)',
+    '<strong>Entsorgung von Sondermüll</strong> ohne vorherige Absprache',
+    '<strong>Renovierungs-</strong>oder <strong>Handwerksarbeiten</strong>',
+    '<strong>Schädlingsbekämpfung</strong> (nur in Kooperation / auf Anfrage)',
+    'Arbeiten außerhalb des vereinbarten Leistungsumfangs'
+  ],
+  notIncludedFooter = 'Leistungen außerhalb dieses Rahmens besprechen wir transparent vorab.',
+  ctaText = 'Klären Sie vorab, was in Ihrem Fall sinnvoll ist',
+  showCTA = true
+} = Astro.props;
+---
+
+<section
+  id="included-section"
+  class="section-bg flex items-center py-8 md:py-10 lg:py-12"
+>
+  <div class="container relative mx-auto px-4 w-full">
+    <div class="max-w-[90%] mx-auto text-center relative z-10">
+      <h2
+        class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight"
+      >
+        {heading}
+      </h2>
+
+      <div
+        class="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-80 leading-relaxed"
+      >
+        <h3 set:html={subtitle} />
+      </div>
+    </div>
+
+    <div class="bg-surface-light-peach rounded-2xl p-6 md:p-8 mt-8 lg:mt-12 shadow-sm">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0">
+        <!-- Included Column -->
+        <div class="lg:pr-8 lg:border-r lg:border-black/5">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="check-circle">
+              <Checkmark class="check-icon-large" aria-hidden={true} />
+            </span>
+            <h3 class="text-lg md:text-xl lg:text-2xl font-bold text-primary">
+              {includedTitle}
+            </h3>
+          </div>
+          <div class="space-y-4">
+            {includedItems.map((item) => (
+              <div class="flex items-start gap-3">
+                <Checkmark class="check-icon text-primary shrink-0 mt-1" aria-hidden={true} />
+                <span class="text-sm md:text-base" set:html={item} />
+              </div>
+            ))}
+          </div>
+          {includedFooter && (
+            <div class="mt-6 pt-6 border-t border-black/5">
+              <p class="text-sm md:text-base opacity-80">{includedFooter}</p>
+            </div>
+          )}
+        </div>
+
+        <!-- Not Included Column -->
+        <div class="lg:pl-8">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="cross-circle">
+              <Close class="cross-icon-large" aria-hidden={true} />
+            </span>
+            <h3 class="text-lg md:text-xl lg:text-2xl font-bold text-primary">
+              {notIncludedTitle} <span class="font-normal">{notIncludedTitleSuffix}</span>
+            </h3>
+          </div>
+          <div class="space-y-4">
+            {notIncludedItems.map((item) => (
+              <div class="flex items-start gap-3">
+                <Close class="cross-icon text-accent-red shrink-0 mt-1" aria-hidden={true} />
+                <span class="text-sm md:text-base opacity-80" set:html={item} />
+              </div>
+            ))}
+          </div>
+          {notIncludedFooter && (
+            <div class="mt-6 pt-6 border-t border-black/5">
+              <p class="text-sm md:text-base opacity-80">{notIncludedFooter}</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+
+    {showCTA && <SectionCTA topText={ctaText} />}
+  </div>
+
+  <style>
+    .section-bg {
+      background:
+        url('/images/background.webp') left 80% / cover no-repeat,
+        var(--color-surface-primary);
+      position: relative;
+    }
+
+    .check-circle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 50%;
+      background-color: var(--color-primary);
+      color: white;
+    }
+
+    .check-icon-large {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .check-icon {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .cross-circle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 50%;
+      background-color: #8b4a4a;
+      color: white;
+    }
+
+    .cross-icon-large {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+
+    .cross-icon {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+
+    @media (min-width: 768px) {
+      .check-circle,
+      .cross-circle {
+        width: 2rem;
+        height: 2rem;
+      }
+
+      .check-icon-large {
+        width: 1.125rem;
+        height: 1.125rem;
+      }
+
+      .cross-icon-large {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      .section-bg {
+        background:
+          url('/images/background.webp') left / cover no-repeat,
+          var(--color-surface-primary);
+      }
+    }
+  </style>
+</section>

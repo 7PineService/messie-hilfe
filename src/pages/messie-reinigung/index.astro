@@ -1,19 +1,141 @@
 ---
 import BaseLayout from '@/layouts/base-layout.astro';
 import Hero from '@/components/sections/hero.astro';
+import Start from '@/components/sections/start.astro';
+import Steps from '@/components/sections/steps.astro';
+import Included from '@/components/sections/included.astro';
+import Transparency from '@/components/sections/transparency.astro';
+import FAQ from '@/components/sections/faqs.astro';
 import { FinalCTA } from '@/components/sections';
 import AnonymFormOverlay from '@/components/anonym-form-overlay.astro';
 import FloatingActionIcons from '@/components/floating-action-icons.astro';
 import { SITE_URL } from '@/config/site';
+import startImage from '@/assets/images/section-start-messie-reinigung.png';
+import stepsImg1 from '@/assets/images/section-steps-1.png';
+import stepsImg2 from '@/assets/images/section-steps-2.png';
+import stepsImg3 from '@/assets/images/section-steps-3.png';
+import stepsImg4 from '@/assets/images/section-steps-4.png';
+import faqImg1 from '@/assets/images/section-faq-messie-reinigung-1.png';
+import faqImg2 from '@/assets/images/section-faq-messie-reinigung-2.png';
+import faqImg3 from '@/assets/images/section-faq-messie-reinigung-3.png';
+import faqImg4 from '@/assets/images/section-faq-messie-reinigung-4.png';
+import faqImg5 from '@/assets/images/section-faq-messie-reinigung-5.png';
+import faqImg6 from '@/assets/images/section-faq-messie-reinigung-6.png';
 
-const title = 'Messie-Reinigung';
-const description = 'Professionelle Messie-Reinigung – diskret, schnell und zuverlässig.';
+const title = 'Messie-Reinigung – diskret, gründlich & anonym';
+const description = 'Professionelle Messie-Reinigung – diskret, anonym und mit klaren Abläufen. Wir übernehmen die Reinigung von Messie-Wohnungen. Jetzt unverbindlich anfragen.';
 const canonicalUrl = `${SITE_URL}/messie-reinigung/`;
+
+const heroProps = {
+  title: 'Messie-Reinigung – diskret, gründlich & anonym',
+  description: [
+    'Eine Messie-Reinigung ist für Betroffene und Angehörige oft emotional belastend.',
+    'Wir übernehmen die professionelle Reinigung von Messie-Wohnungen – diskret, anonym und mit klaren Abläufen.'
+  ],
+  usps: [
+    'Diskret & anonym vor Ort',
+    'Sensibler Umgang mit der Situation',
+    'Kostenlose Vor-Ort-Besichtigung',
+    'Kurzfristig verfügbar'
+  ]
+};
+
+const startProps = {
+  heading: 'So unterstützen wir bei einer Messie-Reinigung',
+  subtitle: 'Eine Messie-Reinigung kann für Betroffene sowie für Angehörige eine große Belastung sein. Wir unterstützen Sie einfühlsam und professionell, um Räume Schritt für Schritt wieder bewohnbar zu machen.',
+  bulletPoints: [
+    '<strong>Diskret</strong> & ohne Vorurteile',
+    '<strong>Schritt für Schritt</strong> & respektvoll',
+    '<strong>Rücksichtsvoll</strong> & strukturiert',
+    'Ziel: wieder <strong>bewohnbare Räume</strong>'
+  ],
+  closingText: 'Eine Messie-Reinigung ist oft emotional belastend. Wir arbeiten mit Verständnis, Respekt und klarer Struktur – ohne Bewertung und ohne Druck.',
+  image: startImage
+};
+
+const stepsData = [
+  {
+    title: 'Anonym & unverbindlich anfragen',
+    description: 'Schildern Sie uns Ihre Situation telefonisch, per E-Mail oder über das Online-Formular.',
+    subDescription: 'Der erste Kontakt ist anonym, diskret und ohne Verpflichtung. Sie entscheiden in Ruhe, wie es weitergeht.',
+    image: stepsImg1,
+  },
+  {
+    title: 'Kostenlose Besichtigung vor Ort',
+    description: 'Wir kommen diskret und anonym vorbei, um die Situation realistisch einzuschätzen.',
+    subDescription: 'Die Besichtigung dient ausschließlich der Einschätzung des Aufwands – ruhig, respektvoll und ohne Druck oder Verpflichtung.',
+    image: stepsImg2,
+  },
+  {
+    title: 'Transparenter Gesamtpreis',
+    description: 'Sie erhalten ein verbindliches Festpreis-Angebot für die Messie-Reinigung.',
+    subDescription: 'Alle Leistungen sind enthalten – ohne versteckte Kosten oder Überraschungen.',
+    image: stepsImg3,
+  },
+  {
+    title: 'Diskrete Reinigung durch erfahrene Teams',
+    description: 'Zum vereinbarten Termin führen unsere geschulten Teams die Messie-Reinigung durch.',
+    subDescription: 'Diskret, strukturiert und respektvoll – mit dem Ziel, Räume wieder bewohnbar zu machen.',
+    image: stepsImg4,
+  },
+];
+
+const stepsProps = {
+  heading: 'So läuft eine Messie-Reinigung bei uns ab',
+  subtitle: 'In vier klaren Schritten unterstützen wir diskret, respektvoll und ohne versteckte Kosten.',
+  ctaText: 'Unverbindlich anfragen – wir erklären Ihnen den Ablauf',
+  steps: stepsData
+};
+
+const faqData = [
+  {
+    title: 'Ist eine Messie-Reinigung ohne Entrümpelung möglich?',
+    description: 'Ja. Eine Messie-Reinigung kann auch ohne vollständige Entrümpelung erfolgen. Wir reinigen stark verschmutzte Räume fachgerecht und stimmen den genauen Umfang vorab individuell mit Ihnen ab.',
+    image: faqImg1,
+  },
+  {
+    title: 'Muss ich während der Reinigung anwesend sein?',
+    description: 'Nein. Auf Wunsch führen wir die Messie-Reinigung vollständig selbstständig und diskret durch. Sie müssen nicht vor Ort sein und werden zuverlässig über den Ablauf informiert.',
+    image: faqImg2,
+  },
+  {
+    title: 'Wie diskret ist der Einsatz wirklich?',
+    description: 'Sehr diskret. Wir kommen ohne Werbung, arbeiten respektvoll und behandeln jede Anfrage vertraulich. Niemand erfährt, dass Sie unsere Hilfe in Anspruch nehmen.',
+    image: faqImg3,
+  },
+  {
+    title: 'Wie wird der Aufwand eingeschätzt?',
+    description: 'Der tatsächliche Aufwand wird im Rahmen einer Besichtigung oder einer detaillierten Vorabklärung realistisch eingeschätzt. So stellen wir sicher, dass das Angebot zu Ihrer Situation passt.',
+    image: faqImg4,
+  },
+  {
+    title: 'Gibt es feste Preise für eine Messie-Reinigung?',
+    description: 'Nein. Sie erhalten vorab ein transparentes Festpreis-Angebot auf Basis des tatsächlichen Aufwands – ohne versteckte Kosten oder nachträgliche Überraschungen.',
+    image: faqImg5,
+  },
+  {
+    title: 'Helfen Sie auch bei starken Gerüchen oder Verunreinigungen?',
+    description: 'Ja. Auch bei starker Geruchsbelastung oder extremen Verschmutzungen reinigen wir gründlich und setzen geeignete Reinigungs- und Geruchsneutralisationsverfahren ein.',
+    image: faqImg6,
+  },
+];
+
+const faqProps = {
+  heading: 'Häufige Fragen zur Messie-Reinigung',
+  subtitle: 'Diskret, transparent und ohne Bewertung – hier finden Sie Antworten auf die wichtigsten Fragen rund um eine professionelle Messie-Reinigung.',
+  faqItems: faqData,
+  ctaText: 'Ihre Frage ist noch offen?'
+};
 ---
 
 <BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
   <main>
-    <Hero />
+    <Hero {...heroProps} />
+    <Start {...startProps} />
+    <Steps {...stepsProps} />
+    <Included />
+    <Transparency />
+    <FAQ {...faqProps} />
     <FinalCTA />
   </main>
 
