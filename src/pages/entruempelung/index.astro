@@ -1,19 +1,179 @@
 ---
 import BaseLayout from '@/layouts/base-layout.astro';
 import Hero from '@/components/sections/hero.astro';
+import Start from '@/components/sections/start.astro';
+import Steps from '@/components/sections/steps.astro';
+import Included from '@/components/sections/included.astro';
+import Transparency from '@/components/sections/transparency.astro';
+import FAQ from '@/components/sections/faqs.astro';
 import { FinalCTA } from '@/components/sections';
 import AnonymFormOverlay from '@/components/anonym-form-overlay.astro';
 import FloatingActionIcons from '@/components/floating-action-icons.astro';
 import { SITE_URL } from '@/config/site';
+import stepsImg1 from '@/assets/images/section-steps-1.png';
+import stepsImg2 from '@/assets/images/section-steps-2.png';
+import stepsImg3 from '@/assets/images/section-steps-3.png';
+import stepsImg4 from '@/assets/images/section-steps-4.png';
+import faqImg1 from '@/assets/images/section-faq-1.png';
+import faqImg2 from '@/assets/images/section-faq-2.png';
+import faqImg3 from '@/assets/images/section-faq-3.png';
+import faqImg4 from '@/assets/images/section-faq-4.png';
+import faqImg5 from '@/assets/images/section-faq-5.png';
+import faqImg6 from '@/assets/images/section-faq-6.png';
+import startImg from '@/assets/images/section-start-messie-reinigung.png';
 
-const title = 'Entrümpelung';
-const description = 'Professionelle Entrümpelung – schnell, diskret und zuverlässig.';
+const title = 'Entrümpelung – schnell, diskret & zuverlässig';
+const description = 'Professionelle Entrümpelung – schnell, diskret und zuverlässig. Wir entrümpeln Wohnungen, Häuser, Keller und Gewerbeflächen. Jetzt unverbindlich anfragen.';
 const canonicalUrl = `${SITE_URL}/entruempelung/`;
+
+const heroProps = {
+  title: 'Entrümpelung – schnell, diskret & zuverlässig',
+  description: [
+    'Eine Entrümpelung schafft Platz, Ordnung und Klarheit – ob Wohnung, Haus, Keller oder Gewerbefläche.',
+    'Wir übernehmen die professionelle Entrümpelung zuverlässig, strukturiert und mit transparentem Festpreis.'
+  ],
+  usps: [
+    'Schnelle & zuverlässige Durchführung',
+    'Transparenter Festpreis',
+    'Diskret & professionell vor Ort',
+    'Kostenlose Vor-Ort-Besichtigung'
+  ]
+};
+
+const startProps = {
+  heading: 'So unterstützen wir bei einer Entrümpelung',
+  subtitle: 'Eine Entrümpelung ist oft mehr als nur „Aufräumen". Ob Haushaltsauflösung, Wohnungswechsel oder Platzmangel – wir sorgen für einen klaren, strukturierten Ablauf und übernehmen die Arbeit zuverlässig für Sie.',
+  bulletPoints: [
+    '<strong>Zuverlässig</strong> & termingerecht',
+    '<strong>Strukturiert</strong> & effizient',
+    '<strong>Rücksichtsvoll</strong> & professionell',
+    'Ziel: freie, <strong>nutzbare Räume</strong>'
+  ],
+  closingText: 'Wir passen den Ablauf individuell an Ihre Situation an – vom einzelnen Raum bis zur vollständigen Immobilie. Ohne unnötigen Aufwand, ohne Überraschungen.',
+  image: startImg
+};
+
+const stepsData = [
+  {
+    title: 'Unverbindlich anfragen',
+    description: 'Schildern Sie uns Ihr Anliegen telefonisch, per E-Mail oder über das Online-Formular.',
+    subDescription: 'Die Anfrage ist unverbindlich. Wir klären erste Fragen und besprechen das weitere Vorgehen in Ruhe.',
+    image: stepsImg1,
+  },
+  {
+    title: 'Kostenlose Besichtigung vor Ort',
+    description: 'Wir verschaffen uns vor Ort einen Überblick über Umfang, Aufwand und Besonderheiten.',
+    subDescription: 'Die Besichtigung dient ausschließlich der realistischen Einschätzung – ohne Verpflichtung.',
+    image: stepsImg2,
+  },
+  {
+    title: 'Transparenter Gesamtpreis',
+    description: 'Sie erhalten ein verbindliches Festpreis-Angebot für die Entrümpelung.',
+    subDescription: 'Alle vereinbarten Leistungen sind enthalten – klar, transparent und ohne versteckte Kosten.',
+    image: stepsImg3,
+  },
+  {
+    title: 'Fachgerechte Entrümpelung',
+    description: 'Zum vereinbarten Termin führen unsere Teams die Entrümpelung professionell durch.',
+    subDescription: 'Zügig, strukturiert und zuverlässig – mit dem Ziel, Räume vollständig freizugeben.',
+    image: stepsImg4,
+  },
+];
+
+const stepsProps = {
+  heading: 'So läuft eine Entrümpelung bei uns ab',
+  subtitle: 'In vier klaren Schritten sorgen wir für eine schnelle, saubere und planbare Entrümpelung.',
+  ctaText: 'Unverbindlich anfragen – wir erklären Ihnen den Ablauf',
+  steps: stepsData
+};
+
+const includedProps = {
+  heading: 'Was ist bei einer Entrümpelung enthalten – und was nicht',
+  subtitle: 'Klare Abgrenzung von Anfang an – damit es später keine <strong>Missverständnisse</strong> gibt.',
+  includedTitle: 'In der Entrümpelung enthalten',
+  includedItems: [
+    '<strong>Entrümpelung</strong> von Wohnungen, Häusern, Kellern & Garagen',
+    '<strong>Sortierung</strong> und Räumung vereinbarter Bereiche',
+    '<strong>Abtransport</strong> des Inhalts',
+    '<strong>Fachgerechte Entsorgung</strong> nach Absprache',
+    '<strong>Fester Ablauf</strong> & transparenter Festpreis',
+    '<strong>Individuelle</strong> Anpassung an den Umfang'
+  ],
+  includedFooter: 'Gern klären wir vorab, welche Leistungen in Ihrem Fall sinnvoll und notwendig sind.',
+  notIncludedTitle: 'Nicht enthalten',
+  notIncludedTitleSuffix: 'bzw. separat buchbar',
+  notIncludedItems: [
+    '<strong>Renovierungs-</strong> oder <strong>Handwerksarbeiten</strong>',
+    '<strong>Reinigungs-</strong> oder <strong>Desinfektionsleistungen</strong>',
+    '<strong>Entsorgung von Sondermüll</strong> ohne vorherige Absprache',
+    'Arbeiten außerhalb des vereinbarten Leistungsumfangs'
+  ],
+  notIncludedFooter: 'Leistungen außerhalb dieses Rahmens stimmen wir transparent mit Ihnen ab.',
+  ctaText: 'Klären Sie vorab, welche Leistungen für Sie sinnvoll sind'
+};
+
+const transparencyProps = {
+  heading: 'Kosten & Transparenz – fair, nachvollziehbar und planbar',
+  subtitle: 'Die Kosten einer Entrümpelung lassen sich nicht pauschal festlegen. Größe, Menge und Zugänglichkeit spielen eine entscheidende Rolle – deshalb setzen wir auf eine realistische Einschätzung und klare Angebote.',
+  bulletPoints: [
+    'Der Preis richtet sich nach dem tatsächlichen Aufwand',
+    'Kostenlose Besichtigung zur realistischen Einschätzung',
+    'Verbindliches Festpreis-Angebot vor Beginn',
+    'Angebot unverbindlich – Sie entscheiden in Ruhe'
+  ],
+  rightText: 'Uns ist wichtig, dass Sie von Anfang an wissen, womit Sie rechnen können. Transparenz, Fairness und klare Absprachen stehen bei uns an erster Stelle – ohne nachträgliche Überraschungen.',
+  ctaText: 'Kosten realistisch einschätzen lassen'
+};
+
+const faqData = [
+  {
+    title: 'Ist eine Teil-Entrümpelung möglich?',
+    description: 'Ja. Wir entrümpeln auch einzelne Räume, Keller oder Garagen – ganz nach Ihrem Bedarf.',
+    image: faqImg1,
+  },
+  {
+    title: 'Muss ich während der Entrümpelung anwesend sein?',
+    description: 'Nein. Auf Wunsch führen wir die Entrümpelung selbstständig durch und halten Sie auf dem Laufenden.',
+    image: faqImg2,
+  },
+  {
+    title: 'Wie schnell kann eine Entrümpelung durchgeführt werden?',
+    description: 'Je nach Umfang oft kurzfristig. Kleinere Entrümpelungen sind häufig innerhalb eines Tages erledigt.',
+    image: faqImg3,
+  },
+  {
+    title: 'Wie wird der Aufwand eingeschätzt?',
+    description: 'Im Rahmen einer kostenlosen Besichtigung oder detaillierten Vorabklärung.',
+    image: faqImg4,
+  },
+  {
+    title: 'Gibt es feste Preise für eine Entrümpelung?',
+    description: 'Sie erhalten vorab ein verbindliches Festpreis-Angebot – ohne versteckte Kosten.',
+    image: faqImg5,
+  },
+  {
+    title: 'Was passiert mit dem entrümpelten Inhalt?',
+    description: 'Abtransport und Entsorgung erfolgen gemäß der vorherigen Absprache.',
+    image: faqImg6,
+  },
+];
+
+const faqProps = {
+  heading: 'Häufige Fragen zur Entrümpelung',
+  subtitle: 'Hier finden Sie Antworten auf die wichtigsten Fragen rund um eine professionelle Entrümpelung.',
+  faqItems: faqData,
+  ctaText: 'Ihre Frage ist noch offen?'
+};
 ---
 
 <BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
   <main>
-    <Hero />
+    <Hero {...heroProps} />
+    <Start {...startProps} />
+    <Steps {...stepsProps} />
+    <Included {...includedProps} />
+    <Transparency {...transparencyProps} />
+    <FAQ {...faqProps} />
     <FinalCTA />
   </main>
 

@@ -1,19 +1,179 @@
 ---
 import BaseLayout from '@/layouts/base-layout.astro';
 import Hero from '@/components/sections/hero.astro';
+import Start from '@/components/sections/start.astro';
+import Steps from '@/components/sections/steps.astro';
+import Included from '@/components/sections/included.astro';
+import Transparency from '@/components/sections/transparency.astro';
+import FAQ from '@/components/sections/faqs.astro';
 import { FinalCTA } from '@/components/sections';
 import AnonymFormOverlay from '@/components/anonym-form-overlay.astro';
 import FloatingActionIcons from '@/components/floating-action-icons.astro';
 import { SITE_URL } from '@/config/site';
+import stepsImg1 from '@/assets/images/section-steps-1.png';
+import stepsImg2 from '@/assets/images/section-steps-2.png';
+import stepsImg3 from '@/assets/images/section-steps-3.png';
+import stepsImg4 from '@/assets/images/section-steps-4.png';
+import faqImg1 from '@/assets/images/section-faq-1.png';
+import faqImg2 from '@/assets/images/section-faq-2.png';
+import faqImg3 from '@/assets/images/section-faq-3.png';
+import faqImg4 from '@/assets/images/section-faq-4.png';
+import faqImg5 from '@/assets/images/section-faq-5.png';
+import faqImg6 from '@/assets/images/section-faq-6.png';
+import startImg from '@/assets/images/section-start-messie-reinigung.png';
 
-const title = 'Entsorgung';
-const description = 'Professionelle Entsorgung – fachgerecht, schnell und zuverlässig.';
+const title = 'Entsorgung – fachgerecht, zuverlässig & transparent';
+const description = 'Professionelle Entsorgung – fachgerecht, zuverlässig und transparent. Wir entsorgen verschiedenste Materialien für private und gewerbliche Kunden. Jetzt unverbindlich anfragen.';
 const canonicalUrl = `${SITE_URL}/entsorgung/`;
+
+const heroProps = {
+  title: 'Entsorgung – fachgerecht, zuverlässig & transparent',
+  description: [
+    'Eine fachgerechte Entsorgung sorgt für Ordnung, Sicherheit und Klarheit.',
+    'Wir übernehmen die Entsorgung verschiedenster Materialien zuverlässig, strukturiert und mit transparentem Festpreis – für private und gewerbliche Kunden.'
+  ],
+  usps: [
+    'Fachgerechte & gesetzeskonforme Entsorgung',
+    'Transparenter Festpreis',
+    'Zuverlässige Abwicklung',
+    'Kostenlose Vor-Ort-Besichtigung'
+  ]
+};
+
+const startProps = {
+  heading: 'So unterstützen wir bei einer Entsorgung',
+  subtitle: 'Eine Entsorgung ist oft mit Aufwand, Unsicherheit und gesetzlichen Vorgaben verbunden. Wir kümmern uns um eine strukturierte Abwicklung und sorgen dafür, dass Materialien fachgerecht und ordnungsgemäß entsorgt werden.',
+  bulletPoints: [
+    '<strong>Fachgerecht</strong> & gesetzeskonform',
+    '<strong>Strukturiert</strong> & zuverlässig',
+    '<strong>Transparent</strong> & nachvollziehbar',
+    'Ziel: sichere und <strong>saubere Entsorgung</strong>'
+  ],
+  closingText: 'Ob einzelne Gegenstände oder größere Mengen – wir stimmen den Ablauf individuell mit Ihnen ab und sorgen für eine reibungslose Umsetzung ohne unnötigen Aufwand.',
+  image: startImg
+};
+
+const stepsData = [
+  {
+    title: 'Unverbindlich anfragen',
+    description: 'Schildern Sie uns Ihr Anliegen telefonisch, per E-Mail oder über das Online-Formular.',
+    subDescription: 'Die Anfrage ist unverbindlich. Wir klären erste Fragen und besprechen das weitere Vorgehen in Ruhe.',
+    image: stepsImg1,
+  },
+  {
+    title: 'Kostenlose Besichtigung & Einschätzung',
+    description: 'Wir prüfen vor Ort Art, Menge und Beschaffenheit der zu entsorgenden Materialien.',
+    subDescription: 'Die Besichtigung dient der realistischen Einschätzung – transparent, nachvollziehbar und ohne Verpflichtung.',
+    image: stepsImg2,
+  },
+  {
+    title: 'Transparenter Gesamtpreis',
+    description: 'Sie erhalten ein verbindliches Festpreis-Angebot für die Entsorgung.',
+    subDescription: 'Alle vereinbarten Leistungen sind enthalten – ohne versteckte Kosten.',
+    image: stepsImg3,
+  },
+  {
+    title: 'Fachgerechte Entsorgung',
+    description: 'Zum vereinbarten Termin übernehmen unsere Teams die Entsorgung.',
+    subDescription: 'Zuverlässig, ordnungsgemäß und gemäß den geltenden Vorschriften.',
+    image: stepsImg4,
+  },
+];
+
+const stepsProps = {
+  heading: 'So läuft eine Entsorgung bei uns ab',
+  subtitle: 'In vier klaren Schritten sorgen wir für eine sichere, planbare und fachgerechte Entsorgung.',
+  ctaText: 'Unverbindlich anfragen – wir erklären Ihnen den Ablauf',
+  steps: stepsData
+};
+
+const includedProps = {
+  heading: 'Was ist bei einer Entsorgung enthalten – und was nicht',
+  subtitle: 'Klare Abgrenzung von Anfang an – für maximale <strong>Transparenz</strong>.',
+  includedTitle: 'In der Entsorgung enthalten',
+  includedItems: [
+    '<strong>Abholung</strong> vereinbarter Materialien',
+    '<strong>Fachgerechte Entsorgung</strong> nach gesetzlichen Vorgaben',
+    '<strong>Sortierung</strong> nach Materialart (nach Absprache)',
+    '<strong>Transport</strong> und Abwicklung',
+    '<strong>Fester Ablauf</strong> & transparenter Festpreis',
+    '<strong>Individuelle</strong> Anpassung an Menge und Art'
+  ],
+  includedFooter: 'Gern klären wir vorab, welche Entsorgungsleistungen in Ihrem Fall notwendig sind.',
+  notIncludedTitle: 'Nicht enthalten',
+  notIncludedTitleSuffix: 'bzw. separat buchbar',
+  notIncludedItems: [
+    '<strong>Entrümpelungs-</strong> oder <strong>Reinigungsarbeiten</strong>',
+    '<strong>Entsorgung von Sondermüll</strong> ohne vorherige Absprache',
+    '<strong>Demontage-</strong> oder <strong>Handwerksleistungen</strong>',
+    'Leistungen außerhalb des vereinbarten Umfangs'
+  ],
+  notIncludedFooter: 'Leistungen außerhalb dieses Rahmens stimmen wir transparent mit Ihnen ab.',
+  ctaText: 'Klären Sie vorab, welche Entsorgung sinnvoll ist'
+};
+
+const transparencyProps = {
+  heading: 'Kosten & Transparenz – fair, nachvollziehbar und planbar',
+  subtitle: 'Die Kosten einer Entsorgung hängen von Art, Menge und Aufwand ab. Deshalb setzen wir auf eine realistische Einschätzung und transparente Angebote statt pauschaler Preisangaben.',
+  bulletPoints: [
+    'Preis richtet sich nach Art und Umfang',
+    'Kostenlose Einschätzung vorab',
+    'Verbindliches Festpreis-Angebot',
+    'Angebot unverbindlich – Sie entscheiden in Ruhe'
+  ],
+  rightText: 'Uns ist wichtig, dass Sie von Anfang an wissen, womit Sie rechnen können. Klare Absprachen und transparente Preise stehen bei uns im Vordergrund – ohne nachträgliche Überraschungen.',
+  ctaText: 'Entsorgung realistisch einschätzen lassen'
+};
+
+const faqData = [
+  {
+    title: 'Welche Materialien können entsorgt werden?',
+    description: 'Das hängt vom Einzelfall ab. Wir entsorgen unterschiedliche Materialien und klären vorab, was möglich und sinnvoll ist.',
+    image: faqImg1,
+  },
+  {
+    title: 'Wie wird der Aufwand eingeschätzt?',
+    description: 'Im Rahmen einer kostenlosen Besichtigung oder detaillierten Vorabklärung.',
+    image: faqImg2,
+  },
+  {
+    title: 'Erfolgt die Entsorgung gesetzeskonform?',
+    description: 'Ja. Wir achten auf eine ordnungsgemäße und fachgerechte Entsorgung gemäß den geltenden Vorschriften.',
+    image: faqImg3,
+  },
+  {
+    title: 'Gibt es feste Preise für eine Entsorgung?',
+    description: 'Sie erhalten vorab ein verbindliches Festpreis-Angebot auf Basis des tatsächlichen Aufwands.',
+    image: faqImg4,
+  },
+  {
+    title: 'Muss ich während der Entsorgung anwesend sein?',
+    description: 'Nein. Auf Wunsch führen wir die Entsorgung selbstständig durch.',
+    image: faqImg5,
+  },
+  {
+    title: 'Was passiert mit den entsorgten Materialien?',
+    description: 'Die Materialien werden gemäß Art und Vorgaben fachgerecht weiterverarbeitet oder entsorgt.',
+    image: faqImg6,
+  },
+];
+
+const faqProps = {
+  heading: 'Häufige Fragen zur Entsorgung',
+  subtitle: 'Hier finden Sie Antworten auf häufige Fragen rund um eine fachgerechte Entsorgung.',
+  faqItems: faqData,
+  ctaText: 'Ihre Frage ist noch offen?'
+};
 ---
 
 <BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
   <main>
-    <Hero />
+    <Hero {...heroProps} />
+    <Start {...startProps} />
+    <Steps {...stepsProps} />
+    <Included {...includedProps} />
+    <Transparency {...transparencyProps} />
+    <FAQ {...faqProps} />
     <FinalCTA />
   </main>
 

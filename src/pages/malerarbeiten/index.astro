@@ -1,19 +1,179 @@
 ---
 import BaseLayout from '@/layouts/base-layout.astro';
 import Hero from '@/components/sections/hero.astro';
+import Start from '@/components/sections/start.astro';
+import Steps from '@/components/sections/steps.astro';
+import Included from '@/components/sections/included.astro';
+import Transparency from '@/components/sections/transparency.astro';
+import FAQ from '@/components/sections/faqs.astro';
 import { FinalCTA } from '@/components/sections';
 import AnonymFormOverlay from '@/components/anonym-form-overlay.astro';
 import FloatingActionIcons from '@/components/floating-action-icons.astro';
 import { SITE_URL } from '@/config/site';
+import stepsImg1 from '@/assets/images/section-steps-1.png';
+import stepsImg2 from '@/assets/images/section-steps-2.png';
+import stepsImg3 from '@/assets/images/section-steps-3.png';
+import stepsImg4 from '@/assets/images/section-steps-4.png';
+import faqImg1 from '@/assets/images/section-faq-1.png';
+import faqImg2 from '@/assets/images/section-faq-2.png';
+import faqImg3 from '@/assets/images/section-faq-3.png';
+import faqImg4 from '@/assets/images/section-faq-4.png';
+import faqImg5 from '@/assets/images/section-faq-5.png';
+import faqImg6 from '@/assets/images/section-faq-6.png';
+import startImg from '@/assets/images/section-start-messie-reinigung.png';
 
-const title = 'Malerarbeiten';
-const description = 'Professionelle Malerarbeiten – sauber, schnell und zuverlässig.';
+const title = 'Malerarbeiten – sauber, zuverlässig & fachgerecht';
+const description = 'Professionelle Malerarbeiten – sauber, zuverlässig und fachgerecht. Wir übernehmen Malerarbeiten für Wohnungen, Häuser und Gewerbeflächen. Jetzt unverbindlich anfragen.';
 const canonicalUrl = `${SITE_URL}/malerarbeiten/`;
+
+const heroProps = {
+  title: 'Malerarbeiten – sauber, zuverlässig & fachgerecht',
+  description: [
+    'Professionelle Malerarbeiten sorgen für ein gepflegtes Erscheinungsbild und frische Räume.',
+    'Wir übernehmen Malerarbeiten zuverlässig, strukturiert und mit transparentem Festpreis – für Wohnungen, Häuser und Gewerbeflächen.'
+  ],
+  usps: [
+    'Saubere & fachgerechte Ausführung',
+    'Transparenter Festpreis',
+    'Zuverlässige Terminabsprachen',
+    'Kostenlose Vor-Ort-Besichtigung'
+  ]
+};
+
+const startProps = {
+  heading: 'So unterstützen wir bei Malerarbeiten',
+  subtitle: 'Malerarbeiten sind oft der letzte Schritt, um Räume wieder nutzbar und gepflegt erscheinen zu lassen. Wir sorgen für eine saubere Ausführung, klare Abläufe und ein verlässliches Ergebnis.',
+  bulletPoints: [
+    '<strong>Fachgerecht</strong> & sauber',
+    '<strong>Strukturiert</strong> & zuverlässig',
+    '<strong>Rücksichtsvoll</strong> & ordentlich',
+    'Ziel: gepflegte, <strong>nutzbare Räume</strong>'
+  ],
+  closingText: 'Ob einzelne Räume oder komplette Einheiten – wir stimmen Umfang und Ablauf individuell mit Ihnen ab und setzen die Arbeiten professionell um.',
+  image: startImg
+};
+
+const stepsData = [
+  {
+    title: 'Unverbindlich anfragen',
+    description: 'Schildern Sie uns Ihr Vorhaben telefonisch, per E-Mail oder über das Online-Formular.',
+    subDescription: 'Die Anfrage ist unverbindlich. Wir klären erste Fragen und besprechen das weitere Vorgehen in Ruhe.',
+    image: stepsImg1,
+  },
+  {
+    title: 'Besichtigung & Einschätzung',
+    description: 'Wir prüfen vor Ort den Umfang der Malerarbeiten, Flächen und Besonderheiten.',
+    subDescription: 'Die Einschätzung dient der realistischen Planung – transparent und ohne Verpflichtung.',
+    image: stepsImg2,
+  },
+  {
+    title: 'Transparentes Angebot',
+    description: 'Sie erhalten ein verbindliches Festpreis-Angebot für die Malerarbeiten.',
+    subDescription: 'Alle vereinbarten Leistungen sind klar definiert – ohne versteckte Kosten.',
+    image: stepsImg3,
+  },
+  {
+    title: 'Fachgerechte Ausführung',
+    description: 'Zum vereinbarten Termin führen unsere Teams die Malerarbeiten professionell durch.',
+    subDescription: 'Sauber, strukturiert und termingerecht – mit einem gepflegten Ergebnis.',
+    image: stepsImg4,
+  },
+];
+
+const stepsProps = {
+  heading: 'So laufen Malerarbeiten bei uns ab',
+  subtitle: 'In vier klaren Schritten sorgen wir für eine saubere, planbare und zuverlässige Umsetzung.',
+  ctaText: 'Unverbindlich anfragen – wir erklären Ihnen den Ablauf',
+  steps: stepsData
+};
+
+const includedProps = {
+  heading: 'Was ist bei Malerarbeiten enthalten – und was nicht',
+  subtitle: 'Klare Abgrenzung sorgt für <strong>Transparenz</strong> und Planungssicherheit.',
+  includedTitle: 'In den Malerarbeiten enthalten',
+  includedItems: [
+    '<strong>Streichen</strong> von Wänden und Decken',
+    '<strong>Vorbereitung</strong> der Flächen (Abdecken, einfache Vorarbeiten)',
+    'Einsatz geeigneter <strong>Farben & Materialien</strong>',
+    '<strong>Saubere</strong> Ausführung',
+    '<strong>Fester Ablauf</strong> & transparenter Festpreis',
+    '<strong>Individuelle</strong> Anpassung an den Umfang'
+  ],
+  includedFooter: 'Gern klären wir vorab, welche Malerarbeiten in Ihrem Fall sinnvoll sind.',
+  notIncludedTitle: 'Nicht enthalten',
+  notIncludedTitleSuffix: 'bzw. separat buchbar',
+  notIncludedItems: [
+    'Umfangreiche <strong>Untergrundsanierung</strong>',
+    '<strong>Tapezierarbeiten</strong> (sofern nicht vereinbart)',
+    '<strong>Renovierungs-</strong> oder <strong>Handwerksleistungen</strong>',
+    'Arbeiten außerhalb des vereinbarten Leistungsumfangs'
+  ],
+  notIncludedFooter: 'Leistungen außerhalb dieses Rahmens stimmen wir transparent mit Ihnen ab.',
+  ctaText: 'Klären Sie vorab, welche Malerarbeiten sinnvoll sind'
+};
+
+const transparencyProps = {
+  heading: 'Kosten & Transparenz – fair, nachvollziehbar und planbar',
+  subtitle: 'Die Kosten für Malerarbeiten hängen von Fläche, Zustand und Aufwand ab. Deshalb setzen wir auf eine realistische Einschätzung und transparente Angebote statt pauschaler Preisangaben.',
+  bulletPoints: [
+    'Preis richtet sich nach Fläche und Aufwand',
+    'Kostenlose Besichtigung zur realistischen Einschätzung',
+    'Verbindliches Festpreis-Angebot',
+    'Angebot unverbindlich – Sie entscheiden in Ruhe'
+  ],
+  rightText: 'Uns ist wichtig, dass Sie von Anfang an wissen, womit Sie rechnen können. Transparenz, klare Absprachen und saubere Ausführung stehen bei uns im Vordergrund.',
+  ctaText: 'Malerarbeiten realistisch einschätzen lassen'
+};
+
+const faqData = [
+  {
+    title: 'Welche Räume können gestrichen werden?',
+    description: 'Wir übernehmen Malerarbeiten in Wohnungen, Häusern und Gewerbeflächen – nach vorheriger Absprache.',
+    image: faqImg1,
+  },
+  {
+    title: 'Muss ich während der Malerarbeiten anwesend sein?',
+    description: 'Nein. Auf Wunsch führen wir die Arbeiten selbstständig durch.',
+    image: faqImg2,
+  },
+  {
+    title: 'Welche Farben werden verwendet?',
+    description: 'Wir setzen geeignete, gängige Farben ein und stimmen Details vorab mit Ihnen ab.',
+    image: faqImg3,
+  },
+  {
+    title: 'Wie wird der Aufwand eingeschätzt?',
+    description: 'Im Rahmen einer kostenlosen Besichtigung oder Vorabklärung.',
+    image: faqImg4,
+  },
+  {
+    title: 'Gibt es feste Preise für Malerarbeiten?',
+    description: 'Sie erhalten vorab ein verbindliches Festpreis-Angebot auf Basis des tatsächlichen Aufwands.',
+    image: faqImg5,
+  },
+  {
+    title: 'Wie sauber wird gearbeitet?',
+    description: 'Sauberkeit und Schutz der Umgebung haben für uns hohe Priorität.',
+    image: faqImg6,
+  },
+];
+
+const faqProps = {
+  heading: 'Häufige Fragen zu Malerarbeiten',
+  subtitle: 'Hier finden Sie Antworten auf häufige Fragen rund um professionelle Malerarbeiten.',
+  faqItems: faqData,
+  ctaText: 'Ihre Frage ist noch offen?'
+};
 ---
 
 <BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
   <main>
-    <Hero />
+    <Hero {...heroProps} />
+    <Start {...startProps} />
+    <Steps {...stepsProps} />
+    <Included {...includedProps} />
+    <Transparency {...transparencyProps} />
+    <FAQ {...faqProps} />
     <FinalCTA />
   </main>
 
