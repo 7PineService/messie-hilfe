@@ -1,0 +1,332 @@
+---
+import { Input, Textarea } from '@/components/ui';
+---
+
+<div data-step="6" class="step-content hidden" aria-hidden="true" data-step-title="Kontakt – anonym & unverbindlich" data-step-subtitle="Sie entscheiden, wie viel Sie angeben möchten.">
+
+	<div class="grid md:grid-cols-2 gap-8">
+		<div class="space-y-6">
+			<h3 class="text-lg font-semibold border-b border-gray-100 pb-2">
+				Rechnungsadresse & Ansprechpartner
+			</h3>
+
+			<div class="space-y-4">
+				<p class="text-base font-bold">Ihre Kontaktinformationen</p>
+				<Input
+					name="email"
+					type="email"
+					placeholder="E-Mail-Adresse"
+					required
+				/>
+				<Input
+					name="phone"
+					type="tel"
+					placeholder="Handynummer"
+					required
+				/>
+			</div>
+
+			<div class="space-y-4">
+				<p class="text-base font-bold">Ansprechpartner</p>
+				<Input
+					name="company"
+					placeholder="Firmenname (optional)"
+				/>
+				<Input
+					name="vat_id"
+					placeholder="Umsatzsteuer-ID (optional)"
+				/>
+				<div class="grid grid-cols-2 gap-3">
+					<div>
+						<label class="block text-xs text-muted mb-1">Anrede*</label>
+						<select
+							name="salutation"
+							required
+							class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
+						>
+							<option value="">Bitte wählen</option>
+							<option value="herr">Herr</option>
+							<option value="frau">Frau</option>
+						</select>
+					</div>
+					<div>
+						<label class="block text-xs text-muted mb-1">Titel</label>
+						<select
+							name="title"
+							class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
+						>
+							<option value="">Kein Titel</option>
+							<option value="dr">Dr.</option>
+							<option value="prof">Prof.</option>
+							<option value="prof_dr">Prof. Dr.</option>
+						</select>
+					</div>
+				</div>
+				<div class="grid grid-cols-2 gap-3">
+					<Input
+						name="first_name"
+						placeholder="Vorname"
+						required
+					/>
+					<Input
+						name="last_name"
+						placeholder="Nachname"
+						required
+					/>
+				</div>
+			</div>
+
+			<div class="space-y-4">
+				<p class="text-base font-bold">Adresse</p>
+				<div class="grid grid-cols-3 gap-3">
+					<div class="col-span-2">
+						<Input
+							name="street"
+							placeholder="Straße"
+							required
+						/>
+					</div>
+					<Input
+						name="street_number"
+						placeholder="Nr."
+						required
+					/>
+				</div>
+				<div class="grid grid-cols-3 gap-3">
+					<Input
+						name="postal_code"
+						placeholder="PLZ"
+						required
+					/>
+					<div class="col-span-2">
+						<Input
+							name="city"
+							placeholder="Stadt"
+							required
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="space-y-6">
+			<div class="optional-section">
+				<label class="flex items-center gap-3 cursor-pointer">
+					<input
+						type="checkbox"
+						name="has_different_address"
+						class="w-4 h-4 border-border-primary rounded text-primary focus:ring-border-primary"
+						data-toggle-section="different-address"
+					/>
+					<span class="text-base font-medium">Abweichende Einsatzadresse angeben</span>
+				</label>
+				<div id="different-address" class="hidden mt-4 space-y-4">
+					<Input
+						name="job_company"
+						placeholder="Firmenname (optional)"
+					/>
+					<div class="grid grid-cols-3 gap-3">
+						<div class="col-span-2">
+							<Input
+								name="job_street"
+								placeholder="Straße"
+							/>
+						</div>
+						<Input
+							name="job_street_number"
+							placeholder="Nr."
+						/>
+					</div>
+					<div class="grid grid-cols-3 gap-3">
+						<Input
+							name="job_postal_code"
+							placeholder="PLZ"
+						/>
+						<div class="col-span-2">
+							<Input
+								name="job_city"
+								placeholder="Stadt"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="optional-section">
+				<label class="flex items-center gap-3 cursor-pointer">
+					<input
+						type="checkbox"
+						name="has_different_contact"
+						class="w-4 h-4 border-border-primary rounded text-primary focus:ring-border-primary"
+						data-toggle-section="different-contact"
+					/>
+					<span class="text-base font-medium">Abweichenden Ansprechpartner angeben</span>
+				</label>
+				<div id="different-contact" class="hidden mt-4 space-y-4">
+					<div class="grid grid-cols-2 gap-3">
+						<div>
+							<label class="block text-xs text-muted mb-1">Anrede</label>
+							<select
+								name="alt_salutation"
+								class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
+							>
+								<option value="">Bitte wählen</option>
+								<option value="herr">Herr</option>
+								<option value="frau">Frau</option>
+							</select>
+						</div>
+						<div>
+							<label class="block text-xs text-muted mb-1">Titel</label>
+							<select
+								name="alt_title"
+								class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
+							>
+								<option value="">Kein Titel</option>
+								<option value="dr">Dr.</option>
+								<option value="prof">Prof.</option>
+								<option value="prof_dr">Prof. Dr.</option>
+							</select>
+						</div>
+					</div>
+					<div class="grid grid-cols-2 gap-3">
+						<Input
+							name="alt_first_name"
+							placeholder="Vorname"
+						/>
+						<Input
+							name="alt_last_name"
+							placeholder="Nachname"
+						/>
+					</div>
+					<Input
+						name="alt_email"
+						type="email"
+						placeholder="E-Mail-Adresse"
+					/>
+					<Input
+						name="alt_phone"
+						type="tel"
+						placeholder="Handynummer"
+					/>
+					<Textarea
+						name="alt_notes"
+						placeholder="Weitere Angaben (z. B. Name auf Klingelschild)"
+						rows={2}
+					/>
+				</div>
+			</div>
+
+			<div class="mt-8 pt-6 border-t border-gray-100 space-y-6">
+				<label class="flex items-start gap-3 cursor-pointer">
+					<input
+						type="checkbox"
+						name="privacy"
+						required
+						class="mt-0.5 w-4 h-4 border-border-primary rounded text-primary focus:ring-border-primary"
+					/>
+					<span class="text-sm">
+						Ich habe die <a href="/datenschutz/" target="_blank" class="underline hover:text-cta-primary">Datenschutzerklärung</a> zur Kenntnis genommen.
+					</span>
+				</label>
+
+				<button
+					type="submit"
+					class="w-full cta-primary text-white font-semibold px-6 py-3 rounded-xl text-base transition-colors"
+				>
+					Jetzt kostenlos anfragen
+				</button>
+
+				<div class="space-y-2 text-center">
+					<p class="text-sm opacity-70">100 % anonym – keine Weitergabe Ihrer Daten</p>
+					<p class="text-xs opacity-50">Kommt es zu keinem Auftrag, löschen wir Ihre Daten spätestens nach 14 Tagen automatisch.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	select {
+		appearance: none;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath stroke='%23D4BAA5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: right 0.75rem center;
+		background-size: 10px;
+		padding-right: 2.5rem !important;
+	}
+
+	select:focus {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath stroke='%23C9996B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+	}
+
+	input[type="checkbox"] {
+		appearance: none;
+		width: 1.25rem;
+		height: 1.25rem;
+		border: 2px solid rgba(212, 186, 165, 0.5);
+		border-radius: 0.25rem;
+		background: white;
+		cursor: pointer;
+		position: relative;
+		flex-shrink: 0;
+		transition: all 0.2s;
+	}
+
+	input[type="checkbox"]:checked {
+		border-color: var(--color-cta-primary);
+		background: var(--color-cta-primary);
+	}
+
+	input[type="checkbox"]:checked::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) rotate(45deg);
+		width: 0.35rem;
+		height: 0.65rem;
+		border: solid white;
+		border-width: 0 2px 2px 0;
+	}
+
+	input[type="checkbox"]:hover {
+		border-color: var(--color-cta-primary);
+	}
+
+	input[type="checkbox"]:focus {
+		outline: 2px solid var(--color-border-primary);
+		outline-offset: 2px;
+	}
+</style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const step6 = document.querySelector('[data-step="6"]');
+		if (!step6) return;
+
+		const toggleCheckboxes = step6.querySelectorAll<HTMLInputElement>('[data-toggle-section]');
+
+		toggleCheckboxes.forEach((checkbox) => {
+			const sectionId = checkbox.getAttribute('data-toggle-section');
+			const section = sectionId ? document.getElementById(sectionId) : null;
+
+			if (section) {
+				checkbox.addEventListener('change', () => {
+					if (checkbox.checked) {
+						section.classList.remove('hidden');
+					} else {
+						section.classList.add('hidden');
+						section.querySelectorAll('input, textarea, select').forEach((field) => {
+							const inputField = field as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+							if (inputField instanceof HTMLInputElement && (inputField.type === 'checkbox' || inputField.type === 'radio')) {
+								inputField.checked = false;
+							} else {
+								inputField.value = '';
+							}
+						});
+					}
+				});
+			}
+		});
+	});
+</script>

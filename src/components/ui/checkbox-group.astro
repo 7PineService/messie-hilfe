@@ -1,0 +1,139 @@
+---
+import { cn } from '@/utils/cn';
+
+interface Option {
+	value: string;
+	label: string;
+	hasTextField?: boolean;
+	textFieldPlaceholder?: string;
+}
+
+interface Props {
+	name: string;
+	options: Option[];
+	values?: string[];
+	disabled?: boolean;
+	class?: string;
+	[key: string]: any;
+}
+
+const {
+	name,
+	options,
+	values = [],
+	disabled = false,
+	class: className = '',
+	...rest
+} = Astro.props;
+
+const baseClasses = 'flex flex-col gap-3';
+const optionClasses = 'flex flex-col gap-2';
+const checkboxRowClasses = 'flex items-center gap-3 cursor-pointer';
+const labelClasses = 'text-sm cursor-pointer';
+const textFieldClasses = 'w-full px-3 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary transition-colors';
+---
+
+<div
+	class={cn(baseClasses, className)}
+	data-checkbox-group={name}
+	{...rest}
+>
+	{options.map((option) => (
+		<div class={optionClasses}>
+			<label class={cn(checkboxRowClasses, disabled && 'opacity-50 cursor-not-allowed')}>
+				<input
+					type="checkbox"
+					name={`${name}[]`}
+					value={option.value}
+					checked={values.includes(option.value)}
+					disabled={disabled}
+					class="checkbox-input"
+					data-has-textfield={option.hasTextField ? 'true' : undefined}
+				/>
+				<span class={labelClasses}>{option.label}</span>
+			</label>
+			{option.hasTextField && (
+				<input
+					type="text"
+					name={`${name}_${option.value}_text`}
+					placeholder={option.textFieldPlaceholder || ''}
+					class={cn(textFieldClasses, 'conditional-field hidden')}
+					data-for-checkbox={option.value}
+					disabled={disabled}
+				/>
+			)}
+		</div>
+	))}
+</div>
+
+<style>
+	.checkbox-input {
+		appearance: none;
+		width: 1.25rem;
+		height: 1.25rem;
+		border: 2px solid rgba(212, 186, 165, 0.5);
+		border-radius: 0.25rem;
+		background: white;
+		cursor: pointer;
+		position: relative;
+		flex-shrink: 0;
+		transition: all 0.2s;
+	}
+
+	.checkbox-input:hover {
+		border-color: var(--color-cta-primary);
+	}
+
+	.checkbox-input:checked {
+		border-color: var(--color-cta-primary);
+		background: var(--color-cta-primary);
+	}
+
+	.checkbox-input:checked::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) rotate(45deg);
+		width: 0.35rem;
+		height: 0.65rem;
+		border: solid white;
+		border-width: 0 2px 2px 0;
+	}
+
+	.checkbox-input:focus-visible {
+		outline: 2px solid var(--color-border-primary);
+		outline-offset: 2px;
+	}
+</style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const checkboxGroups = document.querySelectorAll('[data-checkbox-group]');
+
+		checkboxGroups.forEach((group) => {
+			const checkboxes = group.querySelectorAll('input[type="checkbox"][data-has-textfield]');
+
+			checkboxes.forEach((checkbox) => {
+				const textField = group.querySelector(`input[data-for-checkbox="${(checkbox as HTMLInputElement).value}"]`);
+
+				if (textField) {
+					// Set initial state
+					if ((checkbox as HTMLInputElement).checked) {
+						textField.classList.remove('hidden');
+					}
+
+					// Handle change
+					checkbox.addEventListener('change', () => {
+						if ((checkbox as HTMLInputElement).checked) {
+							textField.classList.remove('hidden');
+						} else {
+							textField.classList.add('hidden');
+							(textField as HTMLInputElement).value = '';
+						}
+					});
+				}
+			});
+		});
+	});
+</script>

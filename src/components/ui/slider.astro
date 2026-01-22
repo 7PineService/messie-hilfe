@@ -1,0 +1,202 @@
+---
+import { cn } from '@/utils/cn';
+
+interface Props {
+	name: string;
+	id?: string;
+	min?: number;
+	max?: number;
+	step?: number;
+	value?: number;
+	unit?: string;
+	showInput?: boolean;
+	showMilestones?: boolean;
+	milestones?: number[];
+	required?: boolean;
+	disabled?: boolean;
+	class?: string;
+	[key: string]: any;
+}
+
+const {
+	name,
+	id = name,
+	min = 0,
+	max = 200,
+	step = 10,
+	value = 50,
+	unit = '',
+	showInput = true,
+	showMilestones = false,
+	milestones = [],
+	required = false,
+	disabled = false,
+	class: className = '',
+	...rest
+} = Astro.props;
+
+const baseClasses = 'flex flex-col gap-1';
+const sliderRowClasses = 'flex items-center gap-4';
+const sliderClasses = 'flex-1 h-2 bg-white rounded-lg appearance-none cursor-pointer accent-primary';
+const inputClasses = 'w-24 px-3 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary transition-colors text-center';
+
+// Generate milestone positions
+const milestonePositions = showMilestones && milestones.length > 0
+	? milestones.map(m => ({
+		value: m,
+		position: ((m - min) / (max - min)) * 100
+	}))
+	: [];
+---
+
+<div class={cn(baseClasses, className)} data-slider-container={id} {...rest}>
+	<div class={sliderRowClasses}>
+		<input
+			type="range"
+			name={name}
+			id={id}
+			min={min}
+			max={max}
+			step={step}
+			value={value}
+			required={required}
+			disabled={disabled}
+			class={sliderClasses}
+			data-slider-input
+		/>
+		{showInput && (
+			<div class="flex items-center gap-1">
+				<span class="text-sm text-muted">ca.</span>
+				<input
+					type="number"
+					name={`${name}_display`}
+					id={`${id}_display`}
+					min={min}
+					max={max}
+					step={step}
+					value={value}
+					disabled={disabled}
+					class={inputClasses}
+					data-slider-display
+				/>
+				{unit && <span class="text-sm text-muted">{unit}</span>}
+			</div>
+		)}
+	</div>
+	{showMilestones && milestonePositions.length > 0 && (
+		<div class="relative h-5 ml-0 -mt-1" style="width: calc(100% - 152px);">
+			{milestonePositions.map((milestone) => (
+				<div
+					class="absolute text-xs text-muted -translate-x-1/2 top-0"
+					style={`left: ${milestone.position}%;`}
+				>
+					{milestone.value}
+				</div>
+			))}
+		</div>
+	)}
+</div>
+
+<style>
+	/* Custom slider styling */
+	input[type="range"] {
+		-webkit-appearance: none;
+		appearance: none;
+		background: transparent;
+	}
+
+	input[type="range"]::-webkit-slider-runnable-track {
+		height: 8px;
+		background: white;
+		border-radius: 4px;
+		border: 1px solid var(--color-border-primary);
+	}
+
+	input[type="range"]::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 20px;
+		height: 20px;
+		background: var(--color-cta-primary);
+		border-radius: 50%;
+		cursor: pointer;
+		margin-top: -7px;
+		border: 2px solid white;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	input[type="range"]::-moz-range-track {
+		height: 8px;
+		background: white;
+		border-radius: 4px;
+		border: 1px solid var(--color-border-primary);
+	}
+
+	input[type="range"]::-moz-range-thumb {
+		width: 20px;
+		height: 20px;
+		background: var(--color-cta-primary);
+		border-radius: 50%;
+		cursor: pointer;
+		border: 2px solid white;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	input[type="range"]:focus {
+		outline: none;
+	}
+
+	input[type="range"]:focus::-webkit-slider-thumb {
+		box-shadow: 0 0 0 3px var(--color-border-primary);
+	}
+
+	input[type="range"]:focus::-moz-range-thumb {
+		box-shadow: 0 0 0 3px var(--color-border-primary);
+	}
+</style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const sliderContainers = document.querySelectorAll('[data-slider-container]');
+
+		sliderContainers.forEach((container) => {
+			const slider = container.querySelector('[data-slider-input]') as HTMLInputElement;
+			const display = container.querySelector('[data-slider-display]') as HTMLInputElement;
+
+			if (slider && display) {
+				// Sync slider to display
+				slider.addEventListener('input', () => {
+					display.value = slider.value;
+				});
+
+				// Sync display to slider
+				display.addEventListener('input', () => {
+					const val = parseInt(display.value, 10);
+					const min = parseInt(slider.min, 10);
+					const max = parseInt(slider.max, 10);
+
+					if (!isNaN(val)) {
+						if (val >= min && val <= max) {
+							slider.value = String(val);
+						}
+					}
+				});
+
+				// Clamp display value on blur
+				display.addEventListener('blur', () => {
+					const val = parseInt(display.value, 10);
+					const min = parseInt(slider.min, 10);
+					const max = parseInt(slider.max, 10);
+
+					if (isNaN(val) || val < min) {
+						display.value = slider.min;
+						slider.value = slider.min;
+					} else if (val > max) {
+						display.value = slider.max;
+						slider.value = slider.max;
+					}
+				});
+			}
+		});
+	});
+</script>

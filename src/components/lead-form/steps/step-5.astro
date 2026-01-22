@@ -1,0 +1,93 @@
+---
+---
+
+<div data-step="5" class="step-content hidden" aria-hidden="true" data-step-title="Wann soll der Einsatz stattfinden?" data-step-subtitle="Unverbindlich – wir richten uns nach Ihrer Situation.">
+	<div class="space-y-4 max-w-lg mx-auto">
+		<div class="space-y-3">
+			<label class="timing-option flex items-center gap-1 p-4 rounded-lg border cursor-pointer transition">
+				<input
+					type="radio"
+					name="timing"
+					value="next_weeks"
+					class="sr-only"
+				/>
+				<span class="text-base font-semibold pr-4">In den nächsten 1–2 Wochen</span>
+			</label>
+
+			<div class="timing-option-with-field">
+				<label class="timing-option flex items-center justify-between gap-1 p-4 rounded-lg border cursor-pointer transition">
+					<input
+						type="radio"
+						name="timing"
+						value="specific_date"
+						class="sr-only"
+						data-toggle-datepicker
+					/>
+					<span class="text-base font-semibold pr-4">Zu einem bestimmten Datum</span>
+					<input
+						type="date"
+						name="preferred_date"
+						class="hidden datepicker-field px-3 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
+					/>
+				</label>
+			</div>
+
+			<label class="timing-option flex items-center gap-1 p-4 rounded-lg border cursor-pointer transition">
+				<input
+					type="radio"
+					name="timing"
+					value="unsure"
+					class="sr-only"
+				/>
+				<span class="text-base font-semibold pr-4">Ich bin unsicher</span>
+			</label>
+		</div>
+	</div>
+</div>
+
+<style>
+	.timing-option {
+		background: var(--color-surface-light-peach);
+		border-color: rgba(212, 186, 165, 0.3);
+		box-shadow: 0 1px 3px rgba(99, 99, 99, 0.12);
+	}
+
+	.timing-option:hover {
+		background: var(--color-surface-warm-peach);
+		border-color: var(--color-cta-primary);
+	}
+
+	.timing-option:has(input:checked) {
+		background: var(--color-surface-warm-peach);
+		border-color: var(--color-cta-primary);
+	}
+
+	.timing-option:has(input:focus-visible) {
+		outline: 2px solid var(--color-border-primary);
+		outline-offset: 2px;
+	}
+
+	.timing-option-with-field:has(input[type="radio"]:checked) .datepicker-field {
+		display: block;
+	}
+</style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const step5 = document.querySelector('[data-step="5"]');
+		if (!step5) return;
+
+		const timingRadios = step5.querySelectorAll<HTMLInputElement>('input[name="timing"]');
+		const datepickerField = step5.querySelector<HTMLInputElement>('.datepicker-field');
+
+		timingRadios.forEach((radio) => {
+			radio.addEventListener('change', () => {
+				if (radio.value === 'specific_date' && radio.checked) {
+					datepickerField?.classList.remove('hidden');
+				} else {
+					datepickerField?.classList.add('hidden');
+				}
+			});
+		});
+	});
+</script>

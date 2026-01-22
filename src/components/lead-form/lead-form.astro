@@ -1,0 +1,347 @@
+---
+import { cn } from '@/utils/cn';
+import { CONTACT_API_ENDPOINT } from '@/config/site';
+
+interface Props {
+	formId?: string;
+	initialStep?: number;
+	class?: string;
+}
+
+const {
+	formId = 'lead-form',
+	initialStep = 1,
+	class: className = ''
+} = Astro.props;
+
+const contactApiEndpoint = CONTACT_API_ENDPOINT;
+---
+
+<div
+	class={cn('lead-form-container', className)}
+	data-lead-form={formId}
+	data-initial-step={initialStep}
+>
+	<form id={formId} class="lead-form" method="POST" action={contactApiEndpoint || '#'}>
+		<!-- Steps Container -->
+		<div class="steps-container">
+			<slot />
+		</div>
+
+		<!-- Navigation Buttons (hidden on step 6) -->
+		<div class="navigation-buttons flex items-center justify-between mt-8 pt-6 border-t border-border-primary">
+			<!-- Back Button (hidden on step 1) -->
+			<button
+				type="button"
+				class="back-btn flex items-center gap-2 text-base font-medium text-primary hover:text-cta-primary transition-colors cursor-pointer"
+				data-action="prev"
+				style="visibility: hidden;"
+			>
+				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+				</svg>
+				<span>Zurück</span>
+			</button>
+
+			<!-- Next Button -->
+			<button
+				type="button"
+				class="next-btn cta-primary text-white font-semibold px-6 py-3 rounded-xl flex items-center gap-2 text-base transition-colors"
+				data-action="next"
+			>
+				<span>Weiter</span>
+				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+				</svg>
+			</button>
+		</div>
+	</form>
+</div>
+
+<script define:vars={{ formId, contactApiEndpoint, isDev: import.meta.env.DEV }}>
+	document.addEventListener('DOMContentLoaded', () => {
+		const container = document.querySelector(`[data-lead-form="${formId}"]`);
+		const form = document.getElementById(formId);
+
+		if (!container || !form) return;
+
+		const steps = form.querySelectorAll('[data-step]');
+		const backBtn = form.querySelector('[data-action="prev"]');
+		const nextBtn = form.querySelector('[data-action="next"]');
+		const navigationButtons = form.querySelector('.navigation-buttons');
+
+		const totalSteps = steps.length;
+		let currentStep = parseInt(container.getAttribute('data-initial-step') || '1', 10);
+
+		// Form data storage
+		let formData = {};
+
+		// Try to load saved data from sessionStorage
+		try {
+			const savedData = sessionStorage.getItem(`${formId}_data`);
+			if (savedData) {
+				formData = JSON.parse(savedData);
+			}
+		} catch (e) {
+			if (isDev) console.warn('Could not load saved form data:', e);
+		}
+
+		// Save form data to sessionStorage
+		function saveFormData() {
+			try {
+				sessionStorage.setItem(`${formId}_data`, JSON.stringify(formData));
+			} catch (e) {
+				if (isDev) console.warn('Could not save form data:', e);
+			}
+		}
+
+		// Collect data from current step
+		function collectStepData(stepNum) {
+			const step = form.querySelector(`[data-step="${stepNum}"]`);
+			if (!step) return;
+
+			const inputs = step.querySelectorAll('input, textarea, select');
+			inputs.forEach((input) => {
+				const name = input.getAttribute('name');
+				if (!name) return;
+
+				if (input.type === 'checkbox') {
+					if (!formData[name]) formData[name] = [];
+					if (input.checked) {
+						if (!formData[name].includes(input.value)) {
+							formData[name].push(input.value);
+						}
+					} else {
+						formData[name] = formData[name].filter(v => v !== input.value);
+					}
+				} else if (input.type === 'radio') {
+					if (input.checked) {
+						formData[name] = input.value;
+					}
+				} else {
+					formData[name] = input.value;
+				}
+			});
+
+			saveFormData();
+		}
+
+		// Restore data to a step
+		function restoreStepData(stepNum) {
+			const step = form.querySelector(`[data-step="${stepNum}"]`);
+			if (!step) return;
+
+			const inputs = step.querySelectorAll('input, textarea, select');
+			inputs.forEach((input) => {
+				const name = input.getAttribute('name');
+				if (!name || !formData[name]) return;
+
+				if (input.type === 'checkbox') {
+					input.checked = formData[name].includes(input.value);
+					// Trigger change event for conditional fields
+					input.dispatchEvent(new Event('change', { bubbles: true }));
+				} else if (input.type === 'radio') {
+					input.checked = formData[name] === input.value;
+				} else {
+					input.value = formData[name];
+					// Sync slider displays
+					if (input.hasAttribute('data-slider-input')) {
+						const display = step.querySelector(`[data-slider-display]`);
+						if (display) display.value = input.value;
+					}
+				}
+			});
+		}
+
+		// Update step visibility and navigation
+		function updateUI() {
+			// Update step visibility
+			steps.forEach((step, index) => {
+				const stepNum = index + 1;
+				if (stepNum === currentStep) {
+					step.classList.remove('hidden');
+					step.setAttribute('aria-hidden', 'false');
+
+					// Update page title and subtitle
+					const stepTitle = step.getAttribute('data-step-title');
+					const stepSubtitle = step.getAttribute('data-step-subtitle');
+
+					const pageTitle = document.querySelector('.step-page-title');
+					const pageSubtitle = document.querySelector('.step-page-subtitle');
+
+					if (pageTitle && stepTitle) {
+						pageTitle.textContent = stepTitle;
+					}
+					if (pageSubtitle && stepSubtitle) {
+						pageSubtitle.textContent = stepSubtitle;
+					}
+				} else {
+					step.classList.add('hidden');
+					step.setAttribute('aria-hidden', 'true');
+				}
+			});
+
+			// Update back button visibility
+			if (backBtn) {
+				backBtn.style.visibility = currentStep > 1 ? 'visible' : 'hidden';
+			}
+
+			// Hide/show next button based on step
+			if (nextBtn) {
+				if (currentStep === totalSteps) {
+					nextBtn.classList.add('hidden');
+				} else {
+					nextBtn.classList.remove('hidden');
+				}
+			}
+
+			// Update navigation buttons layout for step 6
+			if (navigationButtons) {
+				if (currentStep === totalSteps) {
+					// Show only back button on step 6
+					navigationButtons.style.justifyContent = 'flex-start';
+				} else {
+					// Show both buttons on other steps
+					navigationButtons.style.justifyContent = 'space-between';
+				}
+			}
+
+			// Update step indicator in header
+			const stepIndicator = document.querySelector('.step-indicator span');
+			if (stepIndicator) {
+				stepIndicator.textContent = `Schritt ${currentStep} von ${totalSteps}`;
+			}
+
+			// Update progress bar
+			const progressBar = document.querySelector('.step-indicator .bg-cta-primary');
+			if (progressBar) {
+				progressBar.style.width = `${(currentStep / totalSteps) * 100}%`;
+			}
+
+			// Restore data for current step
+			restoreStepData(currentStep);
+
+			// Scroll to top of form
+			container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
+
+		// Validate current step
+		function validateStep(stepNum) {
+			const step = form.querySelector(`[data-step="${stepNum}"]`);
+			if (!step) return true;
+
+			const requiredInputs = step.querySelectorAll('[required]');
+			let isValid = true;
+
+			requiredInputs.forEach((input) => {
+				if (!input.checkValidity()) {
+					isValid = false;
+					input.reportValidity();
+				}
+			});
+
+			return isValid;
+		}
+
+		// Go to next step
+		function nextStep() {
+			if (!validateStep(currentStep)) return;
+
+			collectStepData(currentStep);
+
+			if (currentStep < totalSteps) {
+				currentStep++;
+				updateUI();
+			}
+		}
+
+		// Go to previous step
+		function prevStep() {
+			collectStepData(currentStep);
+
+			if (currentStep > 1) {
+				currentStep--;
+				updateUI();
+			}
+		}
+
+		// Handle form submission
+		async function handleSubmit(e) {
+			e.preventDefault();
+
+			if (!validateStep(currentStep)) return;
+
+			collectStepData(currentStep);
+
+			const submitBtn = nextBtn;
+			if (!submitBtn) return;
+
+			const originalText = submitBtn.innerHTML;
+			submitBtn.disabled = true;
+			submitBtn.innerHTML = '<span>Wird gesendet...</span>';
+
+			// Prepare form data for submission
+			const submitData = {
+				...formData,
+				timestamp: new Date().toISOString(),
+				source: 'lead-form'
+			};
+
+			if (isDev) {
+				console.log('=== Lead Form Submission ===');
+				console.log('Form Data:', submitData);
+			}
+
+			if (contactApiEndpoint) {
+				try {
+					const response = await fetch(contactApiEndpoint, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(submitData)
+					});
+
+					if (response.ok) {
+						if (isDev) console.log('Lead form submitted successfully!');
+
+						// Clear saved data
+						sessionStorage.removeItem(`${formId}_data`);
+
+						// Redirect to thank you page
+						window.location.href = '/anfrage/danke/';
+					} else {
+						throw new Error('Server error');
+					}
+				} catch (error) {
+					if (isDev) console.error('Form submission error:', error);
+					alert('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
+					submitBtn.disabled = false;
+					submitBtn.innerHTML = originalText;
+				}
+			} else {
+				// No endpoint - just redirect (dev mode)
+				if (isDev) console.log('No endpoint configured, redirecting...');
+				sessionStorage.removeItem(`${formId}_data`);
+				window.location.href = '/anfrage/danke/';
+			}
+		}
+
+		// Event listeners
+		backBtn?.addEventListener('click', prevStep);
+		nextBtn?.addEventListener('click', nextStep);
+		form.addEventListener('submit', handleSubmit);
+
+		// Initialize UI
+		updateUI();
+
+		// Track funnel progress
+		if (typeof window !== 'undefined' && window.dataLayer) {
+			window.dataLayer.push({
+				'event': 'lead_form_step',
+				'step': currentStep,
+				'total_steps': totalSteps
+			});
+		}
+	});
+</script>

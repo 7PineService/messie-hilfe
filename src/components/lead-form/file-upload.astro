@@ -1,0 +1,160 @@
+---
+import { cn } from '@/utils/cn';
+
+interface Props {
+	name?: string;
+	id?: string;
+	accept?: string;
+	multiple?: boolean;
+	disabled?: boolean;
+	class?: string;
+	[key: string]: any;
+}
+
+const {
+	name = 'files',
+	id = 'lead-form-files',
+	accept = 'image/*,.pdf,.mp4,.mov',
+	multiple = true,
+	disabled = false,
+	class: className = '',
+	...rest
+} = Astro.props;
+
+const fileListId = `${id}-list`;
+---
+
+<div class={cn('file-upload-container', className)} data-file-upload={id} {...rest}>
+	<!-- Upload Area -->
+	<div class="border-2 border-dashed border-border-primary rounded-lg p-6 hover:border-cta-primary transition-colors bg-surface-input">
+		<input
+			type="file"
+			id={id}
+			name={name}
+			accept={accept}
+			multiple={multiple}
+			disabled={disabled}
+			class="hidden"
+		/>
+		<label for={id} class="cursor-pointer flex flex-col items-center gap-3">
+			<!-- Upload Icon -->
+			<div class="w-12 h-12 rounded-lg flex items-center justify-center border border-dashed" style="background-color: #fbe5ce; border-color: #eacb62;">
+				<svg class="w-6 h-6 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+				</svg>
+			</div>
+			<!-- Text -->
+			<div class="text-center">
+				<p class="text-sm font-medium">Dateien hierhin ziehen oder auswählen</p>
+				<p class="text-xs text-muted mt-1">Bilder (JPG/PNG/HEIC) | kurze Videos (MP4)</p>
+			</div>
+			<!-- Button -->
+			<span class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-surface-secondary border border-border-primary hover:bg-surface-tertiary transition-colors">
+				Dateien auswählen
+			</span>
+		</label>
+	</div>
+
+	<!-- File List -->
+	<div id={fileListId} class="mt-3 space-y-2"></div>
+</div>
+
+<script define:vars={{ id, fileListId }}>
+	document.addEventListener('DOMContentLoaded', () => {
+		const fileInput = document.getElementById(id);
+		const fileList = document.getElementById(fileListId);
+		const container = document.querySelector(`[data-file-upload="${id}"]`);
+
+		if (!fileInput || !fileList || !container) return;
+
+		// Store files with unique IDs
+		const fileMap = new Map();
+		let fileIdCounter = 0;
+
+		// Add file to storage
+		function addFile(file) {
+			const fileId = `file-${fileIdCounter++}`;
+			fileMap.set(fileId, file);
+			renderFileList();
+		}
+
+		// Remove file from storage
+		function removeFile(fileId) {
+			fileMap.delete(fileId);
+			renderFileList();
+		}
+
+		// Render the file list
+		function renderFileList() {
+			fileList.innerHTML = '';
+
+			fileMap.forEach((file, fileId) => {
+				const fileItem = document.createElement('div');
+				fileItem.className = 'text-sm flex items-center justify-between gap-2 p-2 bg-surface-input rounded-lg border border-border-primary';
+
+				const fileInfo = document.createElement('div');
+				fileInfo.className = 'flex items-center gap-2 flex-1 min-w-0';
+				fileInfo.innerHTML = `
+					<svg class="w-4 h-4 shrink-0 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+					</svg>
+					<span class="truncate">${file.name}</span>
+					<span class="text-muted shrink-0">(${(file.size / 1024).toFixed(1)} KB)</span>
+				`;
+
+				const removeBtn = document.createElement('button');
+				removeBtn.type = 'button';
+				removeBtn.className = 'shrink-0 p-1 text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors';
+				removeBtn.setAttribute('aria-label', 'Datei entfernen');
+				removeBtn.innerHTML = `
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				`;
+				removeBtn.addEventListener('click', () => removeFile(fileId));
+
+				fileItem.appendChild(fileInfo);
+				fileItem.appendChild(removeBtn);
+				fileList.appendChild(fileItem);
+			});
+		}
+
+		// Handle file selection
+		fileInput.addEventListener('change', (e) => {
+			const newFiles = Array.from(e.target.files || []);
+			newFiles.forEach(file => addFile(file));
+			// Clear the input so same file can be selected again
+			fileInput.value = '';
+		});
+
+		// Drag and drop support
+		const dropZone = container.querySelector('label');
+
+		['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+			dropZone?.addEventListener(eventName, (e) => {
+				e.preventDefault();
+				e.stopPropagation();
+			});
+		});
+
+		['dragenter', 'dragover'].forEach(eventName => {
+			dropZone?.addEventListener(eventName, () => {
+				dropZone.parentElement?.classList.add('border-cta-primary', 'bg-surface-tertiary');
+			});
+		});
+
+		['dragleave', 'drop'].forEach(eventName => {
+			dropZone?.addEventListener(eventName, () => {
+				dropZone.parentElement?.classList.remove('border-cta-primary', 'bg-surface-tertiary');
+			});
+		});
+
+		dropZone?.addEventListener('drop', (e) => {
+			const files = Array.from(e.dataTransfer?.files || []);
+			files.forEach(file => addFile(file));
+		});
+
+		// Expose fileMap for form submission
+		window[`getFileMap_${id}`] = () => fileMap;
+	});
+</script>

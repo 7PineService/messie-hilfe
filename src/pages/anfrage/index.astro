@@ -1,98 +1,52 @@
 ---
-import BaseLayout from '@/layouts/base-layout.astro';
-import ContactForm from '@/components/contact-form.astro';
+import LeadFormLayout from '@/layouts/lead-form-layout.astro';
+import { LeadForm, Step1, Step2, Step3, Step4, Step5, Step6 } from '@/components/lead-form';
 ---
 
-<BaseLayout
-	title="Kostenloses Angebot anfordern – Messie-Hilfe"
+<LeadFormLayout
+	title="Kostenloses Angebot anfordern"
 	description="Fordern Sie jetzt Ihr kostenloses, unverbindliches Angebot für unsere diskrete Messie-Hilfe an. Professionell, zuverlässig und ohne Bewertung."
+	currentStep={1}
+	totalSteps={6}
+	showFooter={false}
 >
+	<section class="bg-surface-primary py-8 md:py-12 min-h-[calc(100vh-200px)]">
+		<div class="container mx-auto px-4">
+			<div class="max-w-4xl mx-auto">
+				<div class="text-center mb-6">
+					<h1 class="step-page-title text-2xl md:text-3xl font-bold mb-2">
+						Wobei können wir Ihnen helfen?
+					</h1>
+					<p class="step-page-subtitle text-base text-muted">
+						Mehrfachauswahl möglich – wir stimmen alles transparent mit Ihnen ab.
+					</p>
+				</div>
 
-	<main class="bg-surface-primary py-12 md:py-20">
-		<div class="container mx-auto px-4 max-w-3xl">
-			<!-- Page Header -->
-			<div class="text-center mb-12">
-				<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-					Kostenloses Angebot anfordern
-				</h1>
-				<p class="text-lg md:text-xl opacity-80 max-w-2xl mx-auto">
-					Füllen Sie das Formular aus und wir melden uns schnellstmöglich bei Ihnen mit einem unverbindlichen Angebot für unsere diskrete Messie-Hilfe.
-				</p>
-			</div>
-
-			<!-- Contact Form -->
-			<div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
-				<ContactForm />
-			</div>
-
-			<!-- Additional Information -->
-			<div class="mt-12 text-center">
-				<div class="bg-surface-tertiary rounded-lg p-6 md:p-8 border border-border-primary">
-					<h2 class="text-xl md:text-2xl font-bold mb-4">
-						Warum Messie-Hilfe?
-					</h2>
-					<div class="grid md:grid-cols-2 gap-6 text-left">
-						<div class="flex items-start space-x-3">
-							<svg class="w-6 h-6 shrink-0 mt-1" style="color: #bca99f;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-							</svg>
-							<div>
-								<h3 class="font-semibold mb-1">Diskret & Anonym</h3>
-								<p class="opacity-80 text-sm">Keine Logos am Fahrzeug, diskrete Anfahrt</p>
-							</div>
-						</div>
-						<div class="flex items-start space-x-3">
-							<svg class="w-6 h-6 shrink-0 mt-1" style="color: #bca99f;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-							</svg>
-							<div>
-								<h3 class="font-semibold mb-1">Ohne Bewertung</h3>
-								<p class="opacity-80 text-sm">Professionelle Unterstützung ohne Urteil</p>
-							</div>
-						</div>
-						<div class="flex items-start space-x-3">
-							<svg class="w-6 h-6 shrink-0 mt-1" style="color: #bca99f;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-							</svg>
-							<div>
-								<h3 class="font-semibold mb-1">Kurzfristig verfügbar</h3>
-								<p class="opacity-80 text-sm">Schnelle Terminvereinbarung möglich</p>
-							</div>
-						</div>
-						<div class="flex items-start space-x-3">
-							<svg class="w-6 h-6 shrink-0 mt-1" style="color: #bca99f;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-							</svg>
-							<div>
-								<h3 class="font-semibold mb-1">Über 20 Jahre Erfahrung</h3>
-								<p class="opacity-80 text-sm">Erprobte Methoden und bewährte Abläufe</p>
-							</div>
-						</div>
-					</div>
+				<div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+					<LeadForm formId="lead-form">
+						<Step1 />
+						<Step2 />
+						<Step3 />
+						<Step4 />
+						<Step5 />
+						<Step6 />
+					</LeadForm>
 				</div>
 			</div>
 		</div>
-	</main>
-</BaseLayout>
+	</section>
+</LeadFormLayout>
 
 <!-- Track funnel_start event on page view -->
-<script is:inline define:vars={{ isDev: import.meta.env.DEV }}>
+<script is:inline>
 	(function() {
 		if (typeof window === 'undefined' || !window.dataLayer) {
-			if (isDev) console.warn('[Tracking] dataLayer not available - funnel_start tracking disabled');
 			return;
 		}
-		
-		// Fire funnel_start event with funnel_type: 'offer_request' on page view
-		if (isDev) {
-			console.log('[Tracking] ✅ Firing funnel_start event for offer_request');
-			console.log('[Tracking] Event data:', { event: 'funnel_start', funnel_type: 'offer_request' });
-		}
-		
+
 		window.dataLayer.push({
 			'event': 'funnel_start',
-			'funnel_type': 'offer_request'
+			'funnel_type': 'lead_form'
 		});
 	})();
 </script>
-

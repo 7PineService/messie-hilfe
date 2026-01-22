@@ -1,0 +1,37 @@
+---
+import { Textarea } from '@/components/ui';
+import FileUpload from '../file-upload.astro';
+---
+
+<div data-step="4" class="step-content hidden" aria-hidden="true" data-step-title="Weitere Hinweise (optional)" data-step-subtitle="Alles, was Sie uns zusätzlich mitteilen möchten – nur wenn Sie möchten.">
+	<div class="space-y-6">
+		<div>
+			<label for="additional_notes" class="block text-base font-bold mb-2">
+				Möchten Sie uns noch etwas zum Einsatz mitteilen?
+			</label>
+			<Textarea
+				name="additional_notes"
+				id="additional_notes"
+				placeholder="z. B. Gerüche, Feuchtigkeit, Schädlingsbefall, besondere Zugangssituationen oder andere Hinweise"
+				rows={4}
+			/>
+		</div>
+
+		<div>
+			<p class="text-base font-bold mb-3">
+				Bilder oder Videos hochladen <span class="text-muted font-normal">(optional)</span>
+			</p>
+			<FileUpload
+				name="files"
+				id="lead-form-files"
+				accept="image/jpeg,image/png,image/heic,video/mp4"
+				multiple={true}
+			/>
+			<div class="mt-4 text-sm text-muted space-y-1">
+				<p>Der Upload ist freiwillig und hilft uns bei der Einschätzung.</p>
+				<p>Sie können diesen Schritt auch überspringen.</p>
+				<p>Falls Sie unsicher sind: Wir klären alles Weitere persönlich mit Ihnen.</p>
+			</div>
+		</div>
+	</div>
+</div>

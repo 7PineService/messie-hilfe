@@ -1,0 +1,80 @@
+---
+import ServiceTile from '../service-tile.astro';
+import { RadioGroup, Slider, Textarea } from '@/components/ui';
+
+import iconLeicht from '@/assets/images/lead-form/lead-15-leicht-verschmutzt.png';
+import iconNormal from '@/assets/images/lead-form/lead-16-normal-verschmutzt.png';
+import iconStark from '@/assets/images/lead-form/lead-17-stark-verschmutzt.png';
+import iconExtrem from '@/assets/images/lead-form/lead-18-extrem-verschmutzt.png';
+
+const conditionLevels = [
+	{ value: 'leicht', label: 'Leicht verschmutzt', icon: iconLeicht },
+	{ value: 'normal', label: 'Normal verschmutzt', icon: iconNormal },
+	{ value: 'stark', label: 'Stark verschmutzt', icon: iconStark },
+	{ value: 'extrem', label: 'Extrem verschmutzt', icon: iconExtrem },
+];
+
+const clutterOptions = [
+	{ value: 'wenige', label: 'Wenige Gegenstände' },
+	{ value: 'teilweise', label: 'Teilweise vollgestellt' },
+	{ value: 'stark', label: 'Stark vollgestellt' },
+	{ value: 'komplett', label: 'Komplett zu räumen' },
+];
+---
+
+<div data-step="3" class="step-content hidden" aria-hidden="true" data-step-title="Wie ist der aktuelle Zustand der Räume?" data-step-subtitle="Das hilft uns, Aufwand und Dauer realistisch einzuschätzen.">
+	<div class="space-y-6">
+		<div>
+			<p class="text-base font-bold mb-3">Zustand der Räume</p>
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+				{conditionLevels.map((level) => (
+					<ServiceTile
+						name="condition"
+						value={level.value}
+						label={level.label}
+						icon={level.icon}
+						multiSelect={false}
+						class="text-xs"
+					/>
+				))}
+			</div>
+		</div>
+
+		<div>
+			<p class="text-base font-bold mb-3">Fläche (m²)</p>
+			<Slider
+				name="area"
+				min={10}
+				max={200}
+				step={10}
+				value={50}
+				unit="m²"
+				showInput={true}
+				showMilestones={true}
+				milestones={[10, 50, 100, 150]}
+			/>
+			<p class="text-sm text-muted mt-2">
+				Falls Sie die Fläche nicht genau kennen, können Sie diesen Punkt grob einschätzen.
+			</p>
+		</div>
+
+		<div>
+			<p class="text-base font-bold mb-3">Entrümpelungsgrad</p>
+			<RadioGroup
+				name="clutter_level"
+				options={clutterOptions}
+			/>
+		</div>
+
+		<div>
+			<p class="text-base mb-3">
+				<span class="font-bold">Weitere Hinweise zum Zustand</span> <span class="text-muted font-normal">(optional)</span>
+			</p>
+			<Textarea
+				name="condition_notes"
+				placeholder="Gibt es Gerüche, Feuchtigkeit, Schädlingsbefall oder andere Besonderheiten?"
+				rows={3}
+			/>
+		</div>
+	</div>
+</div>
