@@ -6,14 +6,19 @@ import iconReinigung from '@/assets/images/lead-form/lead-1-reinigung.png';
 import iconEntruempelung from '@/assets/images/lead-form/lead-2-entruempelung.png';
 import iconEntsorgung from '@/assets/images/lead-form/lead-3-entsorgung.png';
 import iconDesinfektion from '@/assets/images/lead-form/lead-4-desinfektion.png';
+import iconGeruchsneutralisation from '@/assets/images/lead-form/lead-4-geruchsneutralisation.png';
 import iconMalerarbeiten from '@/assets/images/lead-form/lead-6-malerarbeiten.png';
 import iconRenovierung from '@/assets/images/lead-form/lead-7-renovierung.png';
 
-const services = [
+const mainServices = [
 	{ value: 'reinigung', label: 'Reinigung', icon: iconReinigung },
 	{ value: 'entruempelung', label: 'Entrümpelung', icon: iconEntruempelung },
 	{ value: 'entsorgung', label: 'Entsorgung', icon: iconEntsorgung },
+];
+
+const addonServices = [
 	{ value: 'desinfektion', label: 'Desinfektion', icon: iconDesinfektion },
+	{ value: 'geruchsneutralisation', label: 'Geruchsneutralisation', icon: iconGeruchsneutralisation },
 	{ value: 'malerarbeiten', label: 'Malerarbeiten', icon: iconMalerarbeiten },
 	{ value: 'renovierung', label: 'Renovierung', icon: iconRenovierung },
 ];
@@ -26,16 +31,37 @@ const paymentOptions = [
 ---
 
 <div data-step="1" class="step-content" data-step-title="Wobei können wir Ihnen helfen?" data-step-subtitle="Mehrfachauswahl möglich – wir stimmen alles transparent mit Ihnen ab.">
-	<div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
-		{services.map((service) => (
-			<ServiceTile
-				name="services"
-				value={service.value}
-				label={service.label}
-				icon={service.icon}
-				multiSelect={true}
-			/>
-		))}
+	<div class="mb-4">
+		<p class="text-base font-bold">
+			Leistungen auswählen<span class="text-red-500">*</span>
+		</p>
+		<p class="text-sm text-muted">Mehrfachauswahl möglich</p>
+	</div>
+
+	<div class="service-grid">
+		<div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-3">
+			{mainServices.map((service) => (
+				<ServiceTile
+					name="services"
+					value={service.value}
+					label={service.label}
+					icon={service.icon}
+					multiSelect={true}
+				/>
+			))}
+		</div>
+
+		<div class="addon-services-row grid grid-cols-2 gap-3 mb-6">
+			{addonServices.map((service) => (
+				<ServiceTile
+					name="services"
+					value={service.value}
+					label={service.label}
+					icon={service.icon}
+					multiSelect={true}
+				/>
+			))}
+		</div>
 	</div>
 
 	<div class="mt-6">
@@ -52,3 +78,18 @@ const paymentOptions = [
 		</p>
 	</div>
 </div>
+
+<style>
+	@media (min-width: 768px) {
+		.addon-services-row {
+			display: flex;
+			flex-wrap: nowrap;
+			gap: 0.75rem;
+		}
+
+		.addon-services-row > :global(label) {
+			flex: 1 1 auto;
+			min-width: 0;
+		}
+	}
+</style>

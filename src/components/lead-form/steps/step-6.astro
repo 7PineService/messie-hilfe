@@ -2,7 +2,7 @@
 import { Input, Textarea } from '@/components/ui';
 ---
 
-<div data-step="6" class="step-content hidden" aria-hidden="true" data-step-title="Kontakt – anonym & unverbindlich" data-step-subtitle="Sie entscheiden, wie viel Sie angeben möchten.">
+<div data-step="6" class="step-content hidden" aria-hidden="true" data-step-title="Wie können wir Sie erreichen?" data-step-subtitle="Für Rückfragen und unser Angebot – diskret und sicher.">
 
 	<div class="grid md:grid-cols-2 gap-8">
 		<div class="space-y-6">
@@ -15,62 +15,48 @@ import { Input, Textarea } from '@/components/ui';
 				<Input
 					name="email"
 					type="email"
-					placeholder="E-Mail-Adresse"
+					placeholder="E-Mail-Adresse*"
 					required
 				/>
 				<Input
 					name="phone"
 					type="tel"
-					placeholder="Handynummer"
+					placeholder="Handynummer*"
 					required
 				/>
 			</div>
 
 			<div class="space-y-4">
 				<p class="text-base font-bold">Ansprechpartner</p>
-				<Input
-					name="company"
-					placeholder="Firmenname (optional)"
-				/>
-				<Input
-					name="vat_id"
-					placeholder="Umsatzsteuer-ID (optional)"
-				/>
 				<div class="grid grid-cols-2 gap-3">
-					<div>
-						<label class="block text-xs text-muted mb-1">Anrede*</label>
-						<select
-							name="salutation"
-							required
-							class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
-						>
-							<option value="">Bitte wählen</option>
-							<option value="herr">Herr</option>
-							<option value="frau">Frau</option>
-						</select>
-					</div>
-					<div>
-						<label class="block text-xs text-muted mb-1">Titel</label>
-						<select
-							name="title"
-							class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
-						>
-							<option value="">Kein Titel</option>
-							<option value="dr">Dr.</option>
-							<option value="prof">Prof.</option>
-							<option value="prof_dr">Prof. Dr.</option>
-						</select>
-					</div>
+					<select
+						name="salutation"
+						required
+						class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
+					>
+						<option value="" disabled selected>Anrede*</option>
+						<option value="herr">Herr</option>
+						<option value="frau">Frau</option>
+					</select>
+					<select
+						name="title"
+						class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
+					>
+						<option value="" disabled selected>Titel (optional)</option>
+						<option value="dr">Dr.</option>
+						<option value="prof">Prof.</option>
+						<option value="prof_dr">Prof. Dr.</option>
+					</select>
 				</div>
 				<div class="grid grid-cols-2 gap-3">
 					<Input
 						name="first_name"
-						placeholder="Vorname"
+						placeholder="Vorname*"
 						required
 					/>
 					<Input
 						name="last_name"
-						placeholder="Nachname"
+						placeholder="Nachname*"
 						required
 					/>
 				</div>
@@ -82,26 +68,26 @@ import { Input, Textarea } from '@/components/ui';
 					<div class="col-span-2">
 						<Input
 							name="street"
-							placeholder="Straße"
+							placeholder="Straße*"
 							required
 						/>
 					</div>
 					<Input
 						name="street_number"
-						placeholder="Nr."
+						placeholder="Nr.*"
 						required
 					/>
 				</div>
 				<div class="grid grid-cols-3 gap-3">
 					<Input
 						name="postal_code"
-						placeholder="PLZ"
+						placeholder="PLZ*"
 						required
 					/>
 					<div class="col-span-2">
 						<Input
 							name="city"
-							placeholder="Stadt"
+							placeholder="Stadt*"
 							required
 						/>
 					</div>
@@ -121,10 +107,6 @@ import { Input, Textarea } from '@/components/ui';
 					<span class="text-base font-medium">Abweichende Einsatzadresse angeben</span>
 				</label>
 				<div id="different-address" class="hidden mt-4 space-y-4">
-					<Input
-						name="job_company"
-						placeholder="Firmenname (optional)"
-					/>
 					<div class="grid grid-cols-3 gap-3">
 						<div class="col-span-2">
 							<Input
@@ -228,13 +210,6 @@ import { Input, Textarea } from '@/components/ui';
 						Ich habe die <a href="/datenschutz/" target="_blank" class="underline hover:text-cta-primary">Datenschutzerklärung</a> zur Kenntnis genommen.
 					</span>
 				</label>
-
-				<button
-					type="submit"
-					class="w-full cta-primary text-white font-semibold px-6 py-3 rounded-xl text-base transition-colors"
-				>
-					Jetzt kostenlos anfragen
-				</button>
 
 				<div class="space-y-2 text-center">
 					<p class="text-sm opacity-70">100 % anonym – keine Weitergabe Ihrer Daten</p>

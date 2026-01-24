@@ -22,7 +22,7 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 	data-lead-form={formId}
 	data-initial-step={initialStep}
 >
-	<form id={formId} class="lead-form" method="POST" action={contactApiEndpoint || '#'}>
+	<form id={formId} class="lead-form" novalidate>
 		<!-- Steps Container -->
 		<div class="steps-container">
 			<slot />
@@ -54,9 +54,36 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
 				</svg>
 			</button>
+
+			<!-- Submit Button (shown only on step 6) -->
+			<button
+				type="button"
+				class="submit-btn hidden cta-primary text-white font-semibold px-6 py-3 rounded-xl text-base transition-colors"
+				data-action="submit"
+			>
+				Jetzt kostenlos anfragen
+			</button>
 		</div>
 	</form>
 </div>
+
+<style is:global>
+	/* Error state styles - must be global for dynamically created elements */
+	.is-invalid {
+		border-color: #dc2626 !important;
+		background-color: #fef2f2 !important;
+	}
+
+	.is-invalid:focus {
+		--tw-ring-color: #dc2626;
+	}
+
+	.field-error {
+		color: #dc2626;
+		font-size: 0.875rem;
+		margin-top: 0.25rem;
+	}
+</style>
 
 <script define:vars={{ formId, contactApiEndpoint, isDev: import.meta.env.DEV }}>
 	document.addEventListener('DOMContentLoaded', () => {
@@ -68,10 +95,12 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 		const steps = form.querySelectorAll('[data-step]');
 		const backBtn = form.querySelector('[data-action="prev"]');
 		const nextBtn = form.querySelector('[data-action="next"]');
+		const submitBtn = form.querySelector('.submit-btn');
 		const navigationButtons = form.querySelector('.navigation-buttons');
 
 		const totalSteps = steps.length;
 		let currentStep = parseInt(container.getAttribute('data-initial-step') || '1', 10);
+		let isInitialLoad = true;
 
 		// Form data storage
 		let formData = {};
@@ -186,24 +215,19 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 				backBtn.style.visibility = currentStep > 1 ? 'visible' : 'hidden';
 			}
 
-			// Hide/show next button based on step
-			if (nextBtn) {
+			// Hide/show next button and submit button based on step
+			if (nextBtn && submitBtn) {
 				if (currentStep === totalSteps) {
 					nextBtn.classList.add('hidden');
+					submitBtn.classList.remove('hidden');
 				} else {
 					nextBtn.classList.remove('hidden');
+					submitBtn.classList.add('hidden');
 				}
 			}
 
-			// Update navigation buttons layout for step 6
 			if (navigationButtons) {
-				if (currentStep === totalSteps) {
-					// Show only back button on step 6
-					navigationButtons.style.justifyContent = 'flex-start';
-				} else {
-					// Show both buttons on other steps
-					navigationButtons.style.justifyContent = 'space-between';
-				}
+				navigationButtons.style.justifyContent = 'space-between';
 			}
 
 			// Update step indicator in header
@@ -221,8 +245,56 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			// Restore data for current step
 			restoreStepData(currentStep);
 
-			// Scroll to top of form
-			container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			// Scroll to top of page (skip on initial load to prevent auto-scroll issue)
+			if (!isInitialLoad) {
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			}
+			isInitialLoad = false;
+		}
+
+		// Clear previous error states
+		function clearStepErrors(step) {
+			step.querySelectorAll('.field-error').forEach(el => el.remove());
+			step.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+		}
+
+		// Get German error message based on validity state
+		function getErrorMessage(input) {
+			if (input.validity.valueMissing) return 'Dieses Feld ist erforderlich.';
+			if (input.validity.typeMismatch && input.type === 'email') return 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+			if (input.validity.typeMismatch && input.type === 'tel') return 'Bitte geben Sie eine gültige Telefonnummer ein.';
+			return 'Bitte überprüfen Sie Ihre Eingabe.';
+		}
+
+		// Show error for a field
+		function showFieldError(input, message) {
+			input.classList.add('is-invalid');
+			const errorEl = document.createElement('p');
+			errorEl.className = 'field-error';
+			errorEl.textContent = message;
+
+			// Find the appropriate parent to append error
+			if (input.type === 'checkbox' || input.type === 'radio') {
+				// For checkboxes/radios, append after the label
+				const label = input.closest('label');
+				if (label && label.parentElement) {
+					label.parentElement.appendChild(errorEl);
+				}
+			} else {
+				// For regular inputs, append inside the parent container
+				const parent = input.parentElement;
+				if (parent) {
+					parent.appendChild(errorEl);
+				}
+			}
+		}
+
+		// Show error for a grid/container (like service selection)
+		function showGridError(container, message) {
+			const errorEl = document.createElement('p');
+			errorEl.className = 'field-error';
+			errorEl.textContent = message;
+			container.after(errorEl);
 		}
 
 		// Validate current step
@@ -230,15 +302,169 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			const step = form.querySelector(`[data-step="${stepNum}"]`);
 			if (!step) return true;
 
-			const requiredInputs = step.querySelectorAll('[required]');
-			let isValid = true;
+			// Clear previous errors
+			clearStepErrors(step);
 
-			requiredInputs.forEach((input) => {
-				if (!input.checkValidity()) {
-					isValid = false;
-					input.reportValidity();
+			let isValid = true;
+			let firstInvalidField = null;
+
+			// Special handling for step 6 - group errors by section
+			if (stepNum === 6) {
+				const sections = {
+					contact: { fields: ['email', 'phone'], message: 'Bitte füllen Sie alle Kontaktinformationen aus.' },
+					person: { fields: ['salutation', 'first_name', 'last_name'], message: 'Bitte füllen Sie alle Ansprechpartner-Felder aus.' },
+					address: { fields: ['street', 'street_number', 'postal_code', 'city'], message: 'Bitte füllen Sie alle Adressfelder aus.' },
+					privacy: { fields: ['privacy'], message: 'Bitte akzeptieren Sie die Datenschutzerklärung.', skipHighlight: true }
+				};
+
+				for (const [key, section] of Object.entries(sections)) {
+					let sectionHasError = false;
+					let sectionContainer = null;
+
+					section.fields.forEach(fieldName => {
+						const input = step.querySelector(`[name="${fieldName}"]`);
+						if (input && input.hasAttribute('required') && !input.checkValidity()) {
+							if (!section.skipHighlight) {
+								input.classList.add('is-invalid');
+							}
+							sectionHasError = true;
+							if (!firstInvalidField) firstInvalidField = input;
+
+							if (!sectionContainer) {
+								if (key === 'contact' || key === 'person' || key === 'address') {
+									sectionContainer = input.closest('.space-y-4');
+								}
+							}
+						}
+					});
+
+					if (sectionHasError) {
+						const errorEl = document.createElement('p');
+						errorEl.className = 'field-error';
+						errorEl.textContent = section.message;
+
+						if (key === 'privacy') {
+							const privacyLabel = step.querySelector('label:has([name="privacy"])');
+							if (privacyLabel) {
+								const anonymText = step.querySelector('.space-y-2.text-center');
+								if (anonymText && anonymText.parentElement) {
+									anonymText.parentElement.insertBefore(errorEl, anonymText);
+								}
+							}
+						} else if (sectionContainer) {
+							sectionContainer.insertAdjacentElement('afterend', errorEl);
+						}
+						isValid = false;
+					}
 				}
-			});
+			} else {
+				// Check required inputs for other steps
+				const requiredInputs = step.querySelectorAll('[required]');
+				requiredInputs.forEach((input) => {
+					if (!input.checkValidity()) {
+						isValid = false;
+						showFieldError(input, getErrorMessage(input));
+						if (!firstInvalidField) firstInvalidField = input;
+					}
+				});
+			}
+
+			// Custom validation for Step 1: at least one service selected
+			if (stepNum === 1) {
+				const checkedServices = step.querySelectorAll('input[name="services[]"]:checked');
+				if (checkedServices.length === 0) {
+					isValid = false;
+					const serviceGrid = step.querySelector('.service-grid');
+					if (serviceGrid) {
+						showGridError(serviceGrid, 'Bitte wählen Sie mindestens eine Leistung aus.');
+						if (!firstInvalidField) firstInvalidField = serviceGrid;
+					}
+				}
+			}
+
+			// Custom validation for Step 2: object type, elevator, and furnishing required
+			if (stepNum === 2) {
+				const checkedObjectType = step.querySelectorAll('input[name="object_type"]:checked');
+				if (checkedObjectType.length === 0) {
+					isValid = false;
+					const objectTypeGrid = step.querySelector('.object-type-grid');
+					if (objectTypeGrid) {
+						showGridError(objectTypeGrid, 'Bitte wählen Sie eine Objektart aus.');
+						if (!firstInvalidField) firstInvalidField = objectTypeGrid;
+					}
+				}
+
+				const checkedElevator = step.querySelectorAll('input[name="elevator"]:checked');
+				if (checkedElevator.length === 0) {
+					isValid = false;
+					const elevatorGrid = step.querySelector('.elevator-grid');
+					if (elevatorGrid) {
+						showGridError(elevatorGrid, 'Bitte geben Sie an, ob ein Aufzug vorhanden ist.');
+						if (!firstInvalidField) firstInvalidField = elevatorGrid;
+					}
+				}
+
+				const checkedFurnishing = step.querySelectorAll('input[name="furnishing"]:checked');
+				if (checkedFurnishing.length === 0) {
+					isValid = false;
+					const furnishingGrid = step.querySelector('.furnishing-grid');
+					if (furnishingGrid) {
+						showGridError(furnishingGrid, 'Bitte wählen Sie einen Möblierungsgrad aus.');
+						if (!firstInvalidField) firstInvalidField = furnishingGrid;
+					}
+				}
+			}
+
+			if (stepNum === 3) {
+				const checkedCondition = step.querySelectorAll('input[name="condition"]:checked');
+				if (checkedCondition.length === 0) {
+					isValid = false;
+					const conditionGrid = step.querySelector('.condition-grid');
+					if (conditionGrid) {
+						showGridError(conditionGrid, 'Bitte wählen Sie den Zustand der Räume aus.');
+						if (!firstInvalidField) firstInvalidField = conditionGrid;
+					}
+				}
+
+				const checkedClutter = step.querySelectorAll('input[name="clutter_level"]:checked');
+				if (checkedClutter.length === 0) {
+					isValid = false;
+					const clutterGrid = step.querySelector('.clutter-grid');
+					if (clutterGrid) {
+						showGridError(clutterGrid, 'Bitte wählen Sie den Entrümpelungsgrad aus.');
+						if (!firstInvalidField) firstInvalidField = clutterGrid;
+					}
+				}
+			}
+
+			if (stepNum === 5) {
+				const checkedTiming = step.querySelectorAll('input[name="timing"]:checked');
+				if (checkedTiming.length === 0) {
+					isValid = false;
+					const timingGrid = step.querySelector('.timing-grid');
+					if (timingGrid) {
+						showGridError(timingGrid, 'Bitte wählen Sie eine Option aus.');
+						if (!firstInvalidField) firstInvalidField = timingGrid;
+					}
+				} else {
+					const selectedTiming = step.querySelector('input[name="timing"]:checked');
+					if (selectedTiming && selectedTiming.value === 'specific_date') {
+						const dateField = step.querySelector('input[name="preferred_date"]');
+						if (!dateField || !dateField.value) {
+							isValid = false;
+							const timingGrid = step.querySelector('.timing-grid');
+							if (timingGrid) {
+								showGridError(timingGrid, 'Bitte wählen Sie ein Datum aus.');
+								if (!firstInvalidField) firstInvalidField = timingGrid;
+							}
+						}
+					}
+				}
+			}
+
+			if (firstInvalidField) {
+				firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			}
 
 			return isValid;
 		}
@@ -266,19 +492,17 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 		}
 
 		// Handle form submission
-		async function handleSubmit(e) {
-			e.preventDefault();
-
+		async function handleSubmit() {
 			if (!validateStep(currentStep)) return;
 
 			collectStepData(currentStep);
 
-			const submitBtn = nextBtn;
-			if (!submitBtn) return;
+			const submitButton = form.querySelector('.submit-btn');
+			if (!submitButton) return;
 
-			const originalText = submitBtn.innerHTML;
-			submitBtn.disabled = true;
-			submitBtn.innerHTML = '<span>Wird gesendet...</span>';
+			const originalText = submitButton.innerHTML;
+			submitButton.disabled = true;
+			submitButton.innerHTML = '<span>Wird gesendet...</span>';
 
 			// Prepare form data for submission
 			const submitData = {
@@ -316,8 +540,8 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 				} catch (error) {
 					if (isDev) console.error('Form submission error:', error);
 					alert('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
-					submitBtn.disabled = false;
-					submitBtn.innerHTML = originalText;
+					submitButton.disabled = false;
+					submitButton.innerHTML = originalText;
 				}
 			} else {
 				// No endpoint - just redirect (dev mode)
@@ -330,7 +554,75 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 		// Event listeners
 		backBtn?.addEventListener('click', prevStep);
 		nextBtn?.addEventListener('click', nextStep);
-		form.addEventListener('submit', handleSubmit);
+		submitBtn?.addEventListener('click', handleSubmit);
+
+		function clearErrorOnChange(input) {
+			input.classList.remove('is-invalid');
+
+			if (input.type === 'checkbox' || input.type === 'radio') {
+				const gridContainer = input.closest('.service-grid, .object-type-grid, .elevator-grid, .furnishing-grid, .condition-grid, .clutter-grid, .timing-grid');
+				if (gridContainer) {
+					const nextSibling = gridContainer.nextElementSibling;
+					if (nextSibling && nextSibling.classList.contains('field-error')) {
+						nextSibling.remove();
+					}
+				}
+				const label = input.closest('label');
+				if (label && label.parentElement) {
+					const errorEl = label.parentElement.querySelector('.field-error');
+					if (errorEl) errorEl.remove();
+				}
+
+				if (input.name === 'privacy') {
+					const step6 = input.closest('[data-step="6"]');
+					if (step6) {
+						const anonymText = step6.querySelector('.space-y-2.text-center');
+						if (anonymText && anonymText.parentElement) {
+							const prevSibling = anonymText.previousElementSibling;
+							if (prevSibling && prevSibling.classList.contains('field-error')) {
+								prevSibling.remove();
+							}
+						}
+					}
+				}
+			} else {
+				const step6Fields = ['email', 'phone', 'salutation', 'first_name', 'last_name', 'street', 'street_number', 'postal_code', 'city'];
+				if (step6Fields.includes(input.name)) {
+					const sectionContainer = input.closest('.space-y-4');
+					if (sectionContainer) {
+						const nextSibling = sectionContainer.nextElementSibling;
+						if (nextSibling && nextSibling.classList.contains('field-error')) {
+							nextSibling.remove();
+						}
+					}
+				} else {
+					// Error is inside the parent container for other steps
+					const parent = input.parentElement;
+					if (parent) {
+						const errorEl = parent.querySelector('.field-error');
+						if (errorEl) errorEl.remove();
+					}
+				}
+
+				if (input.name === 'preferred_date') {
+					const step5 = input.closest('[data-step="5"]');
+					if (step5) {
+						const timingGrid = step5.querySelector('.timing-grid');
+						if (timingGrid) {
+							const nextSibling = timingGrid.nextElementSibling;
+							if (nextSibling && nextSibling.classList.contains('field-error')) {
+								nextSibling.remove();
+							}
+						}
+					}
+				}
+			}
+		}
+
+		form.querySelectorAll('input, select, textarea').forEach((input) => {
+			const eventType = (input.type === 'checkbox' || input.type === 'radio') ? 'change' : 'input';
+			input.addEventListener(eventType, () => clearErrorOnChange(input));
+		});
 
 		// Initialize UI
 		updateUI();

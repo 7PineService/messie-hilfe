@@ -24,8 +24,8 @@ const clutterOptions = [
 
 <div data-step="3" class="step-content hidden" aria-hidden="true" data-step-title="Wie ist der aktuelle Zustand der Räume?" data-step-subtitle="Das hilft uns, Aufwand und Dauer realistisch einzuschätzen.">
 	<div class="space-y-6">
-		<div>
-			<p class="text-base font-bold mb-3">Zustand der Räume</p>
+		<div class="condition-grid">
+			<p class="text-base font-bold mb-3">Zustand der Räume<span class="text-red-500">*</span></p>
 			<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
 				{conditionLevels.map((level) => (
 					<ServiceTile
@@ -58,11 +58,12 @@ const clutterOptions = [
 			</p>
 		</div>
 
-		<div>
-			<p class="text-base font-bold mb-3">Entrümpelungsgrad</p>
+		<div class="clutter-grid">
+			<p class="text-base font-bold mb-3">Entrümpelungsgrad<span class="text-red-500">*</span></p>
 			<RadioGroup
 				name="clutter_level"
 				options={clutterOptions}
+				class="md:flex md:flex-row md:flex-wrap md:gap-4"
 			/>
 		</div>
 

@@ -66,22 +66,52 @@ const disabledClasses = 'opacity-50 cursor-not-allowed';
 </label>
 
 <style>
+	/* State 1: Default/Inactive */
 	.service-tile {
 		background: var(--color-surface-light-peach);
 		border-color: rgba(212, 186, 165, 0.3);
 		box-shadow: 0 1px 3px rgba(99, 99, 99, 0.12);
+		transition: all 0.15s ease-in-out;
 	}
 
-	.service-tile:hover {
+	/* State 2: Hover (not selected) */
+	.service-tile:hover:not(:has(input:checked)) {
 		background: var(--color-surface-warm-peach);
-		border-color: var(--color-cta-primary);
+		border-color: var(--color-border-primary);
+		transform: translateY(-1px);
+		box-shadow: 0 4px 8px rgba(99, 99, 99, 0.15);
 	}
 
+	/* State 3: Selected/Active */
 	.service-tile:has(input:checked) {
 		background: var(--color-surface-warm-peach);
 		border-color: var(--color-cta-primary);
+		outline: 2px solid var(--color-cta-primary);
+		outline-offset: -1px;
 	}
 
+	/* Checkmark indicator for selected state */
+	.service-tile:has(input:checked)::after {
+		content: '';
+		position: absolute;
+		top: 6px;
+		right: 6px;
+		width: 20px;
+		height: 20px;
+		background: var(--color-cta-primary);
+		border-radius: 50%;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='3'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7'/%3E%3C/svg%3E");
+		background-size: 14px;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	/* State 4: Hover on Selected (deselect hint) */
+	.service-tile:has(input:checked):hover {
+		opacity: 0.85;
+	}
+
+	/* Focus state for accessibility */
 	.service-tile:has(input:focus-visible) {
 		outline: 2px solid var(--color-border-primary);
 		outline-offset: 2px;
