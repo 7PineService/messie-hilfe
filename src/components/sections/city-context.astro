@@ -1,0 +1,113 @@
+---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+
+interface Props {
+  heading: string;
+  text: string;
+  image: ImageMetadata;
+}
+
+const { heading, text, image } = Astro.props;
+
+const paragraphs = text.split('\n\n').filter(p => p.trim());
+const optimizedImage = await getImage({ src: image, format: 'webp' });
+---
+
+<section
+  id="city-context-section"
+  class="section-bg flex items-center py-8 md:py-10 lg:py-12"
+  style={`background-image: url('${optimizedImage.src}');`}
+>
+  <div class="container mx-auto px-4 w-full">
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+      <h2
+        class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight mb-6 md:mb-8"
+      >
+        {heading}
+      </h2>
+
+      <div class="space-y-4 md:space-y-6">
+        {paragraphs.map((paragraph) => (
+          <p class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-90 leading-relaxed">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-bg {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    color: var(--color-text-primary);
+  }
+
+  /* Add subtle overlay for better text readability if needed */
+  .section-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-surface-primary);
+    opacity: 0.03;
+    pointer-events: none;
+  }
+
+  /* Ensure text stays readable on all screen sizes */
+  @media (max-width: 768px) {
+    .section-bg {
+      background-position: center center;
+    }
+  }
+
+  @media (min-width: 1024px) and (orientation: landscape) {
+    #city-context-section {
+      min-height: calc(100vh - 7rem);
+    }
+  }
+
+  @media (max-width: 1023px), (orientation: portrait) {
+    #city-context-section {
+      min-height: auto;
+    }
+  }
+
+  @media (max-height: 600px) and (orientation: landscape) {
+    #city-context-section {
+      min-height: auto;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const setCityContextHeight = () => {
+      const header = document.getElementById('main-header')
+      const cityContextSection = document.getElementById('city-context-section')
+
+      if (!header || !cityContextSection) return
+
+      const isLandscape = window.matchMedia('(orientation: landscape)').matches
+      const isDesktop = window.innerWidth >= 1024
+      const isTallEnough = window.innerHeight >= 600
+
+      if (isDesktop && isLandscape && isTallEnough) {
+        const headerHeight = header.offsetHeight
+        cityContextSection.style.minHeight = `calc(100vh - ${headerHeight}px)`
+      } else {
+        cityContextSection.style.minHeight = 'auto'
+      }
+    }
+
+    setCityContextHeight()
+
+    window.addEventListener('resize', setCityContextHeight)
+    window.addEventListener('orientationchange', () => {
+      setTimeout(setCityContextHeight, 100)
+    })
+  })
+</script>

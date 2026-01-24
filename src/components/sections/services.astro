@@ -9,6 +9,12 @@ import serviceImg4 from '@/assets/images/section-services-4.png'
 import serviceImg5 from '@/assets/images/section-services-5.png'
 import serviceImg6 from '@/assets/images/section-services-6.png'
 import serviceImg7 from '@/assets/images/section-services-7.png'
+
+interface Props {
+  introText?: string;
+}
+
+const { introText } = Astro.props;
 ---
 
 <section
@@ -19,9 +25,11 @@ import serviceImg7 from '@/assets/images/section-services-7.png'
     <div
       class="max-w-[90%] mx-auto text-center relative z-10"
     >
-      <p class="transition-text text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-70 leading-relaxed mb-4 md:mb-6">
-        Darauf aufbauend haben wir unsere Leistungen klar strukturiert.
-      </p>
+      {introText && (
+        <p class="transition-text text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-70 leading-relaxed mb-4 md:mb-6">
+          {introText}
+        </p>
+      )}
       <h2
         class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold leading-tight"
       >

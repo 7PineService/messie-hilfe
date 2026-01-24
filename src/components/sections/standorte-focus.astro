@@ -9,13 +9,13 @@ import duesseldorfImg from '@/assets/images/section-standorte-duesseldorf.png';
 import essenImg from '@/assets/images/section-standorte-essen.png';
 
 const cities = [
-  { name: 'Berlin', image: berlinImg },
-  { name: 'München', image: muenchenImg },
-  { name: 'Hamburg', image: hamburgImg },
-  { name: 'Köln', image: koelnImg },
-  { name: 'Frankfurt', image: frankfurtImg },
-  { name: 'Düsseldorf', image: duesseldorfImg },
-  { name: 'Essen', image: essenImg },
+  { name: 'Berlin', image: berlinImg, slug: 'berlin' },
+  { name: 'München', image: muenchenImg, slug: 'muenchen' },
+  { name: 'Hamburg', image: hamburgImg, slug: 'hamburg' },
+  { name: 'Köln', image: koelnImg, slug: 'koeln' },
+  { name: 'Frankfurt', image: frankfurtImg, slug: 'frankfurt' },
+  { name: 'Düsseldorf', image: duesseldorfImg, slug: 'duesseldorf' },
+  { name: 'Essen', image: essenImg, slug: 'essen' },
 ];
 ---
 
@@ -35,18 +35,20 @@ const cities = [
     <div class="cities-grid">
       {cities.map((city) => (
         <div class="city-card">
-          <div class="city-card-inner">
-            <div class="flex justify-center mb-3">
-              <Image
-                src={city.image}
-                alt={city.name}
-                class="city-icon"
-              />
+          <a href={`/${city.slug}/`} class="city-card-link">
+            <div class="city-card-inner">
+              <div class="flex justify-center mb-3">
+                <Image
+                  src={city.image}
+                  alt={city.name}
+                  class="city-icon"
+                />
+              </div>
+              <h3 class="city-name">
+                {city.name}
+              </h3>
             </div>
-            <h3 class="city-name">
-              {city.name}
-            </h3>
-          </div>
+          </a>
         </div>
       ))}
     </div>
@@ -90,6 +92,12 @@ const cities = [
   .city-card {
     width: 100%;
     max-width: 18.75rem;
+  }
+
+  .city-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
   }
 
   .city-card-inner {

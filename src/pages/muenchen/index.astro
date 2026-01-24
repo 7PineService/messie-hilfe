@@ -1,0 +1,54 @@
+---
+import BaseLayout from '@/layouts/base-layout.astro';
+import Hero from '@/components/sections/hero.astro';
+import CityContext from '@/components/sections/city-context.astro';
+import AnonymFormOverlay from '@/components/anonym-form-overlay.astro';
+import FloatingActionIcons from '@/components/floating-action-icons.astro';
+import Services from '@/components/sections/services.astro';
+import Steps from '@/components/sections/steps.astro';
+import Who from '@/components/sections/who.astro';
+import Why from '@/components/sections/why.astro';
+import Cost from '@/components/sections/cost.astro';
+import FAQ from '@/components/sections/faqs.astro';
+import { FinalCTA } from '@/components/sections';
+import { getCityBySlug } from '@/data/cities';
+import { SITE_URL } from '@/config/site';
+
+const cityData = getCityBySlug('muenchen');
+
+if (!cityData) {
+  return Astro.redirect('/404');
+}
+
+const heroDescriptionParagraphs = cityData.hero.text.split('\n\n').filter(p => p.trim());
+
+const canonicalUrl = `${SITE_URL}/${cityData.slug}/`;
+---
+
+<BaseLayout
+  title={cityData.meta.title}
+  description={cityData.meta.description}
+  canonicalUrl={canonicalUrl}
+>
+  <main>
+    <Hero
+      title={cityData.hero.h1}
+      description={heroDescriptionParagraphs}
+    />
+    <CityContext
+      heading={cityData.cityContext.h2}
+      text={cityData.cityContext.text}
+      image={cityData.cityContext.image}
+    />
+    <Services />
+    <Steps />
+    <Who />
+    <Why />
+    <Cost />
+    <FAQ />
+    <FinalCTA />
+  </main>
+
+  <AnonymFormOverlay />
+  <FloatingActionIcons />
+</BaseLayout>
