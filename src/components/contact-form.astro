@@ -14,6 +14,8 @@ interface Props {
 	overlayStyle?: boolean;
 	formTitle?: string;
 	submitButtonText?: string;
+	formType?: 'anonym' | 'contact';
+	formLocation?: string;
 }
 
 const {
@@ -28,7 +30,9 @@ const {
 	showTitle = true,
 	overlayStyle = false,
 	formTitle = 'Anonym anfragen',
-	submitButtonText = 'Anonym anfragen'
+	submitButtonText = 'Anonym anfragen',
+	formType = 'contact',
+	formLocation = null
 } = Astro.props;
 
 const contactApiEndpoint = CONTACT_API_ENDPOINT;
@@ -155,9 +159,36 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			</p>
 		</div>
 	</form>
+
+	<!-- Success State (hidden by default) -->
+	<div id={`${formId}-success`} class="hidden text-center py-8">
+		<!-- Green checkmark icon -->
+		<div class="mb-6 flex justify-center">
+			<svg class="w-16 h-16 md:w-20 md:h-20 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+			</svg>
+		</div>
+
+		<h3 class="text-2xl md:text-3xl font-semibold mb-4">Vielen Dank.</h3>
+
+		<div class="space-y-3 text-base opacity-80">
+			{formType === 'anonym' ? (
+				<>
+					<p>Ihre anonyme Anfrage ist bei uns angekommen.</p>
+					<p>Wir melden uns – sofern möglich – zeitnah bei Ihnen.</p>
+					{overlayStyle && <p class="opacity-60">Sie können dieses Fenster jetzt schließen.</p>}
+				</>
+			) : (
+				<>
+					<p>Ihre Anfrage ist bei uns angekommen.</p>
+					<p>Wir melden uns schnellstmöglich bei Ihnen.</p>
+				</>
+			)}
+		</div>
+	</div>
 </div>
 
-<script define:vars={{ contactApiEndpoint, formId, fileListId, formMessageId, privacyCheckboxId, filesInputId, overlayStyle, isDev: import.meta.env.DEV }}>
+<script define:vars={{ contactApiEndpoint, formId, fileListId, formMessageId, privacyCheckboxId, filesInputId, overlayStyle, isDev: import.meta.env.DEV, formType, formLocation }}>
 	const form = document.getElementById(formId);
 	let formMessage = null;
 	const fileInput = document.getElementById(filesInputId);
@@ -187,6 +218,73 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			formMessage.parentNode.removeChild(formMessage);
 			formMessage = null;
 		}
+	}
+
+	const successElement = document.getElementById(`${formId}-success`);
+
+	function showSuccessState() {
+		if (!form || !successElement) return;
+		form.style.display = 'none';
+		successElement.classList.remove('hidden');
+		successElement.classList.add('block');
+		successElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+	}
+
+	function resetToFormState() {
+		if (!form || !successElement) return;
+		form.style.display = 'block';
+		successElement.classList.add('hidden');
+		successElement.classList.remove('block');
+	}
+
+	let eventFired = false;
+
+	function trackLeadGeneration() {
+		if (eventFired) {
+			if (isDev) console.warn('[Tracking] Event already fired, skipping duplicate');
+			return;
+		}
+
+		if (typeof window === 'undefined' || !window.dataLayer) {
+			if (isDev) console.warn('[Tracking] dataLayer not available');
+			return;
+		}
+
+		let detectedFormLocation = formLocation;
+		if (!detectedFormLocation) {
+			if (overlayStyle) {
+				detectedFormLocation = 'modal';
+			} else if (formId.includes('hero')) {
+				detectedFormLocation = 'hero';
+			} else if (window.location.pathname.includes('kontakt')) {
+				detectedFormLocation = 'kontakt';
+			} else {
+				detectedFormLocation = 'startseite';
+			}
+		}
+
+		const eventData = {
+			'event': 'generate_lead',
+			'form_type': formType,
+			'form_location': detectedFormLocation
+		};
+
+		if (isDev) {
+			console.log('[Tracking] ✅ Firing generate_lead event');
+			console.log('[Tracking] Event data:', eventData);
+		}
+
+		window.dataLayer.push(eventData);
+		eventFired = true;
+	}
+
+	if (typeof window !== 'undefined') {
+		const resetFunctionName = `resetFormTracking_${formId.replace(/-/g, '')}`;
+		window[resetFunctionName] = () => {
+			eventFired = false;
+			resetToFormState();
+			if (isDev) console.log(`[Tracking] Reset form tracking for ${formId}`);
+		};
 	}
 
 	// File upload - simple storage until form submission
@@ -336,25 +434,12 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 							console.log('Server response:', responseData);
 						}
 
-						showMessage('mt-4 p-4 rounded-lg bg-green-100 text-green-800', 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.');
+						trackLeadGeneration();
 						form.reset();
 						if (fileList) fileList.innerHTML = '';
-						// Clear stored files
 						if (storedFileMap) storedFileMap.clear();
-
-						// Redirect after 2-3 seconds
-						setTimeout(() => {
-							if (isOverlayForm) {
-								window.location.href = '/danke-anonym/';
-							} else if (isOfferRequestPage) {
-								window.location.href = '/danke-anfrage/';
-							} else {
-								// Scroll to message (only if not redirecting)
-								if (formMessage) {
-									formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-								}
-							}
-						}, 2500);
+						clearMessage();
+						showSuccessState();
 					} else {
 						const errorText = await response.text().catch(() => 'Unknown error');
 						if (isDev) console.error('Server error:', response.status, errorText);
@@ -388,23 +473,11 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 							console.log('Server response:', responseData);
 						}
 
-						showMessage('mt-4 p-4 rounded-lg bg-green-100 text-green-800', 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns schnellstmöglich bei Ihnen.');
+						trackLeadGeneration();
 						form.reset();
 						if (fileList) fileList.innerHTML = '';
-
-						// Redirect after 2-3 seconds
-						setTimeout(() => {
-							if (isOverlayForm) {
-								window.location.href = '/danke-anonym/';
-							} else if (isOfferRequestPage) {
-								window.location.href = '/danke-anfrage/';
-							} else {
-								// Scroll to message (only if not redirecting)
-								if (formMessage) {
-									formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-								}
-							}
-						}, 2500);
+						clearMessage();
+						showSuccessState();
 					} else {
 						const errorText = await response.text().catch(() => 'Unknown error');
 						if (isDev) console.error('Server error:', response.status, errorText);
@@ -448,8 +521,7 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			console.log('=== Form Submission Data (Fallback Mode - No Endpoint) ===');
 			console.log('Form ID:', formId);
 			console.log('Form Data:', data);
-			
-			// Handle file uploads from stored Map - use unique function name based on filesInputId
+
 			const getFileMapFn = window[`getFileMap_${filesInputId}`];
 			const storedFileMap = getFileMapFn ? getFileMapFn() : null;
 			if (storedFileMap && storedFileMap.size > 0) {
@@ -460,9 +532,11 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 				}
 			}
 
-			showMessage('mt-4 p-4 rounded-lg bg-yellow-100 text-yellow-800', 'Formularfunktion wird konfiguriert. Bitte kontaktieren Sie uns direkt per Telefon oder E-Mail.');
+			trackLeadGeneration();
 			form.reset();
 			if (fileList) fileList.innerHTML = '';
+			clearMessage();
+			showSuccessState();
 		});
 	}
 </script>
