@@ -24,11 +24,16 @@
 						data-toggle-datepicker
 					/>
 					<span class="text-base font-semibold pr-4">Zu einem bestimmten Datum</span>
-					<input
-						type="date"
-						name="preferred_date"
-						class="hidden datepicker-field px-3 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary mt-3 md:mt-0"
-					/>
+					<div class="hidden datepicker-wrapper relative mt-3 md:mt-0">
+						<input
+							type="date"
+							name="preferred_date"
+							class="datepicker-field pl-3 pr-10 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary w-full md:w-auto"
+						/>
+						<svg class="calendar-icon absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+						</svg>
+					</div>
 				</label>
 			</div>
 
@@ -101,8 +106,22 @@
 		outline-offset: 2px;
 	}
 
-	.timing-option-with-field:has(input[type="radio"]:checked) .datepicker-field {
+	.timing-option-with-field:has(input[type="radio"]:checked) .datepicker-wrapper {
 		display: block;
+	}
+
+	.datepicker-field {
+		min-width: 160px;
+	}
+
+	/* Hide native calendar icon on webkit browsers */
+	.datepicker-field::-webkit-calendar-picker-indicator {
+		opacity: 0;
+		position: absolute;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		cursor: pointer;
 	}
 </style>
 
@@ -112,16 +131,30 @@
 		if (!step5) return;
 
 		const timingRadios = step5.querySelectorAll<HTMLInputElement>('input[name="timing"]');
-		const datepickerField = step5.querySelector<HTMLInputElement>('.datepicker-field');
+		const datepickerWrapper = step5.querySelector<HTMLElement>('.datepicker-wrapper');
+
+		function updateDatepickerVisibility() {
+			if (!step5) return;
+			const specificDateRadio = step5.querySelector<HTMLInputElement>('input[name="timing"][value="specific_date"]');
+			if (specificDateRadio?.checked) {
+				datepickerWrapper?.classList.remove('hidden');
+			} else {
+				datepickerWrapper?.classList.add('hidden');
+			}
+		}
 
 		timingRadios.forEach((radio) => {
-			radio.addEventListener('change', () => {
-				if (radio.value === 'specific_date' && radio.checked) {
-					datepickerField?.classList.remove('hidden');
-				} else {
-					datepickerField?.classList.add('hidden');
-				}
-			});
+			radio.addEventListener('change', updateDatepickerVisibility);
 		});
+
+		const observer = new MutationObserver(() => {
+			if (step5 && !step5.classList.contains('hidden')) {
+				updateDatepickerVisibility();
+			}
+		});
+
+		observer.observe(step5, { attributes: true, attributeFilter: ['class'] });
+
+		updateDatepickerVisibility();
 	});
 </script>

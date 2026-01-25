@@ -27,37 +27,49 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			<slot />
 		</div>
 
-		<div class="navigation-buttons flex items-center justify-between mt-8 pt-6 border-t border-border-primary">
-			<button
-				type="button"
-				class="back-btn flex items-center gap-2 text-base font-medium text-primary hover:text-cta-primary transition-colors cursor-pointer"
-				data-action="prev"
-				style="visibility: hidden;"
-			>
-				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-				</svg>
-				<span>Zurück</span>
-			</button>
+		<div class="mt-8 pt-6 border-t border-border-primary">
+			<div class="navigation-buttons flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-4">
+				<button
+					type="button"
+					class="back-btn flex items-center justify-center gap-2 text-base font-medium text-primary hover:text-cta-primary transition-colors cursor-pointer"
+					data-action="prev"
+					style="visibility: hidden;"
+				>
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+					</svg>
+					<span>Zurück</span>
+				</button>
 
-			<button
-				type="button"
-				class="next-btn cta-primary text-white font-semibold px-6 py-3 rounded-xl flex items-center gap-2 text-base transition-colors"
-				data-action="next"
-			>
-				<span>Weiter</span>
-				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-				</svg>
-			</button>
+				<div class="privacy-text-mobile space-y-2 text-center hidden md:hidden">
+					<p class="text-sm opacity-70">100 % anonym – keine Weitergabe Ihrer Daten</p>
+					<p class="text-xs opacity-50">Kommt es zu keinem Auftrag, löschen wir Ihre Daten spätestens nach 14 Tagen automatisch.</p>
+				</div>
 
-			<button
-				type="button"
-				class="submit-btn hidden cta-primary text-white font-semibold px-6 py-3 rounded-xl text-base transition-colors"
-				data-action="submit"
-			>
-				Jetzt kostenlos anfragen
-			</button>
+				<button
+					type="button"
+					class="next-btn cta-primary text-white font-semibold px-6 py-3 rounded-xl flex items-center justify-center gap-2 text-base transition-colors"
+					data-action="next"
+				>
+					<span>Weiter</span>
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+					</svg>
+				</button>
+
+				<button
+					type="button"
+					class="submit-btn hidden cta-primary text-white font-semibold px-6 py-3 rounded-xl text-base transition-colors"
+					data-action="submit"
+				>
+					Jetzt unverbindlich anfragen
+				</button>
+			</div>
+
+			<div class="privacy-text space-y-2 text-center mt-6 hidden max-md:hidden">
+				<p class="text-sm opacity-70">100 % anonym – keine Weitergabe Ihrer Daten</p>
+				<p class="text-xs opacity-50">Kommt es zu keinem Auftrag, löschen wir Ihre Daten spätestens nach 14 Tagen automatisch.</p>
+			</div>
 		</div>
 	</form>
 </div>
@@ -90,7 +102,8 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 		const backBtn = form.querySelector('[data-action="prev"]');
 		const nextBtn = form.querySelector('[data-action="next"]');
 		const submitBtn = form.querySelector('.submit-btn');
-		const navigationButtons = form.querySelector('.navigation-buttons');
+		const privacyText = form.querySelector('.privacy-text');
+		const privacyTextMobile = form.querySelector('.privacy-text-mobile');
 
 		const totalSteps = steps.length;
 		let currentStep = parseInt(container.getAttribute('data-initial-step') || '1', 10);
@@ -208,9 +221,22 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 				}
 			}
 
-			if (navigationButtons) {
-				navigationButtons.style.justifyContent = 'space-between';
+			if (privacyText) {
+				if (currentStep === totalSteps) {
+					privacyText.classList.remove('hidden');
+				} else {
+					privacyText.classList.add('hidden');
+				}
 			}
+
+			if (privacyTextMobile) {
+				if (currentStep === totalSteps) {
+					privacyTextMobile.classList.remove('hidden');
+				} else {
+					privacyTextMobile.classList.add('hidden');
+				}
+			}
+
 
 			const stepIndicator = document.querySelector('.step-indicator span');
 			if (stepIndicator) {
@@ -440,16 +466,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 					if (conditionGrid) {
 						showGridError(conditionGrid, 'Bitte wählen Sie den Zustand der Räume aus.');
 						if (!firstInvalidField) firstInvalidField = conditionGrid;
-					}
-				}
-
-				const checkedClutter = step.querySelectorAll('input[name="clutter_level"]:checked');
-				if (checkedClutter.length === 0) {
-					isValid = false;
-					const clutterGrid = step.querySelector('.clutter-grid');
-					if (clutterGrid) {
-						showGridError(clutterGrid, 'Bitte wählen Sie den Entrümpelungsgrad aus.');
-						if (!firstInvalidField) firstInvalidField = clutterGrid;
 					}
 				}
 			}

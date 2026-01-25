@@ -6,10 +6,6 @@ import { Input, Textarea } from '@/components/ui';
 
 	<div class="grid md:grid-cols-2 gap-8">
 		<div class="space-y-6">
-			<h3 class="text-lg font-semibold border-b border-gray-100 pb-2">
-				Rechnungsadresse & Ansprechpartner
-			</h3>
-
 			<div class="space-y-4">
 				<p class="text-base font-bold">Ihre Kontaktinformationen</p>
 				<Input
@@ -42,7 +38,7 @@ import { Input, Textarea } from '@/components/ui';
 						name="title"
 						class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
 					>
-						<option value="" disabled selected>Titel (optional)</option>
+						<option value="">Titel (optional)</option>
 						<option value="dr">Dr.</option>
 						<option value="prof">Prof.</option>
 						<option value="prof_dr">Prof. Dr.</option>
@@ -81,6 +77,9 @@ import { Input, Textarea } from '@/components/ui';
 				<div class="grid grid-cols-3 gap-3">
 					<Input
 						name="postal_code"
+						type="text"
+						inputmode="numeric"
+						pattern="[0-9]*"
 						placeholder="PLZ*"
 						required
 					/>
@@ -124,6 +123,9 @@ import { Input, Textarea } from '@/components/ui';
 					<div class="grid grid-cols-3 gap-3">
 						<Input
 							name="job_postal_code"
+							type="text"
+							inputmode="numeric"
+							pattern="[0-9]*"
 							placeholder="PLZ*"
 							data-conditional-required="has_different_address"
 						/>
@@ -163,7 +165,7 @@ import { Input, Textarea } from '@/components/ui';
 							name="alt_title"
 							class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
 						>
-							<option value="" disabled selected>Titel (optional)</option>
+							<option value="">Titel (optional)</option>
 							<option value="dr">Dr.</option>
 							<option value="prof">Prof.</option>
 							<option value="prof_dr">Prof. Dr.</option>
@@ -213,11 +215,6 @@ import { Input, Textarea } from '@/components/ui';
 						Ich habe die <a href="/datenschutz/" target="_blank" class="underline hover:text-cta-primary">Datenschutzerklärung</a> zur Kenntnis genommen.
 					</span>
 				</label>
-
-				<div class="space-y-2 text-center">
-					<p class="text-sm opacity-70">100 % anonym – keine Weitergabe Ihrer Daten</p>
-					<p class="text-xs opacity-50">Kommt es zu keinem Auftrag, löschen wir Ihre Daten spätestens nach 14 Tagen automatisch.</p>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -281,6 +278,15 @@ import { Input, Textarea } from '@/components/ui';
 	document.addEventListener('DOMContentLoaded', () => {
 		const step6 = document.querySelector('[data-step="6"]');
 		if (!step6) return;
+
+		// Numbers-only validation for postal codes
+		const postalCodeInputs = step6.querySelectorAll<HTMLInputElement>('input[name="postal_code"], input[name="job_postal_code"]');
+		postalCodeInputs.forEach((input) => {
+			input.addEventListener('input', (e) => {
+				const target = e.target as HTMLInputElement;
+				target.value = target.value.replace(/[^0-9]/g, '');
+			});
+		});
 
 		const toggleCheckboxes = step6.querySelectorAll<HTMLInputElement>('[data-toggle-section]');
 
