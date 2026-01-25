@@ -94,116 +94,118 @@ import { Input, Textarea } from '@/components/ui';
 			</div>
 		</div>
 
-		<div class="space-y-6">
-			<div class="optional-section">
-				<label class="flex items-center gap-3 cursor-pointer">
-					<input
-						type="checkbox"
-						name="has_different_address"
-						class="w-4 h-4 border-border-primary rounded text-primary focus:ring-border-primary"
-						data-toggle-section="different-address"
-					/>
-					<span class="text-base font-medium">Abweichende Einsatzadresse angeben</span>
-				</label>
-				<div id="different-address" class="hidden mt-4 space-y-4">
-					<div class="grid grid-cols-3 gap-3">
-						<div class="col-span-2">
+		<div class="flex flex-col">
+			<div class="flex-1 space-y-6">
+				<div class="optional-section">
+					<label class="flex items-center gap-3 cursor-pointer">
+						<input
+							type="checkbox"
+							name="has_different_address"
+							class="w-4 h-4 border-border-primary rounded text-primary focus:ring-border-primary"
+							data-toggle-section="different-address"
+						/>
+						<span class="text-base font-medium">Abweichende Einsatzadresse angeben</span>
+					</label>
+					<div id="different-address" class="hidden mt-4 space-y-4">
+						<div class="grid grid-cols-3 gap-3">
+							<div class="col-span-2">
+								<Input
+									name="job_street"
+									placeholder="Straße*"
+									data-conditional-required="has_different_address"
+								/>
+							</div>
 							<Input
-								name="job_street"
-								placeholder="Straße*"
+								name="job_street_number"
+								placeholder="Nr.*"
 								data-conditional-required="has_different_address"
 							/>
 						</div>
-						<Input
-							name="job_street_number"
-							placeholder="Nr.*"
-							data-conditional-required="has_different_address"
-						/>
+						<div class="grid grid-cols-3 gap-3">
+							<Input
+								name="job_postal_code"
+								type="text"
+								inputmode="numeric"
+								pattern="[0-9]*"
+								placeholder="PLZ*"
+								data-conditional-required="has_different_address"
+							/>
+							<div class="col-span-2">
+								<Input
+									name="job_city"
+									placeholder="Stadt*"
+									data-conditional-required="has_different_address"
+								/>
+							</div>
+						</div>
 					</div>
-					<div class="grid grid-cols-3 gap-3">
-						<Input
-							name="job_postal_code"
-							type="text"
-							inputmode="numeric"
-							pattern="[0-9]*"
-							placeholder="PLZ*"
-							data-conditional-required="has_different_address"
+				</div>
+
+				<div class="optional-section">
+					<label class="flex items-center gap-3 cursor-pointer">
+						<input
+							type="checkbox"
+							name="has_different_contact"
+							class="w-4 h-4 border-border-primary rounded text-primary focus:ring-border-primary"
+							data-toggle-section="different-contact"
 						/>
-						<div class="col-span-2">
+						<span class="text-base font-medium">Abweichenden Ansprechpartner angeben</span>
+					</label>
+					<div id="different-contact" class="hidden mt-4 space-y-4">
+						<div class="grid grid-cols-2 gap-3">
+							<select
+								name="alt_salutation"
+								data-conditional-required="has_different_contact"
+								class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
+							>
+								<option value="" disabled selected>Anrede*</option>
+								<option value="herr">Herr</option>
+								<option value="frau">Frau</option>
+							</select>
+							<select
+								name="alt_title"
+								class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
+							>
+								<option value="">Titel (optional)</option>
+								<option value="dr">Dr.</option>
+								<option value="prof">Prof.</option>
+								<option value="prof_dr">Prof. Dr.</option>
+							</select>
+						</div>
+						<div class="grid grid-cols-2 gap-3">
 							<Input
-								name="job_city"
-								placeholder="Stadt*"
-								data-conditional-required="has_different_address"
+								name="alt_first_name"
+								placeholder="Vorname*"
+								data-conditional-required="has_different_contact"
+							/>
+							<Input
+								name="alt_last_name"
+								placeholder="Nachname*"
+								data-conditional-required="has_different_contact"
 							/>
 						</div>
+						<Input
+							name="alt_email"
+							type="email"
+							placeholder="E-Mail-Adresse*"
+							data-conditional-required="has_different_contact"
+						/>
+						<Input
+							name="alt_phone"
+							type="tel"
+							placeholder="Handynummer*"
+							data-conditional-required="has_different_contact"
+						/>
+						<Textarea
+							name="alt_notes"
+							placeholder="Weitere Angaben (z. B. Name auf Klingelschild)"
+							rows={2}
+						/>
 					</div>
 				</div>
 			</div>
 
-			<div class="optional-section">
-				<label class="flex items-center gap-3 cursor-pointer">
-					<input
-						type="checkbox"
-						name="has_different_contact"
-						class="w-4 h-4 border-border-primary rounded text-primary focus:ring-border-primary"
-						data-toggle-section="different-contact"
-					/>
-					<span class="text-base font-medium">Abweichenden Ansprechpartner angeben</span>
-				</label>
-				<div id="different-contact" class="hidden mt-4 space-y-4">
-					<div class="grid grid-cols-2 gap-3">
-						<select
-							name="alt_salutation"
-							data-conditional-required="has_different_contact"
-							class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
-						>
-							<option value="" disabled selected>Anrede*</option>
-							<option value="herr">Herr</option>
-							<option value="frau">Frau</option>
-						</select>
-						<select
-							name="alt_title"
-							class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
-						>
-							<option value="">Titel (optional)</option>
-							<option value="dr">Dr.</option>
-							<option value="prof">Prof.</option>
-							<option value="prof_dr">Prof. Dr.</option>
-						</select>
-					</div>
-					<div class="grid grid-cols-2 gap-3">
-						<Input
-							name="alt_first_name"
-							placeholder="Vorname*"
-							data-conditional-required="has_different_contact"
-						/>
-						<Input
-							name="alt_last_name"
-							placeholder="Nachname*"
-							data-conditional-required="has_different_contact"
-						/>
-					</div>
-					<Input
-						name="alt_email"
-						type="email"
-						placeholder="E-Mail-Adresse*"
-						data-conditional-required="has_different_contact"
-					/>
-					<Input
-						name="alt_phone"
-						type="tel"
-						placeholder="Handynummer*"
-						data-conditional-required="has_different_contact"
-					/>
-					<Textarea
-						name="alt_notes"
-						placeholder="Weitere Angaben (z. B. Name auf Klingelschild)"
-						rows={2}
-					/>
-				</div>
-			</div>
-
-			<div class="mt-8 pt-6 border-t border-gray-100 space-y-6">
+			<div class="mt-6 pt-6 border-t border-gray-100">
 				<label class="flex items-start gap-3 cursor-pointer">
 					<input
 						type="checkbox"

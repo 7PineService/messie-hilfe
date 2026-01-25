@@ -28,12 +28,11 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 		</div>
 
 		<div class="mt-8 pt-6 border-t border-border-primary">
-			<div class="navigation-buttons flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-4">
+			<div class="navigation-buttons flex flex-row items-center justify-between gap-4">
 				<button
 					type="button"
-					class="back-btn flex items-center justify-center gap-2 text-base font-medium text-primary hover:text-cta-primary transition-colors cursor-pointer"
+					class="back-btn hidden items-center justify-center gap-2 text-base font-medium text-primary hover:text-cta-primary transition-colors cursor-pointer"
 					data-action="prev"
-					style="visibility: hidden;"
 				>
 					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -104,6 +103,7 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 		const submitBtn = form.querySelector('.submit-btn');
 		const privacyText = form.querySelector('.privacy-text');
 		const privacyTextMobile = form.querySelector('.privacy-text-mobile');
+		const navigationButtons = form.querySelector('.navigation-buttons');
 
 		const totalSteps = steps.length;
 		let currentStep = parseInt(container.getAttribute('data-initial-step') || '1', 10);
@@ -208,7 +208,19 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			});
 
 			if (backBtn) {
-				backBtn.style.visibility = currentStep > 1 ? 'visible' : 'hidden';
+				if (currentStep > 1) {
+					backBtn.classList.remove('hidden');
+					backBtn.classList.add('flex');
+					if (nextBtn) {
+						nextBtn.classList.remove('w-full');
+					}
+				} else {
+					backBtn.classList.add('hidden');
+					backBtn.classList.remove('flex');
+					if (nextBtn) {
+						nextBtn.classList.add('w-full');
+					}
+				}
 			}
 
 			if (nextBtn && submitBtn) {
@@ -232,11 +244,44 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			if (privacyTextMobile) {
 				if (currentStep === totalSteps) {
 					privacyTextMobile.classList.remove('hidden');
+					privacyTextMobile.style.display = 'block';
 				} else {
 					privacyTextMobile.classList.add('hidden');
+					privacyTextMobile.style.display = '';
 				}
 			}
 
+			if (privacyText) {
+				privacyText.classList.add('hidden');
+			}
+
+			if (navigationButtons) {
+				if (currentStep === totalSteps) {
+					navigationButtons.classList.remove('flex-row', 'justify-between', 'items-center');
+					navigationButtons.classList.add('flex-col');
+					if (submitBtn) {
+						submitBtn.classList.add('w-full', 'order-1');
+					}
+					if (privacyTextMobile) {
+						privacyTextMobile.classList.add('order-2');
+					}
+					if (backBtn) {
+						backBtn.classList.add('w-full', 'order-3');
+					}
+				} else {
+					navigationButtons.classList.remove('flex-col');
+					navigationButtons.classList.add('flex-row', 'justify-between', 'items-center');
+					if (submitBtn) {
+						submitBtn.classList.remove('w-full', 'order-1');
+					}
+					if (privacyTextMobile) {
+						privacyTextMobile.classList.remove('order-2');
+					}
+					if (backBtn) {
+						backBtn.classList.remove('w-full', 'order-3');
+					}
+				}
+			}
 
 			const stepIndicator = document.querySelector('.step-indicator span');
 			if (stepIndicator) {
@@ -340,10 +385,7 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 						if (key === 'privacy') {
 							const privacyLabel = step.querySelector('label:has([name="privacy"])');
 							if (privacyLabel) {
-								const anonymText = step.querySelector('.space-y-2.text-center');
-								if (anonymText && anonymText.parentElement) {
-									anonymText.parentElement.insertBefore(errorEl, anonymText);
-								}
+								privacyLabel.insertAdjacentElement('afterend', errorEl);
 							}
 						} else if (sectionContainer) {
 							sectionContainer.insertAdjacentElement('afterend', errorEl);
@@ -599,14 +641,11 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 				}
 
 				if (input.name === 'privacy') {
-					const step6 = input.closest('[data-step="6"]');
-					if (step6) {
-						const anonymText = step6.querySelector('.space-y-2.text-center');
-						if (anonymText && anonymText.parentElement) {
-							const prevSibling = anonymText.previousElementSibling;
-							if (prevSibling && prevSibling.classList.contains('field-error')) {
-								prevSibling.remove();
-							}
+					const label = input.closest('label');
+					if (label) {
+						const nextSibling = label.nextElementSibling;
+						if (nextSibling && nextSibling.classList.contains('field-error')) {
+							nextSibling.remove();
 						}
 					}
 				}
