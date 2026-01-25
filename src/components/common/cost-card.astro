@@ -34,7 +34,6 @@ const rightImage = isFeatured ? (props as FeaturedCardProps).rightImage : undefi
 ---
 
 <>
-  <!-- cost-card-desktop -->
   <div
     class={cn(
       classes,
@@ -42,7 +41,6 @@ const rightImage = isFeatured ? (props as FeaturedCardProps).rightImage : undefi
       isFeatured ? 'items-center' : ''
     )}
   >
-    <!-- Left Image -->
     <div
       class={cn(
         'flex items-center lg:max-w-[24%] max-w-[30%]',
@@ -56,7 +54,6 @@ const rightImage = isFeatured ? (props as FeaturedCardProps).rightImage : undefi
       />
     </div>
 
-    <!-- Content Section -->
     <div class={cn(
       'flex flex-col justify-center flex-1 px-4 py-4 lg:py-6'
     )}>
@@ -93,7 +90,6 @@ const rightImage = isFeatured ? (props as FeaturedCardProps).rightImage : undefi
       </div>
     </div>
 
-    <!-- Right Image (Featured only) -->
     {
       rightImage && (
         <div class="lg:max-w-[24%] flex items-center">
@@ -108,7 +104,6 @@ const rightImage = isFeatured ? (props as FeaturedCardProps).rightImage : undefi
     }
   </div>
 
-  <!-- cost-card-mobile -->
   <div
     class="cost-card-mobile md:hidden grid grid-cols-6 transition rounded-lg p-0"
   >

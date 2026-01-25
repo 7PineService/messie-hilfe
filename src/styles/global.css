@@ -10,14 +10,12 @@
       Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   }
 
-  /* Form input placeholder styling */
   input::placeholder,
   textarea::placeholder {
     color: var(--color-muted);
     opacity: 1;
   }
 
-  /* Remove default focus outline and ensure custom focus styles work */
   input:focus,
   textarea:focus,
   select:focus {
@@ -25,13 +23,11 @@
     outline-offset: 0;
   }
 
-  /* Checkbox styling to match theme */
   input[type='checkbox'] {
     accent-color: var(--color-primary);
     cursor: pointer;
   }
 
-  /* CTA Button styles using theme colors */
   .cta-primary {
     background-color: var(--color-cta-primary);
     transition: background-color 0.2s ease-in-out;
@@ -65,94 +61,44 @@
 }
 
 @theme {
-  /* ============================================================================
-	   SURFACE COLORS - Reusable backgrounds for any component
-	   ============================================================================ */
-
-  /* Primary surface - Lightest warm beige for main backgrounds */
   --color-surface-primary: #fcf4f0;
 
-  /* Secondary surface - Medium warm beige for secondary backgrounds */
   --color-surface-secondary: #f9ede4;
 
-  /* Tertiary surface - Peachy beige for tertiary backgrounds */
   --color-surface-tertiary: #f7ebe4;
 
-  /* Muted surface - Subtle warm background */
   --color-surface-muted: #fbf4f0;
 
-  /* Input surface - Form input backgrounds */
   --color-surface-input: #f2e7df;
 
-  /* ============================================================================
-	   BORDER COLORS - Reusable borders
-	   ============================================================================ */
-
-  /* Primary border - Main border color for inputs and containers */
   --color-border-primary: #d4baa5;
 
-  /* Secondary border - Muted brown for buttons and CTAs */
   --color-border-secondary: #c1a9a1;
 
-  /* ============================================================================
-	   TEXT COLORS - Reusable text colors
-	   ============================================================================ */
-
-  /* Primary text - Dark brown for main content */
   --color-primary: #4a3221;
 
-  /* Muted text - Lighter brown for placeholders and secondary text */
   --color-muted: #a39186;
 
-  /* ============================================================================
-	   INTERACTIVE COLORS - CTAs & Buttons
-	   ============================================================================ */
-
-  /* Primary CTA - Bronze button (Anonym anfragen - contact form) */
   --color-cta-primary: #c49f70;
   --color-cta-primary-hover: #b38f60;
 
-  /* Secondary CTA - Light beige button (Kostenloses Angebot - header/hero) */
   --color-cta-secondary: #f4e4d3;
   --color-cta-secondary-hover: #e9d4c3;
 
-  /* Tertiary CTA - Warm peach button (Service cards) */
   --color-cta-tertiary: #fdecc9;
 
-  /* ============================================================================
-	   ACCENT COLORS
-	   ============================================================================ */
-
-  /* Accent bronze - Darker bronze for icons and accents */
   --color-accent-bronze: #bb853c;
 
-	/* ============================================================================
-	   LOGO TEXT COLORS - Brand logo styling
-	   ============================================================================ */
-
-	/* Logo "Messie-" part - Dark brown, always semibold */
 	--color-logo-messie: #463324;
 
-	/* Logo "Hilfe" part - Light beige with glow effect, always regular weight */
 	--color-logo-hilfe: #F4E4D3;
 
-	/* ============================================================================
-	   ADDITIONAL SURFACE COLORS
-	   ============================================================================ */
-
-  /* Light peach surface - Cards and containers */
   --color-surface-light-peach: #fef7f5;
   --color-surface-warm-peach: #fdecc9;
 
-  /* Gradient surfaces - For image containers */
   --color-surface-gradient-light: linear-gradient(225deg, #fcecd7, #fdf3f2);
   --color-surface-gradient-warm: linear-gradient(225deg, ##fce8cf, #fcedda);
 
-  /* ============================================================================
-	   SHADOW COLORS
-	   ============================================================================ */
-
-  /* Shadow colors for cards and containers */
   --color-shadow-subtle: rgba(99, 99, 99, 0.2);
   --color-shadow-warm: #f5dcae;
 }

@@ -13,7 +13,6 @@ const trustPoints = [
 <section class="section-bg py-8 md:py-10 lg:py-12">
   <div class="container mx-auto px-4">
     <div class="max-w-3xl mx-auto text-center">
-      <!-- Map illustration (reused from hero) -->
       <div class="flex justify-center mb-4 md:mb-5 lg:mb-6">
         <Image
           src={heroStandorte}
@@ -22,18 +21,15 @@ const trustPoints = [
         />
       </div>
 
-      <!-- Section heading -->
       <h2 class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold text-primary leading-tight mb-4 md:mb-6">
         Auch außerhalb dieser Städte für Sie da
       </h2>
 
-      <!-- Main text -->
       <p class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl text-primary opacity-80 leading-relaxed mb-8 md:mb-10">
         Wir unterstützen Menschen in ganz Deutschland.<br />
         Auch wenn Ihr Wohnort hier nicht aufgeführt ist, prüfen wir Ihr Anliegen individuell und helfen Ihnen nach Möglichkeit weiter.
       </p>
 
-      <!-- Trust Points - Vertical on mobile, horizontal row on desktop -->
       <div class="flex flex-col md:flex-row md:items-center md:justify-center gap-4 md:gap-6 lg:gap-8">
         {trustPoints.map((point) => (
           <div class="flex items-center justify-center md:justify-start gap-3">

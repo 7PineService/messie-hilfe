@@ -163,12 +163,10 @@ export const cities: CityData[] = [
   },
 ];
 
-// Helper function to get city by slug
 export function getCityBySlug(slug: string): CityData | undefined {
   return cities.find((city) => city.slug === slug);
 }
 
-// Get all city slugs for static path generation
 export function getCitySlugs(): string[] {
   return cities.map((city) => city.slug);
 }

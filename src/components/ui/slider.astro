@@ -40,7 +40,6 @@ const sliderRowClasses = 'flex items-center gap-4';
 const sliderClasses = 'flex-1 h-2 bg-white rounded-lg appearance-none cursor-pointer accent-primary';
 const inputClasses = 'w-24 px-3 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary transition-colors text-center';
 
-// Generate milestone positions
 const milestonePositions = showMilestones && milestones.length > 0
 	? milestones.map(m => ({
 		value: m,
@@ -98,7 +97,6 @@ const milestonePositions = showMilestones && milestones.length > 0
 </div>
 
 <style>
-	/* Custom slider styling */
 	input[type="range"] {
 		-webkit-appearance: none;
 		appearance: none;
@@ -164,12 +162,10 @@ const milestonePositions = showMilestones && milestones.length > 0
 			const display = container.querySelector('[data-slider-display]') as HTMLInputElement;
 
 			if (slider && display) {
-				// Sync slider to display
 				slider.addEventListener('input', () => {
 					display.value = slider.value;
 				});
 
-				// Sync display to slider
 				display.addEventListener('input', () => {
 					const val = parseInt(display.value, 10);
 					const min = parseInt(slider.min, 10);
@@ -182,7 +178,6 @@ const milestonePositions = showMilestones && milestones.length > 0
 					}
 				});
 
-				// Clamp display value on blur
 				display.addEventListener('blur', () => {
 					const val = parseInt(display.value, 10);
 					const min = parseInt(slider.min, 10);

@@ -25,7 +25,6 @@ const fileListId = `${id}-list`;
 ---
 
 <div class={cn('file-upload-container', className)} data-file-upload={id} {...rest}>
-	<!-- Upload Area -->
 	<div class="border-2 border-dashed border-border-primary rounded-lg p-6 hover:border-cta-primary transition-colors bg-surface-input">
 		<input
 			type="file"
@@ -37,25 +36,21 @@ const fileListId = `${id}-list`;
 			class="hidden"
 		/>
 		<label for={id} class="cursor-pointer flex flex-col items-center gap-3">
-			<!-- Upload Icon -->
 			<div class="w-12 h-12 rounded-lg flex items-center justify-center border border-dashed" style="background-color: #fbe5ce; border-color: #eacb62;">
 				<svg class="w-6 h-6 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
 				</svg>
 			</div>
-			<!-- Text -->
 			<div class="text-center">
 				<p class="text-sm font-medium">Dateien hierhin ziehen oder auswählen</p>
 				<p class="text-xs text-muted mt-1">Bilder (JPG/PNG/HEIC) | kurze Videos (MP4)</p>
 			</div>
-			<!-- Button -->
 			<span class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-surface-secondary border border-border-primary hover:bg-surface-tertiary transition-colors">
 				Dateien auswählen
 			</span>
 		</label>
 	</div>
 
-	<!-- File List -->
 	<div id={fileListId} class="mt-3 space-y-2"></div>
 </div>
 
@@ -67,24 +62,20 @@ const fileListId = `${id}-list`;
 
 		if (!fileInput || !fileList || !container) return;
 
-		// Store files with unique IDs
 		const fileMap = new Map();
 		let fileIdCounter = 0;
 
-		// Add file to storage
 		function addFile(file) {
 			const fileId = `file-${fileIdCounter++}`;
 			fileMap.set(fileId, file);
 			renderFileList();
 		}
 
-		// Remove file from storage
 		function removeFile(fileId) {
 			fileMap.delete(fileId);
 			renderFileList();
 		}
 
-		// Render the file list
 		function renderFileList() {
 			fileList.innerHTML = '';
 
@@ -119,15 +110,12 @@ const fileListId = `${id}-list`;
 			});
 		}
 
-		// Handle file selection
 		fileInput.addEventListener('change', (e) => {
 			const newFiles = Array.from(e.target.files || []);
 			newFiles.forEach(file => addFile(file));
-			// Clear the input so same file can be selected again
 			fileInput.value = '';
 		});
 
-		// Drag and drop support
 		const dropZone = container.querySelector('label');
 
 		['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -154,7 +142,6 @@ const fileListId = `${id}-list`;
 			files.forEach(file => addFile(file));
 		});
 
-		// Expose fileMap for form submission
 		window[`getFileMap_${id}`] = () => fileMap;
 	});
 </script>

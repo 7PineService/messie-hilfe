@@ -21,7 +21,6 @@ const cities = [
 
 <section class="section-bg py-8 md:py-10 lg:py-12">
   <div class="container mx-auto px-4">
-    <!-- Section heading -->
     <div class="max-w-3xl mx-auto text-center mb-8 md:mb-10 lg:mb-12">
       <h2 class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold text-primary leading-tight mb-4">
         Unsere Schwerpunkte
@@ -31,7 +30,6 @@ const cities = [
       </p>
     </div>
 
-    <!-- 3-column grid -->
     <div class="cities-grid">
       {cities.map((city) => (
         <div class="city-card">
@@ -83,7 +81,6 @@ const cities = [
       gap: 1rem;
     }
 
-    /* Center the last item (7th) when it's alone in the row */
     .city-card:nth-child(7) {
       grid-column: 2 / 3;
     }

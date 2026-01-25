@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import BaseLayout from '@/layouts/base-layout.astro';
 import { CONTACT_PHONE_DISPLAY, CONTACT_EMAIL } from '@/config/site';
 
-// Import images
 import dankeImg1 from '@/assets/images/lead-form/lead-19-danke-1.png';
 import dankeImg2 from '@/assets/images/lead-form/lead-20-danke-2.png';
 import dankeImg3 from '@/assets/images/lead-form/lead-21-danke-3.png';
@@ -16,7 +15,6 @@ import dankeImg3 from '@/assets/images/lead-form/lead-21-danke-3.png';
 	<section class="bg-surface-muted py-6 md:py-8">
 		<div class="container mx-auto px-4">
 			<div class="max-w-4xl mx-auto">
-				<!-- Success Icon & Headline -->
 				<div class="text-center mb-8">
 					<div class="mb-5">
 						<div class="w-20 h-20 mx-auto rounded-full bg-surface-warm-peach border-2 border-cta-primary flex items-center justify-center">
@@ -34,16 +32,13 @@ import dankeImg3 from '@/assets/images/lead-form/lead-21-danke-3.png';
 					</p>
 				</div>
 
-				<!-- Main Content Card -->
 				<div class="bg-surface-secondary rounded-2xl shadow-lg p-6 md:p-8 space-y-6">
-					<!-- Next Steps -->
 					<div>
 						<h2 class="text-lg font-semibold mb-6 text-center">
 							So geht es jetzt weiter:
 						</h2>
 
 						<div class="grid md:grid-cols-3 gap-6">
-							<!-- Step 1 -->
 							<div class="text-center">
 								<div class="mx-auto">
 									<Image src={dankeImg1} alt="Prüfung" class="w-24 h-24 md:w-28 md:h-28 mx-auto object-contain" loading="eager" />
@@ -52,7 +47,6 @@ import dankeImg3 from '@/assets/images/lead-form/lead-21-danke-3.png';
 								<p class="text-xs text-muted leading-relaxed">diskret & ohne Bewertung</p>
 							</div>
 
-							<!-- Step 2 -->
 							<div class="text-center">
 								<div class="mx-auto">
 									<Image src={dankeImg2} alt="Kontaktaufnahme" class="w-24 h-24 md:w-28 md:h-28 mx-auto object-contain" loading="eager" />
@@ -61,7 +55,6 @@ import dankeImg3 from '@/assets/images/lead-form/lead-21-danke-3.png';
 								<p class="text-xs text-muted leading-relaxed">telefonisch oder per E-Mail – so wie Sie es angegeben haben</p>
 							</div>
 
-							<!-- Step 3 -->
 							<div class="text-center">
 								<div class="mx-auto">
 									<Image src={dankeImg3} alt="Beratung" class="w-24 h-24 md:w-28 md:h-28 mx-auto object-contain" loading="eager" />
@@ -72,7 +65,6 @@ import dankeImg3 from '@/assets/images/lead-form/lead-21-danke-3.png';
 						</div>
 					</div>
 
-					<!-- Reassurance Text -->
 					<div class="text-center pt-4">
 						<p class="text-sm font-semibold mb-1">
 							Sie müssen nichts vorbereiten, nichts erklären und nichts rechtfertigen.
@@ -82,7 +74,6 @@ import dankeImg3 from '@/assets/images/lead-form/lead-21-danke-3.png';
 						</p>
 					</div>
 
-					<!-- Contact Info -->
 					<div class="text-center">
 						<p class="text-sm text-muted mb-4">Falls Sie uns doch direkt erreichen möchten:</p>
 						<div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
@@ -103,7 +94,6 @@ import dankeImg3 from '@/assets/images/lead-form/lead-21-danke-3.png';
 					</div>
 				</div>
 
-				<!-- Back to Home -->
 				<div class="mt-6 text-center">
 					<a href="/" class="inline-flex items-center gap-2 text-muted hover:text-primary transition-colors font-medium text-sm">
 						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,7 +107,6 @@ import dankeImg3 from '@/assets/images/lead-form/lead-21-danke-3.png';
 	</section>
 </BaseLayout>
 
-<!-- Track form completion -->
 <script is:inline>
 	(function() {
 		if (typeof window === 'undefined' || !window.dataLayer) {

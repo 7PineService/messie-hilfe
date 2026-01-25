@@ -1,23 +1,13 @@
-// Environment Variable Validation
-// Validates required and optional environment variables at build time
-// Provides helpful error messages for missing or invalid values
-
 interface ValidationResult {
 	valid: boolean;
 	errors: string[];
 	warnings: string[];
 }
 
-/**
- * Validates environment variables
- * @param isProduction - Whether we're in production build
- * @returns Validation result with errors and warnings
- */
 export function validateEnvVariables(isProduction: boolean = false): ValidationResult {
 	const errors: string[] = [];
 	const warnings: string[] = [];
 
-	// Required environment variables
 	const requiredVars = [
 		{
 			name: 'PUBLIC_SITE_URL',
@@ -62,7 +52,6 @@ export function validateEnvVariables(isProduction: boolean = false): ValidationR
 		}
 	];
 
-	// Optional but recommended environment variables
 	const recommendedVars = [
 		{
 			name: 'PUBLIC_CONTACT_API_ENDPOINT',
@@ -76,7 +65,6 @@ export function validateEnvVariables(isProduction: boolean = false): ValidationR
 		}
 	];
 
-	// Validate required variables
 	requiredVars.forEach(({ name, value, validate }) => {
 		const error = validate(value);
 		if (error) {
@@ -84,7 +72,6 @@ export function validateEnvVariables(isProduction: boolean = false): ValidationR
 		}
 	});
 
-	// Validate recommended variables (warnings only)
 	recommendedVars.forEach(({ name, value, validate }) => {
 		if (value) {
 			const error = validate(value);
@@ -94,7 +81,6 @@ export function validateEnvVariables(isProduction: boolean = false): ValidationR
 		}
 	});
 
-	// Validate CookieYes configuration (required if enabled)
 	const cookieYesUrl = import.meta.env.PUBLIC_COOKIEYES_SCRIPT_URL;
 	const cookieYesEnabled = import.meta.env.PUBLIC_COOKIEYES_ENABLED !== 'false';
 	
@@ -105,7 +91,6 @@ export function validateEnvVariables(isProduction: boolean = false): ValidationR
 		errors.push('PUBLIC_COOKIEYES_SCRIPT_URL must use HTTPS');
 	}
 
-	// Validate Twitter handle format
 	const twitterHandle = import.meta.env.PUBLIC_TWITTER_HANDLE;
 	if (twitterHandle && !twitterHandle.startsWith('@')) {
 		warnings.push('PUBLIC_TWITTER_HANDLE should start with "@" (e.g., @username)');
@@ -118,10 +103,6 @@ export function validateEnvVariables(isProduction: boolean = false): ValidationR
 	};
 }
 
-/**
- * Validates and logs environment variables
- * Call this during build or at app startup
- */
 export function validateAndLogEnv(isProduction: boolean = false): void {
 	const result = validateEnvVariables(isProduction);
 

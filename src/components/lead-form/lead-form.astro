@@ -23,14 +23,11 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 	data-initial-step={initialStep}
 >
 	<form id={formId} class="lead-form" novalidate>
-		<!-- Steps Container -->
 		<div class="steps-container">
 			<slot />
 		</div>
 
-		<!-- Navigation Buttons (hidden on step 6) -->
 		<div class="navigation-buttons flex items-center justify-between mt-8 pt-6 border-t border-border-primary">
-			<!-- Back Button (hidden on step 1) -->
 			<button
 				type="button"
 				class="back-btn flex items-center gap-2 text-base font-medium text-primary hover:text-cta-primary transition-colors cursor-pointer"
@@ -43,7 +40,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 				<span>Zurück</span>
 			</button>
 
-			<!-- Next Button -->
 			<button
 				type="button"
 				class="next-btn cta-primary text-white font-semibold px-6 py-3 rounded-xl flex items-center gap-2 text-base transition-colors"
@@ -55,7 +51,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 				</svg>
 			</button>
 
-			<!-- Submit Button (shown only on step 6) -->
 			<button
 				type="button"
 				class="submit-btn hidden cta-primary text-white font-semibold px-6 py-3 rounded-xl text-base transition-colors"
@@ -68,7 +63,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 </div>
 
 <style is:global>
-	/* Error state styles - must be global for dynamically created elements */
 	.is-invalid {
 		border-color: #dc2626 !important;
 		background-color: #fef2f2 !important;
@@ -102,10 +96,8 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 		let currentStep = parseInt(container.getAttribute('data-initial-step') || '1', 10);
 		let isInitialLoad = true;
 
-		// Form data storage
 		let formData = {};
 
-		// Try to load saved data from sessionStorage
 		try {
 			const savedData = sessionStorage.getItem(`${formId}_data`);
 			if (savedData) {
@@ -115,7 +107,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			if (isDev) console.warn('Could not load saved form data:', e);
 		}
 
-		// Save form data to sessionStorage
 		function saveFormData() {
 			try {
 				sessionStorage.setItem(`${formId}_data`, JSON.stringify(formData));
@@ -124,7 +115,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			}
 		}
 
-		// Collect data from current step
 		function collectStepData(stepNum) {
 			const step = form.querySelector(`[data-step="${stepNum}"]`);
 			if (!step) return;
@@ -155,7 +145,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			saveFormData();
 		}
 
-		// Restore data to a step
 		function restoreStepData(stepNum) {
 			const step = form.querySelector(`[data-step="${stepNum}"]`);
 			if (!step) return;
@@ -167,13 +156,11 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 
 				if (input.type === 'checkbox') {
 					input.checked = formData[name].includes(input.value);
-					// Trigger change event for conditional fields
 					input.dispatchEvent(new Event('change', { bubbles: true }));
 				} else if (input.type === 'radio') {
 					input.checked = formData[name] === input.value;
 				} else {
 					input.value = formData[name];
-					// Sync slider displays
 					if (input.hasAttribute('data-slider-input')) {
 						const display = step.querySelector(`[data-slider-display]`);
 						if (display) display.value = input.value;
@@ -182,16 +169,13 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			});
 		}
 
-		// Update step visibility and navigation
 		function updateUI() {
-			// Update step visibility
 			steps.forEach((step, index) => {
 				const stepNum = index + 1;
 				if (stepNum === currentStep) {
 					step.classList.remove('hidden');
 					step.setAttribute('aria-hidden', 'false');
 
-					// Update page title and subtitle
 					const stepTitle = step.getAttribute('data-step-title');
 					const stepSubtitle = step.getAttribute('data-step-subtitle');
 
@@ -210,12 +194,10 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 				}
 			});
 
-			// Update back button visibility
 			if (backBtn) {
 				backBtn.style.visibility = currentStep > 1 ? 'visible' : 'hidden';
 			}
 
-			// Hide/show next button and submit button based on step
 			if (nextBtn && submitBtn) {
 				if (currentStep === totalSteps) {
 					nextBtn.classList.add('hidden');
@@ -230,35 +212,29 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 				navigationButtons.style.justifyContent = 'space-between';
 			}
 
-			// Update step indicator in header
 			const stepIndicator = document.querySelector('.step-indicator span');
 			if (stepIndicator) {
 				stepIndicator.textContent = `Schritt ${currentStep} von ${totalSteps}`;
 			}
 
-			// Update progress bar
 			const progressBar = document.querySelector('.step-indicator .bg-cta-primary');
 			if (progressBar) {
 				progressBar.style.width = `${(currentStep / totalSteps) * 100}%`;
 			}
 
-			// Restore data for current step
 			restoreStepData(currentStep);
 
-			// Scroll to top of page (skip on initial load to prevent auto-scroll issue)
 			if (!isInitialLoad) {
 				window.scrollTo({ top: 0, behavior: 'smooth' });
 			}
 			isInitialLoad = false;
 		}
 
-		// Clear previous error states
 		function clearStepErrors(step) {
 			step.querySelectorAll('.field-error').forEach(el => el.remove());
 			step.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
 		}
 
-		// Get German error message based on validity state
 		function getErrorMessage(input) {
 			if (input.validity.valueMissing) return 'Dieses Feld ist erforderlich.';
 			if (input.validity.typeMismatch && input.type === 'email') return 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
@@ -266,22 +242,18 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			return 'Bitte überprüfen Sie Ihre Eingabe.';
 		}
 
-		// Show error for a field
 		function showFieldError(input, message) {
 			input.classList.add('is-invalid');
 			const errorEl = document.createElement('p');
 			errorEl.className = 'field-error';
 			errorEl.textContent = message;
 
-			// Find the appropriate parent to append error
 			if (input.type === 'checkbox' || input.type === 'radio') {
-				// For checkboxes/radios, append after the label
 				const label = input.closest('label');
 				if (label && label.parentElement) {
 					label.parentElement.appendChild(errorEl);
 				}
 			} else {
-				// For regular inputs, append inside the parent container
 				const parent = input.parentElement;
 				if (parent) {
 					parent.appendChild(errorEl);
@@ -289,7 +261,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			}
 		}
 
-		// Show error for a grid/container (like service selection)
 		function showGridError(container, message) {
 			const errorEl = document.createElement('p');
 			errorEl.className = 'field-error';
@@ -297,18 +268,15 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			container.after(errorEl);
 		}
 
-		// Validate current step
 		function validateStep(stepNum) {
 			const step = form.querySelector(`[data-step="${stepNum}"]`);
 			if (!step) return true;
 
-			// Clear previous errors
 			clearStepErrors(step);
 
 			let isValid = true;
 			let firstInvalidField = null;
 
-			// Special handling for step 6 - group errors by section
 			if (stepNum === 6) {
 				const sections = {
 					contact: { fields: ['email', 'phone'], message: 'Bitte füllen Sie alle Kontaktinformationen aus.' },
@@ -358,7 +326,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 					}
 				}
 			} else {
-				// Check required inputs for other steps
 				const requiredInputs = step.querySelectorAll('[required]');
 				requiredInputs.forEach((input) => {
 					if (!input.checkValidity()) {
@@ -369,7 +336,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 				});
 			}
 
-			// Custom validation for Step 1: at least one service selected
 			if (stepNum === 1) {
 				const checkedServices = step.querySelectorAll('input[name="services[]"]:checked');
 				if (checkedServices.length === 0) {
@@ -382,7 +348,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 				}
 			}
 
-			// Custom validation for Step 2: object type, elevator, and furnishing required
 			if (stepNum === 2) {
 				const checkedObjectType = step.querySelectorAll('input[name="object_type"]:checked');
 				if (checkedObjectType.length === 0) {
@@ -469,7 +434,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			return isValid;
 		}
 
-		// Go to next step
 		function nextStep() {
 			if (!validateStep(currentStep)) return;
 
@@ -481,7 +445,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			}
 		}
 
-		// Go to previous step
 		function prevStep() {
 			collectStepData(currentStep);
 
@@ -491,7 +454,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			}
 		}
 
-		// Handle form submission
 		async function handleSubmit() {
 			if (!validateStep(currentStep)) return;
 
@@ -504,7 +466,6 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			submitButton.disabled = true;
 			submitButton.innerHTML = '<span>Wird gesendet...</span>';
 
-			// Prepare form data for submission
 			const submitData = {
 				...formData,
 				timestamp: new Date().toISOString(),
@@ -529,10 +490,8 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 					if (response.ok) {
 						if (isDev) console.log('Lead form submitted successfully!');
 
-						// Clear saved data
 						sessionStorage.removeItem(`${formId}_data`);
 
-						// Redirect to thank you page
 						window.location.href = '/anfrage/danke/';
 					} else {
 						throw new Error('Server error');
@@ -544,14 +503,12 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 					submitButton.innerHTML = originalText;
 				}
 			} else {
-				// No endpoint - just redirect (dev mode)
 				if (isDev) console.log('No endpoint configured, redirecting...');
 				sessionStorage.removeItem(`${formId}_data`);
 				window.location.href = '/anfrage/danke/';
 			}
 		}
 
-		// Event listeners
 		backBtn?.addEventListener('click', prevStep);
 		nextBtn?.addEventListener('click', nextStep);
 		submitBtn?.addEventListener('click', handleSubmit);
@@ -624,10 +581,8 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			input.addEventListener(eventType, () => clearErrorOnChange(input));
 		});
 
-		// Initialize UI
 		updateUI();
 
-		// Track funnel progress
 		if (typeof window !== 'undefined' && window.dataLayer) {
 			window.dataLayer.push({
 				'event': 'lead_form_step',

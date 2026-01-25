@@ -46,7 +46,6 @@ import { Play } from '@/components/icons';
 	</a>
 </div>
 
-<!-- Scroll to Top Button - Bottom right, appears when scrolled -->
 <button
 	id="scroll-to-top"
 	type="button"
@@ -64,10 +63,8 @@ import { Play } from '@/components/icons';
 		const scrollToTopButton = document.getElementById('scroll-to-top');
 		if (!scrollToTopButton) return;
 
-		// Show/hide button based on scroll position
 		function toggleScrollButton() {
 			const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-			// Show button after scrolling 300px
 			if (scrollY > 300) {
 				scrollToTopButton.classList.remove('opacity-0', 'invisible');
 				scrollToTopButton.classList.add('opacity-100', 'visible');
@@ -77,7 +74,6 @@ import { Play } from '@/components/icons';
 			}
 		}
 
-		// Smooth scroll to top
 		function scrollToTop() {
 			window.scrollTo({
 				top: 0,
@@ -85,10 +81,8 @@ import { Play } from '@/components/icons';
 			});
 		}
 
-		// Add event listeners
 		scrollToTopButton.addEventListener('click', scrollToTop);
-		
-		// Throttle scroll event for performance
+
 		let ticking = false;
 		window.addEventListener('scroll', function() {
 			if (!ticking) {
@@ -100,11 +94,7 @@ import { Play } from '@/components/icons';
 			}
 		}, { passive: true });
 
-		// Check initial scroll position
 		toggleScrollButton();
 	})();
 </script>
-
-<!-- Event tracking is handled globally in base-layout.astro -->
-<!-- This component's phone/WhatsApp links will be automatically tracked on successful navigation -->
 

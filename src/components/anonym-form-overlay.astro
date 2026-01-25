@@ -3,18 +3,14 @@ import ContactForm from './contact-form.astro';
 ---
 
 <div id="anonym-overlay" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
-	<!-- Backdrop - Warm translucent beige/yellowish tone -->
-	<div 
+	<div
 		id="overlay-backdrop"
 		class="absolute inset-0 bg-logo-messie/75 backdrop-blur-sm transition-opacity duration-300"
 		aria-hidden="true"
 	></div>
-	
-	<!-- Modal Content - Warm peachy beige background matching desktop form, centered card -->
+
 	<div class="relative z-10 w-full max-w-140 max-h-[90vh] overflow-y-auto bg-surface-secondary rounded-2xl md:rounded-[18px] shadow-lg transform transition-all duration-300 scale-95 opacity-0" id="overlay-content">
-		<!-- Header with centered title and close button -->
 		<div class="relative px-4 md:px-6 pt-4 md:pt-6 pb-3 md:pb-4">
-			<!-- Close Button - Top right -->
 			<button
 				id="overlay-close"
 				class="absolute top-4 md:top-6 right-4 md:right-6 p-1.5 hover:bg-yellow-200/60 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
@@ -25,11 +21,9 @@ import ContactForm from './contact-form.astro';
 				</svg>
 			</button>
 
-			<!-- Centered Title -->
 			<h2 id="overlay-title" class="text-xl md:text-2xl font-semibold text-center">Anonym anfragen</h2>
 		</div>
-		
-		<!-- Form Content - Reusing ContactForm component -->
+
 		<ContactForm
 			formId="overlay-contact-form"
 			fileListId="overlay-file-list"
@@ -164,16 +158,14 @@ import ContactForm from './contact-form.astro';
 </script>
 
 <style>
-	/* Ensure overlay doesn't cause CLS */
 	#anonym-overlay {
 		will-change: opacity;
 	}
-	
+
 	#overlay-content {
 		will-change: transform, opacity;
 	}
-	
-	/* Smooth transitions */
+
 	@media (prefers-reduced-motion: no-preference) {
 		#overlay-content {
 			transition: transform 0.3s ease-out, opacity 0.3s ease-out;

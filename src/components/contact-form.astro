@@ -37,7 +37,6 @@ const {
 
 const contactApiEndpoint = CONTACT_API_ENDPOINT;
 
-// Determine styling based on context
 const containerClass = overlayStyle
 	? 'px-4 md:px-6 pb-4 md:pb-6'
 	: 'bg-surface-secondary rounded-2xl shadow-xl px-6 py-6';
@@ -45,7 +44,6 @@ const inputBgClass = 'bg-surface-input';
 const borderClass = 'border-border-primary';
 const focusBorderClass = 'focus:ring-2 focus:ring-border-primary focus:border-border-primary';
 const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 border-2 border-transparent rounded-lg flex items-center justify-center space-x-2 text-base';
-// File upload uses consistent overlay design for both contexts
 ---
 
 <div class={`${containerClass} ${!overlayStyle ? 'text-center' : ''}`} id={overlayStyle ? undefined : 'anfrage'}>
@@ -55,13 +53,12 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 		</h2>
 	)}
 	
-	<form 
+	<form
 		id={formId}
 		class="space-y-3 min-[1920px]:space-y-4"
 		method="POST"
 		action={contactApiEndpoint || '#'}
 	>
-		<!-- Name Field (Optional) -->
 		<div>
 			<input
 				type="text"
@@ -72,7 +69,6 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			/>
 		</div>
 
-		<!-- Phone or Email Field -->
 		<div>
 			<input
 				type="text"
@@ -84,7 +80,6 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			/>
 		</div>
 
-		<!-- Message Field -->
 		<div>
 			<textarea
 				id={messageInputId}
@@ -96,7 +91,6 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			></textarea>
 		</div>
 
-		<!-- File Upload (Optional) - Square plus button with matching background -->
 		<div>
 			<div class={`border-2 border-dashed ${borderClass} rounded-lg p-2.5 hover:border-border-primary transition-colors cursor-pointer ${inputBgClass}`}>
 				<input
@@ -108,13 +102,11 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 					accept="image/*,.pdf"
 				/>
 				<label for={filesInputId} class="cursor-pointer flex items-center gap-2">
-					<!-- Square plus button container with new background and border -->
 					<div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border border-dashed" style="background-color: #fbe5ce; border-color: #eacb62;">
 						<svg class="w-4 h-4 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
 						</svg>
 					</div>
-					<!-- Text content -->
 					<p class="text-xs opacity-80">
 						<span class="font-medium">Dateien hinzufügen (optional)</span>
 					</p>
@@ -123,7 +115,6 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			<div id={fileListId} class="mt-1.5 space-y-1"></div>
 		</div>
 
-		<!-- Privacy Checkbox -->
 		<div class="flex items-start gap-2 pt-1">
 			<input
 				type="checkbox"
@@ -137,7 +128,6 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			</label>
 		</div>
 
-		<!-- Submit Button -->
 		<button
 			type="submit"
 			class={buttonClass}
@@ -149,7 +139,6 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			</svg>
 		</button>
 
-		<!-- Footer Notes -->
 		<div class="text-center pt-2 space-y-1">
 			<p class="text-xs opacity-60">
 				100 % anonym – keine Weitergabe Ihrer Daten
@@ -160,9 +149,7 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 		</div>
 	</form>
 
-	<!-- Success State (hidden by default) -->
 	<div id={`${formId}-success`} class="hidden text-center py-8">
-		<!-- Green checkmark icon -->
 		<div class="mb-6 flex justify-center">
 			<svg class="w-16 h-16 md:w-20 md:h-20 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -195,7 +182,6 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 	const fileList = document.getElementById(fileListId);
 	const privacyCheckbox = document.getElementById(privacyCheckboxId);
 
-	// Helper function to get or create the message element
 	function getMessageElement() {
 		if (!formMessage) {
 			formMessage = document.createElement('div');
@@ -205,14 +191,12 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 		return formMessage;
 	}
 
-	// Helper function to show a message
 	function showMessage(className, text) {
 		const msg = getMessageElement();
 		msg.className = className;
 		msg.textContent = text;
 	}
 
-	// Helper function to clear/hide the message
 	function clearMessage() {
 		if (formMessage && formMessage.parentNode) {
 			formMessage.parentNode.removeChild(formMessage);
@@ -287,26 +271,21 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 		};
 	}
 
-	// File upload - simple storage until form submission
 	if (fileInput && fileList) {
-		// Store files with unique IDs - simple Map
 		const fileMap = new Map();
 		let fileIdCounter = 0;
-		
-		// Add file to storage
+
 		function addFile(file) {
 			const fileId = `file-${fileIdCounter++}`;
 			fileMap.set(fileId, file);
 			renderFileList();
 		}
-		
-		// Remove file from storage
+
 		function removeFile(fileId) {
 			fileMap.delete(fileId);
 			renderFileList();
 		}
-		
-		// Render the file list
+
 		function renderFileList() {
 			fileList.innerHTML = '';
 			const bgClass = overlayStyle ? 'bg-[#FFFBF0]' : 'bg-[var(--color-input-bg)]';
@@ -340,39 +319,32 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 				fileList.appendChild(fileItem);
 			});
 		}
-		
-		// Handle file selection - add to Map
+
 		fileInput.addEventListener('change', (e) => {
 			const newFiles = Array.from(e.target.files || []);
 			newFiles.forEach(file => addFile(file));
-			// Clear the input so same file can be selected again if needed
 			fileInput.value = '';
 		});
-		
-		// Expose fileMap for form submission - use unique function name based on filesInputId
-		// This prevents conflicts when multiple ContactForm instances exist on the same page
+
 		window[`getFileMap_${filesInputId}`] = () => fileMap;
 	}
 
-	// Form submission
 	if (form && contactApiEndpoint) {
 		form.addEventListener('submit', async (e) => {
 			e.preventDefault();
-			
-			// Validate privacy checkbox
+
 			if (privacyCheckbox && !privacyCheckbox.checked) {
 				showMessage('mt-4 p-4 rounded-lg bg-red-100 text-red-800', 'Bitte bestätigen Sie die Datenschutzerklärung.');
 				privacyCheckbox.focus();
 				return;
 			}
-			
+
 			const submitButton = form.querySelector('button[type="submit"]');
 			if (!submitButton) return;
 			const originalText = submitButton.innerHTML;
 			submitButton.disabled = true;
 			submitButton.innerHTML = '<span>Wird gesendet...</span>';
 
-			// Collect form data
 			const formData = new FormData(form);
 			const data = {
 				name: formData.get('name') || '',
@@ -383,29 +355,25 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 				source: formId.includes('overlay') ? 'overlay-form' : 'landing-page'
 			};
 
-			// Log form submission data (dev mode only)
 			if (isDev) {
 			console.log('=== Form Submission Data ===');
 			console.log('Form ID:', formId);
 			console.log('Form Data:', data);
 			}
 
-			// Handle file uploads from stored Map - use unique function name based on filesInputId
 			const getFileMapFn = window[`getFileMap_${filesInputId}`];
 			const storedFileMap = getFileMapFn ? getFileMapFn() : null;
 			if (storedFileMap && storedFileMap.size > 0) {
 				data.hasFiles = true;
 				data.fileCount = storedFileMap.size;
-				
-				// Log file information (dev mode only)
+
 				if (isDev) {
 				console.log('Files attached:', storedFileMap.size);
 				storedFileMap.forEach((file, fileId) => {
 					console.log(`  - ${fileId}: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`);
 				});
 				}
-				
-				// Create FormData for file upload
+
 				const uploadFormData = new FormData();
 				uploadFormData.append('name', data.name);
 				uploadFormData.append('contact', data.contact || '');
@@ -413,12 +381,11 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 				uploadFormData.append('privacy', data.privacy);
 				uploadFormData.append('timestamp', data.timestamp);
 				uploadFormData.append('source', data.source);
-				
-				// Append files from Map
+
 				storedFileMap.forEach((file) => {
 					uploadFormData.append('files', file);
 				});
-				
+
 				if (isDev) console.log('Upload FormData created with files');
 
 				try {
@@ -455,7 +422,6 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 					}
 				}
 			} else {
-				// No files - send JSON as before
 				if (isDev) console.log('No files attached, sending JSON data');
 				try {
 					const response = await fetch(contactApiEndpoint, {
@@ -494,18 +460,15 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			}
 		});
 	} else if (form) {
-		// Fallback: show success message even without Firebase endpoint
 		form.addEventListener('submit', (e) => {
 			e.preventDefault();
-			
-			// Validate privacy checkbox
+
 			if (privacyCheckbox && !privacyCheckbox.checked) {
 				showMessage('mt-4 p-4 rounded-lg bg-red-100 text-red-800', 'Bitte bestätigen Sie die Datenschutzerklärung.');
 				privacyCheckbox.focus();
 				return;
 			}
-			
-			// Collect form data
+
 			const formData = new FormData(form);
 			const data = {
 				name: formData.get('name') || '',
@@ -515,8 +478,7 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 				timestamp: new Date().toISOString(),
 				source: formId.includes('overlay') ? 'overlay-form' : 'landing-page'
 			};
-			
-			// Log form submission data (fallback mode, dev only)
+
 			if (isDev) {
 			console.log('=== Form Submission Data (Fallback Mode - No Endpoint) ===');
 			console.log('Form ID:', formId);

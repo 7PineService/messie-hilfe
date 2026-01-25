@@ -1,8 +1,5 @@
-// Site Configuration
-// Centralized site-wide settings from environment variables
 import { validateEnvVariables } from './env-validation';
 
-// Validate environment variables (warnings only in dev, errors in production)
 const isProduction = import.meta.env.PROD;
 const envValidation = validateEnvVariables(isProduction);
 
@@ -25,7 +22,6 @@ if (envValidation.warnings.length > 0 && import.meta.env.DEV) {
 	console.warn('');
 }
 
-// Site URL (canonical URL)
 export const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://messie-hilfe.de';
 
 export const CONTACT_PHONE = '+4989120891335';
@@ -33,12 +29,9 @@ export const CONTACT_PHONE_DISPLAY = '089 120 891 335';
 export const CONTACT_EMAIL = 'kontakt@messie-hilfe.de';
 export const CONTACT_WHATSAPP = '4989120891335';
 
-// Social Media
 export const TWITTER_HANDLE = import.meta.env.PUBLIC_TWITTER_HANDLE || '@messiehilfe';
 
-// Site Name
 export const SITE_NAME = import.meta.env.PUBLIC_SITE_NAME || 'Messie-Hilfe';
 
-// Contact Form API Endpoint (optional - for form submissions)
 export const CONTACT_API_ENDPOINT = import.meta.env.PUBLIC_CONTACT_API_ENDPOINT || undefined;
 

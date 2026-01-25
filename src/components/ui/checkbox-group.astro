@@ -118,12 +118,10 @@ const textFieldClasses = 'w-full px-3 py-2 text-sm border border-border-primary 
 				const textField = group.querySelector(`input[data-for-checkbox="${(checkbox as HTMLInputElement).value}"]`);
 
 				if (textField) {
-					// Set initial state
 					if ((checkbox as HTMLInputElement).checked) {
 						textField.classList.remove('hidden');
 					}
 
-					// Handle change
 					checkbox.addEventListener('change', () => {
 						if ((checkbox as HTMLInputElement).checked) {
 							textField.classList.remove('hidden');

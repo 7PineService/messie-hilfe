@@ -72,9 +72,7 @@ const gtmId = getGTMContainerId(hostname);
 			</noscript>
 		)}
 
-		<!-- Minimal Header for Lead Form -->
 		<header class="z-50 relative border-b border-border-primary">
-			<!-- Top Bar - Same as main header -->
 			<div class="bg-surface-muted">
 				<div class="container mx-auto px-4 py-2.5">
 					<div class="flex flex-wrap items-center justify-between text-sm">
@@ -88,11 +86,9 @@ const gtmId = getGTMContainerId(hostname);
 				</div>
 			</div>
 
-			<!-- Main Nav Area - Logo + Step Indicator only -->
 			<nav class="bg-surface-secondary" aria-label="Formular-Navigation">
 				<div class="container mx-auto px-4">
 					<div class="flex items-center justify-between md:justify-center md:relative h-18">
-						<!-- Logo -->
 						<a href="/" class="flex items-center gap-2 md:absolute md:left-0" aria-label={`${SITE_NAME} Startseite`}>
 							<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-14 h-auto w-auto object-contain" />
 							<span class="text-xl whitespace-nowrap logo-text">
@@ -100,10 +96,8 @@ const gtmId = getGTMContainerId(hostname);
 							</span>
 						</a>
 
-						<!-- Step Indicator -->
 						<div class="step-indicator flex flex-col items-center text-base font-medium">
 							<span class="text-primary">Schritt {currentStep} von {totalSteps}</span>
-							<!-- Progress Bar -->
 							<div class="mt-2 w-32 h-1.5 bg-surface-muted rounded-full overflow-hidden">
 								<div
 									class="h-full bg-cta-primary rounded-full transition-all duration-300"
@@ -116,7 +110,6 @@ const gtmId = getGTMContainerId(hostname);
 			</nav>
 		</header>
 
-		<!-- Main Content -->
 		<main class="flex-1">
 			<slot />
 		</main>
