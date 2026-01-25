@@ -325,6 +325,58 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 						isValid = false;
 					}
 				}
+
+				const hasDifferentAddressCheckbox = step.querySelector('input[name="has_different_address"]');
+				if (hasDifferentAddressCheckbox && hasDifferentAddressCheckbox.checked) {
+					const jobAddressFields = ['job_street', 'job_street_number', 'job_postal_code', 'job_city'];
+					let jobAddressHasError = false;
+
+					jobAddressFields.forEach(fieldName => {
+						const input = step.querySelector(`[name="${fieldName}"]`);
+						if (input && input.hasAttribute('required') && !input.checkValidity()) {
+							input.classList.add('is-invalid');
+							jobAddressHasError = true;
+							if (!firstInvalidField) firstInvalidField = input;
+						}
+					});
+
+					if (jobAddressHasError) {
+						const errorEl = document.createElement('p');
+						errorEl.className = 'field-error';
+						errorEl.textContent = 'Bitte füllen Sie alle Felder der Einsatzadresse aus.';
+						const differentAddressSection = step.querySelector('#different-address');
+						if (differentAddressSection) {
+							differentAddressSection.insertAdjacentElement('afterend', errorEl);
+						}
+						isValid = false;
+					}
+				}
+
+				const hasDifferentContactCheckbox = step.querySelector('input[name="has_different_contact"]');
+				if (hasDifferentContactCheckbox && hasDifferentContactCheckbox.checked) {
+					const altContactFields = ['alt_salutation', 'alt_first_name', 'alt_last_name', 'alt_email', 'alt_phone'];
+					let altContactHasError = false;
+
+					altContactFields.forEach(fieldName => {
+						const input = step.querySelector(`[name="${fieldName}"]`);
+						if (input && input.hasAttribute('required') && !input.checkValidity()) {
+							input.classList.add('is-invalid');
+							altContactHasError = true;
+							if (!firstInvalidField) firstInvalidField = input;
+						}
+					});
+
+					if (altContactHasError) {
+						const errorEl = document.createElement('p');
+						errorEl.className = 'field-error';
+						errorEl.textContent = 'Bitte füllen Sie alle Pflichtfelder des Ansprechpartners aus.';
+						const differentContactSection = step.querySelector('#different-contact');
+						if (differentContactSection) {
+							differentContactSection.insertAdjacentElement('afterend', errorEl);
+						}
+						isValid = false;
+					}
+				}
 			} else {
 				const requiredInputs = step.querySelectorAll('[required]');
 				requiredInputs.forEach((input) => {
@@ -544,6 +596,9 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 				}
 			} else {
 				const step6Fields = ['email', 'phone', 'salutation', 'first_name', 'last_name', 'street', 'street_number', 'postal_code', 'city'];
+				const jobAddressFields = ['job_street', 'job_street_number', 'job_postal_code', 'job_city'];
+				const altContactFields = ['alt_salutation', 'alt_first_name', 'alt_last_name', 'alt_email', 'alt_phone'];
+
 				if (step6Fields.includes(input.name)) {
 					const sectionContainer = input.closest('.space-y-4');
 					if (sectionContainer) {
@@ -552,8 +607,29 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 							nextSibling.remove();
 						}
 					}
+				} else if (jobAddressFields.includes(input.name)) {
+					const step6 = input.closest('[data-step="6"]');
+					if (step6) {
+						const differentAddressSection = step6.querySelector('#different-address');
+						if (differentAddressSection) {
+							const nextSibling = differentAddressSection.nextElementSibling;
+							if (nextSibling && nextSibling.classList.contains('field-error')) {
+								nextSibling.remove();
+							}
+						}
+					}
+				} else if (altContactFields.includes(input.name)) {
+					const step6 = input.closest('[data-step="6"]');
+					if (step6) {
+						const differentContactSection = step6.querySelector('#different-contact');
+						if (differentContactSection) {
+							const nextSibling = differentContactSection.nextElementSibling;
+							if (nextSibling && nextSibling.classList.contains('field-error')) {
+								nextSibling.remove();
+							}
+						}
+					}
 				} else {
-					// Error is inside the parent container for other steps
 					const parent = input.parentElement;
 					if (parent) {
 						const errorEl = parent.querySelector('.field-error');

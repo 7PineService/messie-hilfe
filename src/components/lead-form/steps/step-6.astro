@@ -111,23 +111,27 @@ import { Input, Textarea } from '@/components/ui';
 						<div class="col-span-2">
 							<Input
 								name="job_street"
-								placeholder="Straße"
+								placeholder="Straße*"
+								data-conditional-required="has_different_address"
 							/>
 						</div>
 						<Input
 							name="job_street_number"
-							placeholder="Nr."
+							placeholder="Nr.*"
+							data-conditional-required="has_different_address"
 						/>
 					</div>
 					<div class="grid grid-cols-3 gap-3">
 						<Input
 							name="job_postal_code"
-							placeholder="PLZ"
+							placeholder="PLZ*"
+							data-conditional-required="has_different_address"
 						/>
 						<div class="col-span-2">
 							<Input
 								name="job_city"
-								placeholder="Stadt"
+								placeholder="Stadt*"
+								data-conditional-required="has_different_address"
 							/>
 						</div>
 					</div>
@@ -146,49 +150,48 @@ import { Input, Textarea } from '@/components/ui';
 				</label>
 				<div id="different-contact" class="hidden mt-4 space-y-4">
 					<div class="grid grid-cols-2 gap-3">
-						<div>
-							<label class="block text-xs text-muted mb-1">Anrede</label>
-							<select
-								name="alt_salutation"
-								class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
-							>
-								<option value="">Bitte wählen</option>
-								<option value="herr">Herr</option>
-								<option value="frau">Frau</option>
-							</select>
-						</div>
-						<div>
-							<label class="block text-xs text-muted mb-1">Titel</label>
-							<select
-								name="alt_title"
-								class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
-							>
-								<option value="">Kein Titel</option>
-								<option value="dr">Dr.</option>
-								<option value="prof">Prof.</option>
-								<option value="prof_dr">Prof. Dr.</option>
-							</select>
-						</div>
+						<select
+							name="alt_salutation"
+							data-conditional-required="has_different_contact"
+							class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
+						>
+							<option value="" disabled selected>Anrede*</option>
+							<option value="herr">Herr</option>
+							<option value="frau">Frau</option>
+						</select>
+						<select
+							name="alt_title"
+							class="w-full pl-3 pr-8 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary"
+						>
+							<option value="" disabled selected>Titel (optional)</option>
+							<option value="dr">Dr.</option>
+							<option value="prof">Prof.</option>
+							<option value="prof_dr">Prof. Dr.</option>
+						</select>
 					</div>
 					<div class="grid grid-cols-2 gap-3">
 						<Input
 							name="alt_first_name"
-							placeholder="Vorname"
+							placeholder="Vorname*"
+							data-conditional-required="has_different_contact"
 						/>
 						<Input
 							name="alt_last_name"
-							placeholder="Nachname"
+							placeholder="Nachname*"
+							data-conditional-required="has_different_contact"
 						/>
 					</div>
 					<Input
 						name="alt_email"
 						type="email"
-						placeholder="E-Mail-Adresse"
+						placeholder="E-Mail-Adresse*"
+						data-conditional-required="has_different_contact"
 					/>
 					<Input
 						name="alt_phone"
 						type="tel"
-						placeholder="Handynummer"
+						placeholder="Handynummer*"
+						data-conditional-required="has_different_contact"
 					/>
 					<Textarea
 						name="alt_notes"
@@ -286,11 +289,28 @@ import { Input, Textarea } from '@/components/ui';
 			const section = sectionId ? document.getElementById(sectionId) : null;
 
 			if (section) {
+				const updateRequiredFields = (isRequired: boolean) => {
+					const conditionalFields = section.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
+						`[data-conditional-required="${checkbox.name}"]`
+					);
+
+					conditionalFields.forEach((field) => {
+						if (isRequired) {
+							field.setAttribute('required', 'required');
+						} else {
+							field.removeAttribute('required');
+						}
+					});
+				};
+
 				checkbox.addEventListener('change', () => {
 					if (checkbox.checked) {
 						section.classList.remove('hidden');
+						updateRequiredFields(true);
 					} else {
 						section.classList.add('hidden');
+						updateRequiredFields(false);
+
 						section.querySelectorAll('input, textarea, select').forEach((field) => {
 							const inputField = field as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 							if (inputField instanceof HTMLInputElement && (inputField.type === 'checkbox' || inputField.type === 'radio')) {
