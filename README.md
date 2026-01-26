@@ -84,9 +84,6 @@ PUBLIC_CONTACT_PHONE_DISPLAY=089 120 891 335
 PUBLIC_CONTACT_EMAIL=kontakt@messie-hilfe.de
 PUBLIC_CONTACT_WHATSAPP=4989120891335
 
-# Form Submission Endpoint (optional - leave empty if not using backend API)
-PUBLIC_CONTACT_API_ENDPOINT=
-
 # Social Media
 PUBLIC_TWITTER_HANDLE=@messiehilfe
 
@@ -124,7 +121,6 @@ The project includes automatic environment variable validation:
 - `PUBLIC_GA4_MEASUREMENT_ID` - Required for tracking, must start with "G-"
 
 **Optional Variables (Format Validation):**
-- `PUBLIC_CONTACT_API_ENDPOINT` - Must be a valid URL if set
 - `PUBLIC_TWITTER_HANDLE` - Should start with "@" if set
 
 **CookieYes Configuration:**
@@ -133,15 +129,14 @@ The project includes automatic environment variable validation:
 
 ### Form Submission Integration
 
-To enable form submission, set the `PUBLIC_CONTACT_API_ENDPOINT` environment variable to your API endpoint:
+The project includes a built-in API endpoint at `/api/contact` that handles form submissions using Resend for email delivery.
 
-```env
-PUBLIC_CONTACT_API_ENDPOINT=https://your-api-endpoint.com/api/contact
-```
+**Required Environment Variables:**
+- `RESEND_API_KEY` - Your Resend API key from https://resend.com/api-keys
+- `RESEND_FROM_EMAIL` - Sender email (use `onboarding@resend.dev` for testing or your verified domain)
+- `CONTACT_RECIPIENT_EMAIL` - Email address to receive form submissions
 
-**Note:** This works with any API endpoint that accepts POST requests with form data (JSON or FormData).
-
-The form will automatically use this endpoint if provided. If not set, forms will show a fallback message.
+The API endpoint handles both the lead form (multi-step) and contact forms (simple), including file attachments.
 
 ### Google Tag Manager & Analytics
 
@@ -236,7 +231,6 @@ The project is configured for Vercel deployment:
 1. **Environment Variables**: Set in Vercel dashboard (Project Settings → Environment Variables):
    - `PUBLIC_GTM_CONTAINER_ID` - Use different IDs for production/staging
    - `PUBLIC_SITE_URL` - Production: `https://messie-hilfe.de`
-   - `PUBLIC_CONTACT_API_ENDPOINT` - Your form submission API endpoint (if using)
    - `PUBLIC_SITE_NAME` - Site name
    - `PUBLIC_CONTACT_PHONE` - Contact phone number
    - `PUBLIC_CONTACT_EMAIL` - Contact email
@@ -244,6 +238,9 @@ The project is configured for Vercel deployment:
    - `PUBLIC_TWITTER_HANDLE` - Twitter handle
    - `PUBLIC_COOKIEYES_SCRIPT_URL` - CookieYes script URL
    - `PUBLIC_COOKIEYES_ENABLED` - Set to `true` or `false`
+   - `RESEND_API_KEY` - Resend API key for email delivery
+   - `RESEND_FROM_EMAIL` - Sender email address
+   - `CONTACT_RECIPIENT_EMAIL` - Email address to receive form submissions
 
 2. **Deployment**:
    - **Staging**: Push to `dev` branch → Auto-deploys to `staging.messie-hilfe.de`

@@ -1,26 +1,20 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import vercel from '@astrojs/vercel';
 
-// https://astro.build/config
 export default defineConfig({
-  // Build optimizations
+  adapter: vercel(),
   build: {
-    // Inline small CSS files to reduce render-blocking requests
-    inlineStylesheets: 'auto', // Automatically inline CSS < 4KB
+    inlineStylesheets: 'auto',
   },
   vite: {
-    plugins: [
-      tailwindcss()
-    ],
+    plugins: [tailwindcss()],
     server: {
       headers: {
-        // Security headers
         'Referrer-Policy': 'strict-origin-when-cross-origin',
         'X-Frame-Options': 'DENY',
         'X-Content-Type-Options': 'nosniff',
         'X-XSS-Protection': '1; mode=block',
-        // Content Security Policy - Allow GTM, CookieYes, fonts, and self
         'Content-Security-Policy': [
           "default-src 'self'",
           "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdn-cookieyes.com https://www.google-analytics.com",
@@ -38,31 +32,26 @@ export default defineConfig({
       }
     },
     build: {
-      // Minify JavaScript (Astro minifies by default, but we ensure terser is used)
       minify: 'terser',
       terserOptions: {
         compress: {
-          drop_console: false, // Keep console logs for debugging
+          drop_console: false,
           drop_debugger: true,
-          pure_funcs: ['console.debug'], // Remove debug logs only
-          passes: 2, // Multiple passes for better minification
+          pure_funcs: ['console.debug'],
+          passes: 2,
         },
         format: {
-          comments: false, // Remove all comments
+          comments: false,
         },
       },
-      // Optimize chunk size warnings
       chunkSizeWarningLimit: 1000,
       rollupOptions: {
         output: {
-          // Manual chunk splitting for better caching
           manualChunks: (id) => {
-            // Separate vendor chunks for better caching
             if (id.includes('node_modules')) {
               return 'vendor';
             }
           },
-          // Compact output format
           compact: true,
         },
       },

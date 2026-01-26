@@ -33,5 +33,5 @@ export const TWITTER_HANDLE = import.meta.env.PUBLIC_TWITTER_HANDLE || '@messieh
 
 export const SITE_NAME = import.meta.env.PUBLIC_SITE_NAME || 'Messie-Hilfe';
 
-export const CONTACT_API_ENDPOINT = import.meta.env.PUBLIC_CONTACT_API_ENDPOINT || undefined;
+export const CONTACT_API_ENDPOINT = '/api/contact';
 

@@ -52,18 +52,7 @@ export function validateEnvVariables(isProduction: boolean = false): ValidationR
 		}
 	];
 
-	const recommendedVars = [
-		{
-			name: 'PUBLIC_CONTACT_API_ENDPOINT',
-			value: import.meta.env.PUBLIC_CONTACT_API_ENDPOINT,
-			validate: (val: string | undefined) => {
-				if (val && !val.startsWith('http://') && !val.startsWith('https://')) {
-					return 'PUBLIC_CONTACT_API_ENDPOINT must be a valid URL starting with http:// or https://';
-				}
-				return null;
-			}
-		}
-	];
+	const recommendedVars: Array<{ name: string; value: string | undefined; validate: (val: string | undefined) => string | null }> = [];
 
 	requiredVars.forEach(({ name, value, validate }) => {
 		const error = validate(value);
