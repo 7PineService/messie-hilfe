@@ -1,6 +1,6 @@
 ---
 import { cn } from '@/utils/cn';
-import { CONTACT_API_ENDPOINT } from '@/config/site';
+import { LEAD_API_ENDPOINT } from '@/config/site';
 
 interface Props {
 	formId?: string;
@@ -14,7 +14,7 @@ const {
 	class: className = ''
 } = Astro.props;
 
-const contactApiEndpoint = CONTACT_API_ENDPOINT;
+const leadApiEndpoint = LEAD_API_ENDPOINT;
 ---
 
 <div
@@ -65,6 +65,10 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 				</button>
 			</div>
 
+			<div id="form-error" class="hidden mt-4 p-4 rounded-lg bg-red-100 text-red-800 text-center">
+				<p class="text-sm"></p>
+			</div>
+
 			<div class="privacy-text space-y-2 text-center mt-6 hidden max-md:hidden">
 				<p class="text-sm opacity-70">100 % anonym – keine Weitergabe Ihrer Daten</p>
 				<p class="text-xs opacity-50">Kommt es zu keinem Auftrag, löschen wir Ihre Daten spätestens nach 14 Tagen automatisch.</p>
@@ -90,7 +94,7 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 	}
 </style>
 
-<script define:vars={{ formId, contactApiEndpoint, isDev: import.meta.env.DEV }}>
+<script define:vars={{ formId, leadApiEndpoint, isDev: import.meta.env.DEV }}>
 	document.addEventListener('DOMContentLoaded', () => {
 		const container = document.querySelector(`[data-lead-form="${formId}"]`);
 		const form = document.getElementById(formId);
@@ -108,6 +112,7 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 		const totalSteps = steps.length;
 		let currentStep = parseInt(container.getAttribute('data-initial-step') || '1', 10);
 		let isInitialLoad = true;
+		let isSubmitting = false;
 
 		let formData = {};
 
@@ -564,13 +569,38 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 			}
 		}
 
+		function showErrorMessage(message) {
+			const errorEl = document.getElementById('form-error');
+			if (errorEl) {
+				const textEl = errorEl.querySelector('p');
+				if (textEl) textEl.textContent = message;
+				errorEl.classList.remove('hidden');
+				errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			}
+		}
+
+		function hideErrorMessage() {
+			const errorEl = document.getElementById('form-error');
+			if (errorEl) {
+				errorEl.classList.add('hidden');
+			}
+		}
+
 		async function handleSubmit() {
 			if (!validateStep(currentStep)) return;
+
+			if (isSubmitting) {
+				if (isDev) console.warn('Form is already being submitted');
+				return;
+			}
 
 			collectStepData(currentStep);
 
 			const submitButton = form.querySelector('.submit-btn');
 			if (!submitButton) return;
+
+			hideErrorMessage();
+			isSubmitting = true;
 
 			const originalText = submitButton.innerHTML;
 			submitButton.disabled = true;
@@ -587,9 +617,9 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 				console.log('Form Data:', submitData);
 			}
 
-			if (contactApiEndpoint) {
+			if (leadApiEndpoint) {
 				try {
-					const response = await fetch(contactApiEndpoint, {
+					const response = await fetch(leadApiEndpoint, {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
@@ -608,7 +638,8 @@ const contactApiEndpoint = CONTACT_API_ENDPOINT;
 					}
 				} catch (error) {
 					if (isDev) console.error('Form submission error:', error);
-					alert('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
+					showErrorMessage('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per Telefon.');
+					isSubmitting = false;
 					submitButton.disabled = false;
 					submitButton.innerHTML = originalText;
 				}
