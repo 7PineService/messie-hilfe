@@ -91,9 +91,12 @@ const gtmId = getGTMContainerId(hostname);
 					<div class="flex items-center justify-between md:justify-center md:relative h-18">
 						<a href="/" class="flex items-center gap-2 md:absolute md:left-0" aria-label={`${SITE_NAME} Startseite`}>
 							<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-14 h-auto w-auto object-contain" />
-							<span class="text-xl whitespace-nowrap logo-text">
-								<span class="messie">Messie-</span><span class="hilfe">Hilfe</span>
-							</span>
+							<div class="flex flex-col">
+								<span class="text-xl whitespace-nowrap logo-text">
+									<span class="messie">Messie-</span><span class="hilfe">Hilfe</span>
+								</span>
+								<span class="deutschland">Deutschland</span>
+							</div>
 						</a>
 
 						<div class="flex items-center gap-2">
@@ -135,5 +138,12 @@ const gtmId = getGTMContainerId(hostname);
 	.hilfe {
 		font-weight: 400;
 		color: #8B7A6A;
+	}
+
+	.deutschland {
+		font-weight: 300;
+		font-size: 0.9rem;
+		color: #8F887F;
+		opacity: 0.3;
 	}
 </style>
