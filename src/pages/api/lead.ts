@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { sendEmail, getRecipientEmail } from '@/lib/email';
+import { RESEND_API_KEY, RESEND_FROM_EMAIL, CONTACT_RECIPIENT_EMAIL } from 'astro:env/server';
 
 export const prerender = false;
 
@@ -118,6 +119,10 @@ function buildLeadEmail(data: LeadFormData, fileNames: string[] = []): { subject
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    console.log('🔍 [Lead API] astro:env - API_KEY:', !!RESEND_API_KEY, 'len:', RESEND_API_KEY?.length, 'FROM:', RESEND_FROM_EMAIL, 'TO:', CONTACT_RECIPIENT_EMAIL);
+    console.log('🔍 [Lead API] process.env - API_KEY:', !!process.env.RESEND_API_KEY, 'len:', process.env.RESEND_API_KEY?.length, 'FROM:', process.env.RESEND_FROM_EMAIL);
+    console.log('🔍 [Lead API] import.meta.env - API_KEY:', !!(import.meta as any).env?.RESEND_API_KEY, 'value:', (import.meta as any).env?.RESEND_API_KEY);
+
     const contentType = request.headers.get('content-type') || '';
 
     let data: LeadFormData;
@@ -201,6 +206,8 @@ export const POST: APIRoute = async ({ request }) => {
       }))
     );
 
+    console.log('📧 [Lead API] Sending to:', getRecipientEmail(), 'Subject:', emailContent.subject, 'Attachments:', attachments.length);
+
     const { data: emailData, error } = await sendEmail({
       to: getRecipientEmail(),
       subject: emailContent.subject,
@@ -209,8 +216,10 @@ export const POST: APIRoute = async ({ request }) => {
       attachments: attachments.length > 0 ? attachments : undefined,
     });
 
+    console.log('📬 [Lead API] Result - Success:', !error, 'ID:', emailData?.id, error ? 'Error:' : '', error || '');
+
     if (error) {
-      console.error('Lead form email error:', error);
+      console.error('❌ [Lead API] Failed:', error);
       return new Response(
         JSON.stringify({
           error: 'Failed to send email',
@@ -220,12 +229,13 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
+    console.log('✅ [Lead API] Success, ID:', emailData?.id);
     return new Response(
       JSON.stringify({ success: true, id: emailData?.id }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Lead form API error:', error);
+    console.error('❌ [Lead API] Exception:', error instanceof Error ? error.message : error, error instanceof Error ? error.stack : '');
     return new Response(
       JSON.stringify({
         error: 'Internal server error',
