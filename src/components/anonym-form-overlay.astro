@@ -101,11 +101,15 @@ import ContactForm from './contact-form.astro';
 				form.reset();
 				const fileList = document.getElementById('overlay-file-list');
 				const formMessage = document.getElementById('overlay-form-message');
+				const overlayTitle = document.getElementById('overlay-title');
 				if (fileList) fileList.innerHTML = '';
 				if (formMessage) {
 					formMessage.classList.add('hidden');
 					formMessage.textContent = '';
 					formMessage.className = 'hidden mt-4 p-4 rounded-lg';
+				}
+				if (overlayTitle) {
+					overlayTitle.style.display = '';
 				}
 
 				const resetFunction = window.resetFormTracking_overlaycontactform;
