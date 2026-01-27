@@ -1,6 +1,6 @@
 import { Resend } from 'resend';
 
-export const resend = new Resend(import.meta.env.RESEND_API_KEY);
+export const resend = new Resend(process.env.RESEND_API_KEY);
 
 export interface EmailOptions {
   to: string;
@@ -15,7 +15,7 @@ export interface EmailOptions {
 
 export async function sendEmail(options: EmailOptions) {
   return await resend.emails.send({
-    from: import.meta.env.RESEND_FROM_EMAIL || 'Messie-Hilfe <onboarding@resend.dev>',
+    from: process.env.RESEND_FROM_EMAIL!,
     to: options.to,
     subject: options.subject,
     html: options.html,
@@ -25,5 +25,5 @@ export async function sendEmail(options: EmailOptions) {
 }
 
 export function getRecipientEmail(): string {
-  return import.meta.env.CONTACT_RECIPIENT_EMAIL || 'haihuynhngoc24@gmail.com';
+  return process.env.CONTACT_RECIPIENT_EMAIL!;
 }
