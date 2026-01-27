@@ -43,7 +43,7 @@ const fileListId = `${id}-list`;
 			</div>
 			<div class="text-center">
 				<p class="text-sm font-medium">Dateien hierhin ziehen oder auswählen</p>
-				<p class="text-xs text-muted mt-1">Bilder (JPG/PNG/HEIC) | kurze Videos (MP4)</p>
+				<p class="text-xs text-muted mt-1">Bilder (JPG/PNG/HEIC) | kurze Videos (MP4) | Max. 40MB pro Datei</p>
 			</div>
 			<span class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-surface-secondary border border-border-primary hover:bg-surface-tertiary transition-colors">
 				Dateien auswählen
@@ -52,20 +52,37 @@ const fileListId = `${id}-list`;
 	</div>
 
 	<div id={fileListId} class="mt-3 space-y-2"></div>
+	<div id={`${id}-error`} class="mt-2 text-sm text-red-600 hidden"></div>
 </div>
 
 <script define:vars={{ id, fileListId }}>
 	document.addEventListener('DOMContentLoaded', () => {
 		const fileInput = document.getElementById(id);
 		const fileList = document.getElementById(fileListId);
+		const errorContainer = document.getElementById(`${id}-error`);
 		const container = document.querySelector(`[data-file-upload="${id}"]`);
 
 		if (!fileInput || !fileList || !container) return;
 
 		const fileMap = new Map();
 		let fileIdCounter = 0;
+		const MAX_FILE_SIZE = 40 * 1024 * 1024;
+
+		function showError(message) {
+			if (errorContainer) {
+				errorContainer.textContent = message;
+				errorContainer.classList.remove('hidden');
+				setTimeout(() => {
+					errorContainer.classList.add('hidden');
+				}, 5000);
+			}
+		}
 
 		function addFile(file) {
+			if (file.size > MAX_FILE_SIZE) {
+				showError(`Die Datei "${file.name}" ist zu groß. Maximale Größe: 40MB`);
+				return;
+			}
 			const fileId = `file-${fileIdCounter++}`;
 			fileMap.set(fileId, file);
 			renderFileList();
@@ -74,6 +91,13 @@ const fileListId = `${id}-list`;
 		function removeFile(fileId) {
 			fileMap.delete(fileId);
 			renderFileList();
+		}
+
+		function formatFileSize(bytes) {
+			if (bytes >= 1024 * 1024) {
+				return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+			}
+			return `${(bytes / 1024).toFixed(1)} KB`;
 		}
 
 		function renderFileList() {
@@ -90,7 +114,7 @@ const fileListId = `${id}-list`;
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
 					</svg>
 					<span class="truncate">${file.name}</span>
-					<span class="text-muted shrink-0">(${(file.size / 1024).toFixed(1)} KB)</span>
+					<span class="text-muted shrink-0">(${formatFileSize(file.size)})</span>
 				`;
 
 				const removeBtn = document.createElement('button');

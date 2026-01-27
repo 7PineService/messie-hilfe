@@ -163,6 +163,18 @@ export const POST: APIRoute = async ({ request }) => {
 
       const fileEntries = formData.getAll('files');
       files = fileEntries.filter((entry): entry is File => entry instanceof File);
+
+      const MAX_FILE_SIZE = 40 * 1024 * 1024;
+      const oversizedFiles = files.filter(file => file.size > MAX_FILE_SIZE);
+      if (oversizedFiles.length > 0) {
+        return new Response(
+          JSON.stringify({
+            error: 'File size limit exceeded',
+            details: `Die folgenden Dateien überschreiten die maximale Größe von 40MB: ${oversizedFiles.map(f => f.name).join(', ')}`
+          }),
+          { status: 400, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
     } else if (contentType.includes('application/json')) {
       data = await request.json();
     } else {
