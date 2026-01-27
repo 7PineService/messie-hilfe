@@ -47,7 +47,7 @@ const leadApiEndpoint = LEAD_API_ENDPOINT;
 
 				<button
 					type="button"
-					class="next-btn cta-primary text-white font-semibold px-6 py-3 rounded-xl flex items-center justify-center gap-2 text-base transition-colors"
+					class="next-btn cta-primary text-white font-semibold px-6 py-3 rounded-xl flex items-center justify-center gap-2 text-base transition-colors w-full md:w-auto"
 					data-action="next"
 				>
 					<span>Weiter</span>
@@ -58,7 +58,7 @@ const leadApiEndpoint = LEAD_API_ENDPOINT;
 
 				<button
 					type="button"
-					class="submit-btn hidden cta-primary text-white font-semibold px-6 py-3 rounded-xl text-base transition-colors"
+					class="submit-btn hidden cta-primary text-white font-semibold px-6 py-3 rounded-xl text-base transition-colors w-full md:w-auto"
 					data-action="submit"
 				>
 					Jetzt unverbindlich anfragen
@@ -216,15 +216,9 @@ const leadApiEndpoint = LEAD_API_ENDPOINT;
 				if (currentStep > 1) {
 					backBtn.classList.remove('hidden');
 					backBtn.classList.add('flex');
-					if (nextBtn) {
-						nextBtn.classList.remove('w-full');
-					}
 				} else {
 					backBtn.classList.add('hidden');
 					backBtn.classList.remove('flex');
-					if (nextBtn) {
-						nextBtn.classList.add('w-full');
-					}
 				}
 			}
 
@@ -262,28 +256,42 @@ const leadApiEndpoint = LEAD_API_ENDPOINT;
 
 			if (navigationButtons) {
 				if (currentStep === totalSteps) {
-					navigationButtons.classList.remove('flex-row', 'justify-between', 'items-center');
-					navigationButtons.classList.add('flex-col');
+					navigationButtons.classList.remove('flex-row', 'justify-between', 'md:justify-end', 'items-center');
+					navigationButtons.classList.add('flex-col', 'md:items-center');
 					if (submitBtn) {
-						submitBtn.classList.add('w-full', 'order-1');
+						submitBtn.classList.add('order-1');
 					}
 					if (privacyTextMobile) {
 						privacyTextMobile.classList.add('order-2');
 					}
 					if (backBtn) {
-						backBtn.classList.add('w-full', 'order-3');
+						backBtn.classList.add('w-full', 'md:w-auto', 'order-3');
 					}
-				} else {
-					navigationButtons.classList.remove('flex-col');
-					navigationButtons.classList.add('flex-row', 'justify-between', 'items-center');
+				} else if (currentStep === 1) {
+					// Step 1: align button to the right on desktop
+					navigationButtons.classList.remove('flex-col', 'md:items-center', 'justify-between');
+					navigationButtons.classList.add('flex-row', 'md:justify-end', 'items-center');
 					if (submitBtn) {
-						submitBtn.classList.remove('w-full', 'order-1');
+						submitBtn.classList.remove('order-1');
 					}
 					if (privacyTextMobile) {
 						privacyTextMobile.classList.remove('order-2');
 					}
 					if (backBtn) {
-						backBtn.classList.remove('w-full', 'order-3');
+						backBtn.classList.remove('w-full', 'md:w-auto', 'order-3');
+					}
+				} else {
+					// Steps 2-5: space between back and next buttons
+					navigationButtons.classList.remove('flex-col', 'md:items-center', 'md:justify-end');
+					navigationButtons.classList.add('flex-row', 'justify-between', 'items-center');
+					if (submitBtn) {
+						submitBtn.classList.remove('order-1');
+					}
+					if (privacyTextMobile) {
+						privacyTextMobile.classList.remove('order-2');
+					}
+					if (backBtn) {
+						backBtn.classList.remove('w-full', 'md:w-auto', 'order-3');
 					}
 				}
 			}
