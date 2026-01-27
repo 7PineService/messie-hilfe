@@ -91,30 +91,22 @@ const gtmId = getGTMContainerId(hostname);
 					<div class="flex items-center justify-between md:justify-center md:relative h-18">
 						<a href="/" class="flex items-center gap-2 md:absolute md:left-0" aria-label={`${SITE_NAME} Startseite`}>
 							<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-14 h-auto w-auto object-contain" />
-							<div class="flex flex-col">
+							<div class="relative">
 								<span class="text-xl whitespace-nowrap logo-text">
 									<span class="messie">Messie-</span><span class="hilfe">Hilfe</span>
 								</span>
-								<span class="deutschland">Deutschland</span>
+								<span class="deutschland absolute top-6 left-0 whitespace-nowrap">Deutschland</span>
 							</div>
 						</a>
 
-						<div class="flex items-center gap-2">
-							<div class="step-indicator flex flex-col items-center text-base font-medium">
-								<span class="text-primary">Schritt {currentStep} von {totalSteps}</span>
-								<div class="mt-2 w-32 h-1.5 bg-surface-muted rounded-full overflow-hidden">
-									<div
-										class="h-full bg-cta-primary rounded-full transition-all duration-300"
-										style={`width: ${(currentStep / totalSteps) * 100}%`}
-									></div>
-								</div>
+						<div class="step-indicator flex flex-col items-center text-base font-medium">
+							<span class="text-primary">Schritt {currentStep} von {totalSteps}</span>
+							<div class="mt-2 w-32 h-1.5 bg-surface-muted rounded-full overflow-hidden">
+								<div
+									class="h-full bg-cta-primary rounded-full transition-all duration-300"
+									style={`width: ${(currentStep / totalSteps) * 100}%`}
+								></div>
 							</div>
-
-							<a href="/anfrage/" class="md:hidden p-2" aria-label="Anfrage">
-								<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-								</svg>
-							</a>
 						</div>
 					</div>
 				</div>
