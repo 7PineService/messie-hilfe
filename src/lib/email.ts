@@ -1,9 +1,9 @@
 import { Resend } from 'resend';
-import { RESEND_API_KEY, RESEND_FROM_EMAIL, CONTACT_RECIPIENT_EMAIL } from 'astro:env/server';
+import { getSecret } from 'astro:env/server';
 
-console.log('🔧 [Email Service] astro:env/server - API_KEY exists:', !!RESEND_API_KEY, 'length:', RESEND_API_KEY?.length, 'prefix:', RESEND_API_KEY?.substring(0, 7));
-console.log('🔧 [Email Service] process.env.RESEND_API_KEY exists:', !!process.env.RESEND_API_KEY, 'length:', process.env.RESEND_API_KEY?.length);
-console.log('🔧 [Email Service] import.meta.env.RESEND_API_KEY exists:', !!(import.meta as any).env?.RESEND_API_KEY, 'value:', (import.meta as any).env?.RESEND_API_KEY);
+const RESEND_API_KEY = getSecret('RESEND_API_KEY') as string;
+const RESEND_FROM_EMAIL = getSecret('RESEND_FROM_EMAIL') as string;
+const CONTACT_RECIPIENT_EMAIL = getSecret('CONTACT_RECIPIENT_EMAIL') as string;
 
 export const resend = new Resend(RESEND_API_KEY);
 
@@ -19,8 +19,6 @@ export interface EmailOptions {
 }
 
 export async function sendEmail(options: EmailOptions) {
-  console.log('📨 [Email Service] Sending - To:', options.to, 'From:', RESEND_FROM_EMAIL, 'Subject:', options.subject, 'Attachments:', options.attachments?.length || 0);
-
   try {
     const result = await resend.emails.send({
       from: RESEND_FROM_EMAIL,
@@ -31,10 +29,8 @@ export async function sendEmail(options: EmailOptions) {
       attachments: options.attachments,
     });
 
-    console.log('✉️ [Email Service] Result:', JSON.stringify(result));
     return result;
   } catch (error) {
-    console.error('❌ [Email Service] Error:', error);
     throw error;
   }
 }
