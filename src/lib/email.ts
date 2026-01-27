@@ -1,6 +1,7 @@
 import { Resend } from 'resend';
+import { RESEND_API_KEY, RESEND_FROM_EMAIL, CONTACT_RECIPIENT_EMAIL } from 'astro:env/server';
 
-export const resend = new Resend(process.env.RESEND_API_KEY);
+export const resend = new Resend(RESEND_API_KEY);
 
 export interface EmailOptions {
   to: string;
@@ -15,7 +16,7 @@ export interface EmailOptions {
 
 export async function sendEmail(options: EmailOptions) {
   return await resend.emails.send({
-    from: process.env.RESEND_FROM_EMAIL!,
+    from: RESEND_FROM_EMAIL,
     to: options.to,
     subject: options.subject,
     html: options.html,
@@ -25,5 +26,5 @@ export async function sendEmail(options: EmailOptions) {
 }
 
 export function getRecipientEmail(): string {
-  return process.env.CONTACT_RECIPIENT_EMAIL!;
+  return CONTACT_RECIPIENT_EMAIL;
 }

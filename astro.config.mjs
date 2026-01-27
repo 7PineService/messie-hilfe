@@ -1,9 +1,25 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   adapter: vercel(),
+  env: {
+    schema: {
+      RESEND_API_KEY: envField.string({
+        context: 'server',
+        access: 'secret',
+      }),
+      RESEND_FROM_EMAIL: envField.string({
+        context: 'server',
+        access: 'secret',
+      }),
+      CONTACT_RECIPIENT_EMAIL: envField.string({
+        context: 'server',
+        access: 'secret',
+      }),
+    },
+  },
   build: {
     inlineStylesheets: 'auto',
   },
