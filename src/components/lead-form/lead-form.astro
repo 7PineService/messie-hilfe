@@ -620,20 +620,42 @@ const leadApiEndpoint = LEAD_API_ENDPOINT;
 				source: 'lead-form'
 			};
 
-			if (isDev) {
-				console.log('=== Lead Form Submission ===');
-				console.log('Form Data:', submitData);
-			}
+			const getFileMapFn = window['getFileMap_lead-form-files'];
+			const fileMap = getFileMapFn ? getFileMapFn() : new Map();
+			const hasFiles = fileMap && fileMap.size > 0;
 
 			if (leadApiEndpoint) {
 				try {
-					const response = await fetch(leadApiEndpoint, {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-						},
-						body: JSON.stringify(submitData)
-					});
+					let response;
+
+					if (hasFiles) {
+						const formDataObj = new FormData();
+
+						Object.entries(submitData).forEach(([key, value]) => {
+							if (Array.isArray(value)) {
+								value.forEach(v => formDataObj.append(key, v));
+							} else if (value !== undefined && value !== null) {
+								formDataObj.append(key, value);
+							}
+						});
+
+						fileMap.forEach((file) => {
+							formDataObj.append('files', file);
+						});
+
+						response = await fetch(leadApiEndpoint, {
+							method: 'POST',
+							body: formDataObj
+						});
+					} else {
+						response = await fetch(leadApiEndpoint, {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify(submitData)
+						});
+					}
 
 					if (response.ok) {
 						if (isDev) console.log('Lead form submitted successfully!');
