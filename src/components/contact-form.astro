@@ -258,13 +258,13 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 		}
 
 		const eventData = {
-			'event': 'generate_lead',
+			'event': 'contact_form_submit',
 			'form_type': formType,
 			'form_location': detectedFormLocation
 		};
 
 		if (isDev) {
-			console.log('[Tracking] ✅ Firing generate_lead event');
+			console.log('[Tracking] ✅ Firing contact_form_submit event');
 			console.log('[Tracking] Event data:', eventData);
 		}
 
