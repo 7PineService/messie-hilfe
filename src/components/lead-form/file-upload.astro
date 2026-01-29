@@ -55,20 +55,41 @@ const fileListId = `${id}-list`;
 	<div id={`${id}-error`} class="mt-2 text-sm text-red-600 hidden"></div>
 </div>
 
-<script define:vars={{ id, fileListId }}>
+<script>
+	interface FileData {
+		name: string;
+		size: number;
+		status: 'uploading' | 'uploaded' | 'error';
+		url: string | null;
+		path: string | null;
+		error?: string;
+	}
+
+	interface UploadResult {
+		url: string;
+		path: string;
+		name: string;
+		size: number;
+	}
+
 	document.addEventListener('DOMContentLoaded', () => {
-		const fileInput = document.getElementById(id);
-		const fileList = document.getElementById(fileListId);
-		const errorContainer = document.getElementById(`${id}-error`);
-		const container = document.querySelector(`[data-file-upload="${id}"]`);
+		const fileInputEl = document.getElementById('lead-form-files') as HTMLInputElement | null;
+		const fileListEl = document.getElementById('lead-form-files-list') as HTMLElement | null;
+		const errorContainerEl = document.getElementById('lead-form-files-error') as HTMLElement | null;
+		const containerEl = document.querySelector('[data-file-upload="lead-form-files"]') as HTMLElement | null;
 
-		if (!fileInput || !fileList || !container) return;
+		if (!fileInputEl || !fileListEl || !containerEl) return;
 
-		const fileMap = new Map();
+		const fileInput: HTMLInputElement = fileInputEl;
+		const fileList: HTMLElement = fileListEl;
+		const errorContainer: HTMLElement | null = errorContainerEl;
+		const container: HTMLElement = containerEl;
+
+		const fileMap = new Map<string, FileData>();
 		let fileIdCounter = 0;
 		const MAX_FILE_SIZE = 40 * 1024 * 1024;
 
-		function showError(message) {
+		function showError(message: string): void {
 			if (errorContainer) {
 				errorContainer.textContent = message;
 				errorContainer.classList.remove('hidden');
@@ -78,49 +99,140 @@ const fileListId = `${id}-list`;
 			}
 		}
 
-		function addFile(file) {
+		async function uploadToSupabase(file: File): Promise<UploadResult> {
+			const urlResponse = await fetch('/api/upload-url', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					fileName: file.name,
+					fileType: file.type,
+					fileSize: file.size
+				})
+			});
+
+			if (!urlResponse.ok) {
+				const errorData = await urlResponse.json();
+				throw new Error(errorData.error || 'Failed to get upload URL');
+			}
+
+			const { signedUrl, path, publicUrl } = await urlResponse.json();
+
+			const uploadResponse = await fetch(signedUrl, {
+				method: 'PUT',
+				body: file,
+				headers: {
+					'Content-Type': file.type,
+					'x-upsert': 'false'
+				}
+			});
+
+			if (!uploadResponse.ok) {
+				throw new Error('Upload fehlgeschlagen');
+			}
+
+			return {
+				url: publicUrl,
+				path: path,
+				name: file.name,
+				size: file.size,
+			};
+		}
+
+		async function addFile(file: File): Promise<void> {
 			if (file.size > MAX_FILE_SIZE) {
 				showError(`Die Datei "${file.name}" ist zu groß. Maximale Größe: 40MB`);
 				return;
 			}
+
 			const fileId = `file-${fileIdCounter++}`;
-			fileMap.set(fileId, file);
+
+			const tempFileData: FileData = {
+				name: file.name,
+				size: file.size,
+				status: 'uploading',
+				url: null,
+				path: null
+			};
+
+			fileMap.set(fileId, tempFileData);
 			renderFileList();
+
+			try {
+				const uploadResult = await uploadToSupabase(file);
+
+				fileMap.set(fileId, {
+					...tempFileData,
+					status: 'uploaded',
+					url: uploadResult.url,
+					path: uploadResult.path
+				});
+				renderFileList();
+			} catch (error) {
+				console.error('Upload error:', error);
+				fileMap.set(fileId, {
+					...tempFileData,
+					status: 'error',
+					error: error instanceof Error ? error.message : 'Unknown error'
+				});
+				renderFileList();
+				showError(`Fehler beim Hochladen von "${file.name}": ${error instanceof Error ? error.message : 'Unknown error'}`);
+			}
 		}
 
-		function removeFile(fileId) {
+		function removeFile(fileId: string): void {
 			fileMap.delete(fileId);
 			renderFileList();
 		}
 
-		function formatFileSize(bytes) {
+		function formatFileSize(bytes: number): string {
 			if (bytes >= 1024 * 1024) {
 				return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 			}
 			return `${(bytes / 1024).toFixed(1)} KB`;
 		}
 
-		function renderFileList() {
+		function renderFileList(): void {
 			fileList.innerHTML = '';
 
-			fileMap.forEach((file, fileId) => {
+			fileMap.forEach((fileData, fileId) => {
 				const fileItem = document.createElement('div');
 				fileItem.className = 'text-sm flex items-center justify-between gap-2 p-2 bg-surface-input rounded-lg border border-border-primary';
 
 				const fileInfo = document.createElement('div');
 				fileInfo.className = 'flex items-center gap-2 flex-1 min-w-0';
+
+				let statusIcon = '';
+				let statusText = '';
+
+				if (fileData.status === 'uploading') {
+					statusIcon = `<svg class="w-4 h-4 shrink-0 text-amber-600 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+					</svg>`;
+					statusText = '<span class="text-amber-600 text-xs">Wird hochgeladen...</span>';
+				} else if (fileData.status === 'uploaded') {
+					statusIcon = `<svg class="w-4 h-4 shrink-0 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+					</svg>`;
+					statusText = '';
+				} else if (fileData.status === 'error') {
+					statusIcon = `<svg class="w-4 h-4 shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+					</svg>`;
+					statusText = '<span class="text-red-600 text-xs">Fehler</span>';
+				}
+
 				fileInfo.innerHTML = `
-					<svg class="w-4 h-4 shrink-0 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-					</svg>
-					<span class="truncate">${file.name}</span>
-					<span class="text-muted shrink-0">(${formatFileSize(file.size)})</span>
+					${statusIcon}
+					<span class="truncate">${fileData.name}</span>
+					<span class="text-muted shrink-0">(${formatFileSize(fileData.size)})</span>
+					${statusText}
 				`;
 
 				const removeBtn = document.createElement('button');
 				removeBtn.type = 'button';
 				removeBtn.className = 'shrink-0 p-1 text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors';
 				removeBtn.setAttribute('aria-label', 'Datei entfernen');
+				removeBtn.disabled = fileData.status === 'uploading';
 				removeBtn.innerHTML = `
 					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -134,38 +246,40 @@ const fileListId = `${id}-list`;
 			});
 		}
 
-		fileInput.addEventListener('change', (e) => {
-			const newFiles = Array.from(e.target.files || []);
+		fileInput.addEventListener('change', (e: Event) => {
+			const target = e.target as HTMLInputElement;
+			const newFiles = Array.from(target.files || []);
 			newFiles.forEach(file => addFile(file));
 			fileInput.value = '';
 		});
 
 		const dropZone = container.querySelector('label');
 
-		['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-			dropZone?.addEventListener(eventName, (e) => {
+		(['dragenter', 'dragover', 'dragleave', 'drop'] as const).forEach(eventName => {
+			dropZone?.addEventListener(eventName, (e: Event) => {
 				e.preventDefault();
 				e.stopPropagation();
 			});
 		});
 
-		['dragenter', 'dragover'].forEach(eventName => {
+		(['dragenter', 'dragover'] as const).forEach(eventName => {
 			dropZone?.addEventListener(eventName, () => {
 				dropZone.parentElement?.classList.add('border-cta-primary', 'bg-surface-tertiary');
 			});
 		});
 
-		['dragleave', 'drop'].forEach(eventName => {
+		(['dragleave', 'drop'] as const).forEach(eventName => {
 			dropZone?.addEventListener(eventName, () => {
 				dropZone.parentElement?.classList.remove('border-cta-primary', 'bg-surface-tertiary');
 			});
 		});
 
-		dropZone?.addEventListener('drop', (e) => {
-			const files = Array.from(e.dataTransfer?.files || []);
+		dropZone?.addEventListener('drop', (e: Event) => {
+			const dragEvent = e as DragEvent;
+			const files = Array.from(dragEvent.dataTransfer?.files || []);
 			files.forEach(file => addFile(file));
 		});
 
-		window[`getFileMap_${id}`] = () => fileMap;
+		(window as any).getFileMap_leadformfiles = () => fileMap;
 	});
 </script>

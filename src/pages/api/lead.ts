@@ -3,6 +3,13 @@ import { sendEmail, getRecipientEmail } from '@/lib/email';
 
 export const prerender = false;
 
+interface UploadedFile {
+  url: string;
+  name: string;
+  size: number;
+  path: string;
+}
+
 interface LeadFormData {
   email: string;
   phone: string;
@@ -46,6 +53,7 @@ interface LeadFormData {
   alt_notes?: string;
   timestamp?: string;
   source?: string;
+  fileUrls?: UploadedFile[];
 }
 
 function formatTitle(title?: string): string {
@@ -103,7 +111,7 @@ function hasDifferentContact(data: LeadFormData): boolean {
   return false;
 }
 
-function buildLeadEmail(data: LeadFormData, fileNames: string[] = []): { subject: string; html: string } {
+function buildLeadEmail(data: LeadFormData, fileUrls: UploadedFile[] = []): { subject: string; html: string } {
   const services = data['services[]'];
   const servicesList = Array.isArray(services) ? services.join(', ') : services || 'Keine angegeben';
   const titleStr = formatTitle(data.title);
@@ -139,12 +147,11 @@ function buildLeadEmail(data: LeadFormData, fileNames: string[] = []): { subject
 
     <h3>Schritt 4 – Anmerkungen & Uploads</h3>
     ${data.additional_notes ? `<p><strong>Zusätzliche Anmerkungen:</strong><br>${data.additional_notes.replace(/\n/g, '<br>')}</p>` : '<p><em>Keine Anmerkungen</em></p>'}
-    ${fileNames.length > 0 ? `
-      <p><strong>Uploads (${fileNames.length}):</strong></p>
+    ${fileUrls.length > 0 ? `
+      <p><strong>Hochgeladene Dateien (${fileUrls.length}):</strong></p>
       <ul>
-        ${fileNames.map(name => `<li>${name}</li>`).join('')}
+        ${fileUrls.map(file => `<li><a href="${file.url}" target="_blank">${file.name}</a> (${(file.size / 1024 / 1024).toFixed(2)} MB)</li>`).join('')}
       </ul>
-      <p><em>Dateien als Anhang beigefügt</em></p>
     ` : '<p><em>Keine Dateien hochgeladen</em></p>'}
 
     <hr>
@@ -193,75 +200,12 @@ export const POST: APIRoute = async ({ request }) => {
     const contentType = request.headers.get('content-type') || '';
 
     let data: LeadFormData;
-    let files: File[] = [];
 
-    if (contentType.includes('multipart/form-data')) {
-      const formData = await request.formData();
-
-      data = {
-        email: formData.get('email') as string,
-        phone: formData.get('phone') as string,
-        salutation: formData.get('salutation') as string,
-        title: formData.get('title') as string || undefined,
-        first_name: formData.get('first_name') as string,
-        last_name: formData.get('last_name') as string,
-        street: formData.get('street') as string,
-        street_number: formData.get('street_number') as string,
-        postal_code: formData.get('postal_code') as string,
-        city: formData.get('city') as string,
-        'services[]': formData.getAll('services[]') as string[],
-        payment_method: formData.get('payment_method') as string || undefined,
-        object_type: formData.get('object_type') as string || undefined,
-        etage: formData.get('etage') as string || undefined,
-        elevator: formData.get('elevator') as string || undefined,
-        furnishing: formData.get('furnishing') as string || undefined,
-        'access[]': formData.getAll('access[]') as string[],
-        access_zugang_zeiten_text: formData.get('access_zugang_zeiten_text') as string || undefined,
-        access_parkplatz_entfernt_text: formData.get('access_parkplatz_entfernt_text') as string || undefined,
-        access_besonderheiten_text: formData.get('access_besonderheiten_text') as string || undefined,
-        condition: formData.get('condition') as string || undefined,
-        area: formData.get('area') as string || undefined,
-        clutter_level: formData.get('clutter_level') as string || undefined,
-        condition_notes: formData.get('condition_notes') as string || undefined,
-        additional_notes: formData.get('additional_notes') as string || undefined,
-        timing: formData.get('timing') as string || undefined,
-        preferred_date: formData.get('preferred_date') as string || undefined,
-        has_different_address: formData.getAll('has_different_address') as string[],
-        job_street: formData.get('job_street') as string || undefined,
-        job_street_number: formData.get('job_street_number') as string || undefined,
-        job_postal_code: formData.get('job_postal_code') as string || undefined,
-        job_city: formData.get('job_city') as string || undefined,
-        has_different_contact: formData.getAll('has_different_contact') as string[],
-        alt_salutation: formData.get('alt_salutation') as string || undefined,
-        alt_title: formData.get('alt_title') as string || undefined,
-        alt_first_name: formData.get('alt_first_name') as string || undefined,
-        alt_last_name: formData.get('alt_last_name') as string || undefined,
-        alt_email: formData.get('alt_email') as string || undefined,
-        alt_phone: formData.get('alt_phone') as string || undefined,
-        alt_notes: formData.get('alt_notes') as string || undefined,
-        timestamp: formData.get('timestamp') as string || undefined,
-        source: formData.get('source') as string || undefined,
-      };
-
-      const fileEntries = formData.getAll('files');
-      files = fileEntries.filter((entry): entry is File => entry instanceof File);
-
-      const MAX_FILE_SIZE = 40 * 1024 * 1024;
-      const oversizedFiles = files.filter(file => file.size > MAX_FILE_SIZE);
-      if (oversizedFiles.length > 0) {
-        return new Response(
-          JSON.stringify({
-            error: 'File size limit exceeded',
-            details: `Die folgenden Dateien überschreiten die maximale Größe von 40MB: ${oversizedFiles.map(f => f.name).join(', ')}`
-          }),
-          { status: 400, headers: { 'Content-Type': 'application/json' } }
-        );
-      }
-    } else if (contentType.includes('application/json')) {
+    if (contentType.includes('application/json')) {
       data = await request.json();
     } else {
       return new Response(
-        JSON.stringify({ error: 'Content-Type must be application/json or multipart/form-data' }),
+        JSON.stringify({ error: 'Content-Type must be application/json' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -273,22 +217,14 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    const fileNames = files.map(f => f.name);
-    const emailContent = buildLeadEmail(data, fileNames);
-
-    const attachments = await Promise.all(
-      files.map(async (file) => ({
-        filename: file.name,
-        content: Buffer.from(await file.arrayBuffer()),
-      }))
-    );
+    const fileUrls = data.fileUrls || [];
+    const emailContent = buildLeadEmail(data, fileUrls);
 
     const { data: emailData, error } = await sendEmail({
       to: getRecipientEmail(),
       subject: emailContent.subject,
       html: emailContent.html,
       replyTo: data.email,
-      attachments: attachments.length > 0 ? attachments : undefined,
     });
 
     if (error) {

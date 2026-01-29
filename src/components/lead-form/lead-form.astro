@@ -614,48 +614,39 @@ const leadApiEndpoint = LEAD_API_ENDPOINT;
 			submitButton.disabled = true;
 			submitButton.innerHTML = '<span>Wird gesendet...</span>';
 
+			const getFileMapFn = window.getFileMap_leadformfiles;
+			const fileMap = getFileMapFn ? getFileMapFn() : new Map();
+
+			const uploadedFiles = [];
+			if (fileMap && fileMap.size > 0) {
+				fileMap.forEach((fileData) => {
+					if (fileData.status === 'uploaded' && fileData.url) {
+						uploadedFiles.push({
+							url: fileData.url,
+							name: fileData.name,
+							size: fileData.size,
+							path: fileData.path
+						});
+					}
+				});
+			}
+
 			const submitData = {
 				...formData,
 				timestamp: new Date().toISOString(),
-				source: 'lead-form'
+				source: 'lead-form',
+				fileUrls: uploadedFiles
 			};
-
-			const getFileMapFn = window['getFileMap_lead-form-files'];
-			const fileMap = getFileMapFn ? getFileMapFn() : new Map();
-			const hasFiles = fileMap && fileMap.size > 0;
 
 			if (leadApiEndpoint) {
 				try {
-					let response;
-
-					if (hasFiles) {
-						const formDataObj = new FormData();
-
-						Object.entries(submitData).forEach(([key, value]) => {
-							if (Array.isArray(value)) {
-								value.forEach(v => formDataObj.append(key, v));
-							} else if (value !== undefined && value !== null) {
-								formDataObj.append(key, value);
-							}
-						});
-
-						fileMap.forEach((file) => {
-							formDataObj.append('files', file);
-						});
-
-						response = await fetch(leadApiEndpoint, {
-							method: 'POST',
-							body: formDataObj
-						});
-					} else {
-						response = await fetch(leadApiEndpoint, {
-							method: 'POST',
-							headers: {
-								'Content-Type': 'application/json',
-							},
-							body: JSON.stringify(submitData)
-						});
-					}
+					const response = await fetch(leadApiEndpoint, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(submitData)
+					});
 
 					if (response.ok) {
 						if (isDev) console.log('Lead form submitted successfully!');

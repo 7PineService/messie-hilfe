@@ -176,11 +176,16 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 </div>
 
 <script define:vars={{ contactApiEndpoint, formId, fileListId, formMessageId, privacyCheckboxId, filesInputId, overlayStyle, isDev: import.meta.env.DEV, formType, formLocation }}>
+
 	const form = document.getElementById(formId);
 	let formMessage = null;
 	const fileInput = document.getElementById(filesInputId);
 	const fileList = document.getElementById(fileListId);
 	const privacyCheckbox = document.getElementById(privacyCheckboxId);
+
+	console.log('[Contact Form Debug] filesInputId:', filesInputId);
+	console.log('[Contact Form Debug] fileInput element:', fileInput);
+	console.log('[Contact Form Debug] fileList element:', fileList);
 
 	function getMessageElement() {
 		if (!formMessage) {
@@ -282,13 +287,93 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 	}
 
 	if (fileInput && fileList) {
+		console.log('[Contact Form Debug] Entered file upload block');
+		const fileInputEl = fileInput;
+		const fileListEl = fileList;
+
 		const fileMap = new Map();
 		let fileIdCounter = 0;
+		const MAX_FILE_SIZE = 40 * 1024 * 1024;
 
-		function addFile(file) {
+		async function uploadToSupabase(file) {
+			// Request signed upload URL from API
+			const urlResponse = await fetch('/api/upload-url', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					fileName: file.name,
+					fileType: file.type,
+					fileSize: file.size
+				})
+			});
+
+			if (!urlResponse.ok) {
+				const errorData = await urlResponse.json();
+				throw new Error(errorData.error || 'Failed to get upload URL');
+			}
+
+			const { signedUrl, path, publicUrl } = await urlResponse.json();
+
+			// Upload file to Supabase using signed URL
+			const uploadResponse = await fetch(signedUrl, {
+				method: 'PUT',
+				body: file,
+				headers: {
+					'Content-Type': file.type,
+					'x-upsert': 'false'
+				}
+			});
+
+			if (!uploadResponse.ok) {
+				throw new Error('Upload fehlgeschlagen');
+			}
+
+			return {
+				url: publicUrl,
+				path: path,
+				name: file.name,
+				size: file.size,
+			};
+		}
+
+		async function addFile(file) {
+			if (file.size > MAX_FILE_SIZE) {
+				console.warn(`File "${file.name}" is too large. Max size: 40MB`);
+				return;
+			}
+
 			const fileId = `file-${fileIdCounter++}`;
-			fileMap.set(fileId, file);
+
+			const tempFileData = {
+				name: file.name,
+				size: file.size,
+				status: 'uploading',
+				url: null,
+				path: null
+			};
+
+			fileMap.set(fileId, tempFileData);
 			renderFileList();
+
+			try {
+				const uploadResult = await uploadToSupabase(file);
+
+				fileMap.set(fileId, {
+					...tempFileData,
+					status: 'uploaded',
+					url: uploadResult.url,
+					path: uploadResult.path
+				});
+				renderFileList();
+			} catch (error) {
+				console.error('Upload error:', error);
+				fileMap.set(fileId, {
+					...tempFileData,
+					status: 'error',
+					error: error?.message || 'Unknown error'
+				});
+				renderFileList();
+			}
 		}
 
 		function removeFile(fileId) {
@@ -297,46 +382,73 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 		}
 
 		function renderFileList() {
-			fileList.innerHTML = '';
+			fileListEl.innerHTML = '';
 			const bgClass = overlayStyle ? 'bg-[#FFFBF0]' : 'bg-[var(--color-input-bg)]';
-			
-			fileMap.forEach((file, fileId) => {
+
+			fileMap.forEach((fileData, fileId) => {
 				const fileItem = document.createElement('div');
 				fileItem.className = `text-sm text-gray-600 flex items-center justify-between gap-2 p-2 ${bgClass} rounded border border-amber-200`;
-				
+
 				const fileInfo = document.createElement('div');
 				fileInfo.className = 'flex items-center space-x-2 flex-1 min-w-0';
+
+				let statusIcon = '';
+				let statusText = '';
+
+				if (fileData.status === 'uploading') {
+					statusIcon = `<svg class="w-4 h-4 shrink-0 text-amber-600 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+					</svg>`;
+					statusText = '<span class="text-amber-600 text-xs ml-2">Lädt...</span>';
+				} else if (fileData.status === 'uploaded') {
+					statusIcon = `<svg class="w-4 h-4 shrink-0 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+					</svg>`;
+					statusText = '';
+				} else if (fileData.status === 'error') {
+					statusIcon = `<svg class="w-4 h-4 shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+					</svg>`;
+					statusText = '<span class="text-red-600 text-xs ml-2">Fehler</span>';
+				}
+
 				fileInfo.innerHTML = `
-					<svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-					</svg>
-					<span class="truncate">${file.name} (${(file.size / 1024).toFixed(1)} KB)</span>
+					${statusIcon}
+					<span class="truncate">${fileData.name} (${(fileData.size / 1024).toFixed(1)} KB)</span>
+					${statusText}
 				`;
-				
+
 				const removeBtn = document.createElement('button');
 				removeBtn.type = 'button';
 				removeBtn.className = 'shrink-0 p-1 text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors';
 				removeBtn.setAttribute('aria-label', 'Datei entfernen');
+				removeBtn.disabled = fileData.status === 'uploading';
 				removeBtn.innerHTML = `
 					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
 					</svg>
 				`;
 				removeBtn.addEventListener('click', () => removeFile(fileId));
-				
+
 				fileItem.appendChild(fileInfo);
 				fileItem.appendChild(removeBtn);
-				fileList.appendChild(fileItem);
+				fileListEl.appendChild(fileItem);
 			});
 		}
 
-		fileInput.addEventListener('change', (e) => {
-			const newFiles = Array.from(e.target.files || []);
+		console.log('[Contact Form Debug] Attaching change event listener to file input');
+		fileInputEl.addEventListener('change', (e) => {
+			console.log('[Contact Form Debug] File input change event fired!');
+			const target = e.target;
+			const newFiles = Array.from(target.files || []);
+			console.log('[Contact Form Debug] Selected files:', newFiles);
 			newFiles.forEach(file => addFile(file));
-			fileInput.value = '';
+			fileInputEl.value = '';
 		});
+		console.log('[Contact Form Debug] Event listener attached successfully');
 
 		window[`getFileMap_${filesInputId}`] = () => fileMap;
+		console.log('[Contact Form Debug] File upload setup complete');
 	}
 
 	if (form && contactApiEndpoint) {
@@ -373,99 +485,62 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 
 			const getFileMapFn = window[`getFileMap_${filesInputId}`];
 			const storedFileMap = getFileMapFn ? getFileMapFn() : null;
+
+			const uploadedFiles = [];
 			if (storedFileMap && storedFileMap.size > 0) {
-				data.hasFiles = true;
-				data.fileCount = storedFileMap.size;
-
-				if (isDev) {
-				console.log('Files attached:', storedFileMap.size);
-				storedFileMap.forEach((file, fileId) => {
-					console.log(`  - ${fileId}: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`);
+				storedFileMap.forEach((fileData) => {
+					if (fileData.status === 'uploaded' && fileData.url) {
+						uploadedFiles.push({
+							url: fileData.url,
+							name: fileData.name,
+							size: fileData.size,
+							path: fileData.path
+						});
+					}
 				});
-				}
+			}
 
-				const uploadFormData = new FormData();
-				uploadFormData.append('name', data.name);
-				uploadFormData.append('contact', data.contact || '');
-				uploadFormData.append('message', data.message || '');
-				uploadFormData.append('privacy', data.privacy);
-				uploadFormData.append('timestamp', data.timestamp);
-				uploadFormData.append('source', data.source);
+			data.fileUrls = uploadedFiles;
 
-				storedFileMap.forEach((file) => {
-					uploadFormData.append('files', file);
+			if (isDev) {
+				console.log('Form submission data:', data);
+				console.log('Uploaded files:', uploadedFiles);
+			}
+
+			try {
+				const response = await fetch(contactApiEndpoint, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(data)
 				});
 
-				if (isDev) console.log('Upload FormData created with files');
-
-				try {
-					const response = await fetch(contactApiEndpoint, {
-						method: 'POST',
-						body: uploadFormData
-					});
-
-					if (response.ok) {
-						if (isDev) console.log('Form with files submitted successfully!');
-						const responseData = await response.json().catch(() => null);
-						if (isDev && responseData) {
-							console.log('Server response:', responseData);
-						}
-
-						trackLeadGeneration();
-						form.reset();
-						if (fileList) fileList.innerHTML = '';
-						if (storedFileMap) storedFileMap.clear();
-						clearMessage();
-						showSuccessState();
-					} else {
-						const errorText = await response.text().catch(() => 'Unknown error');
-						if (isDev) console.error('Server error:', response.status, errorText);
-						throw new Error('Server error');
+				if (response.ok) {
+					if (isDev) console.log('Form submitted successfully!');
+					const responseData = await response.json().catch(() => null);
+					if (isDev && responseData) {
+						console.log('Server response:', responseData);
 					}
-				} catch (error) {
-					if (isDev) console.error('Form submission error:', error);
-					showMessage('mt-4 p-4 rounded-lg bg-red-100 text-red-800', 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per Telefon.');
-				} finally {
-					if (submitButton) {
-						submitButton.disabled = false;
-						submitButton.innerHTML = originalText;
-					}
+
+					trackLeadGeneration();
+					form.reset();
+					if (fileList) fileList.innerHTML = '';
+					if (storedFileMap) storedFileMap.clear();
+					clearMessage();
+					showSuccessState();
+				} else {
+					const errorText = await response.text().catch(() => 'Unknown error');
+					if (isDev) console.error('Server error:', response.status, errorText);
+					throw new Error('Server error');
 				}
-			} else {
-				if (isDev) console.log('No files attached, sending JSON data');
-				try {
-					const response = await fetch(contactApiEndpoint, {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-						},
-						body: JSON.stringify(data)
-					});
-
-					if (response.ok) {
-						if (isDev) console.log('Form submitted successfully!');
-						const responseData = await response.json().catch(() => null);
-						if (isDev && responseData) {
-							console.log('Server response:', responseData);
-						}
-
-						trackLeadGeneration();
-						form.reset();
-						if (fileList) fileList.innerHTML = '';
-						clearMessage();
-						showSuccessState();
-					} else {
-						const errorText = await response.text().catch(() => 'Unknown error');
-						if (isDev) console.error('Server error:', response.status, errorText);
-						throw new Error('Server error');
-					}
-				} catch (error) {
-					showMessage('mt-4 p-4 rounded-lg bg-red-100 text-red-800', 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per Telefon.');
-				} finally {
-					if (submitButton) {
-						submitButton.disabled = false;
-						submitButton.innerHTML = originalText;
-					}
+			} catch (error) {
+				if (isDev) console.error('Form submission error:', error);
+				showMessage('mt-4 p-4 rounded-lg bg-red-100 text-red-800', 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per Telefon.');
+			} finally {
+				if (submitButton) {
+					submitButton.disabled = false;
+					submitButton.innerHTML = originalText;
 				}
 			}
 		});
