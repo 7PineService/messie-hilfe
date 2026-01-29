@@ -35,15 +35,15 @@ export const cities: CityData[] = [
     meta: {
       title: 'Messie-Hilfe in Berlin – Messie-Wohnung entrümpeln & reinigen',
       description:
-        'Diskrete Messie-Hilfe in Berlin ohne Bewertung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig. Jetzt anfragen.',
+        'Diskrete Messie-Hilfe in Berlin und Umgebung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig. Jetzt anfragen.',
     },
     hero: {
-      h1: 'Messie-Hilfe & Messie-Wohnung entrümpeln in Berlin – diskret & anonym',
-      text: 'Eine Messie-Wohnung zu entrümpeln ist für viele Betroffene und Angehörige eine schwere Aufgabe. Oft fehlt der Überblick, wo man anfangen soll – oder die Situation ist emotional zu belastend.\n\nWir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in Berlin – diskret, anonym und mit klaren Abläufen.',
+      h1: 'Diskrete Messie-Hilfe & Messie-Entrümpelung in Berlin',
+      text: 'Eine <strong>Messie-Wohnung zu entrümpeln</strong> ist für viele Betroffene und Angehörige eine schwere Aufgabe. Oft fehlt der Überblick, wo man anfangen soll – oder die Situation ist emotional zu belastend. Gerade in einer Großstadt wie Berlin kommen Zeitdruck und räumliche Enge häufig hinzu.\n\n<strong>Wir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in Berlin</strong> – diskret, anonym und mit klaren Abläufen.',
     },
     cityContext: {
-      h2: 'Messie-Hilfe in Berlin – ruhig, diskret, strukturiert',
-      text: 'Berlin ist eine Stadt mit sehr unterschiedlichen Wohn- und Lebenssituationen. Enge Altbauwohnungen, über Jahre genutzte Räume oder persönliche Veränderungen können dazu führen, dass Ordnung schrittweise verloren geht – oft unbemerkt.\n\nGerade hier ist ein respektvoller Umgang entscheidend. Unsere Messie-Hilfe in Berlin setzt auf Diskretion, klare Abläufe und einen ruhigen Einstieg. Wir unterstützen strukturiert und ohne Bewertung – in dem Tempo, das sich richtig anfühlt.',
+      h2: 'Messie-Hilfe in Berlin – diskret, strukturiert und ohne Bewertung',
+      text: 'Berlin ist geprägt von unterschiedlichen Wohn- und Lebenssituationen. In vielen Fällen entwickeln sich Herausforderungen rund um <strong>Messie-Wohnungen in Berlin</strong> schrittweise und bleiben lange unbemerkt – auch durch die anonyme Struktur der Stadt.\n\nGerade bei Mehrfamilienhäusern und direkter Nachbarschaft ist Diskretion entscheidend. <strong>Unsere Messie-Hilfe in Berlin</strong> unterstützt bei Entrümpelung und Reinigung <strong>ohne Bewertung</strong> – strukturiert, respektvoll und angepasst an die jeweilige Wohnsituation.',
       image: berlinImg,
     },
   },
@@ -54,15 +54,15 @@ export const cities: CityData[] = [
     meta: {
       title: 'Messie-Hilfe München – Messie-Wohnung entrümpeln & reinigen',
       description:
-        'Diskrete Messie-Hilfe in München ohne Bewertung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig.',
+        'Diskrete Messie-Hilfe in München & Umgebung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig. Jetzt anfragen.',
     },
     hero: {
-      h1: 'Messie-Hilfe & Messie-Wohnung entrümpeln München – diskret & anonym',
-      text: 'Eine Messie-Wohnung zu entrümpeln ist für viele Betroffene und Angehörige eine schwere Aufgabe. Oft fehlt der Überblick, wo man anfangen soll – oder die Situation ist emotional zu belastend.\n\nWir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in München – diskret, anonym und mit klaren Abläufen.',
+      h1: 'Diskrete Messie-Hilfe & Messie-Entrümpelung in München',
+      text: 'Eine <strong>Messie-Wohnung zu entrümpeln</strong> ist für viele Betroffene und Angehörige eine große Belastung. Oft entsteht zusätzlicher Druck durch Erwartungen von außen – etwa von Familie, Nachbarn oder Vermietern.\n\n<strong>Wir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in München</strong> – diskret, anonym und mit klaren Abläufen.',
     },
     cityContext: {
-      h2: 'Messie-Hilfe München – ruhig, diskret, strukturiert',
-      text: 'München ist eine Stadt mit hoher Wohnraumnachfrage und sehr unterschiedlichen Lebenssituationen. Enge Wohnungen, über Jahre genutzte Räume oder persönliche Veränderungen können dazu führen, dass Ordnung schrittweise verloren geht – oft unbemerkt.\n\nGerade hier ist ein respektvoller Umgang entscheidend. Unsere Messie-Hilfe in München setzt auf Diskretion, klare Abläufe und einen ruhigen Einstieg. Wir unterstützen strukturiert und ohne Bewertung – in dem Tempo, das sich richtig anfühlt.',
+      h2: 'Messie-Hilfe in München – diskret, strukturiert und ohne Bewertung',
+      text: 'München ist geprägt von dichtem Wohnraum, hohen Erwartungen an Ordnung und einer vergleichsweise geringen Anonymität. Probleme rund um <strong>Messie-Wohnungen in München</strong> werden dadurch oft lange verdeckt – aus Sorge vor Konsequenzen oder dem Verlust von Wohnraum.\n\nGerade in Eigentümergemeinschaften, gepflegten Mehrfamilienhäusern oder bei sensiblen Nachbarschaften ist ein zurückhaltendes Vorgehen entscheidend. <strong>Unsere Messie-Hilfe in München</strong> unterstützt bei Entrümpelung und Reinigung <strong>ohne Bewertung</strong> – strukturiert, diskret und angepasst an die jeweilige Wohnsituation.',
       image: muenchenImg,
     },
   },
@@ -73,15 +73,15 @@ export const cities: CityData[] = [
     meta: {
       title: 'Messie-Hilfe Hamburg – Messie-Wohnung entrümpeln & reinigen',
       description:
-        'Diskrete Messie-Hilfe in Hamburg ohne Bewertung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig.',
+        'Diskrete Messie-Hilfe in Hamburg & Umgebung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig. Jetzt anfragen.',
     },
     hero: {
-      h1: 'Messie-Hilfe & Messie-Wohnung entrümpeln Hamburg – diskret & anonym',
-      text: 'Eine Messie-Wohnung zu entrümpeln ist für viele Betroffene und Angehörige eine schwere Aufgabe. Oft fehlt der Überblick, wo man anfangen soll – oder die Situation ist emotional zu belastend.\n\nWir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in Hamburg – diskret, anonym und mit klaren Abläufen.',
+      h1: 'Diskrete Messie-Hilfe & Messie-Entrümpelung in Hamburg',
+      text: 'Eine <strong>Messie-Wohnung zu entrümpeln</strong> ist für viele Betroffene und Angehörige eine große Herausforderung. In Hamburg kommen häufig ältere Bausubstanz, Feuchtigkeit oder lang genutzte Räume hinzu, die Ordnung zusätzlich erschweren.\n\n<strong>Wir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in Hamburg</strong> – diskret, anonym und mit klaren Abläufen.',
     },
     cityContext: {
-      h2: 'Messie-Hilfe Hamburg – ruhig, diskret, strukturiert',
-      text: 'Hamburg ist eine Großstadt mit sehr unterschiedlichen Wohn- und Lebenssituationen. Enge innerstädtische Wohnungen, lange genutzte Räume oder persönliche Veränderungen können dazu führen, dass Ordnung schrittweise verloren geht – oft unbemerkt.\n\nGerade hier ist ein respektvoller Umgang entscheidend. Unsere Messie-Hilfe in Hamburg setzt auf Diskretion, klare Abläufe und einen ruhigen Einstieg. Wir unterstützen strukturiert und ohne Bewertung – in dem Tempo, das sich richtig anfühlt.',
+      h2: 'Messie-Hilfe in Hamburg – diskret, strukturiert und ohne Bewertung',
+      text: 'Hamburg ist geprägt von vielen Altbauwohnungen, Kellerräumen und über Jahre genutzten Wohnflächen. Herausforderungen rund um <strong>Messie-Wohnungen in Hamburg</strong> entstehen häufig schleichend – begünstigt durch Feuchtigkeit, begrenzten Stauraum oder langjährige Nutzung ohne Veränderung.\n\nGerade in Mehrfamilienhäusern mit gemeinschaftlichen Kellern oder enger Nachbarschaft ist ein ruhiges Vorgehen wichtig. <strong>Unsere Messie-Hilfe in Hamburg</strong> unterstützt bei Entrümpelung und Reinigung <strong>ohne Bewertung</strong> – strukturiert, diskret und angepasst an die jeweilige Wohnsituation.',
       image: hamburgImg,
     },
   },
@@ -92,15 +92,15 @@ export const cities: CityData[] = [
     meta: {
       title: 'Messie-Hilfe in Köln – Messie-Wohnung entrümpeln & reinigen',
       description:
-        'Diskrete Messie-Hilfe in Köln ohne Bewertung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig. Jetzt Anfragen',
+        'Diskrete Messie-Hilfe in Köln und Umgebung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig. Jetzt anfragen.',
     },
     hero: {
-      h1: 'Messie-Hilfe & Messie-Wohnung entrümpeln in Köln – diskret & anonym',
-      text: 'Eine Messie-Wohnung zu entrümpeln ist für viele Betroffene und Angehörige eine schwere Aufgabe. Oft fehlt der Überblick, wo man anfangen soll – oder die Situation ist emotional zu belastend.\n\nWir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in Köln – diskret, anonym und mit klaren Abläufen.',
+      h1: 'Diskrete Messie-Hilfe & Messie-Entrümpelung in Köln',
+      text: 'Eine <strong>Messie-Wohnung zu entrümpeln</strong> ist für viele Betroffene und Angehörige eine große Belastung. In Köln spielen persönliche Nähe, Familie und ein enger sozialer Austausch häufig eine zusätzliche Rolle.\n\n<strong>Wir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in Köln</strong> – diskret, anonym und mit klaren Abläufen.',
     },
     cityContext: {
-      h2: 'Messie-Hilfe in Köln – ruhig, diskret, strukturiert',
-      text: 'Köln ist eine Stadt mit sehr unterschiedlichen Wohn- und Lebenssituationen. Wohnungen in gewachsenen Stadtstrukturen, langjährig genutzte Räume oder persönliche Veränderungen können dazu führen, dass Ordnung schrittweise verloren geht – oft unbemerkt.\n\nGerade hier ist ein respektvoller Umgang entscheidend. Unsere Messie-Hilfe in Köln setzt auf Diskretion, klare Abläufe und einen ruhigen Einstieg. Wir unterstützen strukturiert und ohne Bewertung – in dem Tempo, das sich richtig anfühlt.',
+      h2: 'Messie-Hilfe in Köln – diskret, strukturiert und ohne Bewertung',
+      text: 'Köln ist geprägt von gewachsenen Vierteln, enger Nachbarschaft und starken sozialen Bindungen. Herausforderungen rund um <strong>Messie-Wohnungen in Köln</strong> werden oft lange zurückgehalten – aus Rücksicht auf Familie, Freunde oder das direkte Umfeld.\n\nGerade wenn mehrere Personen eingebunden sind oder Erwartungen von außen bestehen, ist ein respektvoller Umgang entscheidend. <strong>Unsere Messie-Hilfe in Köln</strong> unterstützt bei Entrümpelung und Reinigung <strong>ohne Bewertung</strong> – ruhig, strukturiert und angepasst an die jeweilige Situation.',
       image: koelnImg,
     },
   },
@@ -111,15 +111,15 @@ export const cities: CityData[] = [
     meta: {
       title: 'Messie-Hilfe Frankfurt – Messie-Wohnung entrümpeln & reinigen',
       description:
-        'Diskrete Messie-Hilfe in Frankfurt ohne Bewertung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig.',
+        'Diskrete Messie-Hilfe in Frankfurt & Umgebung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig. Jetzt anfragen.',
     },
     hero: {
-      h1: 'Messie-Hilfe & Messie-Wohnung entrümpeln Frankfurt – diskret & anonym',
-      text: 'Eine Messie-Wohnung zu entrümpeln ist für viele Betroffene und Angehörige eine schwere Aufgabe. Oft fehlt der Überblick, wo man anfangen soll – oder die Situation ist emotional zu belastend.\n\nWir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in Frankfurt – diskret, anonym und mit klaren Abläufen.',
+      h1: 'Diskrete Messie-Hilfe & Messie-Entrümpelung in Frankfurt',
+      text: 'Eine <strong>Messie-Wohnung zu entrümpeln</strong> ist für viele Betroffene und Angehörige eine enorme Belastung. In einer Stadt wie Frankfurt kommt häufig zusätzlicher Druck durch Zeitmangel, berufliche Anforderungen oder anstehende Wohnungswechsel hinzu.\n\n<strong>Wir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in Frankfurt</strong> – diskret, anonym und mit klaren Abläufen.',
     },
     cityContext: {
-      h2: 'Messie-Hilfe Frankfurt – ruhig, diskret, strukturiert',
-      text: 'Frankfurt ist eine Stadt mit sehr unterschiedlichen Wohn- und Lebenssituationen. Kleine Wohnungen, langjährig genutzte Räume oder persönliche Veränderungen können dazu führen, dass Ordnung schrittweise verloren geht – oft unbemerkt.\n\nGerade hier ist ein respektvoller Umgang entscheidend. Unsere Messie-Hilfe in Frankfurt setzt auf Diskretion, klare Abläufe und einen ruhigen Einstieg. Wir unterstützen strukturiert und ohne Bewertung – in dem Tempo, das sich richtig anfühlt.',
+      h2: 'Messie-Hilfe in Frankfurt – diskret, strukturiert und ohne Bewertung',
+      text: 'Frankfurt ist geprägt von dichter Bebauung, häufigen Wohnungswechseln und einem hohen beruflichen Tempo. Herausforderungen rund um <strong>Messie-Wohnungen in Frankfurt</strong> entstehen oft parallel zu Arbeit, Trennung oder kurzfristigen Veränderungen – Zeit für Ordnung bleibt kaum.\n\nGerade bei begrenzten Zeitfenstern, sensiblen Mietverhältnissen oder Hausverwaltungen ist ein klar strukturiertes Vorgehen entscheidend. <strong>Unsere Messie-Hilfe in Frankfurt</strong> unterstützt bei Entrümpelung und Reinigung <strong>ohne Bewertung</strong> – effizient, diskret und an die jeweilige Situation angepasst.',
       image: frankfurtImg,
     },
   },
@@ -128,17 +128,17 @@ export const cities: CityData[] = [
     name: 'Düsseldorf',
     displayName: 'Düsseldorf',
     meta: {
-      title: 'Messie-Hilfe Düsseldorf – Wohnung entrümpeln & reinigen',
+      title: 'Messie-Hilfe in Düsseldorf – Wohnung entrümpeln & reinigen',
       description:
-        'Diskrete Messie-Hilfe in Düsseldorf ohne Bewertung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig.',
+        'Diskrete Messie-Hilfe in Düsseldorf und Umgebung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig.',
     },
     hero: {
-      h1: 'Messie-Hilfe & Messie-Wohnung entrümpeln in Düsseldorf – diskret & anonym',
-      text: 'Eine Messie-Wohnung zu entrümpeln ist für viele Betroffene und Angehörige eine schwere Aufgabe. Oft fehlt der Überblick, wo man anfangen soll – oder die Situation ist emotional zu belastend.\n\nWir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in Düsseldorf – diskret, anonym und mit klaren Abläufen.',
+      h1: 'Diskrete Messie-Hilfe & Messie-Entrümpelung in Düsseldorf',
+      text: 'Eine <strong>Messie-Wohnung zu entrümpeln</strong> ist für viele Betroffene und Angehörige eine sensible Situation. In Düsseldorf spielt dabei häufig der Wunsch nach Zurückhaltung und äußerer Ordnung eine besondere Rolle.\n\n<strong>Wir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in Düsseldorf</strong> – diskret, anonym und mit klaren Abläufen.',
     },
     cityContext: {
-      h2: 'Messie-Hilfe Düsseldorf – ruhig, diskret, strukturiert',
-      text: 'Düsseldorf ist eine Stadt mit sehr unterschiedlichen Wohn- und Lebenssituationen. Wohnungen in gewachsenen Stadtstrukturen, langjährig genutzte Räume oder persönliche Veränderungen können dazu führen, dass Ordnung schrittweise verloren geht – oft unbemerkt.\n\nGerade hier ist ein respektvoller Umgang entscheidend. Unsere Messie-Hilfe in Düsseldorf setzt auf Diskretion, klare Abläufe und einen ruhigen Einstieg. Wir unterstützen strukturiert und ohne Bewertung – in dem Tempo, das sich richtig anfühlt.',
+      h2: 'Messie-Hilfe in Düsseldorf – diskret, strukturiert und ohne Bewertung',
+      text: 'Düsseldorf ist geprägt von gepflegten Wohnvierteln, Mehrfamilienhäusern und klaren Erwartungen an Ordnung und Auftreten. Herausforderungen rund um <strong>Messie-Wohnungen in Düsseldorf</strong> werden daher oft lange verborgen – aus Sorge vor Reaktionen von Nachbarn oder Hausverwaltungen.\n\nGerade in sensiblen Hausgemeinschaften oder bei verwalteten Wohnanlagen ist ein ruhiges Vorgehen entscheidend. <strong>Unsere Messie-Hilfe in Düsseldorf</strong> unterstützt bei Entrümpelung und Reinigung <strong>ohne Bewertung</strong> – strukturiert, zurückhaltend und an die jeweilige Wohnsituation angepasst.',
       image: duesseldorfImg,
     },
   },
@@ -149,15 +149,15 @@ export const cities: CityData[] = [
     meta: {
       title: 'Messie-Hilfe in Essen – Messie-Wohnung entrümpeln & reinigen',
       description:
-        'Diskrete Messie-Hilfe in Essen ohne Bewertung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig. Jetzt anfragen',
+        'Diskrete Messie-Hilfe in Essen und Umgebung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig. Jetzt anfragen.',
     },
     hero: {
-      h1: 'Messie-Hilfe & Messie-Wohnung entrümpeln in Essen – diskret & anonym',
-      text: 'Eine Messie-Wohnung zu entrümpeln ist für viele Betroffene und Angehörige eine schwere Aufgabe. Oft fehlt der Überblick, wo man anfangen soll – oder die Situation ist emotional zu belastend.\n\nWir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in Essen – diskret, anonym und mit klaren Abläufen.',
+      h1: 'Diskrete Messie-Hilfe & Messie-Entrümpelung in Essen',
+      text: 'Eine <strong>Messie-Wohnung zu entrümpeln</strong> ist für viele Betroffene und Angehörige eine große Herausforderung. In Essen betrifft dies häufig Häuser, Keller, Garagen oder über Jahre genutzte Räume mit umfangreichem Bestand.\n\n<strong>Wir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in Essen</strong> – diskret, anonym und mit klaren Abläufen.',
     },
     cityContext: {
-      h2: 'Messie-Hilfe in Essen – ruhig, diskret, strukturiert',
-      text: 'Essen ist eine Stadt mit sehr unterschiedlichen Wohn- und Lebenssituationen. Wohnungen in gewachsenen Quartieren, langjährig genutzte Räume oder persönliche Veränderungen können dazu führen, dass Ordnung schrittweise verloren geht – oft unbemerkt.\n\nGerade hier ist ein respektvoller Umgang entscheidend. Unsere Messie-Hilfe in Essen setzt auf Diskretion, klare Abläufe und einen ruhigen Einstieg. Wir unterstützen strukturiert und ohne Bewertung – in dem Tempo, das sich richtig anfühlt.',
+      h2: 'Messie-Hilfe in Essen – diskret, strukturiert und ohne Bewertung',
+      text: 'Essen ist geprägt von Wohnhäusern, ehemaligen Zechensiedlungen und über lange Zeit genutzten Immobilien. Herausforderungen rund um <strong>Messie-Wohnungen in Essen</strong> entstehen häufig über viele Jahre hinweg – mit großen Mengen, Nebenräumen und starkem Bestand.\n\nGerade bei Kellern, Garagen oder generationenübergreifend genutzten Häusern ist ein strukturiertes Vorgehen entscheidend. <strong>Unsere Messie-Hilfe in Essen</strong> unterstützt bei Entrümpelung und Reinigung <strong>ohne Bewertung</strong> – ruhig, nachvollziehbar und angepasst an die jeweilige Wohnsituation.',
       image: essenImg,
     },
   },
