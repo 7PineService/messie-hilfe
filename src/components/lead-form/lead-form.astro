@@ -660,6 +660,14 @@ const leadApiEndpoint = LEAD_API_ENDPOINT;
 					if (response.ok) {
 						if (isDev) console.log('Lead form submitted successfully!');
 
+						if (typeof window !== 'undefined' && window.dataLayer) {
+							window.dataLayer.push({
+								'event': 'form_submit_success',
+								'form_type': 'lead_form',
+								'form_id': formId
+							});
+						}
+
 						sessionStorage.removeItem(`${formId}_data`);
 
 						window.location.href = '/anfrage/danke/';

@@ -164,9 +164,35 @@ const faqProps = {
   faqItems: faqData,
   ctaText: 'Ihre Frage ist noch offen?'
 };
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Desinfektion nach der Reinigung von Messie-Wohnungen",
+  "description": "Gezielte Desinfektion nach der Reinigung von Messie-Wohnungen – ergänzend zur Reinigung",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Messie-Hilfe"
+  }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqData.map(faq => ({
+    "@type": "Question",
+    "name": faq.title,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.description
+    }
+  }))
+};
 ---
 
 <BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <main>
     <Hero {...heroProps} />
     <Start {...startProps} />

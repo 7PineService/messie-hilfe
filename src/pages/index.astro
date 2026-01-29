@@ -9,12 +9,53 @@ import Why from '@/components/sections/why.astro';
 import Cost from '@/components/sections/cost.astro';
 import FAQ from '@/components/sections/faqs.astro';
 import { FinalCTA } from '@/components/sections';
+
+const faqData = [
+  {
+    title: 'Gibt es Vorurteile?',
+    description: 'Nein. Wir helfen ohne Vorurteile und ohne Bewertung. Ihre Situation ist vertraulich und wir behandeln Sie respektvoll.'
+  },
+  {
+    title: 'Wie diskret ist der Einsatz?',
+    description: 'Wir kommen in neutralen Fahrzeugen ohne Werbung und arbeiten diskret und anonym. Niemand wird erfahren, dass Sie uns beauftragt haben.'
+  },
+  {
+    title: 'Muss ich selbst vor Ort sein?',
+    description: 'Nein, Sie müssen nicht anwesend sein. Wir erledigen alles zuverlässig und halten Sie auf dem Laufenden.'
+  },
+  {
+    title: 'Was tun Sie gegen Gerüche?',
+    description: 'Bei starken Gerüchen setzen wir spezielle Geruchsneutralisationen ein, um die Luft zu reinigen und schlechte Gerüche nachhaltig zu reduzieren.'
+  },
+  {
+    title: 'Wie lange dauert die Entrümpelung?',
+    description: 'Das hängt von der Größe und dem Zustand der Wohnung ab. In vielen Fällen sind wir innerhalb von 1–3 Tagen fertig.'
+  },
+  {
+    title: 'Helfen Sie auch bei sehr schwierigen Situationen?',
+    description: 'Ja, auch bei sehr stark belasteten Wohnungen sind wir spezialisiert. Wir kennen uns mit Geruchsbekämpfung, Desinfektion und Schadensbeseitigung aus.'
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqData.map(faq => ({
+    "@type": "Question",
+    "name": faq.title,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.description
+    }
+  }))
+};
 ---
 
 <BaseLayout
   title="Messie-Hilfe – Messie-Wohnung entrümpeln & reinigen"
   description="Diskrete Messie-Hilfe ohne Bewertung. Unterstützung bei Messie-Wohnungen, Reinigung & Entrümpelung – anonym & bezahlbar. Jetzt unverbindlich anfragen."
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <main>
     <Hero />
     <Start />

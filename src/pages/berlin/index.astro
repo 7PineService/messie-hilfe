@@ -13,6 +13,61 @@ import FAQ from '@/components/sections/faqs.astro';
 import { FinalCTA } from '@/components/sections';
 import { SITE_URL } from '@/config/site';
 import berlinImg from '@/assets/images/section-city-context-berlin.png';
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Messie-Hilfe Berlin",
+  "description": "Diskrete Messie-Hilfe in Berlin – Entrümpelung und Reinigung von Messie-Wohnungen",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Messie-Hilfe"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Berlin"
+  }
+};
+
+const faqData = [
+  {
+    title: 'Gibt es Vorurteile?',
+    description: 'Nein. Wir helfen ohne Vorurteile und ohne Bewertung. Ihre Situation ist vertraulich und wir behandeln Sie respektvoll.'
+  },
+  {
+    title: 'Wie diskret ist der Einsatz?',
+    description: 'Wir kommen in neutralen Fahrzeugen ohne Werbung und arbeiten diskret und anonym. Niemand wird erfahren, dass Sie uns beauftragt haben.'
+  },
+  {
+    title: 'Muss ich selbst vor Ort sein?',
+    description: 'Nein, Sie müssen nicht anwesend sein. Wir erledigen alles zuverlässig und halten Sie auf dem Laufenden.'
+  },
+  {
+    title: 'Was tun Sie gegen Gerüche?',
+    description: 'Bei starken Gerüchen setzen wir spezielle Geruchsneutralisationen ein, um die Luft zu reinigen und schlechte Gerüche nachhaltig zu reduzieren.'
+  },
+  {
+    title: 'Wie lange dauert die Entrümpelung?',
+    description: 'Das hängt von der Größe und dem Zustand der Wohnung ab. In vielen Fällen sind wir innerhalb von 1–3 Tagen fertig.'
+  },
+  {
+    title: 'Helfen Sie auch bei sehr schwierigen Situationen?',
+    description: 'Ja, auch bei sehr stark belasteten Wohnungen sind wir spezialisiert. Wir kennen uns mit Geruchsbekämpfung, Desinfektion und Schadensbeseitigung aus.'
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqData.map(faq => ({
+    "@type": "Question",
+    "name": faq.title,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.description
+    }
+  }))
+};
 ---
 
 <BaseLayout
@@ -20,6 +75,8 @@ import berlinImg from '@/assets/images/section-city-context-berlin.png';
   description="Diskrete Messie-Hilfe in Berlin und Umgebung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig. Jetzt anfragen."
   canonicalUrl={`${SITE_URL}/berlin/`}
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <main>
     <Hero
       title="Diskrete Messie-Hilfe & Messie-Entrümpelung in Berlin"

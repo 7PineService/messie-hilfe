@@ -97,19 +97,17 @@ const localBusinessSchema = {
   "@type": "LocalBusiness",
   "name": siteName,
   "image": `${canonicalUrl}${image}`,
-  "description": description,
-  "url": canonicalUrl,
   "telephone": CONTACT_PHONE,
   "email": CONTACT_EMAIL,
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "Aindorferstraße 137",
+    "addressLocality": "München",
+    "postalCode": "80689",
     "addressCountry": "DE"
   },
-  "priceRange": "$$",
-  "areaServed": {
-    "@type": "Country",
-    "name": "Germany"
-  }
+  "url": canonicalUrl,
+  "priceRange": "$$"
 };
 ---
 

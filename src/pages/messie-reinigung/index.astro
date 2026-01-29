@@ -42,7 +42,7 @@ const heroProps = {
 
 const startProps = {
   heading: 'So unterstützen wir bei einer Messie-Reinigung',
-  subtitle: 'Eine Messie-Reinigung kann für Betroffene sowie für Angehörige eine große Belastung sein. Wir unterstützen Sie einfühlsam und professionell, um Räume Schritt für Schritt wieder bewohnbar zu machen.',
+  subtitle: 'Eine Messie-Reinigung kann für Betroffene sowie für Angehörige eine große Belastung sein. Wir unterstützen Sie einfühlsam und professionell, um Räume Schritt für Schritt wieder bewohnbaren zu machen.',
   bulletPoints: [
     '<strong>Diskret</strong> & ohne Vorurteile',
     '<strong>Schritt für Schritt</strong> & respektvoll',
@@ -75,7 +75,7 @@ const stepsData = [
   {
     title: 'Diskrete Reinigung durch erfahrene Teams',
     description: 'Zum vereinbarten Termin führen unsere geschulten Teams die Messie-Reinigung durch.',
-    subDescription: 'Diskret, strukturiert und respektvoll – mit dem Ziel, Räume wieder bewohnbar zu machen.',
+    subDescription: 'Diskret, strukturiert und respektvoll – mit dem Ziel, Räume wieder bewohnbaren zu machen.',
     image: stepsImg4,
   },
 ];
@@ -126,9 +126,35 @@ const faqProps = {
   faqItems: faqData,
   ctaText: 'Ihre Frage ist noch offen?'
 };
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Messie-Reinigung",
+  "description": "Professionelle Reinigung von Messie-Wohnungen – diskret, anonym und strukturiert",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Messie-Hilfe"
+  }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqData.map(faq => ({
+    "@type": "Question",
+    "name": faq.title,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.description
+    }
+  }))
+};
 ---
 
 <BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <main>
     <Hero {...heroProps} />
     <Start {...startProps} />
