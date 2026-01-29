@@ -10,8 +10,10 @@ import { Phone, WhatsApp, Chevron } from '@/components/icons';
 				<div class="flex items-center justify-center space-x-2">
 					<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="h-16 w-16 object-contain" />
 				</div>
-				<div class="relative inline-block">
-					<h2 class="text-2xl md:text-3xl font-bold">{SITE_NAME}</h2>
+				<div class="relative inline-block text-left">
+					<h2 class="text-2xl md:text-3xl font-bold">
+						<span class="messie">Messie-</span><span class="hilfe">Hilfe</span>
+					</h2>
 					<span class="deutschland">Deutschland</span>
 				</div>
 				<p class="text-sm md:text-base leading-relaxed opacity-90">
@@ -249,6 +251,16 @@ import { Phone, WhatsApp, Chevron } from '@/components/icons';
 </footer>
 
 <style>
+	.messie {
+		font-weight: 600;
+		color: var(--color-logo-messie);
+	}
+
+	.hilfe {
+		font-weight: 400;
+		color: #8B7A6A;
+	}
+
 	.deutschland {
 		font-weight: 300;
 		font-size: 1rem;
