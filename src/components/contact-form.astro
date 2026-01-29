@@ -183,10 +183,6 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 	const fileList = document.getElementById(fileListId);
 	const privacyCheckbox = document.getElementById(privacyCheckboxId);
 
-	console.log('[Contact Form Debug] filesInputId:', filesInputId);
-	console.log('[Contact Form Debug] fileInput element:', fileInput);
-	console.log('[Contact Form Debug] fileList element:', fileList);
-
 	function getMessageElement() {
 		if (!formMessage) {
 			formMessage = document.createElement('div');
@@ -287,7 +283,6 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 	}
 
 	if (fileInput && fileList) {
-		console.log('[Contact Form Debug] Entered file upload block');
 		const fileInputEl = fileInput;
 		const fileListEl = fileList;
 
@@ -436,19 +431,14 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 			});
 		}
 
-		console.log('[Contact Form Debug] Attaching change event listener to file input');
 		fileInputEl.addEventListener('change', (e) => {
-			console.log('[Contact Form Debug] File input change event fired!');
 			const target = e.target;
 			const newFiles = Array.from(target.files || []);
-			console.log('[Contact Form Debug] Selected files:', newFiles);
 			newFiles.forEach(file => addFile(file));
 			fileInputEl.value = '';
 		});
-		console.log('[Contact Form Debug] Event listener attached successfully');
 
 		window[`getFileMap_${filesInputId}`] = () => fileMap;
-		console.log('[Contact Form Debug] File upload setup complete');
 	}
 
 	if (form && contactApiEndpoint) {
@@ -477,12 +467,6 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 				source: formId.includes('overlay') ? 'overlay-form' : 'landing-page'
 			};
 
-			if (isDev) {
-			console.log('=== Form Submission Data ===');
-			console.log('Form ID:', formId);
-			console.log('Form Data:', data);
-			}
-
 			const getFileMapFn = window[`getFileMap_${filesInputId}`];
 			const storedFileMap = getFileMapFn ? getFileMapFn() : null;
 
@@ -502,11 +486,6 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 
 			data.fileUrls = uploadedFiles;
 
-			if (isDev) {
-				console.log('Form submission data:', data);
-				console.log('Uploaded files:', uploadedFiles);
-			}
-
 			try {
 				const response = await fetch(contactApiEndpoint, {
 					method: 'POST',
@@ -517,12 +496,6 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 				});
 
 				if (response.ok) {
-					if (isDev) console.log('Form submitted successfully!');
-					const responseData = await response.json().catch(() => null);
-					if (isDev && responseData) {
-						console.log('Server response:', responseData);
-					}
-
 					trackLeadGeneration();
 					form.reset();
 					if (fileList) fileList.innerHTML = '';
@@ -530,12 +503,9 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 					clearMessage();
 					showSuccessState();
 				} else {
-					const errorText = await response.text().catch(() => 'Unknown error');
-					if (isDev) console.error('Server error:', response.status, errorText);
 					throw new Error('Server error');
 				}
 			} catch (error) {
-				if (isDev) console.error('Form submission error:', error);
 				showMessage('mt-4 p-4 rounded-lg bg-red-100 text-red-800', 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per Telefon.');
 			} finally {
 				if (submitButton) {
@@ -563,21 +533,6 @@ const buttonClass = 'cta-primary w-full text-white font-semibold px-5 py-2.5 bor
 				timestamp: new Date().toISOString(),
 				source: formId.includes('overlay') ? 'overlay-form' : 'landing-page'
 			};
-
-			if (isDev) {
-			console.log('=== Form Submission Data (Fallback Mode - No Endpoint) ===');
-			console.log('Form ID:', formId);
-			console.log('Form Data:', data);
-
-			const getFileMapFn = window[`getFileMap_${filesInputId}`];
-			const storedFileMap = getFileMapFn ? getFileMapFn() : null;
-			if (storedFileMap && storedFileMap.size > 0) {
-				console.log('Files attached:', storedFileMap.size);
-				storedFileMap.forEach((file, fileId) => {
-					console.log(`  - ${fileId}: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`);
-				});
-				}
-			}
 
 			trackLeadGeneration();
 			form.reset();
