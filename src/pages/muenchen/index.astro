@@ -11,34 +11,24 @@ import Why from '@/components/sections/why.astro';
 import Cost from '@/components/sections/cost.astro';
 import FAQ from '@/components/sections/faqs.astro';
 import { FinalCTA } from '@/components/sections';
-import { getCityBySlug } from '@/data/cities';
 import { SITE_URL } from '@/config/site';
-
-const cityData = getCityBySlug('muenchen');
-
-if (!cityData) {
-  return Astro.redirect('/404');
-}
-
-const heroDescriptionParagraphs = cityData.hero.text.split('\n\n').filter(p => p.trim());
-
-const canonicalUrl = `${SITE_URL}/${cityData.slug}/`;
+import muenchenImg from '@/assets/images/section-city-context-muenchen.png';
 ---
 
 <BaseLayout
-  title={cityData.meta.title}
-  description={cityData.meta.description}
-  canonicalUrl={canonicalUrl}
+  title="Messie-Hilfe München – Messie-Wohnung entrümpeln & reinigen"
+  description="Diskrete Messie-Hilfe in München & Umgebung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig. Jetzt anfragen."
+  canonicalUrl={`${SITE_URL}/muenchen/`}
 >
   <main>
     <Hero
-      title={cityData.hero.h1}
-      description={heroDescriptionParagraphs}
+      title="Diskrete Messie-Hilfe & Messie-Entrümpelung in München"
+      description={['Eine <strong>Messie-Wohnung zu entrümpeln</strong> ist für viele Betroffene und Angehörige eine große Belastung. Oft entsteht zusätzlicher Druck durch Erwartungen von außen – etwa von Familie, Nachbarn oder Vermietern.', '<strong>Wir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in München</strong> – diskret, anonym und mit klaren Abläufen.']}
     />
     <CityContext
-      heading={cityData.cityContext.h2}
-      text={cityData.cityContext.text}
-      image={cityData.cityContext.image}
+      heading="Messie-Hilfe in München – diskret, strukturiert und ohne Bewertung"
+      text="München ist geprägt von dichtem Wohnraum, hohen Erwartungen an Ordnung und einer vergleichsweise geringen Anonymität. Probleme rund um <strong>Messie-Wohnungen in München</strong> werden dadurch oft lange verdeckt – aus Sorge vor Konsequenzen oder dem Verlust von Wohnraum.\n\nGerade in Eigentümergemeinschaften, gepflegten Mehrfamilienhäusern oder bei sensiblen Nachbarschaften ist ein zurückhaltendes Vorgehen entscheidend. <strong>Unsere Messie-Hilfe in München</strong> unterstützt bei Entrümpelung und Reinigung <strong>ohne Bewertung</strong> – strukturiert, diskret und angepasst an die jeweilige Wohnsituation."
+      image={muenchenImg}
     />
     <Services />
     <Steps />

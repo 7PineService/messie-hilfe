@@ -26,14 +26,36 @@ const paragraphs = text.split('\n\n').filter((p) => p.trim());
       </h2>
     </div>
 
-    <div class="content-bg pt-4 md:py-8 lg:py-16">
+    <!-- Mobile layout -->
+    <div class="md:hidden pt-4">
+      <div class="max-w-lg mx-auto px-4">
+        {paragraphs[0] && (
+          <p class="text-sm opacity-90 leading-relaxed text-justify mb-3" set:html={paragraphs[0]} />
+        )}
+      </div>
+
+      <Image
+        src={image}
+        alt={heading}
+        class="context-image-mobile"
+        widths={[400, 800, 1200]}
+        sizes="400px"
+      />
+
+      <div class="max-w-lg mx-auto px-4">
+        {paragraphs[1] && (
+          <p class="text-sm opacity-90 leading-relaxed text-justify mt-3" set:html={paragraphs[1]} />
+        )}
+      </div>
+    </div>
+
+    <!-- Desktop layout -->
+    <div class="content-bg hidden md:block md:py-8 lg:py-16">
       <div class="mx-auto text-center relative z-10">
         <div class="space-y-3 md:space-y-4 lg:space-y-6 max-w-lg mx-auto px-4">
           {
             paragraphs.map((paragraph) => (
-              <p class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-90 leading-relaxed text-justify">
-                {paragraph}
-              </p>
+              <p class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl opacity-90 leading-relaxed text-justify" set:html={paragraph} />
             ))
           }
         </div>
@@ -42,9 +64,9 @@ const paragraphs = text.split('\n\n').filter((p) => p.trim());
       <Image
         src={image}
         alt={heading}
-        class="context-image"
+        class="context-image-desktop"
         widths={[400, 800, 1200]}
-        sizes="(max-width: 768px) 400px, 1200px"
+        sizes="1200px"
       />
     </div>
   </div>
@@ -60,32 +82,25 @@ const paragraphs = text.split('\n\n').filter((p) => p.trim());
     position: relative;
   }
 
-  .context-image {
+  .context-image-mobile {
     display: block;
-    order: 1;
     width: 100%;
-    margin-top: 1.5rem;
     border-radius: 0.5rem;
   }
 
+  .context-image-desktop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    object-fit: cover;
+    z-index: 0;
+  }
+
   @media (min-width: 768px) {
-    .content-bg {
-      display: block;
-    }
-
-    .context-image {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      max-width: none;
-      margin: 0;
-      padding: 0;
-      border-radius: 0;
-      object-fit: cover;
-      z-index: 0;
-    }
-
     .content-bg::before {
       content: '';
       position: absolute;

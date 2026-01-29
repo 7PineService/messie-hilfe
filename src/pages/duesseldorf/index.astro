@@ -11,34 +11,24 @@ import Why from '@/components/sections/why.astro';
 import Cost from '@/components/sections/cost.astro';
 import FAQ from '@/components/sections/faqs.astro';
 import { FinalCTA } from '@/components/sections';
-import { getCityBySlug } from '@/data/cities';
 import { SITE_URL } from '@/config/site';
-
-const cityData = getCityBySlug('duesseldorf');
-
-if (!cityData) {
-  return Astro.redirect('/404');
-}
-
-const heroDescriptionParagraphs = cityData.hero.text.split('\n\n').filter(p => p.trim());
-
-const canonicalUrl = `${SITE_URL}/${cityData.slug}/`;
+import duesseldorfImg from '@/assets/images/section-city-context-duesseldorf.png';
 ---
 
 <BaseLayout
-  title={cityData.meta.title}
-  description={cityData.meta.description}
-  canonicalUrl={canonicalUrl}
+  title="Messie-Hilfe in Düsseldorf – Wohnung entrümpeln & reinigen"
+  description="Diskrete Messie-Hilfe in Düsseldorf und Umgebung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig."
+  canonicalUrl={`${SITE_URL}/duesseldorf/`}
 >
   <main>
     <Hero
-      title={cityData.hero.h1}
-      description={heroDescriptionParagraphs}
+      title="Diskrete Messie-Hilfe & Messie-Entrümpelung in Düsseldorf"
+      description={['Eine <strong>Messie-Wohnung zu entrümpeln</strong> ist für viele Betroffene und Angehörige eine sensible Situation. In Düsseldorf spielt dabei häufig der Wunsch nach Zurückhaltung und äußerer Ordnung eine besondere Rolle.', '<strong>Wir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in Düsseldorf</strong> – diskret, anonym und mit klaren Abläufen.']}
     />
     <CityContext
-      heading={cityData.cityContext.h2}
-      text={cityData.cityContext.text}
-      image={cityData.cityContext.image}
+      heading="Messie-Hilfe in Düsseldorf – diskret, strukturiert und ohne Bewertung"
+      text="Düsseldorf ist geprägt von gepflegten Wohnvierteln, Mehrfamilienhäusern und klaren Erwartungen an Ordnung und Auftreten. Herausforderungen rund um <strong>Messie-Wohnungen in Düsseldorf</strong> werden daher oft lange verborgen – aus Sorge vor Reaktionen von Nachbarn oder Hausverwaltungen.\n\nGerade in sensiblen Hausgemeinschaften oder bei verwalteten Wohnanlagen ist ein ruhiges Vorgehen entscheidend. <strong>Unsere Messie-Hilfe in Düsseldorf</strong> unterstützt bei Entrümpelung und Reinigung <strong>ohne Bewertung</strong> – strukturiert, zurückhaltend und an die jeweilige Wohnsituation angepasst."
+      image={duesseldorfImg}
     />
     <Services />
     <Steps />
