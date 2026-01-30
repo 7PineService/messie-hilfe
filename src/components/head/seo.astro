@@ -141,29 +141,10 @@ const localBusinessSchema = {
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-<link
-  href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap"
-  rel="stylesheet"
-  media="print"
-  onload="this.media='all'"
-/>
-<noscript>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap"
-    rel="stylesheet"
-  />
-</noscript>
-<script is:inline>
-  const fontLink = document.querySelector('link[href*="fonts.googleapis.com"]');
-  if (fontLink && fontLink.media === 'print') {
-    setTimeout(() => {
-      fontLink.media = 'all';
-    }, 0);
-  }
-</script>
+<!-- DNS Prefetch for tracking domains -->
+<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+<link rel="dns-prefetch" href="https://cdn-cookieyes.com" />
+<link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
 {currentPath === '/' && <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />}
 <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />

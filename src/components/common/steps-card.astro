@@ -38,7 +38,7 @@ const { key, title, classes, description, subDescription, image } = Astro.props
       {description}
     </div>
     <div class="w-full">
-      <Image src={image} alt={title} loading="eager" class={'mx-auto'} />
+      <Image src={image} alt={title} loading="eager" decoding="async" class={'mx-auto'} />
     </div>
     <div
       class="text-xs md:text-sm xl:text-base 2xl:text-lg min-[1920px]:text-xl opacity-80 leading-relaxed "
@@ -63,6 +63,7 @@ const { key, title, classes, description, subDescription, image } = Astro.props
         src={image}
         alt={title}
         loading="eager"
+        decoding="async"
       />
     </div>
     <div class="col-span-3 flex flex-col items-start gap-2 p-3 pr-2 sm:p-4">

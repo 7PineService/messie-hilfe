@@ -11,7 +11,7 @@ const isDev = import.meta.env.DEV;
 
 {COOKIEYES_ENABLED && COOKIEYES_SCRIPT_URL && (
   <>
-    <script id="cookieyes" type="text/javascript" src={COOKIEYES_SCRIPT_URL}></script>
+    <script is:inline id="cookieyes" type="text/javascript" src={COOKIEYES_SCRIPT_URL} defer></script>
     {isDev && (
       <script is:inline>
         document.getElementById('cookieyes')?.addEventListener('error', function() {
@@ -39,5 +39,13 @@ const isDev = import.meta.env.DEV;
 
 <script>
   import { initEventTracking } from '@/scripts/event-tracking';
-  initEventTracking(import.meta.env.DEV);
+
+  // Defer tracking init until page is interactive
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initEventTracking(import.meta.env.DEV);
+    });
+  } else {
+    initEventTracking(import.meta.env.DEV);
+  }
 </script>

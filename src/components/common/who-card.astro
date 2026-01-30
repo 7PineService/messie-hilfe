@@ -20,7 +20,7 @@ const { title, classes, description, image } = Astro.props
     )}
   >
     <div class="w-full">
-      <Image src={image} alt={title} loading="eager" class={'mx-auto'} />
+      <Image src={image} alt={title} loading="eager" decoding="async" class={'mx-auto'} />
     </div>
     <h4
       class="md:text-xl lg:text-lg xl:text-xl 2xl:text-2xl min-[1920px]:text-3xl font-semibold leading-tight mb-2"
@@ -44,7 +44,7 @@ const { title, classes, description, image } = Astro.props
     <div
       class="card-img relative col-span-2 flex justify-center transition rounded-l-lg"
     >
-      <Image class="object-contain" src={image} alt={title} loading="eager" />
+      <Image class="object-contain" src={image} alt={title} loading="eager" decoding="async" />
     </div>
     <div class="col-span-3 flex flex-col items-start gap-2 p-4 sm:p-4">
       <h4

@@ -14,7 +14,7 @@ const { title, description, image, link = '#' } = Astro.props
 <a href={link} class="sub-card-link block h-full">
   <div class="sub-service-card flex items-center p-0 shadow-xl overflow-hidden rounded-2xl bg-surface-secondary h-full">
     <div class="w-[30%] shrink-0">
-      <Image class="w-full h-full object-contain" src={image} alt={title} loading="eager" />
+      <Image class="w-full h-full object-contain" src={image} alt={title} loading="eager" decoding="async" />
     </div>
     <div class="flex-1 flex flex-col gap-2 py-4 pr-2">
       <div

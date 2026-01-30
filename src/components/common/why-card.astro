@@ -25,6 +25,7 @@ const { title, classes, description, image } = Astro.props
         src={image}
         alt={title}
         loading="eager"
+        decoding="async"
         class={'w-auto mx-auto object-contain'}
       />
     </div>

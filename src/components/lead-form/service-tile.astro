@@ -57,9 +57,10 @@ const disabledClasses = 'opacity-50 cursor-not-allowed';
 	{icon && (
 		<Image
 			src={icon}
-			alt=""
+			alt={label}
 			class="w-16 h-16 object-contain shrink-0"
 			loading="eager"
+			decoding="async"
 		/>
 	)}
 	<span class="text-base font-semibold pr-4">{label}</span>

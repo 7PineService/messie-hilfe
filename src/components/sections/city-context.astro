@@ -40,6 +40,7 @@ const paragraphs = text.split('\n\n').filter((p) => p.trim());
         class="context-image-mobile"
         widths={[400, 800, 1200]}
         sizes="400px"
+        decoding="async"
       />
 
       <div class="max-w-lg mx-auto px-4">
@@ -67,6 +68,7 @@ const paragraphs = text.split('\n\n').filter((p) => p.trim());
         class="context-image-desktop"
         widths={[400, 800, 1200]}
         sizes="1200px"
+        decoding="async"
       />
     </div>
   </div>

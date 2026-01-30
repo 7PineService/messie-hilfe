@@ -21,7 +21,7 @@ export default defineConfig({
     },
   },
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'never',
   },
   vite: {
     plugins: [tailwindcss()],
@@ -34,8 +34,8 @@ export default defineConfig({
         'Content-Security-Policy': [
           "default-src 'self'",
           "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdn-cookieyes.com https://www.google-analytics.com",
-          "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-          "font-src 'self' https://fonts.gstatic.com data:",
+          "style-src 'self' 'unsafe-inline'",
+          "font-src 'self' data:",
           "img-src 'self' data: https:",
           "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn-cookieyes.com https://*.supabase.co",
           "frame-src 'self' https://www.googletagmanager.com",
@@ -64,9 +64,11 @@ export default defineConfig({
       rollupOptions: {
         output: {
           manualChunks: (id) => {
-            if (id.includes('node_modules')) {
-              return 'vendor';
-            }
+            // Split large dependencies for better caching and parallel loading
+            if (id.includes('@supabase')) return 'supabase';
+            if (id.includes('resend')) return 'resend';
+            if (id.includes('@vercel/speed-insights')) return 'analytics';
+            if (id.includes('node_modules')) return 'vendor';
           },
           compact: true,
         },
