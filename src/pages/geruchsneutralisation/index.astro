@@ -167,17 +167,6 @@ const faqProps = {
   ctaText: 'Ihre Frage ist noch offen?'
 };
 
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Geruchsneutralisation nach Reinigung von Messie-Wohnungen",
-  "description": "Gezielte Geruchsneutralisation nach der Reinigung von Messie-Wohnungen – ergänzend zur Reinigung",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "Messie-Hilfe"
-  }
-};
-
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -193,7 +182,6 @@ const faqSchema = {
 ---
 
 <BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <main>
     <Hero {...heroProps} />

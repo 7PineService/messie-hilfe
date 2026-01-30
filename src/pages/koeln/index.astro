@@ -14,21 +14,6 @@ import { FinalCTA } from '@/components/sections';
 import { SITE_URL } from '@/config/site';
 import koelnImg from '@/assets/images/section-city-context-koeln.png';
 
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Messie-Hilfe Köln",
-  "description": "Diskrete Messie-Hilfe in Köln – Entrümpelung und Reinigung von Messie-Wohnungen",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "Messie-Hilfe"
-  },
-  "areaServed": {
-    "@type": "City",
-    "name": "Köln"
-  }
-};
-
 const faqData = [
   {
     title: 'Gibt es Vorurteile?',
@@ -75,7 +60,6 @@ const faqSchema = {
   description="Diskrete Messie-Hilfe in Köln und Umgebung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig. Jetzt anfragen."
   canonicalUrl={`${SITE_URL}/koeln/`}
 >
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <main>
     <Hero

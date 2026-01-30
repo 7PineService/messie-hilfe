@@ -165,7 +165,7 @@ const localBusinessSchema = {
   }
 </script>
 
-<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+{currentPath === '/' && <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />}
 <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
