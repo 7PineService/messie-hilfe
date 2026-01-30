@@ -179,10 +179,22 @@ const faqSchema = {
     }
   }))
 };
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Geruchsneutralisation",
+  "description": "Gezielte Geruchsneutralisation nach der Reinigung von Messie-Wohnungen. Ursachenorientiert und nachhaltig für spürbar neutrale Räume.",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Germany"
+  }
+};
 ---
 
 <BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   <main>
     <Hero {...heroProps} />
     <Start {...startProps} />

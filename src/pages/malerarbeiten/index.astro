@@ -177,10 +177,22 @@ const faqSchema = {
     }
   }))
 };
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Malerarbeiten",
+  "description": "Malerarbeiten nach der Räumung von Messie-Wohnungen. Saubere und fachgerechte Ausführung mit transparentem Festpreis.",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Germany"
+  }
+};
 ---
 
 <BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   <main>
     <Hero {...heroProps} />
     <Start {...startProps} />

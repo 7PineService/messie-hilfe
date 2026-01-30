@@ -53,6 +53,17 @@ const faqSchema = {
     }
   }))
 };
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Messie-Hilfe",
+  "description": "Diskrete Messie-Hilfe und Messie-Entrümpelung in Köln. Unterstützung bei Entrümpelung und Reinigung von Messie-Wohnungen – anonym, zuverlässig und ohne Bewertung.",
+  "areaServed": {
+    "@type": "City",
+    "name": "Köln"
+  }
+};
 ---
 
 <BaseLayout
@@ -61,6 +72,7 @@ const faqSchema = {
   canonicalUrl={`${SITE_URL}/koeln/`}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   <main>
     <Hero
       title="Diskrete Messie-Hilfe & Messie-Entrümpelung in Köln"
