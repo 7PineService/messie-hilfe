@@ -4,7 +4,6 @@ import { RadioGroup, CheckboxGroup, Input } from '@/components/ui';
 
 import iconWohnung from '@/assets/images/lead-form/lead-8-wohnung.png';
 import iconHaus from '@/assets/images/lead-form/lead-9-haus.png';
-import iconKeller from '@/assets/images/lead-form/lead-10-keller.png';
 import iconSonstiges from '@/assets/images/lead-form/lead-11-sonstiges.png';
 import iconLeer from '@/assets/images/lead-form/lead-12-leer.png';
 import iconTeilweise from '@/assets/images/lead-form/lead-13-teilweise.png';
@@ -13,7 +12,6 @@ import iconVoll from '@/assets/images/lead-form/lead-14-voll.png';
 const objectTypes = [
 	{ value: 'wohnung', label: 'Wohnung', icon: iconWohnung },
 	{ value: 'haus', label: 'Haus', icon: iconHaus },
-	{ value: 'keller', label: 'Keller', icon: iconKeller },
 	{ value: 'sonstiges', label: 'Sonstiges', icon: iconSonstiges },
 ];
 
@@ -52,6 +50,13 @@ const accessOptions = [
 							multiSelect={false}
 						/>
 					))}
+				</div>
+				<div class="hidden object-type-other-field mt-3">
+					<Input
+						name="object_type_other"
+						id="object_type_other"
+						placeholder="z. B. Keller, Garage, Lagerraum"
+					/>
 				</div>
 			</div>
 
@@ -106,3 +111,36 @@ const accessOptions = [
 		</div>
 	</div>
 </div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const step2 = document.querySelector('[data-step="2"]');
+		if (!step2) return;
+
+		const objectTypeRadios = step2.querySelectorAll<HTMLInputElement>('input[name="object_type"]');
+		const objectTypeOtherField = step2.querySelector<HTMLElement>('.object-type-other-field');
+
+		function updateObjectTypeOtherVisibility() {
+			const sonstigesRadio = step2?.querySelector<HTMLInputElement>('input[name="object_type"][value="sonstiges"]');
+			if (sonstigesRadio?.checked) {
+				objectTypeOtherField?.classList.remove('hidden');
+			} else {
+				objectTypeOtherField?.classList.add('hidden');
+			}
+		}
+
+		objectTypeRadios.forEach((radio) => {
+			radio.addEventListener('change', updateObjectTypeOtherVisibility);
+		});
+
+		const observer = new MutationObserver(() => {
+			if (step2 && !step2.classList.contains('hidden')) {
+				updateObjectTypeOtherVisibility();
+			}
+		});
+
+		observer.observe(step2, { attributes: true, attributeFilter: ['class'] });
+
+		updateObjectTypeOtherVisibility();
+	});
+</script>

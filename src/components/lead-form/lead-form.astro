@@ -614,22 +614,10 @@ const leadApiEndpoint = LEAD_API_ENDPOINT;
 			submitButton.disabled = true;
 			submitButton.innerHTML = '<span>Wird gesendet...</span>';
 
-			const getFileMapFn = window.getFileMap_leadformfiles;
-			const fileMap = getFileMapFn ? getFileMapFn() : new Map();
-
-			const uploadedFiles = [];
-			if (fileMap && fileMap.size > 0) {
-				fileMap.forEach((fileData) => {
-					if (fileData.status === 'uploaded' && fileData.url) {
-						uploadedFiles.push({
-							url: fileData.url,
-							name: fileData.name,
-							size: fileData.size,
-							path: fileData.path
-						});
-					}
-				});
-			}
+			const filesDataInput = document.getElementById('lead-form-files-data');
+			const uploadedFiles = filesDataInput && filesDataInput.value
+				? JSON.parse(filesDataInput.value)
+				: [];
 
 			const submitData = {
 				...formData,

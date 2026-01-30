@@ -24,6 +24,7 @@ interface LeadFormData {
   'services[]'?: string | string[];
   payment_method?: string;
   object_type?: string;
+  object_type_other?: string;
   etage?: string;
   elevator?: string;
   furnishing?: string;
@@ -129,7 +130,7 @@ function buildLeadEmail(data: LeadFormData, fileUrls: UploadedFile[] = []): { su
     <hr>
 
     <h3>Schritt 2 – Objekt & Zugang</h3>
-    <p><strong>Objektart:</strong> ${data.object_type || 'Nicht angegeben'}</p>
+    <p><strong>Objektart:</strong> ${data.object_type || 'Nicht angegeben'}${data.object_type === 'sonstiges' && data.object_type_other ? ` (${data.object_type_other})` : ''}</p>
     ${data.etage ? `<p><strong>Etage:</strong> ${data.etage}</p>` : ''}
     <p><strong>Aufzug vorhanden:</strong> ${data.elevator || 'Nicht angegeben'}</p>
     <p><strong>Möblierungsgrad:</strong> ${data.furnishing || 'Nicht angegeben'}</p>

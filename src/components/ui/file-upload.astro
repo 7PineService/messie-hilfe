@@ -8,6 +8,8 @@ interface Props {
 	multiple?: boolean;
 	disabled?: boolean;
 	class?: string;
+	description?: string;
+	buttonText?: string;
 	[key: string]: any;
 }
 
@@ -18,6 +20,8 @@ const {
 	multiple = true,
 	disabled = false,
 	class: className = '',
+	description,
+	buttonText,
 	...rest
 } = Astro.props;
 
@@ -25,6 +29,12 @@ const fileListId = `${id}-list`;
 ---
 
 <div class={cn('file-upload-container', className)} data-file-upload={id} {...rest}>
+	<input
+		type="hidden"
+		id={`${id}-data`}
+		name={`${name}_data`}
+		value=""
+	/>
 	<div class="border-2 border-dashed border-border-primary rounded-lg p-6 hover:border-cta-primary transition-colors bg-surface-input">
 		<input
 			type="file"
@@ -43,11 +53,15 @@ const fileListId = `${id}-list`;
 			</div>
 			<div class="text-center">
 				<p class="text-sm font-medium">Dateien hierhin ziehen oder auswählen</p>
-				<p class="text-xs text-muted mt-1">Bilder (JPG/PNG/HEIC) | kurze Videos (MP4) | Max. 40MB pro Datei</p>
+				{description && (
+					<p class="text-xs text-muted mt-1">{description}</p>
+				)}
 			</div>
-			<span class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-surface-secondary border border-border-primary hover:bg-surface-tertiary transition-colors">
-				Dateien auswählen
-			</span>
+			{buttonText && (
+				<span class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-surface-secondary border border-border-primary hover:bg-surface-tertiary transition-colors">
+					{buttonText}
+				</span>
+			)}
 		</label>
 	</div>
 
@@ -55,41 +69,42 @@ const fileListId = `${id}-list`;
 	<div id={`${id}-error`} class="mt-2 text-sm text-red-600 hidden"></div>
 </div>
 
-<script>
-	interface FileData {
-		name: string;
-		size: number;
-		status: 'uploading' | 'uploaded' | 'error';
-		url: string | null;
-		path: string | null;
-		error?: string;
-	}
-
-	interface UploadResult {
-		url: string;
-		path: string;
-		name: string;
-		size: number;
-	}
-
+<script is:inline define:vars={{ fileUploadId: id }}>
 	document.addEventListener('DOMContentLoaded', () => {
-		const fileInputEl = document.getElementById('lead-form-files') as HTMLInputElement | null;
-		const fileListEl = document.getElementById('lead-form-files-list') as HTMLElement | null;
-		const errorContainerEl = document.getElementById('lead-form-files-error') as HTMLElement | null;
-		const containerEl = document.querySelector('[data-file-upload="lead-form-files"]') as HTMLElement | null;
+		const fileInputEl = document.getElementById(fileUploadId);
+		const fileListEl = document.getElementById(`${fileUploadId}-list`);
+		const errorContainerEl = document.getElementById(`${fileUploadId}-error`);
+		const containerEl = document.querySelector(`[data-file-upload="${fileUploadId}"]`);
+		const hiddenInputEl = document.getElementById(`${fileUploadId}-data`);
 
-		if (!fileInputEl || !fileListEl || !containerEl) return;
+		if (!fileInputEl || !fileListEl || !containerEl || !hiddenInputEl) return;
 
-		const fileInput: HTMLInputElement = fileInputEl;
-		const fileList: HTMLElement = fileListEl;
-		const errorContainer: HTMLElement | null = errorContainerEl;
-		const container: HTMLElement = containerEl;
+		const fileInput = fileInputEl;
+		const fileList = fileListEl;
+		const errorContainer = errorContainerEl;
+		const container = containerEl;
+		const hiddenInput = hiddenInputEl;
 
-		const fileMap = new Map<string, FileData>();
+		const fileMap = new Map();
 		let fileIdCounter = 0;
 		const MAX_FILE_SIZE = 40 * 1024 * 1024;
 
-		function showError(message: string): void {
+		function syncHiddenInput() {
+			const uploadedFiles = [];
+			fileMap.forEach((fileData) => {
+				if (fileData.status === 'uploaded' && fileData.url) {
+					uploadedFiles.push({
+						url: fileData.url,
+						name: fileData.name,
+						size: fileData.size,
+						path: fileData.path
+					});
+				}
+			});
+			hiddenInput.value = JSON.stringify(uploadedFiles);
+		}
+
+		function showError(message) {
 			if (errorContainer) {
 				errorContainer.textContent = message;
 				errorContainer.classList.remove('hidden');
@@ -99,7 +114,7 @@ const fileListId = `${id}-list`;
 			}
 		}
 
-		async function uploadToSupabase(file: File): Promise<UploadResult> {
+		async function uploadToSupabase(file) {
 			const urlResponse = await fetch('/api/upload-url', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
@@ -138,7 +153,7 @@ const fileListId = `${id}-list`;
 			};
 		}
 
-		async function addFile(file: File): Promise<void> {
+		async function addFile(file) {
 			if (file.size > MAX_FILE_SIZE) {
 				showError(`Die Datei "${file.name}" ist zu groß. Maximale Größe: 40MB`);
 				return;
@@ -146,7 +161,7 @@ const fileListId = `${id}-list`;
 
 			const fileId = `file-${fileIdCounter++}`;
 
-			const tempFileData: FileData = {
+			const tempFileData = {
 				name: file.name,
 				size: file.size,
 				status: 'uploading',
@@ -167,6 +182,7 @@ const fileListId = `${id}-list`;
 					path: uploadResult.path
 				});
 				renderFileList();
+				syncHiddenInput();
 			} catch (error) {
 				console.error('Upload error:', error);
 				fileMap.set(fileId, {
@@ -179,19 +195,20 @@ const fileListId = `${id}-list`;
 			}
 		}
 
-		function removeFile(fileId: string): void {
+		function removeFile(fileId) {
 			fileMap.delete(fileId);
 			renderFileList();
+			syncHiddenInput();
 		}
 
-		function formatFileSize(bytes: number): string {
+		function formatFileSize(bytes) {
 			if (bytes >= 1024 * 1024) {
 				return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 			}
 			return `${(bytes / 1024).toFixed(1)} KB`;
 		}
 
-		function renderFileList(): void {
+		function renderFileList() {
 			fileList.innerHTML = '';
 
 			fileMap.forEach((fileData, fileId) => {
@@ -246,8 +263,8 @@ const fileListId = `${id}-list`;
 			});
 		}
 
-		fileInput.addEventListener('change', (e: Event) => {
-			const target = e.target as HTMLInputElement;
+		fileInput.addEventListener('change', (e) => {
+			const target = e.target;
 			const newFiles = Array.from(target.files || []);
 			newFiles.forEach(file => addFile(file));
 			fileInput.value = '';
@@ -255,31 +272,38 @@ const fileListId = `${id}-list`;
 
 		const dropZone = container.querySelector('label');
 
-		(['dragenter', 'dragover', 'dragleave', 'drop'] as const).forEach(eventName => {
-			dropZone?.addEventListener(eventName, (e: Event) => {
+		['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+			dropZone?.addEventListener(eventName, (e) => {
 				e.preventDefault();
 				e.stopPropagation();
 			});
 		});
 
-		(['dragenter', 'dragover'] as const).forEach(eventName => {
+		['dragenter', 'dragover'].forEach(eventName => {
 			dropZone?.addEventListener(eventName, () => {
 				dropZone.parentElement?.classList.add('border-cta-primary', 'bg-surface-tertiary');
 			});
 		});
 
-		(['dragleave', 'drop'] as const).forEach(eventName => {
+		['dragleave', 'drop'].forEach(eventName => {
 			dropZone?.addEventListener(eventName, () => {
 				dropZone.parentElement?.classList.remove('border-cta-primary', 'bg-surface-tertiary');
 			});
 		});
 
-		dropZone?.addEventListener('drop', (e: Event) => {
-			const dragEvent = e as DragEvent;
+		dropZone?.addEventListener('drop', (e) => {
+			const dragEvent = e;
 			const files = Array.from(dragEvent.dataTransfer?.files || []);
 			files.forEach(file => addFile(file));
 		});
 
-		(window as any).getFileMap_leadformfiles = () => fileMap;
+		const parentForm = fileInput.closest('form');
+		if (parentForm) {
+			parentForm.addEventListener('reset', () => {
+				fileMap.clear();
+				renderFileList();
+				syncHiddenInput();
+			});
+		}
 	});
 </script>

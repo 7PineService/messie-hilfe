@@ -1,6 +1,5 @@
 ---
-import { Textarea } from '@/components/ui';
-import FileUpload from '../file-upload.astro';
+import { Textarea, FileUpload } from '@/components/ui';
 ---
 
 <div data-step="4" class="step-content hidden" aria-hidden="true" data-step-title="Weitere Hinweise (optional)" data-step-subtitle="Alles, was Sie uns zusätzlich mitteilen möchten – nur wenn Sie möchten.">
@@ -26,6 +25,8 @@ import FileUpload from '../file-upload.astro';
 				id="lead-form-files"
 				accept="image/jpeg,image/png,image/heic,video/mp4"
 				multiple={true}
+				description="Bilder (JPG/PNG/HEIC) | kurze Videos (MP4) | Max. 40MB pro Datei"
+				buttonText="Dateien auswählen"
 			/>
 			<p class="mt-4 text-sm text-muted">
 				Der Upload ist freiwillig und hilft uns bei der Einschätzung.<br />

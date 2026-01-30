@@ -6,3 +6,4 @@ export { default as Card } from './card.astro';
 export { default as RadioGroup } from './radio-group.astro';
 export { default as CheckboxGroup } from './checkbox-group.astro';
 export { default as Slider } from './slider.astro';
+export { default as FileUpload } from './file-upload.astro';

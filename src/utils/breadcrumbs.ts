@@ -18,7 +18,14 @@ const breadcrumbLabels: Record<string, string> = {
   '/desinfektion/': 'Desinfektion',
   '/renovierung/': 'Renovierung',
   '/malerarbeiten/': 'Malerarbeiten',
-  '/geruchsneutralisation/': 'Geruchsneutralisation'
+  '/geruchsneutralisation/': 'Geruchsneutralisation',
+  '/berlin/': 'Berlin',
+  '/muenchen/': 'München',
+  '/frankfurt/': 'Frankfurt',
+  '/hamburg/': 'Hamburg',
+  '/koeln/': 'Köln',
+  '/essen/': 'Essen',
+  '/duesseldorf/': 'Düsseldorf'
 };
 
 export function generateVisualBreadcrumbs(currentPath: string, title: string): BreadcrumbItem[] {

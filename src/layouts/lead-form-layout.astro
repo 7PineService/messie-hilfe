@@ -31,7 +31,6 @@ const {
 const currentPath = Astro.url.pathname;
 const hostname = Astro.url.hostname;
 
-const fullTitle = `${title} | Messie-Hilfe`;
 const finalCanonicalUrl = canonicalUrl || `${SITE_URL}${currentPath}`;
 
 const excludeTracking = shouldExcludeTracking(currentPath);
@@ -46,7 +45,7 @@ const gtmId = getGTMContainerId(hostname);
 		<meta name="generator" content={Astro.generator}>
 
 		<SEO
-			title={fullTitle}
+			title={title}
 			description={description}
 			image={image}
 			canonicalUrl={finalCanonicalUrl}

@@ -26,7 +26,6 @@ import ContactForm from './contact-form.astro';
 
 		<ContactForm
 			formId="overlay-contact-form"
-			fileListId="overlay-file-list"
 			formMessageId="overlay-form-message"
 			privacyCheckboxId="overlay-privacy"
 			nameInputId="overlay-name"
@@ -99,10 +98,8 @@ import ContactForm from './contact-form.astro';
 
 			if (form) {
 				form.reset();
-				const fileList = document.getElementById('overlay-file-list');
 				const formMessage = document.getElementById('overlay-form-message');
 				const overlayTitle = document.getElementById('overlay-title');
-				if (fileList) fileList.innerHTML = '';
 				if (formMessage) {
 					formMessage.classList.add('hidden');
 					formMessage.textContent = '';
