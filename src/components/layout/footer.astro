@@ -1,6 +1,7 @@
 ---
 import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, CONTACT_WHATSAPP, SITE_NAME } from '@/config/site';
 import { Phone, WhatsApp, Chevron } from '@/components/icons';
+import { EmailLink } from '@/components/common';
 ---
 
 <footer>
@@ -96,9 +97,7 @@ import { Phone, WhatsApp, Chevron } from '@/components/icons';
 				<div>
 					<h3 class="text-white font-semibold text-lg mb-4">Kontakt</h3>
 					<div class="space-y-2.5">
-						<a href={`mailto:${CONTACT_EMAIL}`} class="block text-white hover:opacity-80 transition-colors text-sm">
-							{CONTACT_EMAIL}
-						</a>
+						<EmailLink email={CONTACT_EMAIL} class="block text-white hover:opacity-80 transition-colors text-sm" />
 						<a href={`tel:${CONTACT_PHONE}`} class="flex items-center gap-2 text-white hover:opacity-80 transition-colors text-sm" data-gtm-event="contact_call">
 							<Phone size="xs" aria-hidden={true} />
 							{CONTACT_PHONE_DISPLAY}
@@ -211,9 +210,7 @@ import { Phone, WhatsApp, Chevron } from '@/components/icons';
 				<div class="pt-2">
 					<h3 class="text-white font-semibold text-lg mb-4">Kontakt</h3>
 					<div class="space-y-2.5">
-						<a href={`mailto:${CONTACT_EMAIL}`} class="block text-white hover:opacity-80 transition-colors text-sm">
-							{CONTACT_EMAIL}
-						</a>
+						<EmailLink email={CONTACT_EMAIL} class="block text-white hover:opacity-80 transition-colors text-sm" />
 						<a href={`tel:${CONTACT_PHONE}`} class="flex items-center gap-2 text-white hover:opacity-80 transition-colors text-sm" data-gtm-event="contact_call">
 							<Phone size="xs" aria-hidden={true} />
 							{CONTACT_PHONE_DISPLAY}

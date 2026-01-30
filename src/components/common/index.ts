@@ -6,3 +6,4 @@ export { default as WhyCard } from './why-card.astro';
 export { default as CostCard } from './cost-card.astro';
 export { default as FAQCard } from './faq-card.astro';
 export { default as SectionCTA } from './section-cta.astro';
+export { default as EmailLink } from './email-link.astro';

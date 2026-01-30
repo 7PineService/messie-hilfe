@@ -1,0 +1,56 @@
+---
+interface Props {
+  email: string;
+  class?: string;
+  ariaLabel?: string;
+}
+
+const { email, class: className = '', ariaLabel } = Astro.props;
+
+const [localPart, domain] = email.split('@');
+const [domainName, tld] = domain.split('.');
+
+const uniqueId = `email-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<a
+  href="#"
+  class={`email-link ${className}`}
+  data-local={btoa(localPart)}
+  data-domain={btoa(domainName)}
+  data-tld={btoa(tld)}
+  id={uniqueId}
+  aria-label={ariaLabel || `E-Mail an ${email} senden`}
+>
+  <span class="email-placeholder">Loading...</span>
+</a>
+
+<script>
+  function decodeEmail(element: HTMLAnchorElement) {
+    const local = atob(element.dataset.local || '');
+    const domain = atob(element.dataset.domain || '');
+    const tld = atob(element.dataset.tld || '');
+
+    const email = `${local}@${domain}.${tld}`;
+    const placeholder = element.querySelector('.email-placeholder');
+
+    if (placeholder) {
+      placeholder.textContent = email;
+    }
+
+    element.href = `mailto:${email}`;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a.email-link').forEach((link) => {
+      decodeEmail(link as HTMLAnchorElement);
+    });
+  });
+
+  if (document.readyState === 'loading') {
+  } else {
+    document.querySelectorAll('a.email-link').forEach((link) => {
+      decodeEmail(link as HTMLAnchorElement);
+    });
+  }
+</script>

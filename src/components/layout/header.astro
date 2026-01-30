@@ -1,15 +1,14 @@
 ---
 import { CONTACT_EMAIL, SITE_NAME } from '@/config/site';
 import { Play, Chevron } from '@/components/icons';
+import { EmailLink } from '@/components/common';
 ---
 
 <header id="main-header" class="z-50 relative border-b border-border-primary">
 	<div class="bg-surface-muted">
 		<div class="container mx-auto px-4 py-2.5">
 			<div class="flex flex-wrap items-center justify-between text-sm">
-				<a href={`mailto:${CONTACT_EMAIL}`}>
-					{CONTACT_EMAIL}
-				</a>
+				<EmailLink email={CONTACT_EMAIL} />
 			</div>
 		</div>
 	</div>

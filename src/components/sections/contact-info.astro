@@ -1,6 +1,7 @@
 ---
 import PhoneIcon from '@/components/icons/phone.astro';
 import EmailIcon from '@/components/icons/email.astro';
+import { EmailLink } from '@/components/common';
 ---
 
 <div>
@@ -27,9 +28,7 @@ import EmailIcon from '@/components/icons/email.astro';
       </div>
       <div>
         <div class="font-semibold text-primary mb-1">E-Mail</div>
-        <a href="mailto:kontakt@messie-hilfe.de" class="text-primary hover:text-cta-primary transition-colors break-all">
-          kontakt@messie-hilfe.de
-        </a>
+        <EmailLink email="kontakt@messie-hilfe.de" class="text-primary hover:text-cta-primary transition-colors break-all" />
       </div>
     </div>
 
