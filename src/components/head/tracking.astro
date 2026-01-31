@@ -40,12 +40,17 @@ const isDev = import.meta.env.DEV;
 <script>
   import { initEventTracking } from '@/scripts/event-tracking';
 
-  // Defer tracking init until page is interactive
+  const init = () => {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => initEventTracking(import.meta.env.DEV));
+    } else {
+      setTimeout(() => initEventTracking(import.meta.env.DEV), 1);
+    }
+  };
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      initEventTracking(import.meta.env.DEV);
-    });
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    initEventTracking(import.meta.env.DEV);
+    init();
   }
 </script>
