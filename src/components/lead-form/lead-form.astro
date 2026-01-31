@@ -545,6 +545,18 @@ const leadApiEndpoint = LEAD_API_ENDPOINT;
 								showGridError(timingGrid, 'Bitte wählen Sie ein Datum aus.');
 								if (!firstInvalidField) firstInvalidField = timingGrid;
 							}
+						} else {
+							const selectedDate = dateField.value;
+							const today = new Date().toISOString().split('T')[0];
+
+							if (selectedDate < today) {
+								isValid = false;
+								const timingGrid = step.querySelector('.timing-grid');
+								if (timingGrid) {
+									showGridError(timingGrid, 'Bitte wählen Sie ein Datum in der Zukunft aus.');
+									if (!firstInvalidField) firstInvalidField = timingGrid;
+								}
+							}
 						}
 					}
 				}
