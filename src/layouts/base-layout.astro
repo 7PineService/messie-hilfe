@@ -48,6 +48,8 @@ const visualBreadcrumbs = generateVisualBreadcrumbs(currentPath, title);
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="generator" content={Astro.generator}>
 
+    {!excludeTracking && <Tracking gtmId={gtmId} />}
+
     <SEO
       title={title}
       description={description}
@@ -57,7 +59,6 @@ const visualBreadcrumbs = generateVisualBreadcrumbs(currentPath, title);
       currentPath={currentPath}
     />
 
-    {!excludeTracking && <Tracking gtmId={gtmId} />}
     <SpeedInsights />
 
     <slot name="head" />
