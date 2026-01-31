@@ -10,6 +10,7 @@ interface Props {
 	class?: string;
 	description?: string;
 	buttonText?: string;
+	variant?: 'default' | 'compact';
 	[key: string]: any;
 }
 
@@ -22,6 +23,7 @@ const {
 	class: className = '',
 	description,
 	buttonText,
+	variant = 'default',
 	...rest
 } = Astro.props;
 
@@ -45,13 +47,16 @@ const fileListId = `${id}-list`;
 			disabled={disabled}
 			class="hidden"
 		/>
-		<label for={id} class="cursor-pointer flex flex-col items-center gap-3">
-			<div class="w-12 h-12 rounded-lg flex items-center justify-center border border-dashed" style="background-color: #fbe5ce; border-color: #eacb62;">
+		<label for={id} class={cn(
+			"cursor-pointer flex gap-3",
+			variant === 'compact' ? 'flex-row items-center' : 'flex-col items-center'
+		)}>
+			<div class="w-12 h-12 rounded-lg flex items-center justify-center border border-dashed shrink-0" style="background-color: #fbe5ce; border-color: #eacb62;">
 				<svg class="w-6 h-6 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
 				</svg>
 			</div>
-			<div class="text-center">
+			<div class={variant === 'compact' ? 'text-left' : 'text-center'}>
 				<p class="text-sm font-medium">Dateien hierhin ziehen oder auswählen</p>
 				{description && (
 					<p class="text-xs text-muted mt-1">{description}</p>
