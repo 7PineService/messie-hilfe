@@ -20,7 +20,7 @@ const uniqueId = `email-${Math.random().toString(36).substring(2, 9)}`;
   data-domain={btoa(domainName)}
   data-tld={btoa(tld)}
   id={uniqueId}
-  aria-label={ariaLabel || `E-Mail an ${email} senden`}
+  aria-label={ariaLabel || "E-Mail senden"}
 >
   <span class="email-placeholder">Loading...</span>
 </a>
@@ -39,6 +39,10 @@ const uniqueId = `email-${Math.random().toString(36).substring(2, 9)}`;
     }
 
     element.href = `mailto:${email}`;
+
+    if (element.getAttribute('aria-label') === 'E-Mail senden') {
+      element.setAttribute('aria-label', `E-Mail an ${email} senden`);
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {

@@ -1,6 +1,7 @@
 ---
 import LegalLayout from '@/layouts/legal-layout.astro';
 import { SITE_URL } from '@/config/site';
+import { EmailLink } from '@/components/common';
 
 const title = 'Datenschutzerklärung | Messie-Hilfe';
 const description = 'Informationen zur Verarbeitung personenbezogener Daten bei Messie-Hilfe.';
@@ -39,7 +40,7 @@ const canonicalUrl = `${SITE_URL}/datenschutz/`;
     <p>
       Telefon: 089 120 891 335<br>
       Telefax: +49 89 548 77 650<br>
-      E-Mail: <span id="mail-datenschutz"></span>
+      E-Mail: <EmailLink email="datenschutz@messie-hilfe.de" />
     </p>
   </section>
 
@@ -179,21 +180,7 @@ const canonicalUrl = `${SITE_URL}/datenschutz/`;
       Stichwort: Datenschutz<br>
       Aindorferstraße 137<br>
       80689 München<br>
-      E-Mail: <span id="mail-datenschutz-2"></span>
+      E-Mail: <EmailLink email="datenschutz@messie-hilfe.de" />
     </p>
   </section>
-
-  <script>
-    (function () {
-      var user = "datenschutz";
-      var domain = "messie-hilfe.de";
-      var email = user + "@" + domain;
-
-      var el1 = document.getElementById("mail-datenschutz");
-      var el2 = document.getElementById("mail-datenschutz-2");
-
-      if (el1) el1.innerHTML = '<a href="mailto:' + email + '">' + email + '</a>';
-      if (el2) el2.innerHTML = '<a href="mailto:' + email + '">' + email + '</a>';
-    })();
-  </script>
 </LegalLayout>

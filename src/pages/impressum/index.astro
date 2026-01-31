@@ -1,6 +1,7 @@
 ---
 import LegalLayout from '@/layouts/legal-layout.astro';
-import { SITE_URL } from '@/config/site';
+import { SITE_URL, CONTACT_EMAIL } from '@/config/site';
+import { EmailLink } from '@/components/common';
 
 const title = 'Impressum | Messie-Hilfe';
 const description = 'Rechtliche Angaben und Kontaktinformationen der Messie-Hilfe gemäß § 5 TMG.';
@@ -32,7 +33,7 @@ const canonicalUrl = `${SITE_URL}/impressum/`;
       <strong>Kontakt:</strong><br>
       Telefon: 089 120 891 335<br>
       Telefax: +49 89 548 77 650<br>
-      E-Mail: <span id="mail-contact"></span>
+      E-Mail: <EmailLink email={CONTACT_EMAIL} />
     </p>
   </section>
 
@@ -190,17 +191,4 @@ const canonicalUrl = `${SITE_URL}/impressum/`;
       dieser Website ohne vorherige schriftliche Zustimmung.
     </p>
   </section>
-
-  <script>
-    (function () {
-      var user = "kontakt";
-      var domain = "messie-hilfe.de";
-      var email = user + "@" + domain;
-
-      var el = document.getElementById("mail-contact");
-      if (el) {
-        el.innerHTML = '<a href="mailto:' + email + '">' + email + '</a>';
-      }
-    })();
-  </script>
 </LegalLayout>
