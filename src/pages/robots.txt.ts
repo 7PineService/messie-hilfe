@@ -9,7 +9,7 @@ export const GET: APIRoute = () => {
     ? `User-agent: *
 Disallow:
 
-Sitemap: https://www.messie-hilfe.de/sitemap.xml`
+Sitemap: https://www.messie-hilfe.de/sitemap-index.xml`
     : `User-agent: *
 Disallow: /`;
 
