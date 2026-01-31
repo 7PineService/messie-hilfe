@@ -33,11 +33,11 @@ export default defineConfig({
         'X-XSS-Protection': '1; mode=block',
         'Content-Security-Policy': [
           "default-src 'self'",
-          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.cookieyes.com https://www.google-analytics.com",
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.cookieyes.com https://cdn-cookieyes.com https://www.google-analytics.com",
           "style-src 'self' 'unsafe-inline'",
           "font-src 'self' data:",
           "img-src 'self' data: https:",
-          "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.cookieyes.com https://log.cookieyes.com https://*.supabase.co",
+          "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.cookieyes.com https://cdn-cookieyes.com https://log.cookieyes.com https://*.supabase.co",
           "frame-src 'self' https://www.googletagmanager.com https://*.cookieyes.com",
           "object-src 'none'",
           "base-uri 'self'",
