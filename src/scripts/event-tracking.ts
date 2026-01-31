@@ -43,5 +43,20 @@ export function initEventTracking(isDev: boolean = false) {
 declare global {
   interface Window {
     dataLayer: any[];
+    gtmLoaded: boolean;
+    trackingInitialized: boolean;
+    getCkyConsent?: () => {
+      activeLaw: string;
+      categories: {
+        necessary: boolean;
+        functional: boolean;
+        analytics: boolean;
+        performance: boolean;
+        advertisement: boolean;
+      };
+      isUserActionCompleted: boolean;
+      consentID: string;
+      languageCode: string;
+    };
   }
 }
