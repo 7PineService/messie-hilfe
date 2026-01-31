@@ -1,9 +1,12 @@
 import { defineConfig, envField } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
+  site: 'https://www.messie-hilfe.de',
   adapter: vercel(),
+  integrations: [sitemap()],
   env: {
     schema: {
       RESEND_API_KEY: envField.string({
