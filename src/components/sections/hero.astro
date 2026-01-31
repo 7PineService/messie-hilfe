@@ -24,6 +24,14 @@ const {
 ---
 
 <section id="hero-section" class="hero-with-bg flex items-center py-8 md:py-10 lg:py-12">
+	<img
+		src="/images/background.webp"
+		alt=""
+		fetchpriority="high"
+		loading="eager"
+		class="hero-bg-image"
+		aria-hidden="true"
+	/>
 	<div class="container mx-auto px-4 w-full">
 		<div class="grid lg:grid-cols-8 gap-6 md:gap-8 lg:gap-8 xl:gap-10 2xl:gap-12 min-[1920px]:gap-16 items-start lg:items-center">
 			<div class="lg:col-span-5 space-y-5 md:space-y-6 lg:space-y-6 xl:space-y-7 2xl:space-y-8 min-[1920px]:space-y-10">
@@ -108,17 +116,31 @@ const {
 
 <style>
 	.hero-with-bg {
-		background:
-			url('/images/background.webp') right center / cover no-repeat,
-			var(--color-surface-primary);
-		background-position: right center;
+		background: var(--color-surface-primary);
 		position: relative;
 	}
 
+	.hero-bg-image {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: right center;
+		z-index: 0;
+		pointer-events: none;
+	}
+
 	@media (max-width: 1023px) {
-		.hero-with-bg {
-			background: var(--color-surface-primary);
+		.hero-bg-image {
+			display: none;
 		}
+	}
+
+	.hero-with-bg > .container {
+		position: relative;
+		z-index: 1;
 	}
 
 	@media (min-width: 1024px) and (orientation: landscape) {
