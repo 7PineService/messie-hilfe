@@ -28,12 +28,8 @@ const isDev = import.meta.env.DEV;
   window.trackingInitialized = window.trackingInitialized || false;
 
   function loadGTM() {
-    if (window.gtmLoaded) {
-      console.debug('[Tracking] GTM already loaded, skipping');
-      return;
-    }
+    if (window.gtmLoaded) return;
     window.gtmLoaded = true;
-    console.log('[Tracking] Loading GTM:', gtmId);
 
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -44,42 +40,29 @@ const isDev = import.meta.env.DEV;
   }
 
   function checkConsent() {
-    console.debug('[Tracking] Checking consent...');
-
     if (typeof window.getCkyConsent === 'function') {
       try {
         var consent = window.getCkyConsent();
-        console.debug('[Tracking] Consent data:', consent);
-
         if (consent && consent.categories) {
           if (consent.categories.analytics || consent.categories.advertisement) {
-            console.log('[Tracking] Consent granted - analytics:', consent.categories.analytics, 'advertisement:', consent.categories.advertisement);
             loadGTM();
             window.dispatchEvent(new CustomEvent('tracking_consent_granted'));
-            console.debug('[Tracking] tracking_consent_granted event dispatched');
-          } else {
-            console.debug('[Tracking] No analytics/advertisement consent');
           }
         }
       } catch (e) {
-        console.debug('[Tracking] getCkyConsent failed', e);
+        console.debug('getCkyConsent failed', e);
       }
-    } else {
-      console.debug('[Tracking] getCkyConsent not available yet');
     }
   }
 
   document.addEventListener('cookieyes_banner_load', function() {
-    console.log('[Tracking] cookieyes_banner_load event fired');
     checkConsent();
   });
 
   document.addEventListener('cookieyes_consent_update', function() {
-    console.log('[Tracking] cookieyes_consent_update event fired');
     checkConsent();
   });
 
-  console.debug('[Tracking] Initial consent check on page load');
   checkConsent();
 </script>
 
@@ -93,12 +76,8 @@ const isDev = import.meta.env.DEV;
   import { initEventTracking } from '@/scripts/event-tracking';
 
   const init = () => {
-    if (window.trackingInitialized) {
-      console.debug('[Tracking] Event tracking already initialized, skipping');
-      return;
-    }
+    if (window.trackingInitialized) return;
     window.trackingInitialized = true;
-    console.log('[Tracking] Initializing event tracking...');
 
     if ('requestIdleCallback' in window) {
       requestIdleCallback(() => initEventTracking(import.meta.env.DEV));
@@ -107,13 +86,9 @@ const isDev = import.meta.env.DEV;
     }
   };
 
-  window.addEventListener('tracking_consent_granted', () => {
-    console.log('[Tracking] tracking_consent_granted event received');
-    init();
-  });
+  window.addEventListener('tracking_consent_granted', init);
 
   if (window.gtmLoaded) {
-    console.log('[Tracking] GTM already loaded, initializing event tracking');
     init();
   }
 </script>
