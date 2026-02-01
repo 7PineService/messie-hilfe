@@ -42,12 +42,12 @@ const { title, classes, description, image } = Astro.props
           <div class="w-fit relative mx-auto inline-flex gap-1">
             <Checkmark
               size="sm"
-              class="hidden sm:block shrink-0 text-(--color-accent-bronze) opacity-70 translate-y-1"
+              class="hidden sm:block shrink-0 text-(--color-bronze-accent) opacity-70 translate-y-1"
               aria-hidden={true}
             />
             <Checkmark
               size="xs"
-              class="sm:hidden shrink-0 text-(--color-accent-bronze) opacity-70"
+              class="sm:hidden shrink-0 text-(--color-bronze-accent) opacity-70"
               aria-hidden={true}
             />
             {d}
@@ -60,19 +60,19 @@ const { title, classes, description, image } = Astro.props
 
 <style>
   .why-card {
-    background: var(--color-surface-light-peach);
+    background: var(--color-warm-25);
   }
 
   .why-card:hover {
-    background: var(--color-surface-warm-peach);
+    background: var(--color-warm-150);
     box-shadow:
-      var(--color-shadow-warm) 1px 0px 2px 2px,
-      var(--color-shadow-warm) -7px 0px 2px -4px,
-      var(--color-shadow-warm) 1px 2px 2px 2px;
+      var(--shadow-peach) 1px 0px 2px 2px,
+      var(--shadow-peach) -7px 0px 2px -4px,
+      var(--shadow-peach) 1px 2px 2px 2px;
   }
 
   .why-card:hover .cta-tertiary {
-    background-color: var(--color-primary);
+    background-color: var(--color-foreground);
     color: white;
   }
 </style>

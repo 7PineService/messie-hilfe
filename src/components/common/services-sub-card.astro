@@ -12,7 +12,7 @@ const { title, description, image, link = '#' } = Astro.props
 ---
 
 <a href={link} class="sub-card-link block h-full">
-  <div class="sub-service-card flex items-center p-0 shadow-xl overflow-hidden rounded-2xl bg-surface-secondary h-full">
+  <div class="sub-service-card flex items-center p-0 shadow-xl overflow-hidden rounded-2xl bg-warm-200 h-full">
     <div class="w-[30%] shrink-0">
       <Image
         class="w-full h-full object-contain"
@@ -55,7 +55,7 @@ const { title, description, image, link = '#' } = Astro.props
     box-shadow:
       0 20px 25px -5px rgba(0, 0, 0, 0.1),
       0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
-    background-color: var(--color-surface-warm-peach) !important;
+    background-color: var(--color-warm-150) !important;
   }
 
   @media (max-width: 768px) {

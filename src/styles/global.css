@@ -5,14 +5,14 @@
 
 @layer base {
   body {
-    color: var(--color-primary);
+    color: var(--color-foreground);
     font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
       Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   }
 
   input::placeholder,
   textarea::placeholder {
-    color: var(--color-muted);
+    color: var(--color-foreground-muted);
     opacity: 1;
   }
 
@@ -24,81 +24,107 @@
   }
 
   input[type='checkbox'] {
-    accent-color: var(--color-primary);
+    accent-color: var(--color-foreground);
     cursor: pointer;
   }
 
   .cta-primary {
-    background-color: var(--color-cta-primary);
+    background-color: var(--color-bronze);
     transition: background-color 0.2s ease-in-out;
     cursor: pointer;
   }
 
   .cta-primary:hover {
-    background-color: var(--color-cta-primary-hover);
+    background-color: var(--color-bronze-dark);
   }
 
   .cta-secondary {
-    background-color: var(--color-cta-secondary);
+    background-color: var(--color-brand-light);
     transition: background-color 0.2s ease-in-out;
     cursor: pointer;
   }
 
   .cta-secondary:hover {
-    background-color: var(--color-cta-secondary-hover);
+    background-color: var(--color-brand-light-hover);
   }
 
   .cta-tertiary {
-    background-color: var(--color-cta-tertiary);
+    background-color: var(--color-warm-150);
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     cursor: pointer;
   }
 
   .cta-tertiary:hover {
-    background-color: var(--color-primary);
+    background-color: var(--color-foreground);
     color: white;
   }
 }
 
 @theme {
-  --color-surface-primary: #fcf4f0;
+  /* ===== Foreground/Text Colors ===== */
+  --color-foreground: #4a3221;
+  --color-foreground-muted: #a39186;
+  --color-foreground-medium: #8b7a6a;
+  --color-foreground-gray: #8f887f;
 
-  --color-surface-secondary: #f9ede4;
+  /* ===== Background Colors (Warm Scale) ===== */
+  --color-warm-0: #ffffff;
+  --color-warm-25: #fef7f5;
+  --color-warm-50: #fbf9f6;
+  --color-warm-75: #fbf4f0;
+  --color-warm-100: #fcf4f0;
+  --color-warm-150: #fdecc9;
+  --color-warm-200: #f9ede4;
+  --color-warm-250: #f7ebe4;
+  --color-warm-300: #f2e7df;
+  --color-warm-350: #f1ded5;
+  --color-warm-400: #fbe5ce;
+  --color-warm-450: #e8dacc;
 
-  --color-surface-tertiary: #f7ebe4;
+  /* ===== Brand Identity ===== */
+  --color-brand-dark: #463324;
+  --color-brand-light: #f4e4d3;
+  --color-brand-light-hover: #e9d4c3;
 
-  --color-surface-muted: #fbf4f0;
+  /* ===== Interactive Colors (Bronze Family) ===== */
+  --color-bronze: #c49f70;
+  --color-bronze-dark: #b38f60;
+  --color-bronze-accent: #bb853c;
 
-  --color-surface-input: #f2e7df;
+  /* ===== Border/Outline Colors ===== */
+  --color-outline: #d4baa5;
+  --color-outline-dark: #c1a9a1;
+  --color-outline-focus: #bca99f;
+  --color-outline-golden: #eacb62;
+  --color-outline-10: rgba(212, 186, 165, 0.1);
+  --color-outline-20: rgba(212, 186, 165, 0.2);
+  --color-outline-30: rgba(212, 186, 165, 0.3);
+  --color-outline-40: rgba(212, 186, 165, 0.4);
+  --color-outline-50: rgba(212, 186, 165, 0.5);
 
-  --color-border-primary: #d4baa5;
+  /* ===== Footer Specific ===== */
+  --color-footer-top: #efdfd9;
+  --color-footer-top-end: #bea89d;
+  --color-footer-bottom: #dfcabb;
 
-  --color-border-secondary: #c1a9a1;
+  /* ===== Status/Feedback ===== */
+  --color-error: #dc2626;
+  --color-error-bg: #fef2f2;
 
-  --color-primary: #4a3221;
+  /* ===== Gradients ===== */
+  --gradient-hero: linear-gradient(225deg, #fcecd7, #fdf3f2);
+  --gradient-section: linear-gradient(225deg, #fce8cf, #fcedda);
+  --gradient-footer: linear-gradient(to bottom, #efdfd9, #bea89d);
 
-  --color-muted: #a39186;
+  /* ===== Custom Shadows ===== */
+  --shadow-subtle: 0 1px 3px rgba(99, 99, 99, 0.12);
+  --shadow-card: 0 2px 8px rgba(99, 99, 99, 0.2);
+  --shadow-float: 0 4px 8px rgba(99, 99, 99, 0.15);
+  --shadow-elevated: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-ui: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-bronze: 2px 8px 12px rgba(170, 71, 14, 0.3);
+  --shadow-peach: #f5dcae;
 
-  --color-cta-primary: #c49f70;
-  --color-cta-primary-hover: #b38f60;
-
-  --color-cta-secondary: #f4e4d3;
-  --color-cta-secondary-hover: #e9d4c3;
-
-  --color-cta-tertiary: #fdecc9;
-
-  --color-accent-bronze: #bb853c;
-
-	--color-logo-messie: #463324;
-
-	--color-logo-hilfe: #F4E4D3;
-
-  --color-surface-light-peach: #fef7f5;
-  --color-surface-warm-peach: #fdecc9;
-
-  --color-surface-gradient-light: linear-gradient(225deg, #fcecd7, #fdf3f2);
-  --color-surface-gradient-warm: linear-gradient(225deg, ##fce8cf, #fcedda);
-
-  --color-shadow-subtle: rgba(99, 99, 99, 0.2);
-  --color-shadow-warm: #f5dcae;
+  /* ===== Special Effects ===== */
+  --glow-logo: 0 0 5px rgba(255, 235, 59, 0.9), 0 0 10px rgba(255, 223, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.6), 0 0 25px rgba(212, 186, 165, 0.7), 0 0 35px rgba(212, 186, 165, 0.5), 0 0 45px rgba(212, 186, 165, 0.4);
 }

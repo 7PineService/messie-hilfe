@@ -1,0 +1,335 @@
+---
+import { Input, Textarea } from '@/components/ui';
+---
+
+<div data-step="6" class="step-content hidden" aria-hidden="true" data-step-title="Wie können wir Sie erreichen?" data-step-subtitle="Für Rückfragen und unser Angebot – diskret und sicher.">
+
+	<div class="grid md:grid-cols-2 gap-8">
+		<div class="space-y-6">
+			<div class="space-y-4">
+				<p class="text-base font-bold">Ihre Kontaktinformationen</p>
+				<Input
+					name="email"
+					type="email"
+					placeholder="E-Mail-Adresse*"
+					required
+				/>
+				<Input
+					name="phone"
+					type="tel"
+					placeholder="Handynummer*"
+					required
+				/>
+			</div>
+
+			<div class="space-y-4">
+				<p class="text-base font-bold">Ansprechpartner</p>
+				<div class="grid grid-cols-2 gap-3">
+					<select
+						name="salutation"
+						required
+						class="w-full pl-3 pr-8 py-2 text-sm border border-outline rounded-lg bg-white focus:ring-2 focus:ring-outline focus:border-outline"
+					>
+						<option value="" disabled selected>Anrede*</option>
+						<option value="herr">Herr</option>
+						<option value="frau">Frau</option>
+					</select>
+					<select
+						name="title"
+						class="w-full pl-3 pr-8 py-2 text-sm border border-outline rounded-lg bg-white focus:ring-2 focus:ring-outline focus:border-outline"
+					>
+						<option value="">Titel (optional)</option>
+						<option value="dr">Dr.</option>
+						<option value="prof">Prof.</option>
+						<option value="prof_dr">Prof. Dr.</option>
+					</select>
+				</div>
+				<div class="grid grid-cols-2 gap-3">
+					<Input
+						name="first_name"
+						placeholder="Vorname*"
+						required
+					/>
+					<Input
+						name="last_name"
+						placeholder="Nachname*"
+						required
+					/>
+				</div>
+			</div>
+
+			<div class="space-y-4">
+				<p class="text-base font-bold">Adresse</p>
+				<div class="grid grid-cols-3 gap-3">
+					<div class="col-span-2">
+						<Input
+							name="street"
+							placeholder="Straße*"
+							required
+						/>
+					</div>
+					<Input
+						name="street_number"
+						placeholder="Nr.*"
+						required
+					/>
+				</div>
+				<div class="grid grid-cols-3 gap-3">
+					<Input
+						name="postal_code"
+						type="text"
+						inputmode="numeric"
+						pattern="[0-9]*"
+						placeholder="PLZ*"
+						required
+					/>
+					<div class="col-span-2">
+						<Input
+							name="city"
+							placeholder="Stadt*"
+							required
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="flex flex-col">
+			<div class="flex-1 space-y-6">
+				<div class="optional-section">
+					<label class="flex items-center gap-3 cursor-pointer">
+						<input
+							type="checkbox"
+							name="has_different_address"
+							class="w-4 h-4 border-outline rounded text-foreground focus:ring-outline"
+							data-toggle-section="different-address"
+						/>
+						<span class="text-base font-medium">Abweichende Einsatzadresse angeben</span>
+					</label>
+					<div id="different-address" class="hidden mt-4 space-y-4">
+						<div class="grid grid-cols-3 gap-3">
+							<div class="col-span-2">
+								<Input
+									name="job_street"
+									placeholder="Straße*"
+									data-conditional-required="has_different_address"
+								/>
+							</div>
+							<Input
+								name="job_street_number"
+								placeholder="Nr.*"
+								data-conditional-required="has_different_address"
+							/>
+						</div>
+						<div class="grid grid-cols-3 gap-3">
+							<Input
+								name="job_postal_code"
+								type="text"
+								inputmode="numeric"
+								pattern="[0-9]*"
+								placeholder="PLZ*"
+								data-conditional-required="has_different_address"
+							/>
+							<div class="col-span-2">
+								<Input
+									name="job_city"
+									placeholder="Stadt*"
+									data-conditional-required="has_different_address"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="optional-section">
+					<label class="flex items-center gap-3 cursor-pointer">
+						<input
+							type="checkbox"
+							name="has_different_contact"
+							class="w-4 h-4 border-outline rounded text-foreground focus:ring-outline"
+							data-toggle-section="different-contact"
+						/>
+						<span class="text-base font-medium">Abweichenden Ansprechpartner angeben</span>
+					</label>
+					<div id="different-contact" class="hidden mt-4 space-y-4">
+						<div class="grid grid-cols-2 gap-3">
+							<select
+								name="alt_salutation"
+								data-conditional-required="has_different_contact"
+								class="w-full pl-3 pr-8 py-2 text-sm border border-outline rounded-lg bg-white focus:ring-2 focus:ring-outline focus:border-outline"
+							>
+								<option value="" disabled selected>Anrede*</option>
+								<option value="herr">Herr</option>
+								<option value="frau">Frau</option>
+							</select>
+							<select
+								name="alt_title"
+								class="w-full pl-3 pr-8 py-2 text-sm border border-outline rounded-lg bg-white focus:ring-2 focus:ring-outline focus:border-outline"
+							>
+								<option value="">Titel (optional)</option>
+								<option value="dr">Dr.</option>
+								<option value="prof">Prof.</option>
+								<option value="prof_dr">Prof. Dr.</option>
+							</select>
+						</div>
+						<div class="grid grid-cols-2 gap-3">
+							<Input
+								name="alt_first_name"
+								placeholder="Vorname*"
+								data-conditional-required="has_different_contact"
+							/>
+							<Input
+								name="alt_last_name"
+								placeholder="Nachname*"
+								data-conditional-required="has_different_contact"
+							/>
+						</div>
+						<Input
+							name="alt_email"
+							type="email"
+							placeholder="E-Mail-Adresse*"
+							data-conditional-required="has_different_contact"
+						/>
+						<Input
+							name="alt_phone"
+							type="tel"
+							placeholder="Handynummer*"
+							data-conditional-required="has_different_contact"
+						/>
+						<Textarea
+							name="alt_notes"
+							placeholder="Weitere Angaben (z. B. Name auf Klingelschild)"
+							rows={2}
+						/>
+					</div>
+				</div>
+			</div>
+
+			<div class="mt-6 pt-6 border-t border-gray-100">
+				<label class="flex items-start gap-3 cursor-pointer">
+					<input
+						type="checkbox"
+						name="privacy"
+						required
+						class="mt-0.5 w-4 h-4 border-outline rounded text-foreground focus:ring-outline"
+					/>
+					<span class="text-sm">
+						Ich habe die <a href="/datenschutz/" target="_blank" class="underline hover:text-bronze">Datenschutzerklärung</a> zur Kenntnis genommen.
+					</span>
+				</label>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	select {
+		appearance: none;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath stroke='%23D4BAA5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: right 0.75rem center;
+		background-size: 10px;
+		padding-right: 2.5rem !important;
+	}
+
+	select:focus {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath stroke='%23C9996B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+	}
+
+	input[type="checkbox"] {
+		appearance: none;
+		width: 1.25rem;
+		height: 1.25rem;
+		border: 2px solid var(--color-outline-50);
+		border-radius: 0.25rem;
+		background: white;
+		cursor: pointer;
+		position: relative;
+		flex-shrink: 0;
+		transition: all 0.2s;
+	}
+
+	input[type="checkbox"]:checked {
+		border-color: var(--color-bronze);
+		background: var(--color-bronze);
+	}
+
+	input[type="checkbox"]:checked::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) rotate(45deg);
+		width: 0.35rem;
+		height: 0.65rem;
+		border: solid white;
+		border-width: 0 2px 2px 0;
+	}
+
+	input[type="checkbox"]:hover {
+		border-color: var(--color-bronze);
+	}
+
+	input[type="checkbox"]:focus {
+		outline: 2px solid var(--color-outline);
+		outline-offset: 2px;
+	}
+</style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const step6 = document.querySelector('[data-step="6"]');
+		if (!step6) return;
+
+		// Numbers-only validation for postal codes
+		const postalCodeInputs = step6.querySelectorAll<HTMLInputElement>('input[name="postal_code"], input[name="job_postal_code"]');
+		postalCodeInputs.forEach((input) => {
+			input.addEventListener('input', (e) => {
+				const target = e.target as HTMLInputElement;
+				target.value = target.value.replace(/[^0-9]/g, '');
+			});
+		});
+
+		const toggleCheckboxes = step6.querySelectorAll<HTMLInputElement>('[data-toggle-section]');
+
+		toggleCheckboxes.forEach((checkbox) => {
+			const sectionId = checkbox.getAttribute('data-toggle-section');
+			const section = sectionId ? document.getElementById(sectionId) : null;
+
+			if (section) {
+				const updateRequiredFields = (isRequired: boolean) => {
+					const conditionalFields = section.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
+						`[data-conditional-required="${checkbox.name}"]`
+					);
+
+					conditionalFields.forEach((field) => {
+						if (isRequired) {
+							field.setAttribute('required', 'required');
+						} else {
+							field.removeAttribute('required');
+						}
+					});
+				};
+
+				checkbox.addEventListener('change', () => {
+					if (checkbox.checked) {
+						section.classList.remove('hidden');
+						updateRequiredFields(true);
+					} else {
+						section.classList.add('hidden');
+						updateRequiredFields(false);
+
+						section.querySelectorAll('input, textarea, select').forEach((field) => {
+							const inputField = field as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+							if (inputField instanceof HTMLInputElement && (inputField.type === 'checkbox' || inputField.type === 'radio')) {
+								inputField.checked = false;
+							} else {
+								inputField.value = '';
+							}
+						});
+					}
+				});
+			}
+		});
+	});
+</script>

@@ -30,7 +30,7 @@ const baseClasses = 'flex flex-col gap-3';
 const optionClasses = 'flex flex-col gap-2';
 const checkboxRowClasses = 'flex items-center gap-3 cursor-pointer';
 const labelClasses = 'text-sm cursor-pointer';
-const textFieldClasses = 'w-full px-3 py-2 text-sm border border-border-primary rounded-lg bg-white focus:ring-2 focus:ring-border-primary focus:border-border-primary transition-colors';
+const textFieldClasses = 'w-full px-3 py-2 text-sm border border-outline rounded-lg bg-white focus:ring-2 focus:ring-outline focus:border-outline transition-colors';
 ---
 
 <div
@@ -71,7 +71,7 @@ const textFieldClasses = 'w-full px-3 py-2 text-sm border border-border-primary 
 		appearance: none;
 		width: 1.25rem;
 		height: 1.25rem;
-		border: 2px solid rgba(212, 186, 165, 0.5);
+		border: 2px solid var(--color-outline-50);
 		border-radius: 0.25rem;
 		background: white;
 		cursor: pointer;
@@ -81,12 +81,12 @@ const textFieldClasses = 'w-full px-3 py-2 text-sm border border-border-primary 
 	}
 
 	.checkbox-input:hover {
-		border-color: var(--color-cta-primary);
+		border-color: var(--color-bronze);
 	}
 
 	.checkbox-input:checked {
-		border-color: var(--color-cta-primary);
-		background: var(--color-cta-primary);
+		border-color: var(--color-bronze);
+		background: var(--color-bronze);
 	}
 
 	.checkbox-input:checked::after {
@@ -102,7 +102,7 @@ const textFieldClasses = 'w-full px-3 py-2 text-sm border border-border-primary 
 	}
 
 	.checkbox-input:focus-visible {
-		outline: 2px solid var(--color-border-primary);
+		outline: 2px solid var(--color-outline);
 		outline-offset: 2px;
 	}
 </style>

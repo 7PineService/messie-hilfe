@@ -1,27 +1,3 @@
-import { validateEnvVariables } from './env-validation';
-
-const isProduction = import.meta.env.PROD;
-const envValidation = validateEnvVariables(isProduction);
-
-if (envValidation.errors.length > 0) {
-	console.error('\n❌ Environment Variable Validation Errors:\n');
-	envValidation.errors.forEach(error => {
-		console.error(`  • ${error}`);
-	});
-	console.error('\nPlease set the required environment variables in your .env file or deployment platform.\n');
-	if (isProduction) {
-		throw new Error('Environment variable validation failed. Please fix the errors above.');
-	}
-}
-
-if (envValidation.warnings.length > 0 && import.meta.env.DEV) {
-	console.warn('\n⚠️  Environment Variable Warnings:\n');
-	envValidation.warnings.forEach(warning => {
-		console.warn(`  • ${warning}`);
-	});
-	console.warn('');
-}
-
 export const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://messie-hilfe.de';
 
 export const CONTACT_PHONE = '+4989120891335';

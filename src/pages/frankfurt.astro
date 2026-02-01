@@ -1,0 +1,97 @@
+---
+import BaseLayout from '@/layouts/base-layout.astro';
+import Hero from '@/components/sections/hero.astro';
+import CityContext from '@/components/sections/city-context.astro';
+import AnonymFormOverlay from '@/components/forms/anonym-form/overlay.astro';
+import FloatingActionIcons from '@/components/floating-action-icons.astro';
+import Services from '@/components/sections/services.astro';
+import Steps from '@/components/sections/steps.astro';
+import Who from '@/components/sections/who.astro';
+import Why from '@/components/sections/why.astro';
+import Cost from '@/components/sections/cost.astro';
+import FAQ from '@/components/sections/faqs.astro';
+import { FinalCTA } from '@/components/sections';
+import { SITE_URL } from '@/config/site';
+import frankfurtImg from '@/assets/images/section-city-context-frankfurt.png';
+
+const faqData = [
+  {
+    title: 'Gibt es Vorurteile?',
+    description: 'Nein. Wir helfen ohne Vorurteile und ohne Bewertung. Ihre Situation ist vertraulich und wir behandeln Sie respektvoll.'
+  },
+  {
+    title: 'Wie diskret ist der Einsatz?',
+    description: 'Wir kommen in neutralen Fahrzeugen ohne Werbung und arbeiten diskret und anonym. Niemand wird erfahren, dass Sie uns beauftragt haben.'
+  },
+  {
+    title: 'Muss ich selbst vor Ort sein?',
+    description: 'Nein, Sie müssen nicht anwesend sein. Wir erledigen alles zuverlässig und halten Sie auf dem Laufenden.'
+  },
+  {
+    title: 'Was tun Sie gegen Gerüche?',
+    description: 'Bei starken Gerüchen setzen wir spezielle Geruchsneutralisationen ein, um die Luft zu reinigen und schlechte Gerüche nachhaltig zu reduzieren.'
+  },
+  {
+    title: 'Wie lange dauert die Entrümpelung?',
+    description: 'Das hängt von der Größe und dem Zustand der Wohnung ab. In vielen Fällen sind wir innerhalb von 1–3 Tagen fertig.'
+  },
+  {
+    title: 'Helfen Sie auch bei sehr schwierigen Situationen?',
+    description: 'Ja, auch bei sehr stark belasteten Wohnungen sind wir spezialisiert. Wir kennen uns mit Geruchsbekämpfung, Desinfektion und Schadensbeseitigung aus.'
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqData.map(faq => ({
+    "@type": "Question",
+    "name": faq.title,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.description
+    }
+  }))
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Messie-Hilfe",
+  "description": "Diskrete Messie-Hilfe und Messie-Entrümpelung in Frankfurt. Unterstützung bei Entrümpelung und Reinigung von Messie-Wohnungen – anonym, zuverlässig und ohne Bewertung.",
+  "areaServed": {
+    "@type": "City",
+    "name": "Frankfurt"
+  }
+};
+---
+
+<BaseLayout
+  title="Messie-Hilfe Frankfurt – Messie-Wohnung entrümpeln & reinigen"
+  description="Diskrete Messie-Hilfe in Frankfurt & Umgebung. Unterstützung bei Entrümpelung & Reinigung von Messie-Wohnungen – anonym & zuverlässig. Jetzt anfragen."
+  canonicalUrl={`${SITE_URL}/frankfurt/`}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <main>
+    <Hero
+      title="Diskrete Messie-Hilfe & Messie-Entrümpelung in Frankfurt"
+      description={['Eine <strong>Messie-Wohnung zu entrümpeln</strong> ist für viele Betroffene und Angehörige eine enorme Belastung. In einer Stadt wie Frankfurt kommt häufig zusätzlicher Druck durch Zeitmangel, berufliche Anforderungen oder anstehende Wohnungswechsel hinzu.', '<strong>Wir helfen bei der Entrümpelung und Reinigung von Messie-Wohnungen in Frankfurt</strong> – diskret, anonym und mit klaren Abläufen.']}
+    />
+    <CityContext
+      heading="Messie-Hilfe in Frankfurt – diskret, strukturiert und ohne Bewertung"
+      text="Frankfurt ist geprägt von dichter Bebauung, häufigen Wohnungswechseln und einem hohen beruflichen Tempo. Herausforderungen rund um <strong>Messie-Wohnungen in Frankfurt</strong> entstehen oft parallel zu Arbeit, Trennung oder kurzfristigen Veränderungen – Zeit für Ordnung bleibt kaum.\n\nGerade bei begrenzten Zeitfenstern, sensiblen Mietverhältnissen oder Hausverwaltungen ist ein klar strukturiertes Vorgehen entscheidend. <strong>Unsere Messie-Hilfe in Frankfurt</strong> unterstützt bei Entrümpelung und Reinigung <strong>ohne Bewertung</strong> – effizient, diskret und an die jeweilige Situation angepasst."
+      image={frankfurtImg}
+    />
+    <Services />
+    <Steps />
+    <Who />
+    <Why />
+    <Cost />
+    <FAQ />
+    <FinalCTA />
+  </main>
+
+  <AnonymFormOverlay />
+  <FloatingActionIcons />
+</BaseLayout>

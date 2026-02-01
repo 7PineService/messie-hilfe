@@ -5,18 +5,18 @@ import { EmailLink } from '@/components/common';
 ---
 
 <div>
-  <h2 class="text-lg md:text-xl lg:text-2xl font-bold text-primary mb-6">
+  <h2 class="text-lg md:text-xl lg:text-2xl font-bold text-foreground mb-6">
     Kontaktinformationen
   </h2>
 
   <div class="space-y-6">
     <div class="flex items-start gap-3">
       <div class="shrink-0 mt-0.5">
-        <PhoneIcon size="md" class="text-primary" aria-hidden={true} />
+        <PhoneIcon size="md" class="text-foreground" aria-hidden={true} />
       </div>
       <div>
-        <div class="font-semibold text-primary mb-1">Telefon</div>
-        <a href="tel:+4989120891335" class="text-primary hover:text-cta-primary transition-colors">
+        <div class="font-semibold text-foreground mb-1">Telefon</div>
+        <a href="tel:+4989120891335" class="text-foreground hover:text-bronze transition-colors">
           089 120 891 335
         </a>
       </div>
@@ -24,23 +24,23 @@ import { EmailLink } from '@/components/common';
 
     <div class="flex items-start gap-3">
       <div class="shrink-0 mt-0.5">
-        <EmailIcon size="md" class="text-primary" aria-hidden={true} />
+        <EmailIcon size="md" class="text-foreground" aria-hidden={true} />
       </div>
       <div>
-        <div class="font-semibold text-primary mb-1">E-Mail</div>
-        <EmailLink email="kontakt@messie-hilfe.de" class="text-primary hover:text-cta-primary transition-colors break-all" />
+        <div class="font-semibold text-foreground mb-1">E-Mail</div>
+        <EmailLink email="kontakt@messie-hilfe.de" class="text-foreground hover:text-bronze transition-colors break-all" />
       </div>
     </div>
 
-    <div class="pt-4 border-t border-border-primary">
-      <div class="font-semibold text-primary mb-2">Öffnungszeiten</div>
-      <p class="text-primary opacity-80">
+    <div class="pt-4 border-t border-outline">
+      <div class="font-semibold text-foreground mb-2">Öffnungszeiten</div>
+      <p class="text-foreground opacity-80">
         Montag bis Freitag, 8:00 – 18:00 Uhr
       </p>
     </div>
 
-    <div class="bg-surface-warm-peach bg-opacity-30 rounded-lg px-4 py-3 mt-6">
-      <p class="text-sm text-primary opacity-80 leading-relaxed">
+    <div class="bg-warm-400 bg-opacity-30 rounded-lg px-4 py-3 mt-6">
+      <p class="text-sm text-foreground opacity-80 leading-relaxed">
         Sie erreichen uns werktags – bei dringenden Fällen auch kurzfristig.
       </p>
     </div>

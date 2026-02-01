@@ -57,7 +57,7 @@ const labelClasses = 'text-sm cursor-pointer';
 		appearance: none;
 		width: 1.25rem;
 		height: 1.25rem;
-		border: 2px solid rgba(212, 186, 165, 0.5);
+		border: 2px solid var(--color-outline-50);
 		border-radius: 50%;
 		background: white;
 		cursor: pointer;
@@ -67,12 +67,12 @@ const labelClasses = 'text-sm cursor-pointer';
 	}
 
 	.radio-input:hover {
-		border-color: var(--color-cta-primary);
+		border-color: var(--color-bronze);
 	}
 
 	.radio-input:checked {
-		border-color: var(--color-cta-primary);
-		background: var(--color-cta-primary);
+		border-color: var(--color-bronze);
+		background: var(--color-bronze);
 	}
 
 	.radio-input:checked::after {
@@ -88,7 +88,7 @@ const labelClasses = 'text-sm cursor-pointer';
 	}
 
 	.radio-input:focus-visible {
-		outline: 2px solid var(--color-border-primary);
+		outline: 2px solid var(--color-outline);
 		outline-offset: 2px;
 	}
 </style>

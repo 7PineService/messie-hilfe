@@ -1,0 +1,195 @@
+---
+---
+
+<div data-step="5" class="step-content hidden" aria-hidden="true" data-step-title="Wann soll der Einsatz stattfinden?" data-step-subtitle="Unverbindlich – wir richten uns nach Ihrer Situation.">
+	<div class="space-y-4 max-w-lg mx-auto">
+		<div class="timing-grid space-y-3">
+			<label class="timing-option flex items-center gap-1 p-4 rounded-lg border cursor-pointer transition">
+				<input
+					type="radio"
+					name="timing"
+					value="next_weeks"
+					class="sr-only"
+				/>
+				<span class="text-base font-semibold pr-4">In den nächsten 1–2 Wochen</span>
+			</label>
+
+			<div class="timing-option-with-field">
+				<label class="timing-option flex flex-col md:flex-row md:items-center md:justify-between gap-1 p-4 rounded-lg border cursor-pointer transition">
+					<input
+						type="radio"
+						name="timing"
+						value="specific_date"
+						class="sr-only"
+					/>
+					<span class="text-base font-semibold pr-4">Zu einem bestimmten Datum</span>
+					<div class="hidden datepicker-wrapper relative mt-3 md:mt-0">
+						<input
+							type="text"
+							name="preferred_date"
+							id="datepicker-input"
+							placeholder="TT.MM.JJJJ"
+							class="datepicker-field pl-3 pr-10 py-2 text-sm border border-outline rounded-lg bg-white focus:ring-2 focus:ring-outline focus:border-outline w-full md:w-auto"
+							aria-label="Wählen Sie Ihr gewünschtes Datum"
+						/>
+						<svg class="calendar-icon absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+						</svg>
+					</div>
+				</label>
+			</div>
+
+			<label class="timing-option flex items-center gap-1 p-4 rounded-lg border cursor-pointer transition">
+				<input
+					type="radio"
+					name="timing"
+					value="unsure"
+					class="sr-only"
+				/>
+				<span class="text-base font-semibold pr-4">Ich bin unsicher</span>
+			</label>
+		</div>
+	</div>
+</div>
+
+<style>
+	/* State 1: Default/Inactive */
+	.timing-option {
+		background: var(--color-warm-25);
+		border-color: var(--color-outline-30);
+		box-shadow: 0 1px 3px var(--shadow-subtle);
+		transition: all 0.15s ease-in-out;
+		position: relative;
+	}
+
+	/* State 2: Hover (not selected) */
+	.timing-option:hover:not(:has(input:checked)) {
+		background: var(--color-warm-150);
+		border-color: var(--color-outline);
+		transform: translateY(-1px);
+		box-shadow: 0 4px 8px var(--shadow-float);
+	}
+
+	/* State 3: Selected/Active */
+	.timing-option:has(input:checked) {
+		background: var(--color-warm-150);
+		border-color: var(--color-bronze);
+		outline: 2px solid var(--color-bronze);
+		outline-offset: -1px;
+	}
+
+	.timing-option:has(input:checked)::after {
+		content: '';
+		position: absolute;
+		top: 16px;
+		right: 12px;
+		width: 20px;
+		height: 20px;
+		background: var(--color-bronze);
+		border-radius: 50%;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='3'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7'/%3E%3C/svg%3E");
+		background-size: 14px;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	.timing-option-with-field .timing-option:has(input:checked)::after {
+		display: none;
+	}
+
+	/* State 4: Hover on Selected (deselect hint) */
+	.timing-option:has(input:checked):hover {
+		opacity: 0.85;
+	}
+
+	/* Focus state for accessibility */
+	.timing-option:has(input:focus-visible) {
+		outline: 2px solid var(--color-outline);
+		outline-offset: 2px;
+	}
+
+	.timing-option-with-field:has(input[type="radio"]:checked) .datepicker-wrapper {
+		display: block;
+	}
+
+	.datepicker-field {
+		box-sizing: border-box;
+	}
+
+	.datepicker-field[type="date"] {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		padding: 0.5rem 2.5rem 0.5rem 0.75rem !important;
+		width: 100%;
+	}
+
+	.datepicker-field[type="date"]::-webkit-calendar-picker-indicator {
+		opacity: 0;
+		position: absolute;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		cursor: pointer;
+	}
+
+	@media (min-width: 768px) {
+		.datepicker-field[type="date"] {
+			width: auto;
+			min-width: 200px;
+		}
+	}
+</style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const step5 = document.querySelector('[data-step="5"]');
+		if (!step5) return;
+
+		const timingRadios = step5.querySelectorAll<HTMLInputElement>('input[name="timing"]');
+		const datepickerWrapper = step5.querySelector<HTMLElement>('.datepicker-wrapper');
+		const datepickerInput = document.getElementById('datepicker-input') as HTMLInputElement;
+
+		if (datepickerInput) {
+			const getToday = () => new Date().toISOString().split('T')[0];
+
+			datepickerInput.setAttribute('min', getToday());
+
+			datepickerInput.addEventListener('focus', () => {
+				const today = getToday();
+				datepickerInput.setAttribute('min', today);
+				datepickerInput.type = 'date';
+			});
+
+			datepickerInput.addEventListener('blur', () => {
+				if (!datepickerInput.value) {
+					datepickerInput.type = 'text';
+				}
+			});
+		}
+
+		function updateDatepickerVisibility() {
+			if (!step5) return;
+			const specificDateRadio = step5.querySelector<HTMLInputElement>('input[name="timing"][value="specific_date"]');
+			if (specificDateRadio?.checked) {
+				datepickerWrapper?.classList.remove('hidden');
+			} else {
+				datepickerWrapper?.classList.add('hidden');
+			}
+		}
+
+		timingRadios.forEach((radio) => {
+			radio.addEventListener('change', updateDatepickerVisibility);
+		});
+
+		const observer = new MutationObserver(() => {
+			if (step5 && !step5.classList.contains('hidden')) {
+				updateDatepickerVisibility();
+			}
+		});
+
+		observer.observe(step5, { attributes: true, attributeFilter: ['class'] });
+
+		updateDatepickerVisibility();
+	});
+</script>

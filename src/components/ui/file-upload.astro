@@ -37,7 +37,7 @@ const fileListId = `${id}-list`;
 		name={`${name}_data`}
 		value=""
 	/>
-	<div class="border-2 border-dashed border-border-primary rounded-lg p-6 hover:border-cta-primary transition-colors bg-surface-input">
+	<div class="border-2 border-dashed border-outline rounded-lg p-6 hover:border-bronze transition-colors bg-warm-300">
 		<input
 			type="file"
 			id={id}
@@ -51,7 +51,7 @@ const fileListId = `${id}-list`;
 			"cursor-pointer flex gap-3",
 			variant === 'compact' ? 'flex-row items-center' : 'flex-col items-center'
 		)}>
-			<div class="w-12 h-12 rounded-lg flex items-center justify-center border border-dashed shrink-0" style="background-color: #fbe5ce; border-color: #eacb62;">
+			<div class="w-12 h-12 rounded-lg flex items-center justify-center border border-dashed shrink-0" style="background-color: var(--color-warm-400); border-color: var(--color-outline-golden);">
 				<svg class="w-6 h-6 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
 				</svg>
@@ -59,11 +59,11 @@ const fileListId = `${id}-list`;
 			<div class={variant === 'compact' ? 'text-left' : 'text-center'}>
 				<p class="text-sm font-medium">Dateien hierhin ziehen oder auswählen</p>
 				{description && (
-					<p class="text-xs text-muted mt-1">{description}</p>
+					<p class="text-xs text-foreground-muted mt-1">{description}</p>
 				)}
 			</div>
 			{buttonText && (
-				<span class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-surface-secondary border border-border-primary hover:bg-surface-tertiary transition-colors">
+				<span class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-warm-200 border border-outline hover:bg-warm-250 transition-colors">
 					{buttonText}
 				</span>
 			)}
@@ -218,7 +218,7 @@ const fileListId = `${id}-list`;
 
 			fileMap.forEach((fileData, fileId) => {
 				const fileItem = document.createElement('div');
-				fileItem.className = 'text-sm flex items-center justify-between gap-2 p-2 bg-surface-input rounded-lg border border-border-primary';
+				fileItem.className = 'text-sm flex items-center justify-between gap-2 p-2 bg-warm-300 rounded-lg border border-outline';
 
 				const fileInfo = document.createElement('div');
 				fileInfo.className = 'flex items-center gap-2 flex-1 min-w-0';
@@ -246,7 +246,7 @@ const fileListId = `${id}-list`;
 				fileInfo.innerHTML = `
 					${statusIcon}
 					<span class="truncate">${fileData.name}</span>
-					<span class="text-muted shrink-0">(${formatFileSize(fileData.size)})</span>
+					<span class="text-foreground-muted shrink-0">(${formatFileSize(fileData.size)})</span>
 					${statusText}
 				`;
 
@@ -286,13 +286,13 @@ const fileListId = `${id}-list`;
 
 		['dragenter', 'dragover'].forEach(eventName => {
 			dropZone?.addEventListener(eventName, () => {
-				dropZone.parentElement?.classList.add('border-cta-primary', 'bg-surface-tertiary');
+				dropZone.parentElement?.classList.add('border-bronze', 'bg-warm-250');
 			});
 		});
 
 		['dragleave', 'drop'].forEach(eventName => {
 			dropZone?.addEventListener(eventName, () => {
-				dropZone.parentElement?.classList.remove('border-cta-primary', 'bg-surface-tertiary');
+				dropZone.parentElement?.classList.remove('border-bronze', 'bg-warm-250');
 			});
 		});
 

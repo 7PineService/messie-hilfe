@@ -4,8 +4,8 @@ import { Play, Chevron } from '@/components/icons';
 import { EmailLink } from '@/components/common';
 ---
 
-<header id="main-header" class="z-50 relative border-b border-border-primary">
-	<div class="bg-surface-muted">
+<header id="main-header" class="z-50 relative border-b border-outline">
+	<div class="bg-warm-75">
 		<div class="container mx-auto px-4 py-2.5">
 			<div class="flex flex-wrap items-center justify-between text-sm">
 				<EmailLink email={CONTACT_EMAIL} />
@@ -13,7 +13,7 @@ import { EmailLink } from '@/components/common';
 		</div>
 	</div>
 
-	<nav class="bg-surface-secondary" aria-label="Hauptnavigation">
+	<nav class="bg-warm-200" aria-label="Hauptnavigation">
 		<div class="container mx-auto px-4">
 			<div class="flex items-center justify-between h-18">
 				<a href="/" class="flex items-center gap-2" aria-label={`${SITE_NAME} Startseite`}>
@@ -35,13 +35,13 @@ import { EmailLink } from '@/components/common';
 						</button>
 						<div class="absolute top-full left-0 pt-2 hidden group-hover/dropdown:block group-focus-within/dropdown:block">
 							<div class="w-56 text-base bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
-								<a href="/messie-reinigung/" class="block px-6 py-3 hover:bg-surface-muted">Messie-Reinigung</a>
-								<a href="/entsorgung/" class="block px-6 py-3 hover:bg-surface-muted">Entsorgung</a>
-								<a href="/entruempelung/" class="block px-6 py-3 hover:bg-surface-muted">Entrümpelung</a>
-								<a href="/desinfektion/" class="block px-6 py-3 hover:bg-surface-muted">Desinfektion</a>
-								<a href="/malerarbeiten/" class="block px-6 py-3 hover:bg-surface-muted">Malerarbeiten</a>
-								<a href="/renovierung/" class="block px-6 py-3 hover:bg-surface-muted">Renovierung</a>
-								<a href="/geruchsneutralisation/" class="block px-6 py-3 hover:bg-surface-muted">Geruchsneutralisation</a>
+								<a href="/messie-reinigung/" class="block px-6 py-3 hover:bg-warm-75">Messie-Reinigung</a>
+								<a href="/entsorgung/" class="block px-6 py-3 hover:bg-warm-75">Entsorgung</a>
+								<a href="/entruempelung/" class="block px-6 py-3 hover:bg-warm-75">Entrümpelung</a>
+								<a href="/desinfektion/" class="block px-6 py-3 hover:bg-warm-75">Desinfektion</a>
+								<a href="/malerarbeiten/" class="block px-6 py-3 hover:bg-warm-75">Malerarbeiten</a>
+								<a href="/renovierung/" class="block px-6 py-3 hover:bg-warm-75">Renovierung</a>
+								<a href="/geruchsneutralisation/" class="block px-6 py-3 hover:bg-warm-75">Geruchsneutralisation</a>
 							</div>
 						</div>
 					</div>
@@ -51,7 +51,7 @@ import { EmailLink } from '@/components/common';
 				</div>
 
 				<div class="flex items-center gap-4">
-					<a href="/anfrage/" class="cta-secondary hidden md:flex items-center gap-2 text-base border border-cta-border rounded-xl px-4 py-2">
+					<a href="/anfrage/" class="cta-secondary hidden md:flex items-center gap-2 text-base border border-outline rounded-xl px-4 py-2">
 						<span>Kostenloses Angebot anfordern</span>
 						<Play size="lg" aria-hidden={true} />
 					</a>
@@ -115,7 +115,7 @@ import { EmailLink } from '@/components/common';
 			</nav>
 
 			<div class="px-5 py-6 border-t border-gray-200">
-				<a href="/anfrage/" class="cta-secondary w-full inline-flex items-center justify-center gap-2 text-base font-medium border border-cta-border rounded-xl px-4 py-3">
+				<a href="/anfrage/" class="cta-secondary w-full inline-flex items-center justify-center gap-2 text-base font-medium border border-outline rounded-xl px-4 py-3">
 					<span>Kostenloses Angebot anfordern</span>
 					<Play size="lg" aria-hidden={true} />
 				</a>
@@ -127,18 +127,18 @@ import { EmailLink } from '@/components/common';
 <style>
 	.messie {
 		font-weight: 600;
-		color: var(--color-logo-messie);
+		color: var(--color-brand-dark);
 	}
 
 	.hilfe {
 		font-weight: 400;
-		color: #8B7A6A;
+		color: var(--color-foreground-medium);
 	}
 
 	.deutschland {
 		font-weight: 300;
 		font-size: 0.9rem;
-		color: #8F887F;
+		color: var(--color-foreground-gray);
 		opacity: 0.3;
 	}
 

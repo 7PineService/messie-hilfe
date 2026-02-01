@@ -54,7 +54,7 @@ const { key, title, classes, description, subDescription, image } = Astro.props
       class="card-img relative col-span-2 flex justify-center transition rounded-l-lg p-4"
     >
       <div
-        class="w-8 aspect-square absolute top-2 left-1/2 -translate-x-1/2 rounded-full shadow-md flex items-center justify-center text-base font-semibold bg(--color-cta-tertiary) z-10 border border-(--color-border-primary)"
+        class="w-8 aspect-square absolute top-2 left-1/2 -translate-x-1/2 rounded-full shadow-md flex items-center justify-center text-base font-semibold bg(--color-cta-tertiary) z-10 border border-(--color-outline)"
       >
         {`0${key + 1}`}
       </div>
@@ -83,12 +83,12 @@ const { key, title, classes, description, subDescription, image } = Astro.props
 
 <style>
   .steps-card {
-    background: var(--color-surface-light-peach);
-    box-shadow: var(--color-shadow-warm) 0px 2px 8px 0px;
+    background: var(--color-warm-25);
+    box-shadow: var(--shadow-peach);
   }
   .steps-card-mobile {
-    background: var(--color-surface-light-peach);
-    box-shadow: var(--color-shadow-subtle) 0px 2px 8px 0px;
+    background: var(--color-warm-25);
+    box-shadow: var(--shadow-card);
   }
 
   .steps-card:first-child {
@@ -99,7 +99,7 @@ const { key, title, classes, description, subDescription, image } = Astro.props
   }
 
   .steps-card-mobile > .card-img {
-    background: var(--color-surface-gradient-light);
+    background: var(--gradient-hero);
   }
 
 </style>

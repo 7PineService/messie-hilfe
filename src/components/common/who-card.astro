@@ -67,29 +67,29 @@ const { title, classes, description, image } = Astro.props
 
 <style>
   .who-card {
-    background: var(--color-surface-light-peach);
+    background: var(--color-warm-25);
   }
   .who-card-mobile {
-    background: var(--color-surface-light-peach);
-    box-shadow: var(--color-shadow-subtle) 0px 2px 8px 0px;
+    background: var(--color-warm-25);
+    box-shadow: var(--shadow-card);
   }
 
   .who-card-mobile > .card-img {
-    background: var(--color-surface-gradient-light);
+    background: var(--gradient-hero);
   }
 
   .who-card:hover,
   .who-card-mobile:hover {
-    background: var(--color-surface-warm-peach);
+    background: var(--color-warm-150);
     box-shadow:
-      var(--color-shadow-warm) 1px 0px 2px 2px,
-      var(--color-shadow-warm) -7px 0px 2px -4px,
-      var(--color-shadow-warm) 1px 2px 2px 2px;
+      var(--shadow-peach) 1px 0px 2px 2px,
+      var(--shadow-peach) -7px 0px 2px -4px,
+      var(--shadow-peach) 1px 2px 2px 2px;
     z-index: 1;
   }
 
   .who-card-mobile:hover > .card-img {
-    background: var(--color-surface-gradient-warm);
+    background: var(--gradient-section);
   }
 
   .who-descriptions::after {
@@ -101,7 +101,7 @@ const { title, classes, description, image } = Astro.props
     left: -1rem;
     transform: translate(0, 160%);
     border-radius: 50%;
-    background: var(--color-shadow-warm);
+    background: var(--shadow-peach);
   }
 
   @media (max-width: 640px) {

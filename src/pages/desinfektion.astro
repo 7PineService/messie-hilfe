@@ -1,0 +1,208 @@
+---
+import BaseLayout from '@/layouts/base-layout.astro';
+import Hero from '@/components/sections/hero.astro';
+import Start from '@/components/sections/start.astro';
+import Steps from '@/components/sections/steps.astro';
+import Included from '@/components/sections/included.astro';
+import Transparency from '@/components/sections/transparency.astro';
+import FAQ from '@/components/sections/faqs.astro';
+import { FinalCTA } from '@/components/sections';
+import AnonymFormOverlay from '@/components/forms/anonym-form/overlay.astro';
+import FloatingActionIcons from '@/components/floating-action-icons.astro';
+import { SITE_URL } from '@/config/site';
+import stepsImg1 from '@/assets/images/section-steps-1.png';
+import stepsImg2 from '@/assets/images/section-steps-2.png';
+import stepsImg3 from '@/assets/images/section-steps-3.png';
+import stepsImg4 from '@/assets/images/section-steps-4.png';
+import faqImg1 from '@/assets/images/section-faq-desinfektion-1.png';
+import faqImg2 from '@/assets/images/section-faq-desinfektion-2.png';
+import faqImg3 from '@/assets/images/section-faq-desinfektion-3.png';
+import faqImg4 from '@/assets/images/section-faq-desinfektion-4.png';
+import faqImg5 from '@/assets/images/section-faq-desinfektion-5.png';
+import faqImg6 from '@/assets/images/section-faq-desinfektion-6.png';
+import startImg from '@/assets/images/section-start-desinfektion.png';
+
+const title = 'Desinfektion nach der Reinigung von Messie-Wohnungen';
+const description = 'Gezielte Desinfektion nach der Reinigung von Messie-Wohnungen – ergänzend zur Reinigung. Jetzt unverbindlich anfragen.';
+const canonicalUrl = `${SITE_URL}/desinfektion/`;
+
+const heroProps = {
+  title: 'Gezielte Desinfektion nach der Reinigung von Messie-Wohnungen',
+  description: [
+    '<strong>Desinfektion nach der Reinigung von Messie-Wohnungen</strong> kann erforderlich sein, wenn trotz gründlicher Reinigung hygienische Belastungen bestehen. Keime, Bakterien oder Rückstände machen gezielte Maßnahmen im Anschluss notwendig.',
+    '<strong>Wir führen die gezielte Desinfektion ergänzend zur Reinigung durch</strong> – abgestimmt auf den Ablauf und ohne unnötige Zwischenschritte.'
+  ],
+  usps: [
+    'Fachgerechte Desinfektion nach Bedarf',
+    'Geeignete & geprüfte Mittel',
+    'Zuverlässige Durchführung',
+    'Kostenlose Vor-Ort-Einschätzung'
+  ]
+};
+
+const startProps = {
+  heading: 'So unterstützen wir bei einer Desinfektion',
+  subtitle: 'Eine Desinfektion ist in bestimmten Situationen notwendig, um Keime, Bakterien oder andere Belastungen zuverlässig zu reduzieren. Wir sorgen für einen klaren Ablauf und setzen geeignete Verfahren ein – abgestimmt auf den jeweiligen Einsatzbereich.',
+  bulletPoints: [
+    '<strong>Fachgerecht</strong> & kontrolliert',
+    'Geeignete <strong>Desinfektionsverfahren</strong>',
+    '<strong>Strukturiert</strong> & zuverlässig',
+    'Ziel: <strong>hygienische Sicherheit</strong>'
+  ],
+  closingText: 'Ob nach besonderen Ereignissen, zur Vorsorge oder bei erhöhten hygienischen Anforderungen – wir stimmen die Desinfektion individuell mit Ihnen ab und führen sie professionell durch.',
+  image: startImg
+};
+
+const stepsData = [
+  {
+    title: 'Unverbindlich anfragen',
+    description: 'Schildern Sie uns Ihre Situation telefonisch, per E-Mail oder über das Online-Formular.',
+    subDescription: 'Die Anfrage ist unverbindlich. Wir klären erste Fragen und besprechen das weitere Vorgehen in Ruhe.',
+    image: stepsImg1,
+  },
+  {
+    title: 'Einschätzung & Besichtigung',
+    description: 'Wir prüfen vor Ort oder im Vorfeld den Bedarf, die Fläche und die geeignete Vorgehensweise.',
+    subDescription: 'Die Einschätzung dient der realistischen Planung – sachlich, transparent und ohne Verpflichtung.',
+    image: stepsImg2,
+  },
+  {
+    title: 'Transparentes Angebot',
+    description: 'Sie erhalten ein verbindliches Festpreis-Angebot für die Desinfektion.',
+    subDescription: 'Alle vereinbarten Leistungen sind klar definiert – ohne versteckte Kosten.',
+    image: stepsImg3,
+  },
+  {
+    title: 'Fachgerechte Desinfektion',
+    description: 'Zum vereinbarten Termin führen unsere Teams die Desinfektion professionell durch.',
+    subDescription: 'Gründlich, kontrolliert und entsprechend der vereinbarten Maßnahmen.',
+    image: stepsImg4,
+  },
+];
+
+const stepsProps = {
+  heading: 'So läuft eine Desinfektion bei uns ab',
+  subtitle: 'In vier klaren Schritten sorgen wir für eine sichere, planbare und fachgerechte Desinfektion.',
+  ctaText: 'Unverbindlich anfragen – wir erklären Ihnen den Ablauf',
+  steps: stepsData
+};
+
+const includedProps = {
+  heading: 'Was ist bei einer Desinfektion enthalten – und was nicht',
+  subtitle: 'Klare Abgrenzung sorgt für Sicherheit und <strong>Transparenz</strong>.',
+  includedTitle: 'In der Desinfektion enthalten',
+  includedItems: [
+    '<strong>Fachgerechte</strong> Desinfektionsmaßnahmen',
+    'Einsatz geeigneter <strong>Desinfektionsmittel</strong>',
+    '<strong>Behandlung</strong> der vereinbarten Flächen',
+    '<strong>Strukturierter</strong> Ablauf',
+    '<strong>Transparenter</strong> Festpreis',
+    '<strong>Individuelle</strong> Anpassung an den Bedarf'
+  ],
+  includedFooter: 'Gern klären wir vorab, welche Maßnahmen in Ihrem Fall sinnvoll und notwendig sind.',
+  notIncludedTitle: 'Nicht enthalten',
+  notIncludedTitleSuffix: 'bzw. separat buchbar',
+  notIncludedItems: [
+    '<strong>Reinigungs-</strong> oder <strong>Entrümpelungsarbeiten</strong>',
+    '<strong>Renovierungs-</strong> oder <strong>Handwerksleistungen</strong>',
+    '<strong>Schädlingsbekämpfung</strong>',
+    'Leistungen außerhalb des vereinbarten Umfangs'
+  ],
+  notIncludedFooter: 'Leistungen außerhalb dieses Rahmens stimmen wir transparent mit Ihnen ab.',
+  ctaText: 'Klären Sie vorab, welche Maßnahmen sinnvoll sind'
+};
+
+const transparencyProps = {
+  heading: 'Kosten & Transparenz – fair, nachvollziehbar und planbar',
+  subtitle: 'Die Kosten einer Desinfektion hängen vom Umfang, der Fläche und den erforderlichen Maßnahmen ab. Deshalb setzen wir auf eine realistische Einschätzung und transparente Angebote statt pauschaler Preisangaben.',
+  bulletPoints: [
+    'Preis richtet sich nach Fläche und Aufwand',
+    'Einschätzung vorab für realistisches Angebot',
+    'Verbindliches Festpreis-Angebot',
+    'Angebot unverbindlich – Sie entscheiden in Ruhe'
+  ],
+  rightText: 'Uns ist wichtig, dass Sie von Anfang an wissen, womit Sie rechnen können. Transparenz, klare Absprachen und nachvollziehbare Angebote stehen bei uns im Vordergrund.',
+  ctaText: 'Desinfektion realistisch einschätzen lassen'
+};
+
+const faqData = [
+  {
+    title: 'Wann ist eine Desinfektion sinnvoll?',
+    description: 'Eine Desinfektion ist sinnvoll, wenn erhöhte hygienische Anforderungen bestehen oder besondere Belastungen vorliegen.',
+    image: faqImg1,
+  },
+  {
+    title: 'Welche Bereiche können desinfiziert werden?',
+    description: 'Die Desinfektion erfolgt auf den zuvor abgestimmten Flächen und Bereichen.',
+    image: faqImg2,
+  },
+  {
+    title: 'Wie wird der Bedarf eingeschätzt?',
+    description: 'Im Rahmen einer Vorabklärung oder Besichtigung.',
+    image: faqImg3,
+  },
+  {
+    title: 'Erfolgt die Desinfektion fachgerecht?',
+    description: 'Ja. Wir setzen geeignete Mittel und Verfahren entsprechend der Situation ein.',
+    image: faqImg4,
+  },
+  {
+    title: 'Gibt es feste Preise für eine Desinfektion?',
+    description: 'Sie erhalten vorab ein verbindliches Festpreis-Angebot auf Basis des tatsächlichen Aufwands.',
+    image: faqImg5,
+  },
+  {
+    title: 'Muss ich während der Desinfektion anwesend sein?',
+    description: 'Nein. Auf Wunsch führen wir die Desinfektion selbstständig durch.',
+    image: faqImg6,
+  },
+];
+
+const faqProps = {
+  heading: 'Häufige Fragen zur Desinfektion',
+  subtitle: 'Hier finden Sie Antworten auf häufige Fragen rund um professionelle Desinfektionsmaßnahmen.',
+  faqItems: faqData,
+  ctaText: 'Ihre Frage ist noch offen?'
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqData.map(faq => ({
+    "@type": "Question",
+    "name": faq.title,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.description
+    }
+  }))
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Desinfektion",
+  "description": "Gezielte Desinfektion nach der Reinigung von Messie-Wohnungen. Fachgerechte Durchführung mit geeigneten und geprüften Mitteln.",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Germany"
+  }
+};
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <main>
+    <Hero {...heroProps} />
+    <Start {...startProps} />
+    <Steps {...stepsProps} />
+    <Included {...includedProps} />
+    <Transparency {...transparencyProps} />
+    <FAQ {...faqProps} />
+    <FinalCTA />
+  </main>
+
+  <AnonymFormOverlay />
+  <FloatingActionIcons />
+</BaseLayout>

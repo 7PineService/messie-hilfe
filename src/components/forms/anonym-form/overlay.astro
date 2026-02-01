@@ -1,0 +1,176 @@
+---
+import ContactForm from '../contact-form/index.astro';
+---
+
+<div id="anonym-overlay" class="fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+	<div
+		id="overlay-backdrop"
+		class="absolute inset-0 bg-logo-messie/75 backdrop-blur-sm transition-opacity duration-300"
+		aria-hidden="true"
+	></div>
+
+	<div class="relative z-10 w-full max-w-140 max-h-[90vh] overflow-y-auto bg-warm-200 rounded-2xl md:rounded-[18px] shadow-lg transform transition-all duration-300 scale-95 opacity-0" id="overlay-content">
+		<div class="relative px-4 md:px-6 pt-4 md:pt-6 pb-3 md:pb-4">
+			<button
+				id="overlay-close"
+				class="absolute top-4 md:top-6 right-4 md:right-6 p-1.5 hover:bg-yellow-200/60 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
+				aria-label="Modal schließen"
+			>
+				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+				</svg>
+			</button>
+
+			<h2 id="overlay-title" class="text-xl md:text-2xl font-semibold text-center">Anonym anfragen</h2>
+		</div>
+
+		<ContactForm
+			formId="overlay-contact-form"
+			formMessageId="overlay-form-message"
+			privacyCheckboxId="overlay-privacy"
+			nameInputId="overlay-name"
+			contactInputId="overlay-contact"
+			messageInputId="overlay-message"
+			filesInputId="overlay-files"
+			showTitle={false}
+			overlayStyle={true}
+			formType="anonym"
+			formLocation="modal"
+		/>
+	</div>
+</div>
+
+<script is:inline define:vars={{ isDev: import.meta.env.DEV }}>
+	const overlay = document.getElementById('anonym-overlay');
+	const overlayContent = document.getElementById('overlay-content');
+	const overlayBackdrop = document.getElementById('overlay-backdrop');
+	const closeButton = document.getElementById('overlay-close');
+	const form = document.getElementById('overlay-contact-form');
+	
+	let previousActiveElement = null;
+
+	function openAnonymForm() {
+		if (!overlay || !overlayContent) return;
+
+		if (typeof window !== 'undefined' && window.dataLayer) {
+			if (isDev) {
+				console.log('[Tracking] ✅ Firing funnel_start event for anonymous');
+				console.log('[Tracking] Event data:', { event: 'funnel_start', funnel_type: 'anonymous' });
+			}
+			window.dataLayer.push({
+				'event': 'funnel_start',
+				'funnel_type': 'anonymous'
+			});
+		}
+
+		previousActiveElement = document.activeElement;
+
+		overlayContent.classList.remove('scale-100', 'opacity-100');
+		overlayContent.classList.add('scale-95', 'opacity-0');
+
+		overlay.classList.remove('hidden');
+		overlay.classList.add('flex');
+		document.body.style.overflow = 'hidden';
+
+		requestAnimationFrame(() => {
+			requestAnimationFrame(() => {
+				overlayContent.classList.remove('scale-95', 'opacity-0');
+				overlayContent.classList.add('scale-100', 'opacity-100');
+			});
+		});
+
+		setTimeout(() => {
+			const firstInput = form?.querySelector('input, textarea');
+			if (firstInput) firstInput.focus();
+		}, 50);
+	}
+
+	function closeAnonymForm() {
+		if (!overlay) return;
+
+		overlayContent?.classList.remove('scale-100', 'opacity-100');
+		overlayContent?.classList.add('scale-95', 'opacity-0');
+
+		setTimeout(() => {
+			overlay.classList.add('hidden');
+			overlay.classList.remove('flex');
+			document.body.style.overflow = '';
+
+			if (form) {
+				form.reset();
+				const formMessage = document.getElementById('overlay-form-message');
+				const overlayTitle = document.getElementById('overlay-title');
+				if (formMessage) {
+					formMessage.classList.add('hidden');
+					formMessage.textContent = '';
+					formMessage.className = 'hidden mt-4 p-4 rounded-lg';
+				}
+				if (overlayTitle) {
+					overlayTitle.style.display = '';
+				}
+
+				const resetFunction = window.resetFormTracking_overlaycontactform;
+				if (resetFunction) {
+					resetFunction();
+				}
+			}
+
+			previousActiveElement?.focus();
+			previousActiveElement = null;
+		}, 300);
+	}
+
+	closeButton?.addEventListener('click', closeAnonymForm);
+
+	overlayBackdrop?.addEventListener('click', (e) => {
+		if (e.target === overlayBackdrop) {
+			closeAnonymForm();
+		}
+	});
+
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && !overlay?.classList.contains('hidden')) {
+			closeAnonymForm();
+		}
+	});
+
+	form?.addEventListener('keydown', (e) => {
+		if (e.key !== 'Tab') return;
+
+		const focusableElements = form.querySelectorAll(
+			'input, textarea, button, [href], [tabindex]:not([tabindex="-1"])'
+		);
+		const firstElement = focusableElements[0];
+		const lastElement = focusableElements[focusableElements.length - 1];
+
+		if (e.shiftKey && document.activeElement === firstElement) {
+			e.preventDefault();
+			if (lastElement) lastElement.focus();
+		} else if (!e.shiftKey && document.activeElement === lastElement) {
+			e.preventDefault();
+			if (firstElement) firstElement.focus();
+		}
+	});
+
+	if (typeof window !== 'undefined') {
+		window.openAnonymForm = openAnonymForm;
+		window.closeAnonymForm = closeAnonymForm;
+	}
+</script>
+
+<style>
+	#anonym-overlay {
+		will-change: opacity;
+	}
+
+	#overlay-content {
+		will-change: transform, opacity;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		#overlay-content {
+			transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+		}
+	}
+</style>
+

@@ -22,11 +22,11 @@ const trustPoints = [
         />
       </div>
 
-      <h2 class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold text-primary leading-tight mb-4 md:mb-6">
+      <h2 class="text-xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl min-[1920px]:text-6xl font-bold text-foreground leading-tight mb-4 md:mb-6">
         Auch außerhalb dieser Städte für Sie da
       </h2>
 
-      <p class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl text-primary opacity-80 leading-relaxed mb-8 md:mb-10">
+      <p class="text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl min-[1920px]:text-2xl text-foreground opacity-80 leading-relaxed mb-8 md:mb-10">
         Wir unterstützen Menschen in ganz Deutschland.<br />
         Auch wenn Ihr Wohnort hier nicht aufgeführt ist, prüfen wir Ihr Anliegen individuell und helfen Ihnen nach Möglichkeit weiter.
       </p>
@@ -37,12 +37,12 @@ const trustPoints = [
             <div class="shrink-0">
               <CheckmarkIcon
                 size="md"
-                class="text-cta-primary"
+                class="text-bronze"
                 aria-hidden={true}
                 strokeWidth={3}
               />
             </div>
-            <p class="text-base md:text-lg text-primary font-medium">
+            <p class="text-base md:text-lg text-foreground font-medium">
               {point}
             </p>
           </div>
@@ -56,6 +56,6 @@ const trustPoints = [
   .section-bg {
     background:
       url('/images/background.webp') center / cover no-repeat,
-      var(--color-surface-primary);
+      var(--color-warm-100);
   }
 </style>

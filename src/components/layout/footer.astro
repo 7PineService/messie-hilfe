@@ -5,7 +5,7 @@ import { EmailLink } from '@/components/common';
 ---
 
 <footer>
-	<div class="py-8 md:py-16" style="background: linear-gradient(to bottom, #EFDFD9, #BEA89D);">
+	<div class="py-8 md:py-16" style="background: var(--gradient-footer);">
 		<div class="container mx-auto px-4">
 			<div class="max-w-2xl mx-auto text-center space-y-6">
 				<div class="flex flex-col items-center space-y-2">
@@ -24,7 +24,7 @@ import { EmailLink } from '@/components/common';
 		</div>
 	</div>
 
-	<div class="py-8 md:py-16" style="background-color: #463324;">
+	<div class="py-8 md:py-16" style="background-color: var(--color-brand-dark);">
 		<div class="container mx-auto px-4">
 			<div class="hidden md:grid md:grid-cols-3 gap-8 lg:gap-12">
 				<div>
@@ -224,7 +224,7 @@ import { EmailLink } from '@/components/common';
 		</div>
 	</div>
 
-	<div class="py-4" style="background-color: #DFCABB;">
+	<div class="py-4" style="background-color: var(--color-footer-bottom);">
 		<div class="container mx-auto px-4">
 			<div class="flex flex-wrap items-center justify-center gap-2 md:gap-3 text-xs md:text-sm">
 				<a href="/kein-datenhandel/" class="hover:opacity-80 transition-colors">Kein Datenhandel</a>
@@ -250,18 +250,18 @@ import { EmailLink } from '@/components/common';
 <style>
 	.messie {
 		font-weight: 600;
-		color: var(--color-logo-messie);
+		color: var(--color-brand-dark);
 	}
 
 	.hilfe {
 		font-weight: 400;
-		color: #8B7A6A;
+		color: var(--color-foreground-medium);
 	}
 
 	.deutschland {
 		font-weight: 300;
 		font-size: 1rem;
-		color: #8F887F;
+		color: var(--color-foreground-gray);
 		opacity: 0.7;
 	}
 </style>

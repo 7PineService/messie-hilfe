@@ -1,0 +1,19 @@
+---
+import { cn } from '@/utils/cn';
+
+interface Props {
+	currentStep: number;
+	totalSteps?: number;
+	class?: string;
+}
+
+const {
+	currentStep,
+	totalSteps = 6,
+	class: className = ''
+} = Astro.props;
+---
+
+<div class={cn('step-indicator text-base font-medium', className)}>
+	<span class="text-foreground">Schritt {currentStep} von {totalSteps}</span>
+</div>

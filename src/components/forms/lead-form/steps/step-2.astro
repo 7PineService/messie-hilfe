@@ -1,0 +1,146 @@
+---
+import ServiceTile from '../service-tile.astro';
+import { RadioGroup, CheckboxGroup, Input } from '@/components/ui';
+
+import iconWohnung from '@/assets/images/lead-form/lead-8-wohnung.png';
+import iconHaus from '@/assets/images/lead-form/lead-9-haus.png';
+import iconSonstiges from '@/assets/images/lead-form/lead-11-sonstiges.png';
+import iconLeer from '@/assets/images/lead-form/lead-12-leer.png';
+import iconTeilweise from '@/assets/images/lead-form/lead-13-teilweise.png';
+import iconVoll from '@/assets/images/lead-form/lead-14-voll.png';
+
+const objectTypes = [
+	{ value: 'wohnung', label: 'Wohnung', icon: iconWohnung },
+	{ value: 'haus', label: 'Haus', icon: iconHaus },
+	{ value: 'sonstiges', label: 'Sonstiges', icon: iconSonstiges },
+];
+
+const furnishingLevels = [
+	{ value: 'leer', label: 'Leer', icon: iconLeer },
+	{ value: 'teilweise', label: 'Teilweise möbliert', icon: iconTeilweise },
+	{ value: 'voll', label: 'Voll möbliert', icon: iconVoll },
+];
+
+const elevatorOptions = [
+	{ value: 'ja', label: 'Ja' },
+	{ value: 'nein', label: 'Nein' },
+	{ value: 'weiss_nicht', label: 'Weiß nicht' },
+];
+
+const accessOptions = [
+	{ value: 'enge_treppe', label: 'Enge Treppe' },
+	{ value: 'zugang_zeiten', label: 'Zugang nur zu bestimmten Zeiten', hasTextField: true, textFieldPlaceholder: 'Uhrzeit angeben' },
+	{ value: 'parkplatz_entfernt', label: 'Parkplatz nicht direkt am Objekt', hasTextField: true, textFieldPlaceholder: 'Entfernung in Metern' },
+	{ value: 'besonderheiten', label: 'Weitere Besonderheiten angeben', hasTextField: true, textFieldPlaceholder: 'z. B. Hinterhof, schmaler Zugang, Schlüssel beim Nachbarn …' },
+];
+---
+
+<div data-step="2" class="step-content hidden" aria-hidden="true" data-step-title="Wo soll der Einsatz stattfinden?" data-step-subtitle="Beschreiben Sie kurz das Objekt und den Zugang – damit wir den Aufwand besser einschätzen können.">
+	<div class="grid md:grid-cols-10 gap-8">
+		<div class="md:col-span-4 space-y-6">
+			<div class="object-type-grid">
+				<p class="text-base font-bold mb-3">Objektart<span class="text-red-500">*</span></p>
+				<div class="grid grid-cols-2 gap-3">
+					{objectTypes.map((type) => (
+						<ServiceTile
+							name="object_type"
+							value={type.value}
+							label={type.label}
+							icon={type.icon}
+							multiSelect={false}
+						/>
+					))}
+				</div>
+				<div class="hidden object-type-other-field mt-3">
+					<Input
+						name="object_type_other"
+						id="object_type_other"
+						placeholder="z. B. Keller, Garage, Lagerraum"
+					/>
+				</div>
+			</div>
+
+			<div>
+				<label for="etage" class="block text-base font-bold mb-2">Etage<span class="text-red-500">*</span></label>
+				<Input
+					name="etage"
+					id="etage"
+					placeholder="z. B. EG, 3. OG, Dachgeschoss"
+					required
+				/>
+			</div>
+
+			<div class="elevator-grid">
+				<p class="text-base font-bold mb-3">Aufzug vorhanden?<span class="text-red-500">*</span></p>
+				<RadioGroup
+					name="elevator"
+					options={elevatorOptions}
+					class="flex-row gap- justify-between"
+				/>
+			</div>
+		</div>
+
+		<div class="md:col-span-6 space-y-6 md:pl-8 md:border-l border-gray-100">
+			<div class="furnishing-grid">
+				<p class="text-base font-bold mb-3">Möblierungsgrad<span class="text-red-500">*</span></p>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+					{furnishingLevels.map((level) => (
+						<ServiceTile
+							name="furnishing"
+							value={level.value}
+							label={level.label}
+							icon={level.icon}
+							multiSelect={false}
+							class="text-xs"
+						/>
+					))}
+				</div>
+				<p class="text-sm text-foreground-muted mt-2">
+					Gemeint ist, ob sich noch Möbel im Objekt befinden – nicht der Zustand.
+				</p>
+			</div>
+
+			<div class="border-t border-gray-100 pt-6">
+				<p class="text-base mb-1"><span class="font-bold">Zugang & Besonderheiten</span> <span class="text-foreground-muted font-normal">(optional)</span></p>
+				<p class="text-sm text-foreground-muted mb-3">Nur falls relevant – hilft uns bei der Planung.</p>
+				<CheckboxGroup
+					name="access"
+					options={accessOptions}
+				/>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const step2 = document.querySelector('[data-step="2"]');
+		if (!step2) return;
+
+		const objectTypeRadios = step2.querySelectorAll<HTMLInputElement>('input[name="object_type"]');
+		const objectTypeOtherField = step2.querySelector<HTMLElement>('.object-type-other-field');
+
+		function updateObjectTypeOtherVisibility() {
+			const sonstigesRadio = step2?.querySelector<HTMLInputElement>('input[name="object_type"][value="sonstiges"]');
+			if (sonstigesRadio?.checked) {
+				objectTypeOtherField?.classList.remove('hidden');
+			} else {
+				objectTypeOtherField?.classList.add('hidden');
+			}
+		}
+
+		objectTypeRadios.forEach((radio) => {
+			radio.addEventListener('change', updateObjectTypeOtherVisibility);
+		});
+
+		const observer = new MutationObserver(() => {
+			if (step2 && !step2.classList.contains('hidden')) {
+				updateObjectTypeOtherVisibility();
+			}
+		});
+
+		observer.observe(step2, { attributes: true, attributeFilter: ['class'] });
+
+		updateObjectTypeOtherVisibility();
+	});
+</script>

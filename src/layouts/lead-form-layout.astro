@@ -1,11 +1,10 @@
 ---
 import { getGTMContainerId, shouldExcludeTracking } from '@/config/tracking';
-import { SITE_URL, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY, SITE_NAME } from '@/config/site';
-import SEO from '@/components/head/seo.astro';
-import Tracking from '@/components/head/tracking.astro';
-import SpeedInsights from '@/components/head/speed-insights.astro';
+import { SITE_URL, CONTACT_EMAIL, SITE_NAME } from '@/config/site';
+import SEO from '@/components/common/seo.astro';
+import Tracking from '@/components/common/tracking.astro';
+import SpeedInsights from '@/components/common/speed-insights.astro';
 import Footer from '@/components/layout/footer.astro';
-import { FinalCTA } from '@/components/sections';
 import { EmailLink } from '@/components/common';
 import '@/styles/global.css';
 
@@ -61,7 +60,7 @@ const gtmId = getGTMContainerId(hostname);
 		<slot name="head" />
 	</head>
 
-	<body class="antialiased bg-surface-muted min-h-screen flex flex-col">
+	<body class="antialiased bg-warm-75 min-h-screen flex flex-col">
 		{!excludeTracking && (
 			<noscript>
 				<iframe
@@ -73,8 +72,8 @@ const gtmId = getGTMContainerId(hostname);
 			</noscript>
 		)}
 
-		<header class="z-50 relative border-b border-border-primary">
-			<div class="bg-surface-muted">
+		<header class="z-50 relative border-b border-outline">
+			<div class="bg-warm-75">
 				<div class="container mx-auto px-4 py-2.5">
 					<div class="flex flex-wrap items-center justify-between text-sm">
 						<EmailLink email={CONTACT_EMAIL} />
@@ -82,7 +81,7 @@ const gtmId = getGTMContainerId(hostname);
 				</div>
 			</div>
 
-			<nav class="bg-surface-secondary" aria-label="Formular-Navigation">
+			<nav class="bg-warm-200" aria-label="Formular-Navigation">
 				<div class="container mx-auto px-4">
 					<div class="flex items-center justify-between md:justify-center md:relative h-18">
 						<a href="/" class="flex items-center gap-2 md:absolute md:left-0" aria-label={`${SITE_NAME} Startseite`}>
@@ -96,10 +95,10 @@ const gtmId = getGTMContainerId(hostname);
 						</a>
 
 						<div class="step-indicator flex flex-col items-center text-base font-medium">
-							<span class="text-primary">Schritt {currentStep} von {totalSteps}</span>
-							<div class="mt-2 w-32 h-1.5 bg-surface-muted rounded-full overflow-hidden">
+							<span class="text-foreground">Schritt {currentStep} von {totalSteps}</span>
+							<div class="mt-2 w-32 h-1.5 bg-warm-75 rounded-full overflow-hidden">
 								<div
-									class="h-full bg-cta-primary rounded-full transition-all duration-300"
+									class="h-full bg-bronze rounded-full transition-all duration-300"
 									style={`width: ${(currentStep / totalSteps) * 100}%`}
 								></div>
 							</div>
@@ -120,18 +119,18 @@ const gtmId = getGTMContainerId(hostname);
 <style>
 	.messie {
 		font-weight: 600;
-		color: var(--color-logo-messie);
+		color: var(--color-brand-dark);
 	}
 
 	.hilfe {
 		font-weight: 400;
-		color: #8B7A6A;
+		color: var(--color-foreground-medium);
 	}
 
 	.deutschland {
 		font-weight: 300;
 		font-size: 0.9rem;
-		color: #8F887F;
+		color: var(--color-foreground-gray);
 		opacity: 0.3;
 	}
 </style>

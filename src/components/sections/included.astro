@@ -63,7 +63,7 @@ const {
       </div>
     </div>
 
-    <div class="bg-surface-light-peach rounded-2xl p-6 md:p-8 mt-8 lg:mt-12 shadow-sm">
+    <div class="bg-warm-400 rounded-2xl p-6 md:p-8 mt-8 lg:mt-12 shadow-sm">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0">
         <!-- Included Column -->
         <div class="lg:pr-8 lg:border-r lg:border-black/5">
@@ -71,14 +71,14 @@ const {
             <span class="check-circle">
               <Checkmark class="check-icon-large" aria-hidden={true} />
             </span>
-            <h3 class="text-lg md:text-xl lg:text-2xl font-bold text-primary">
+            <h3 class="text-lg md:text-xl lg:text-2xl font-bold text-foreground">
               {includedTitle}
             </h3>
           </div>
           <div class="space-y-4">
             {includedItems.map((item) => (
               <div class="flex items-start gap-3">
-                <Checkmark class="check-icon text-primary shrink-0 mt-1" aria-hidden={true} />
+                <Checkmark class="check-icon text-foreground shrink-0 mt-1" aria-hidden={true} />
                 <span class="text-sm md:text-base" set:html={item} />
               </div>
             ))}
@@ -96,7 +96,7 @@ const {
             <span class="cross-circle">
               <Close class="cross-icon-large" aria-hidden={true} />
             </span>
-            <h3 class="text-lg md:text-xl lg:text-2xl font-bold text-primary">
+            <h3 class="text-lg md:text-xl lg:text-2xl font-bold text-foreground">
               {notIncludedTitle} <span class="font-normal">{notIncludedTitleSuffix}</span>
             </h3>
           </div>
@@ -124,7 +124,7 @@ const {
     .section-bg {
       background:
         url('/images/background.webp') left 80% / cover no-repeat,
-        var(--color-surface-primary);
+        var(--color-warm-100);
       position: relative;
     }
 
@@ -135,7 +135,7 @@ const {
       width: 1.75rem;
       height: 1.75rem;
       border-radius: 50%;
-      background-color: var(--color-primary);
+      background-color: var(--color-foreground);
       color: white;
     }
 
@@ -192,7 +192,7 @@ const {
       .section-bg {
         background:
           url('/images/background.webp') left / cover no-repeat,
-          var(--color-surface-primary);
+          var(--color-warm-100);
       }
     }
   </style>

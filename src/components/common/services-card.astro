@@ -92,29 +92,29 @@ const { title, description, link, image } = Astro.props
 <style>
   .service-card,
   .service-card-mobile {
-    background: var(--color-surface-light-peach);
-    box-shadow: var(--color-shadow-subtle) 0px 2px 8px 0px;
+    background: var(--color-warm-25);
+    box-shadow: var(--shadow-card);
   }
   .service-card-mobile > .card-img {
-    background: var(--color-surface-gradient-light);
+    background: var(--gradient-hero);
   }
 
   .service-card:hover,
   .service-card-mobile:hover {
-    background: var(--color-surface-warm-peach);
+    background: var(--color-warm-150);
     box-shadow:
-      var(--color-shadow-warm) 1px 0px 2px 2px,
-      var(--color-shadow-warm) -7px 0px 2px -4px,
-      var(--color-shadow-warm) 1px 2px 2px 2px;
+      var(--shadow-peach) 1px 0px 2px 2px,
+      var(--shadow-peach) -7px 0px 2px -4px,
+      var(--shadow-peach) 1px 2px 2px 2px;
   }
 
   .service-card:hover .cta-tertiary,
   .service-card-mobile:hover .cta-tertiary {
-    background-color: var(--color-primary);
+    background-color: var(--color-foreground);
     color: white;
   }
 
   .service-card-mobile:hover > .card-img {
-    background: var(--color-surface-gradient-warm);
+    background: var(--gradient-section);
   }
 </style>
