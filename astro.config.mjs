@@ -40,7 +40,7 @@ export default defineConfig({
           "style-src 'self' 'unsafe-inline'",
           "font-src 'self' data:",
           "img-src 'self' data: https:",
-          "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.cookieyes.com https://cdn-cookieyes.com https://log.cookieyes.com https://*.supabase.co",
+          "connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.doubleclick.net https://*.cookieyes.com https://cdn-cookieyes.com https://log.cookieyes.com https://*.supabase.co",
           "frame-src 'self' https://www.googletagmanager.com https://*.cookieyes.com",
           "object-src 'none'",
           "base-uri 'self'",
