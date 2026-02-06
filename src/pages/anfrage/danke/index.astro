@@ -13,6 +13,7 @@ import dankeImg3 from '@/assets/images/lead-form/lead-21-danke-3.png';
 	title="Vielen Dank für Ihre Anfrage | Messie-Hilfe"
 	description="Ihre Anfrage ist bei uns eingegangen. Wir melden uns in der Regel innerhalb von 24 Stunden persönlich bei Ihnen."
 	showBreadcrumb={false}
+	noindex={true}
 >
 	<section class="bg-surface-muted py-6 md:py-8">
 		<div class="container mx-auto px-4">
@@ -111,13 +112,21 @@ import dankeImg3 from '@/assets/images/lead-form/lead-21-danke-3.png';
 
 <script is:inline>
 	(function() {
-		if (typeof window === 'undefined' || !window.dataLayer) {
+		if (typeof window === 'undefined') return;
+
+		const formSubmitted = sessionStorage.getItem('form_submitted');
+		if (!formSubmitted) {
+			window.location.replace('/');
 			return;
 		}
 
-		window.dataLayer.push({
-			'event': 'funnel_complete',
-			'funnel_type': 'lead_form'
-		});
+		sessionStorage.removeItem('form_submitted');
+
+		if (window.dataLayer) {
+			window.dataLayer.push({
+				'event': 'funnel_complete',
+				'funnel_type': 'lead_form'
+			});
+		}
 	})();
 </script>
