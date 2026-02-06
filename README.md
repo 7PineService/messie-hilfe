@@ -160,8 +160,6 @@ The API endpoint handles both the lead form (multi-step) and contact forms (simp
 
 **Event Tracking:**
 - **Conversion Events:**
-  - `/danke-anfrage/` page view → `generate_lead` with `lead_type: 'offer_request'` (Primary conversion)
-  - `/danke-anonym/` page view → `generate_lead` with `lead_type: 'anonymous'` (Secondary conversion)
   - Phone clicks → `contact_call` event (tracks on successful call initiation)
   - WhatsApp clicks → `contact_whatsapp` event (tracks on successful window open)
 - **Engagement Events:**
@@ -283,8 +281,6 @@ No additional configuration needed - Vercel auto-detects Astro projects.
 
 **Conversion Tracking:**
 - `generate_lead` events fire on thank-you page views (not on form submission)
-  - `/danke-anfrage/` → `lead_type: 'offer_request'` (Primary conversion for bidding)
-  - `/danke-anonym/` → `lead_type: 'anonymous'` (Secondary conversion, not for bidding)
 - Form submissions redirect to appropriate thank-you page, where conversion is tracked
 
 **Phone/WhatsApp Tracking:**

@@ -6,7 +6,11 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://www.messie-hilfe.de',
   adapter: vercel(),
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/danke'),
+    }),
+  ],
   env: {
     schema: {
       RESEND_API_KEY: envField.string({

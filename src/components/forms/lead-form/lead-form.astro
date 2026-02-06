@@ -660,6 +660,7 @@ const leadApiEndpoint = LEAD_API_ENDPOINT;
 						}
 
 						sessionStorage.removeItem(`${formId}_data`);
+						sessionStorage.setItem('form_submitted', 'true');
 
 						window.location.href = '/anfrage/danke/';
 					} else {
@@ -675,6 +676,7 @@ const leadApiEndpoint = LEAD_API_ENDPOINT;
 			} else {
 				if (isDev) console.log('No endpoint configured, redirecting...');
 				sessionStorage.removeItem(`${formId}_data`);
+				sessionStorage.setItem('form_submitted', 'true');
 				window.location.href = '/anfrage/danke/';
 			}
 		}
