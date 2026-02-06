@@ -7,6 +7,8 @@ import { EmailLink } from '@/components/common';
 import dankeImg1 from '@/assets/images/lead-form/lead-19-danke-1.png';
 import dankeImg2 from '@/assets/images/lead-form/lead-20-danke-2.png';
 import dankeImg3 from '@/assets/images/lead-form/lead-21-danke-3.png';
+
+export const prerender = false;
 ---
 
 <BaseLayout
@@ -112,17 +114,7 @@ import dankeImg3 from '@/assets/images/lead-form/lead-21-danke-3.png';
 
 <script is:inline>
 	(function() {
-		if (typeof window === 'undefined') return;
-
-		const formSubmitted = sessionStorage.getItem('form_submitted');
-		if (!formSubmitted) {
-			window.location.replace('/');
-			return;
-		}
-
-		sessionStorage.removeItem('form_submitted');
-
-		if (window.dataLayer) {
+		if (typeof window !== 'undefined' && window.dataLayer) {
 			window.dataLayer.push({
 				'event': 'funnel_complete',
 				'funnel_type': 'lead_form'

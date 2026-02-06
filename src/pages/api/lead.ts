@@ -241,7 +241,13 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(
       JSON.stringify({ success: true, id: emailData?.id }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Set-Cookie': 'form_submitted=true; Path=/; Max-Age=60; SameSite=Lax',
+        },
+      }
     );
   } catch (error) {
     console.error('Lead form API error:', error);
