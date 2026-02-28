@@ -4,22 +4,22 @@ import { Play, Chevron } from '@/components/icons';
 import { EmailLink } from '@/components/common';
 ---
 
-<header id="main-header" class="z-50 relative border-b border-outline">
-	<div class="bg-warm-75">
-		<div class="container mx-auto px-4 py-2.5">
+<header id="main-header" class="z-50 relative border-b border-border-primary">
+	<div class="bg-surface-muted">
+		<div class="w-full xl:max-w-7xl mx-auto px-4 py-2.5">
 			<div class="flex flex-wrap items-center justify-between text-sm">
 				<EmailLink email={CONTACT_EMAIL} />
 			</div>
 		</div>
 	</div>
 
-	<nav class="bg-warm-200" aria-label="Hauptnavigation">
-		<div class="container mx-auto px-4">
-			<div class="flex items-center justify-between h-18">
-				<a href="/" class="flex items-center gap-2" aria-label={`${SITE_NAME} Startseite`}>
-					<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-14 h-auto w-auto object-contain" />
+	<nav class="bg-surface-secondary" aria-label="Hauptnavigation">
+		<div class="w-full xl:max-w-7xl mx-auto px-4">
+			<div class="flex items-center justify-between h-18 gap-4">
+				<a href="/" class="inline-flex items-center gap-2 shrink-0" aria-label={`${SITE_NAME} Startseite`}>
+					<img src="/logo.svg" alt={`${SITE_NAME} Logo`} class="max-h-14 h-14 w-14 object-contain" />
 					<div class="relative">
-						<span class="text-xl whitespace-nowrap logo-text">
+						<span class="block text-xl whitespace-nowrap">
 							<span class="messie">Messie-</span><span class="hilfe">Hilfe</span>
 						</span>
 						<span class="deutschland absolute top-6 left-0 whitespace-nowrap">Deutschland</span>
