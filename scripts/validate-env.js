@@ -87,15 +87,6 @@ requiredVars.forEach(({ name, validate }) => {
 	}
 });
 
-const cookieYesUrl = process.env.PUBLIC_COOKIEYES_SCRIPT_URL;
-const cookieYesEnabled = process.env.PUBLIC_COOKIEYES_ENABLED !== 'false';
-if (cookieYesEnabled && !cookieYesUrl) {
-	errors.push({ name: 'PUBLIC_COOKIEYES_SCRIPT_URL', error: 'Required when PUBLIC_COOKIEYES_ENABLED is true', value: '(not set)' });
-}
-if (cookieYesUrl && !cookieYesUrl.startsWith('https://')) {
-	errors.push({ name: 'PUBLIC_COOKIEYES_SCRIPT_URL', error: 'Must use HTTPS', value: cookieYesUrl });
-}
-
 console.log('');
 
 if (errors.length > 0) {

@@ -70,16 +70,6 @@ export function validateEnvVariables(isProduction: boolean = false): ValidationR
 		}
 	});
 
-	const cookieYesUrl = import.meta.env.PUBLIC_COOKIEYES_SCRIPT_URL;
-	const cookieYesEnabled = import.meta.env.PUBLIC_COOKIEYES_ENABLED !== 'false';
-	
-	if (cookieYesEnabled && !cookieYesUrl) {
-		errors.push('PUBLIC_COOKIEYES_ENABLED is true but PUBLIC_COOKIEYES_SCRIPT_URL is not set');
-	}
-	if (cookieYesUrl && !cookieYesUrl.startsWith('https://')) {
-		errors.push('PUBLIC_COOKIEYES_SCRIPT_URL must use HTTPS');
-	}
-
 	const twitterHandle = import.meta.env.PUBLIC_TWITTER_HANDLE;
 	if (twitterHandle && !twitterHandle.startsWith('@')) {
 		warnings.push('PUBLIC_TWITTER_HANDLE should start with "@" (e.g., @username)');
